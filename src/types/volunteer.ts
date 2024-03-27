@@ -7,7 +7,6 @@ const zVolunteer = z.object({
   firstName: z.string(),
   lastName: z.string(),
   userName: z.string(),
-  id: z.number(),
   email: z.string().email(),
   phoneNumber: z.string(),
 //   events: zEvents.optional(),

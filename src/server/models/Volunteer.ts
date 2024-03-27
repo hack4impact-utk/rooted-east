@@ -17,10 +17,6 @@ import {
         type: String,
         required: true,
       },
-      id: {
-        type: Number,
-        required: true,
-      },
       email: {
         type: String,
         required: true,
@@ -30,7 +26,7 @@ import {
         required: true,
       },
       events: {
-        type: Schema.Types.ObjectId,
+        type: [Schema.Types.ObjectId],
         ref: 'Events', // link to the Events Schmea if made
         required: false,
       },
