@@ -1,0 +1,72 @@
+import { roles } from '@/types/dataModel/roles';
+import {
+  VolunteerEntity,
+  backgroundCheckStatuses,
+} from '@/types/dataModel/volunteer';
+import { Model, Schema, model, models } from 'mongoose';
+//idk if we need the above but it was from the compassion ministries? so i left it in
+
+const EventModel = new Schema(
+  {
+    ID: {
+      type: int,
+      required: true,
+      //do i need this to be unique?
+      unique: true,
+    },
+    title: {
+      type: String,
+      required: true,
+    },
+    location: {
+      type: Location,
+      required: true,
+    },
+    startTime: {
+      type: Date,
+      required: true,
+    },
+    endTime: {
+      type: Date,
+      required: true,
+    },
+    numVolsCurr: {
+    //idk how to put this in
+      type: Volunteer.id array,
+      required: true,
+    },
+    numVolsNeeded: {
+        type: int,
+        required: true,
+      },
+    numVolsSignedUp: {
+        type: int,
+        required: true,
+    },
+    numVolsSignedIn: {
+    //idk how to put this in
+        type: Volunteer.id array,
+        required: true,
+    },
+    numVolsSignedOut: {
+    //idk how to put this in
+        type: Volunteer.id array,
+        required: true,
+    },
+    isRecurring: {
+        //idk how to put this in
+            type: Boolean,
+            required: true,
+        },
+  },
+
+);
+
+
+//this is also from the example i was following idk if i need it or not?
+export interface VolunteerDocument
+  extends Omit<VolunteerEntity, '_id'>,
+    Document {}
+
+export default (models.Volunteer as Model<VolunteerDocument>) ||
+  model<VolunteerDocument>('Volunteer', VolunteerSchema);
