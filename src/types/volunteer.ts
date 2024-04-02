@@ -1,18 +1,16 @@
 import { z } from 'zod';
-// import zEvents from './events'; <- import if made
-// import zHours from './hours'; <- import if made
-// import zDemographic from './demographic'; <- import if made
+// import zEventHours from './hours'; <- import if made
+import zDemographic from './demographic'
 
 const zVolunteer = z.object({
-  firstName: z.string(),
-  lastName: z.string(),
+  name: z.string(),
   userName: z.string(),
   email: z.string().email(),
   phoneNumber: z.string(),
-//   events: zEvents.optional(),
   active: z.boolean(),
-//   hoursLogged: zHours.optional(),
-//   demographic: zDemographic.optional(),
+  totalHours: z.number(), // i don't know if this is a double
+//   events: zEventHours.optional(),
+  demographic: z.array(zDemographic),
   admin: z.boolean(),
   softDelete: z.boolean(),
 });

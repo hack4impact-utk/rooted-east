@@ -5,11 +5,7 @@ import {
   
   const VolunteerSchema = new Schema(
     {
-      firstName: {
-        type: String,
-        required: true,
-      },
-      lastName: {
+      name: {
         type: String,
         required: true,
       },
@@ -22,26 +18,51 @@ import {
         required: true,
       },
       phoneNumber: {
-        type: Number,
+        type: String,
         required: true,
-      },
-      events: {
-        type: [Schema.Types.ObjectId],
-        ref: 'Events', // link to the Events Schmea if made
-        required: false,
       },
       active: {
         type: Boolean,
         required: false,
       },
-      hoursLogged: {
-        type: Schema.Types.ObjectId,
-        ref: 'Hours', // link to the Hours Schmea if made
-        required: false,
+      totalHours: {
+        type: Number,
+        required: true,
       },
+     /* events: {
+        type: [Schema.Types.ObjectId],
+        ref: 'EventHours', // link to the Events Schmea if made
+        required: false,
+      },*/
       demographic: {
-        type: Schema.Types.ObjectId,
-        ref: 'Demographic', // link to the Demographic Schmea if made
+        type: [
+          {
+            age: {
+              type: Number,
+              required: true,
+            },
+            race: {
+              type: String,
+              required: true,
+            },
+            sex: {
+              type: String,
+              required: true,
+            },
+            income: {
+              type: Number,
+              required: true,
+            },
+            zipcode: {
+              type: Number,
+              required: true,
+            },
+            occupation: {
+              type: String,
+              required: true,
+            },
+          },
+        ],
         required: true,
       },
       admin: {
