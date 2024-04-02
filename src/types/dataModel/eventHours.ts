@@ -1,12 +1,12 @@
 import { z } from 'zod';
 
-const zHours = z.object({
+const zEventHours = z.object({
   id: z.string(),
   totalHours: z.number(),
   signedInTime: z.date(),
   signedOutTime: z.date(),
 });
 
-export interface Hours extends z.infer<typeof zHours> {}
+export interface EventHours extends z.infer<typeof zEventHours> {}
 
-export default zHours;
+export default zEventHours;
