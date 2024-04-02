@@ -1,6 +1,6 @@
 import {
     Volunteer,
-  } from '@/types/volunteer';
+  } from '@/types/dataModel/volunteer';
   import { Model, Schema, model, models } from 'mongoose';
   
   const VolunteerSchema = new Schema(

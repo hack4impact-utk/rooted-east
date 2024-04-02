@@ -8,7 +8,7 @@ const zVolunteer = z.object({
   email: z.string().email(),
   phoneNumber: z.string(),
   active: z.boolean(),
-  totalHours: z.number(), // i don't know if this is a double
+  totalHours: z.number(),
 //   events: zEventHours.optional(),
   demographic: z.array(zDemographic),
   admin: z.boolean(),
