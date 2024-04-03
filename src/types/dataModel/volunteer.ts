@@ -2,15 +2,6 @@ import { z } from 'zod';
 import zDemographic from './demographic';
 //import zEventHours from './hours';
 
-/*const zDemographic = z.object({
-  age: z.number(),
-  race: z.string(),
-  sex: z.string(),
-  income: z.number(),
-  zipcode: z.number(),
-  occupation: z.string(),
-});*/
-
 const zVolunteer = z.object({
   name: z.string(),
   userName: z.string(),
