@@ -1,14 +1,15 @@
 import { z } from 'zod';
+import zDemographic from './demographic';
 //import zEventHours from './hours';
 
-const zDemographic = z.object({
+/*const zDemographic = z.object({
   age: z.number(),
   race: z.string(),
   sex: z.string(),
   income: z.number(),
   zipcode: z.number(),
   occupation: z.string(),
-});
+});*/
 
 const zVolunteer = z.object({
   name: z.string(),
@@ -17,7 +18,7 @@ const zVolunteer = z.object({
   phoneNumber: z.string(),
   active: z.boolean(),
   totalHours: z.number(),
-//   events: zEventHours.optional(),
+  //   events: zEventHours.optional(),
   demographic: z.array(zDemographic),
   admin: z.boolean(),
   softDelete: z.boolean(),
