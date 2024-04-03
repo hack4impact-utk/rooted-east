@@ -1,0 +1,64 @@
+import {
+  EventEntity,
+} from '@rooted-east\src\types\dataModel\event';
+import { Model, Schema, model, models } from 'mongoose';
+//idk if we need the above but it was from the compassion ministries? so i left it in
+
+const EventModel = new Schema(
+  {
+    title: {
+      type: String,
+      required: true,
+    },
+    location: {
+      type: Location,
+      required: true,
+    },
+    startTime: {
+      type: Date,
+      required: true,
+    },
+    endTime: {
+      type: Date,
+      required: true,
+    },
+    numVolsCurr: {
+    //idk how to put this in
+      type: [Schema.Types.ObjectId],
+      required: true,
+    },
+    numVolsNeeded: {
+        type: int,
+        required: true,
+      },
+    numVolsSignedUp: {
+        type: int,
+        required: true,
+    },
+    numVolsSignedIn: {
+    //idk how to put this in
+        type: [Schema.Types.ObjectId],
+        required: true,
+    },
+    numVolsSignedOut: {
+    //idk how to put this in
+        type: [Schema.Types.ObjectId],
+        required: true,
+    },
+    isRecurring: {
+        //idk how to put this in
+            type: Boolean,
+            required: true,
+        },
+  },
+
+);
+
+
+//this is also from the example i was following idk if i need it or not?
+export interface EventDocument
+  extends Omit<EventEntity, '_id'>,
+    Document {}
+
+export default (models.Event as Model<EventDocument>) ||
+  model<EventDocument>('Event', EventSchema);
