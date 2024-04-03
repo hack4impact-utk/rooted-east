@@ -30,7 +30,7 @@ const EventSchema = new Schema({
   },
   recurring: {
     type: Boolean,
-    required: true,
+    required: false,
   },
 });
 
