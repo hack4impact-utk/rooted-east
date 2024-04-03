@@ -1,6 +1,14 @@
 import { z } from 'zod';
-// import zEventHours from './hours'; <- import if made
-import zDemographic from './demographic'
+//import zEventHours from './hours';
+
+const zDemographic = z.object({
+  age: z.number(),
+  race: z.string(),
+  sex: z.string(),
+  income: z.number(),
+  zipcode: z.number(),
+  occupation: z.string(),
+});
 
 const zVolunteer = z.object({
   name: z.string(),
@@ -15,6 +23,14 @@ const zVolunteer = z.object({
   softDelete: z.boolean(),
 });
 
+export const zUpdateVolunteerRequest = zVolunteer
+  .omit({
+    softDelete: true,
+  })
+  .partial();
+
 export interface Volunteer extends z.infer<typeof zVolunteer> {}
+export interface UpdateVolunteerRequest
+  extends z.infer<typeof zUpdateVolunteerRequest> {}
 
 export default zVolunteer;
