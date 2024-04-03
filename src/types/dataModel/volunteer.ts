@@ -1,6 +1,6 @@
 import { z } from 'zod';
 // import zEventHours from './hours'; <- import if made
-import zDemographic from './demographic'
+//import zDemographic from './demographic'
 
 const zVolunteer = z.object({
   name: z.string(),
@@ -9,8 +9,8 @@ const zVolunteer = z.object({
   phoneNumber: z.string(),
   active: z.boolean(),
   totalHours: z.number(),
-//   events: zEventHours.optional(),
-  demographic: z.array(zDemographic),
+  //   events: zEventHours.optional(),
+  //demographic: z.array(zDemographic),
   admin: z.boolean(),
   softDelete: z.boolean(),
 });
