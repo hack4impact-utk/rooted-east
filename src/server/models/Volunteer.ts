@@ -29,7 +29,7 @@ import {
         type: Number,
         required: true,
       },
-     /* events: {
+     /*events: {
         type: [Schema.Types.ObjectId],
         ref: 'EventHours', // link to the Events Schmea if made
         required: false,
