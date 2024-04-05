@@ -1,10 +1,37 @@
 import VolunteerSchema from '@/server/models/Volunteer';
 import dbConnect from '@/utils/db-connect';
-import UpdateVolunteerRequest from '@/types/dataModel/volunteer';
+import { mongo } from 'mongoose';
+import {
+  UpdateVolunteerRequest,
+  CreateVolunteerRequest,
+} from '@/types/dataModel/volunteer';
+
+export async function createVolunteer(
+  request: CreateVolunteerRequest
+): Promise<string> {
+  try {
+    await dbConnect();
+    console.log('connected to db');
+    const volunteer = await VolunteerSchema.create(request);
+    return volunteer._id.toString();
+  } catch (error) {
+    console.log(error);
+
+    if (
+      error instanceof mongo.MongoError ||
+      error instanceof mongo.MongoServerError
+    ) {
+      if (error.code === 11000) {
+        // throw new CMError(CMErrorType.DuplicateKey, 'Volunteer Phone/Email');
+      }
+    }
+  }
+  throw 'Error in create volunteer action';
+}
 
 export async function updateVolunteer(
   volunteerId: string,
-  updatedVolunteer: typeof UpdateVolunteerRequest
+  updatedVolunteer: UpdateVolunteerRequest
 ): Promise<void> {
   let res;
   try {
