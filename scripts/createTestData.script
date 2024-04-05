@@ -1,0 +1,290 @@
+use("test")
+
+// if specified, clear out all existing collections (except the users collection)
+if (true) {
+   db.volunteers.deleteMany({})
+   db.events.deleteMany({})
+}
+
+// creates 12 volunteerId variables
+for (let i = 1; i <= 12; i++) {
+  this[`volunteerId${i}`] = ObjectId();
+}
+
+db.volunteers.insertMany([
+{
+    "name" : "Jasmine Reyes",
+    "user_name" : "JasmineR",
+    "_id" : "",
+    "email" : "JasRey@gmail.com",
+    "phone" : "865-123-4567",
+    "active" : "true",
+    "totalHours" : "78",
+    "events" : [],
+    "admin" : "false",
+    "demograhic": {
+        "age": "28",
+        "race": "African",
+        "sex": "Female",
+        "income": "73000",
+        "zip_code": "37830",
+        "occupation": "Physical Therapist"
+    }
+}, {
+    "name" : "Liam Cooper",
+    "user_name" : "LiamCoop",
+    "_id" : "",
+    "email" : "Lcoop@outlook.com",
+    "phone" : "865-280-3209",
+    "events" : "",
+    "active" : "true",
+    "totalHours" : "15",
+    "events" : [],
+    "admin" : "false",
+    "demograhic": {
+        "age": "32",
+        "race": "White",
+        "sex": "Male",
+        "income": "65000",
+        "zip_code": "37831",
+        "occupation": "Electrician"
+    }
+}, {
+    "name" : "Maya Patel",
+    "user_name" : "MayaPatel22",
+    "_id" : "",
+    "email" : "Maya22@aol.com",
+    "phone" : "585-905-2853",
+    "events" : "",
+    "active" : "false",
+    "totalHours" : "24",
+    "events" : [],
+    "admin" : "true",
+    "demograhic": {
+        "age": "40",
+        "race": "Indian",
+        "sex": "female",
+        "income": "64000",
+        "zip_code": "37771",
+        "occupation": "Software Developer"
+    }
+}, {
+    "name" : "Ethan Brooks",
+    "user_name" : "EthanBrooks87",
+    "_id" : "",
+    "email" : "broski87@gmail.com",
+    "phone" : "256-381-7452",
+    "events" : "",
+    "active" : "true",
+    "totalHours" : "93", 
+    "events" : [],
+    "admin" : "false",
+    "demograhic": {
+        "age": "67",
+        "race": "white",
+        "sex": "male",
+        "income": "",
+        "zip_code": "37831",
+        "occupation": "Retired"
+    }
+}, {
+    "name" : "Zoe Thompson",
+    "user_name" : "ZoeT_123",
+    "_id" : "",
+    "email" : "ThompsonBowling@yahoo.com",
+    "phone" : "865-213-4827",
+    "events" : [],
+    "active" : "true",
+    "totalHours" : "72",
+    "admin" : "false",
+    "demograhic": {
+        "age": "38",
+        "race": "white",
+        "sex": "female",
+        "income": "230000",
+        "zip_code": "37763",
+        "occupation": "Nurse Anesthetist"
+    }
+}, {
+    "name" : "Lucas Ramirez",
+    "user_name" : "LucasRamirez96",
+    "_id" : "",
+    "email" : "lram@gmail.com",
+    "phone" : "857-374-1927",
+    "events" : [],
+    "active" : "true",
+    "totalHours" : "29",
+    "admin" : "true",
+    "demograhic": {
+        "age": "45",
+        "race": "African",
+        "sex": "male",
+        "income": "72060",
+        "zip_code": "37748",
+        "occupation": ""
+    }
+}, {
+    "name" : "Ava Mitchell",
+    "user_name" : "AvaMitchell1",
+    "_id" : "",
+    "email" : "Avalmichell@gmail.com",
+    "phone" : "820-472-1746",
+    "events" : [],
+    "active" : "true",
+    "totalHours" : "30",
+    "admin" : "false",
+    "demograhic": {
+        "age": "21",
+        "race": "white",
+        "sex": "female",
+        "income": "",
+        "zip_code": "89323",
+        "occupation": "College student"
+    }
+}, {
+    "name" : "Jackson Nguyen",
+    "user_name" : "JNguyen2024",
+    "_id" : "",
+    "email" : "newguy@outlook.com",
+    "phone" : "872-742-7452",
+    "events" : [],
+    "active" : "true",
+    "totalHours" : "39",
+    "admin" : "false",
+    "demograhic": {
+        "age": "26",
+        "race": "chinese",
+        "sex": "male",
+        "income": "83000",
+        "zip_code": "64245",
+        "occupation": "Math Professor"
+    }
+}, {
+    "name" : "Harper Carter",
+    "user_name" : "HarperCarter42",
+    "_id" : "",
+    "email" : "harp@aol.com",
+    "phone" : "237-197-1582",
+    "events" : [],
+    "active" : "true",
+    "totalHours" : "56", 
+    "admin" : "true",
+    "demograhic": {
+        "age": "38",
+        "race": "hispanic",
+        "sex": "male",
+        "income": "650000",
+        "zip_code": "37771",
+        "occupation": "Neurosurgeon"
+    }
+}, {
+    "name" : "Noah Morgan",
+    "user_name" : "NoahMorgan77",
+    "_id" : "",
+    "email" : "noah@gmail.com",
+    "phone" : "370-712-6234",
+    "events" : [],
+    "active" : "false",
+    "totalHours" : "52",
+    "admin" : "false",
+    "demograhic": {
+        "age": "89",
+        "race": "white",
+        "sex": "male",
+        "income": "8000000",
+        "zip_code": "78235",
+        "occupation": "Battle Rapper"
+    }
+}, {
+    "name" : "Isabella Khan",
+    "user_name" : "IsabellaKhan_X",
+    "_id" : "",
+    "email" : "khanacademy@icloud.com",
+    "phone" : "513-643-1674",
+    "events" : [],
+    "active" : "true",
+    "totalHours" : "49",
+    "admin" : "false",
+    "demograhic": {
+        "age": "43",
+        "race": "Russian",
+        "sex": "Female",
+        "income": "",
+        "zip_code": "",
+        "occupation": ""
+    }
+}, {
+    "name" : "Caleb Anderson",
+    "user_name" : "CalebA1234",
+    "_id" : "",
+    "email" : "caland12@icloud.com",
+    "phone" : "433-734-3872",
+    "events" : [],
+    "active" : "false",
+    "totalHours" : "39",
+    "admin" : "false",
+    "demograhic": {
+        "age": "29",
+        "race": "white",
+        "sex": "male",
+        "income": "40000",
+        "zip_code": "37932",
+        "occupation": "Painter"
+    }
+}
+])
+
+// creates 5 eventId variables
+for (let i = 1; i <= 5; i++) {
+  this[`eventId${i}`] = ObjectId();
+}
+
+// STANDALONE EVENTS
+db.events.insertMany([
+  {
+    "_id": "",
+    "title": "Market Square",
+    "location": "Market Square, Knoxville, TN 37902",
+    "startTime": "2024-04-10T09:00:00",
+    "endTime": "2024-04-10T12:00:00",
+    "volsSignedUp": [],
+    "numVolsNeeded": "15",
+    "recurring": "true"
+}, {
+    "_id": "",
+    "title": "University of Tennessee",
+    "location": "Address: 800 Andy Holt Tower, Knoxville, TN 37996",
+    "startTime": "2024-05-15T14:30:00",
+    "endTime": "2024-05-15T17:30:00",
+    "volsSignedUp": [],
+    "numVolsNeeded": "30",
+    "recurring": "true"
+}, {
+    "_id": "",
+    "title": "World's Fair Park",
+    "location": "963 World's Fair Park Dr, Knoxville, TN 37916",
+    "startTime": "2024-06-20T11:45:00",
+    "endTime": "2024-06-20T14:45:00",
+    "volsSignedUp": [],
+    "numVolsNeeded": "25",
+    "recurring": "true"
+}, {
+    "_id": "",
+    "title": "Knox Museum of Art",
+    "location": "1050 World's Fair Park Dr, Knoxville, TN 37916",
+    "startTime": "2024-07-25T08:15:0",
+    "endTime": "2024-07-25T08:15:00",
+    "volsSignedUp": [],
+    "numVolsNeeded": "12",
+    "recurring": "false"
+}, {
+    "_id": "",
+    "title": "The Old City",
+    "location": "123 W Jackson Ave Knoxville, TN 37902",
+    "startTime": "2024-03-30T10:00:00",
+    "endTime": "2024-03-30T13:00:00",
+    "volsSignedUp": [],
+    "numVolsNeeded": "18",
+    "recurring": "false"
+}
+])
