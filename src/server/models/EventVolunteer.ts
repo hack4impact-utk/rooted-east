@@ -22,5 +22,5 @@ const EventVolunteerSchema = new Schema({
 
 export type EventVolunteerDocument = EventVolunteer & Document;
 
-export default (models.EventHours as Model<EventVolunteerDocument>) ||
+export default (models.EventVolunteer as Model<EventVolunteerDocument>) ||
   model<EventVolunteerDocument>('EventVolunteer', EventVolunteerSchema);
