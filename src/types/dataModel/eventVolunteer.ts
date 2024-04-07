@@ -5,7 +5,6 @@ import zEvent from './event';
 const zEventVolunteer = z.object({
   volunteer: zVolunteer,
   event: zEvent,
-  totalHours: z.number(),
   checkInTime: z.date().optional(),
   checkOutTime: z.date().optional(),
 });
