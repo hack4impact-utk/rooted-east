@@ -23,27 +23,31 @@ const VolunteerSchema = new Schema({
       {
         age: {
           type: Number,
-          required: true,
+          required: false,
         },
         race: {
           type: String,
-          required: true,
+          required: false,
         },
         sex: {
           type: String,
-          required: true,
+          required: false,
         },
         income: {
           type: Number,
-          required: true,
+          required: false,
         },
         zipcode: {
           type: Number,
-          required: true,
+          required: false,
         },
         occupation: {
           type: String,
-          required: true,
+          required: false,
+        },
+        pronoun: {
+          type: String,
+          required: false,
         },
       },
     ],
