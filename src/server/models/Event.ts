@@ -11,6 +11,10 @@ const EventSchema = new Schema({
     type: String,
     required: true,
   },
+  day: {
+    type: Date,
+    required: true,
+  },
   startTime: {
     type: Date,
     required: true,
@@ -21,15 +25,14 @@ const EventSchema = new Schema({
   },
   volsNeeded: {
     type: Number,
-    required: true,
-  },
-  signedUp: {
-    type: [Schema.Types.ObjectId],
-    ref: 'Volunteer', // link to the Events Schmea if made
     required: false,
   },
-  recurring: {
-    type: Boolean,
+  desciption: {
+    type: String,
+    required: false,
+  },
+  manager: {
+    type: [Schema.Types.ObjectId],
     required: false,
   },
 });
