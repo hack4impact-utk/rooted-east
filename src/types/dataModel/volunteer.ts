@@ -1,13 +1,16 @@
 import { z } from 'zod';
 import zDemographic from './demographic';
 
+export const roles = ['Volunteer', 'Manager', 'Admin'] as const;
+const zRole = z.enum(roles);
+
 const zVolunteer = z.object({
   firstName: z.string(),
   lastName: z.string(),
   email: z.string().email(),
   phoneNumber: z.string(),
   demographic: zDemographic.optional(),
-  role: z.string(),
+  role: zRole,
 });
 
 export const zCreateVolunteerRequest = zVolunteer.partial();
