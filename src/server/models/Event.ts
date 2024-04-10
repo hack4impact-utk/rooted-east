@@ -27,12 +27,13 @@ const EventSchema = new Schema({
     type: Number,
     required: false,
   },
-  desciption: {
+  description: {
     type: String,
     required: false,
   },
   manager: {
-    type: [Schema.Types.ObjectId],
+    type: Schema.Types.ObjectId,
+    ref: 'Volunteer',
     required: false,
   },
 });
