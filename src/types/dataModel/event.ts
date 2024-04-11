@@ -11,6 +11,10 @@ const zEvent = z.object({
   recurring: z.boolean(),
 });
 
+export const zCreateEventRequest = zEvent.partial();
+
 export interface Event extends z.infer<typeof zEvent> {}
+export interface CreateEventRequest
+  extends z.infer<typeof zCreateEventRequest> {}
 
 export default zEvent;
