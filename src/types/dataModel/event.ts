@@ -12,6 +12,10 @@ const zEvent = z.object({
   manager: zVolunteer,
 });
 
+export const zCreateEventRequest = zEvent;
+
 export interface Event extends z.infer<typeof zEvent> {}
+export interface CreateEventRequest
+  extends z.infer<typeof zCreateEventRequest> {}
 
 export default zEvent;
