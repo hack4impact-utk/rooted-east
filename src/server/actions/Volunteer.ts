@@ -1,10 +1,12 @@
 import VolunteerSchema from '@/server/models/Volunteer';
+import EventVolunteerSchema from '@/server/models/EventVolunteer';
 import dbConnect from '@/utils/db-connect';
 import { mongo } from 'mongoose';
 import {
   UpdateVolunteerRequest,
   CreateVolunteerRequest,
 } from '@/types/dataModel/volunteer';
+import CMError, { CMErrorType } from '@/utils/cmerror';
 
 export async function createVolunteer(
   request: CreateVolunteerRequest
@@ -22,7 +24,7 @@ export async function createVolunteer(
       error instanceof mongo.MongoServerError
     ) {
       if (error.code === 11000) {
-        // throw new CMError(CMErrorType.DuplicateKey, 'Volunteer Phone/Email');
+        throw new CMError(CMErrorType.DuplicateKey, 'Volunteer Phone/Email');
       }
     }
   }
@@ -41,9 +43,38 @@ export async function updateVolunteer(
       updatedVolunteer
     );
   } catch (error) {
-    //throw new CMError(CMErrorType.InternalError);
+    throw new CMError(CMErrorType.InternalError);
   }
   if (!res) {
-    // throw new CMError(CMErrorType.NoSuchKey, 'Volunteer');
+    throw new CMError(CMErrorType.NoSuchKey, 'Volunteer');
   }
+}
+
+/**
+ * Get total hours that a volunteer has volunteered
+ * @param volunteerId // Id of the volunteer
+ * @returns // Total Hours of Volunteer
+ */
+export async function getVolunteerTotalHours(volunteerId: string) {
+  let volunteer;
+  let totalTime = 0;
+  try {
+    await dbConnect();
+    volunteer = await EventVolunteerSchema.find({
+      volunteer: volunteerId,
+    }).lean();
+
+    volunteer.forEach((ev) => {
+      if (ev.checkOutTime && ev.checkInTime) {
+        totalTime += ev.checkOutTime.getTime() - ev.checkInTime.getTime();
+      }
+    });
+  } catch (error) {
+    throw new CMError(CMErrorType.InternalError);
+  }
+  if (!volunteer) {
+    throw new CMError(CMErrorType.NoSuchKey, 'Volunteer');
+  }
+  // converting miliseconds to hours
+  return totalTime / 3600000;
 }
