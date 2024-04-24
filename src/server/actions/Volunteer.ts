@@ -5,6 +5,7 @@ import {
   UpdateVolunteerRequest,
   CreateVolunteerRequest,
 } from '@/types/dataModel/volunteer';
+import CMError, { CMErrorType } from '@/utils/cmerror';
 
 export async function createVolunteer(
   request: CreateVolunteerRequest
@@ -46,4 +47,16 @@ export async function updateVolunteer(
   if (!res) {
     // throw new CMError(CMErrorType.NoSuchKey, 'Volunteer');
   }
+}
+
+// Function to return all volunteer's phone numbers.
+export async function getAllVolunteersNumbers(): Promise<string[]> {
+  let volunteersNums: string[];
+  try {
+    await dbConnect();
+    volunteersNums = await VolunteerSchema.find({}).select('phoneNumber');
+  } catch (error) {
+    throw new CMError(CMErrorType.InternalError);
+  }
+  return volunteersNums;
 }
