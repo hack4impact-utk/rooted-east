@@ -2,6 +2,8 @@ import dbConnect from '@/utils/db-connect';
 import CMError, { CMErrorType } from '@/utils/cmerror';
 import { CreateEventVolunteerRequest } from '@/types/dataModel/eventVolunteer';
 import EventVolunteer from '@/server/models/EventVolunteer';
+import EventSchema from '@/server/models/Event';
+import EventVolunteerSchema from '@/server/models/EventVolunteer';
 import { CreateEventRequest } from '@/types/dataModel/event';
 import Event from '@/server/models/Event';
 import { mongo } from 'mongoose';
@@ -52,6 +54,20 @@ export async function createEvent(
         throw new CMError(CMErrorType.DuplicateKey, 'Event');
       }
     }
+    throw new CMError(CMErrorType.InternalError);
+  }
+}
+
+export async function deleteEvent(eventId: string): Promise<void> {
+  try {
+    await dbConnect();
+
+    EventVolunteerSchema.deleteMany({
+      event: eventId,
+    });
+
+    await EventSchema.findByIdAndDelete(eventId);
+  } catch (error) {
     throw new CMError(CMErrorType.InternalError);
   }
 }
