@@ -78,3 +78,22 @@ export async function getVolunteerTotalHours(volunteerId: string) {
   // converting miliseconds to hours
   return totalTime / 3600000;
 }
+
+/**
+ * Deletes a volunteer from all their events first then themselves.
+ * @param volunteerId // Id of the volunteer
+ * @returns // Deleted Volunteer
+ */
+export async function deleteVolunteer(volunteerId: string) {
+  try {
+    await dbConnect();
+
+    EventVolunteerSchema.deleteMany({
+      volunteer: volunteerId,
+    });
+
+    return await VolunteerSchema.findByIdAndDelete(volunteerId);
+  } catch (error) {
+    throw new CMError(CMErrorType.InternalError);
+  }
+}
