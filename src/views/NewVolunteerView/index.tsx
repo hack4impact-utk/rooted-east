@@ -31,6 +31,7 @@ export default function NewVolunteerView() {
       });
 
       if (res.status != 201) {
+        console.log('failed to add volunteer');
         return;
       }
     } catch (e) {
