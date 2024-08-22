@@ -62,7 +62,7 @@ export async function deleteEvent(eventId: string): Promise<void> {
   try {
     await dbConnect();
 
-    EventVolunteerSchema.deleteMany({
+    await EventVolunteerSchema.deleteMany({
       event: eventId,
     });
 
