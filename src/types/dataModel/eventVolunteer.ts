@@ -9,10 +9,7 @@ const zEventVolunteer = z.object({
   checkOutTime: z.date().optional(),
 });
 
-export const zCreateEventVolunteerRequest = zEventVolunteer.extend({
-  volunteer: zVolunteer,
-  event: zEvent,
-});
+export const zCreateEventVolunteerRequest = zEventVolunteer.extend({});
 
 export interface EventVolunteer extends z.infer<typeof zEventVolunteer> {}
 export interface CreateEventVolunteerRequest
