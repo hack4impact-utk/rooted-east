@@ -13,7 +13,7 @@ export async function checkInVolunteerRequest(
 
     const res = await EventVolunteerSchema.findByIdAndUpdate(
       checkInVolunteerRequest.eventVolunteerId,
-      { checkInTime: Date.now() }
+      { checkInTime: checkInVolunteerRequest.checkInTime }
     );
     // TODO for #58 handle a duplicate entry fail case here (duplicate event+volunteer ID combination)
     if (!res) {
