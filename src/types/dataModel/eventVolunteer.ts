@@ -27,5 +27,4 @@ export interface CheckInVolunteerRequest
   extends z.infer<typeof zCheckInVolunteerRequest> {}
 
 export default zEventVolunteer;
-export interface EventVolunteerEntity
-  extends z.infer<typeof zEventVolunteerEntity> {}
+export interface EventVolunteerEntity extends z.infer<typeof zEventVolunteer> {}
