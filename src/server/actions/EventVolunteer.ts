@@ -5,7 +5,7 @@ import EventVolunteerSchema from '@/server/models/EventVolunteer';
 import { mongo } from 'mongoose';
 
 // Check if volunteer has already been checked in by seeing if the checkin time field has been set.
-export async function checkInVolunteerRequest(
+export async function checkInVolunteerAction(
   checkInVolunteerRequest: CheckInVolunteerRequest
 ): Promise<void> {
   try {
