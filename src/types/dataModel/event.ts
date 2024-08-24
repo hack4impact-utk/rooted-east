@@ -14,8 +14,12 @@ const zEvent = z.object({
 
 export const zCreateEventRequest = zEvent;
 
+export const zUpdateEventRequest = zEvent.partial();
+
 export interface Event extends z.infer<typeof zEvent> {}
 export interface CreateEventRequest
   extends z.infer<typeof zCreateEventRequest> {}
+export interface UpdateEventRequest
+  extends z.infer<typeof zUpdateEventRequest> {}
 
 export default zEvent;
