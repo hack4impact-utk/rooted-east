@@ -20,7 +20,7 @@ export async function POST(req: NextRequest) {
     const eventId = await createEvent(validationResult.data);
 
     return NextResponse.json({ id: eventId }, { status: 201 });
-  } catch (e) {
-    return CMErrorResponse(e);
+  } catch (error) {
+    return CMErrorResponse(error);
   }
 }
