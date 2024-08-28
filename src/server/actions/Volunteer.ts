@@ -88,7 +88,7 @@ export async function deleteVolunteer(volunteerId: string) {
   try {
     await dbConnect();
 
-    EventVolunteerSchema.deleteMany({
+    await EventVolunteerSchema.deleteMany({
       volunteer: volunteerId,
     });
 
