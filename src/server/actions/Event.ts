@@ -71,3 +71,17 @@ export async function deleteEvent(eventId: string): Promise<void> {
     throw new CMError(CMErrorType.InternalError);
   }
 }
+
+export async function getUpcomingEvents(): Promise<Event[] | null> {
+  await dbConnect();
+
+  const currentDate = new Date();
+  const events: Event[] = (await EventSchema.find({
+    date: {
+      $gte: currentDate,
+    },
+    softDelete: { $ne: true },
+  }).lean()) as Event[];
+
+  return events;
+}
