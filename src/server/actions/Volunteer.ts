@@ -1,10 +1,12 @@
 import VolunteerSchema from '@/server/models/Volunteer';
+import EventVolunteerSchema from '@/server/models/EventVolunteer';
 import dbConnect from '@/utils/db-connect';
 import { mongo } from 'mongoose';
 import {
   UpdateVolunteerRequest,
   CreateVolunteerRequest,
 } from '@/types/dataModel/volunteer';
+import { EventVolunteerResponse } from '@/types/dataModel/eventVolunteer';
 import CMError, { CMErrorType } from '@/utils/cmerror';
 
 export async function createVolunteer(
@@ -59,4 +61,18 @@ export async function getAllVolunteersNumbers(): Promise<string[]> {
     throw new CMError(CMErrorType.InternalError);
   }
   return volunteersNums;
+}
+
+export async function getAllVolunteersForEvent(
+  eventId: string
+): Promise<EventVolunteerResponse[]> {
+  let eventVols: EventVolunteerResponse[];
+  try {
+    await dbConnect();
+    eventVols = await EventVolunteerSchema.find({ event: eventId });
+  } catch (error) {
+    console.error(error);
+    throw new CMError(CMErrorType.InternalError);
+  }
+  return eventVols;
 }
