@@ -14,6 +14,7 @@ export async function POST(req: NextRequest) {
     // validate the request body
     const validationResult = zCreateEventRequest.safeParse(body);
     if (!validationResult.success) {
+      console.log(validationResult.error);
       return new CMError(CMErrorType.BadValue, 'Event').toNextResponse();
     }
 
@@ -21,6 +22,7 @@ export async function POST(req: NextRequest) {
 
     return NextResponse.json({ id: eventId }, { status: 201 });
   } catch (error) {
+    NextResponse.json(error);
     return CMErrorResponse(error);
   }
 }
