@@ -1,24 +1,21 @@
 import { z } from 'zod';
-import zVolunteer from './volunteer';
-import zEvent from './event';
 import { zObjectId } from './base';
 
 const zEventVolunteer = z.object({
-  volunteer: zVolunteer,
-  event: zEvent,
+  volunteer: zObjectId,
+  event: zObjectId,
   checkInTime: z.date().optional(),
   checkOutTime: z.date().optional(),
 });
 
 const zEventVolunteerEntity = zEventVolunteer.extend({
-  organization: zObjectId.optional(),
   volunteer: zObjectId,
   event: zObjectId,
 });
 
 export const zCreateEventVolunteerRequest = zEventVolunteer.extend({
-  volunteer: zVolunteer,
-  event: zEvent,
+  volunteer: zObjectId,
+  event: zObjectId,
 });
 
 export interface EventVolunteer extends z.infer<typeof zEventVolunteer> {}
