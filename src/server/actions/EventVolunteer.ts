@@ -1,8 +1,10 @@
+
 import { CheckInVolunteerRequest } from '@/types/dataModel/eventVolunteer';
 import dbConnect from '@/utils/db-connect';
 import CMError, { CMErrorType } from '@/utils/cmerror';
 import EventVolunteerSchema from '@/server/models/EventVolunteer';
 import { mongo } from 'mongoose';
+import EventVolunteer from '../models/EventVolunteer';
 
 // Check if volunteer has already been checked in by seeing if the checkin time field has been set.
 export async function checkInVolunteerRequest(
@@ -30,5 +32,15 @@ export async function checkInVolunteerRequest(
       }
     }
     throw new CMError(CMErrorType.InternalError);
+    
+export async function deleteEventVolunteer(
+  eventVolunteerId: string
+): Promise<void> {
+  try {
+    await dbConnect();
+    await EventVolunteer.findOneAndDelete({ _id: eventVolunteerId });
+    return;
+  } catch (error) {
+    throw error;
   }
 }

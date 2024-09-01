@@ -2,17 +2,23 @@ import { z } from 'zod';
 import zVolunteer from './volunteer';
 import zEvent from './event';
 import EventVolunteer from '@/server/models/EventVolunteer';
+import { zObjectId } from './base';
 
 const zEventVolunteer = z.object({
-  volunteer: zVolunteer,
-  event: zEvent,
+  volunteer: zObjectId,
+  event: zObjectId,
   checkInTime: z.date().optional(),
   checkOutTime: z.date().optional(),
 });
 
+// const zEventVolunteerEntity = zEventVolunteer.extend({
+//   _id: zObjectId,
+//   volunteer: zObjectId,
+//   event: zObjectId,
+// });
 export const zCreateEventVolunteerRequest = zEventVolunteer.extend({
-  volunteer: zVolunteer,
-  event: zEvent,
+  volunteer: zObjectId,
+  event: zObjectId,
 });
 
 export const zCheckInVolunteerRequest = z.object({
@@ -27,4 +33,5 @@ export interface CheckInVolunteerRequest
   extends z.infer<typeof zCheckInVolunteerRequest> {}
 
 export default zEventVolunteer;
-export interface EventVolunteerEntity extends z.infer<typeof zEventVolunteer> {}
+// export interface EventVolunteerEntity
+//   extends z.infer<typeof zEventVolunteerEntity> {}
