@@ -1,16 +1,13 @@
-import { EventVolunteerEntity } from '@/types/dataModel/eventVolunteer';
-import VolunteerSchema from '@/server/models/Volunteer';
+import EventVolunteer from '../models/EventVolunteer';
 import dbConnect from '@/utils/db-connect';
 
-export async function deleteVolunteerRoleVerification(
-  volunteerId: string
-): Promise<EventVolunteerEntity | null> {
+export async function deleteEventVolunteer(
+  eventVolunteerId: string
+): Promise<void> {
   try {
     await dbConnect();
-    const volunteer: EventVolunteerEntity | null =
-      await VolunteerSchema.findByIdAndUpdate(volunteerId);
-
-    return volunteer;
+    await EventVolunteer.findOneAndDelete({ _id: eventVolunteerId });
+    return;
   } catch (error) {
     throw error;
   }
