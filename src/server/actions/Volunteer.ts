@@ -42,10 +42,10 @@ export async function updateVolunteer(
       updatedVolunteer
     );
   } catch (error) {
-    //throw new CMError(CMErrorType.InternalError);
+    throw new CMError(CMErrorType.InternalError);
   }
   if (!res) {
-    // throw new CMError(CMErrorType.NoSuchKey, 'Volunteer');
+    throw new CMError(CMErrorType.NoSuchKey, 'Volunteer');
   }
 }
 
