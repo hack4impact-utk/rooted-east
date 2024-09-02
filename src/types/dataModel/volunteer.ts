@@ -13,6 +13,8 @@ const zVolunteer = z.object({
   role: zRole,
 });
 
+export const zVolunteerResponse = zVolunteer;
+
 export const zCreateVolunteerRequest = zVolunteer.partial();
 
 export const zUpdateVolunteerRequest = zVolunteer.partial();
@@ -24,3 +26,4 @@ export interface CreateVolunteerRequest
   extends z.infer<typeof zCreateVolunteerRequest> {}
 
 export default zVolunteer;
+export interface VolunteerResponse extends z.infer<typeof zVolunteerResponse> {}

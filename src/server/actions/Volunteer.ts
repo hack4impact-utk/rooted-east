@@ -97,3 +97,15 @@ export async function deleteVolunteer(volunteerId: string) {
     throw new CMError(CMErrorType.InternalError);
   }
 }
+
+// Function to return all volunteer's phone numbers.
+export async function getAllVolunteersNumbers(): Promise<string[]> {
+  let volunteersNums: string[];
+  try {
+    await dbConnect();
+    volunteersNums = await VolunteerSchema.find({}).select('phoneNumber');
+  } catch (error) {
+    throw new CMError(CMErrorType.InternalError);
+  }
+  return volunteersNums;
+}

@@ -2,7 +2,12 @@ import dbConnect from '@/utils/db-connect';
 import CMError, { CMErrorType } from '@/utils/cmerror';
 import { CreateEventVolunteerRequest } from '@/types/dataModel/eventVolunteer';
 import EventVolunteer from '@/server/models/EventVolunteer';
-import { CreateEventRequest } from '@/types/dataModel/event';
+import EventSchema from '@/server/models/Event';
+import EventVolunteerSchema from '@/server/models/EventVolunteer';
+import {
+  CreateEventRequest,
+  UpdateEventRequest,
+} from '@/types/dataModel/event';
 import Event from '@/server/models/Event';
 import { mongo } from 'mongoose';
 
@@ -53,5 +58,38 @@ export async function createEvent(
       }
     }
     throw new CMError(CMErrorType.InternalError);
+  }
+}
+
+export async function deleteEvent(eventId: string): Promise<void> {
+  try {
+    await dbConnect();
+
+    await EventVolunteerSchema.deleteMany({
+      event: eventId,
+    });
+
+    await EventSchema.findByIdAndDelete(eventId);
+  } catch (error) {
+    throw new CMError(CMErrorType.InternalError);
+  }
+}
+
+export async function updateEventAction(
+  eventId: string,
+  eventUpdatesReqest: UpdateEventRequest
+): Promise<void> {
+  let res;
+  try {
+    await dbConnect();
+    res = await EventVolunteerSchema.findByIdAndUpdate(
+      eventId,
+      eventUpdatesReqest
+    );
+  } catch (error) {
+    throw new CMError(CMErrorType.InternalError);
+  }
+  if (!res) {
+    throw new CMError(CMErrorType.NoSuchKey, 'Event');
   }
 }
