@@ -80,7 +80,6 @@ export async function getUpcomingEvents(): Promise<Event[] | null> {
     date: {
       $gte: currentDate,
     },
-    softDelete: { $ne: true },
   }).lean()) as Event[];
 
   return events;
