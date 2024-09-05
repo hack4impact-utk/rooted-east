@@ -75,6 +75,18 @@ export async function deleteEvent(eventId: string): Promise<void> {
   }
 }
 
+export async function getUpcomingEvents(): Promise<Event[] | null> {
+  await dbConnect();
+
+  const currentDate = new Date();
+  const events: Event[] = (await EventSchema.find({
+    date: {
+      $gte: currentDate,
+    },
+  }).lean()) as Event[];
+
+  return events;
+  
 export async function updateEventAction(
   eventId: string,
   eventUpdatesReqest: UpdateEventRequest
