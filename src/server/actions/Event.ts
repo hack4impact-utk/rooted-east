@@ -4,7 +4,10 @@ import { CreateEventVolunteerRequest } from '@/types/dataModel/eventVolunteer';
 import EventVolunteer from '@/server/models/EventVolunteer';
 import EventSchema from '@/server/models/Event';
 import EventVolunteerSchema from '@/server/models/EventVolunteer';
-import { CreateEventRequest } from '@/types/dataModel/event';
+import {
+  CreateEventRequest,
+  UpdateEventRequest,
+} from '@/types/dataModel/event';
 import Event from '@/server/models/Event';
 import { mongo } from 'mongoose';
 
@@ -83,4 +86,22 @@ export async function getUpcomingEvents(): Promise<Event[] | null> {
   }).lean()) as Event[];
 
   return events;
+  
+export async function updateEventAction(
+  eventId: string,
+  eventUpdatesReqest: UpdateEventRequest
+): Promise<void> {
+  let res;
+  try {
+    await dbConnect();
+    res = await EventVolunteerSchema.findByIdAndUpdate(
+      eventId,
+      eventUpdatesReqest
+    );
+  } catch (error) {
+    throw new CMError(CMErrorType.InternalError);
+  }
+  if (!res) {
+    throw new CMError(CMErrorType.NoSuchKey, 'Event');
+  }
 }
