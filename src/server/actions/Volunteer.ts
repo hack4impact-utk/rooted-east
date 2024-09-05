@@ -5,6 +5,7 @@ import { mongo } from 'mongoose';
 import {
   UpdateVolunteerRequest,
   CreateVolunteerRequest,
+  Volunteer,
 } from '@/types/dataModel/volunteer';
 import CMError, { CMErrorType } from '@/utils/cmerror';
 
@@ -77,6 +78,25 @@ export async function getVolunteerTotalHours(volunteerId: string) {
   }
   // converting miliseconds to hours
   return totalTime / 3600000;
+}
+
+export async function getVolunteer(
+  volunteerId: string
+): Promise<Volunteer | null> {
+  let target: Volunteer | null;
+
+  try {
+    await dbConnect();
+    target = await VolunteerSchema.findById(volunteerId).lean();
+  } catch (error) {
+    throw new CMError(CMErrorType.InternalError);
+  }
+
+  if (!target) {
+    throw new CMError(CMErrorType.NoSuchKey, 'Volunteer');
+  }
+
+  return target;
 }
 
 /**
