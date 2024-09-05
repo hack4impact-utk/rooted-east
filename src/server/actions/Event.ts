@@ -75,6 +75,22 @@ export async function deleteEvent(eventId: string): Promise<void> {
   }
 }
 
+export async function getEvent(eventId: string): Promise<Event | null> {
+  let target: Event | null;
+  try {
+    await dbConnect();
+    target = await EventSchema.findById(eventId).lean();
+  } catch (error) {
+    throw new CMError(CMErrorType.InternalError);
+  }
+
+  if (!target) {
+    throw new CMError(CMErrorType.NoSuchKey, 'Event');
+  }
+
+  return target;
+}
+
 export async function getUpcomingEvents(): Promise<Event[] | null> {
   await dbConnect();
 
@@ -86,7 +102,8 @@ export async function getUpcomingEvents(): Promise<Event[] | null> {
   }).lean()) as Event[];
 
   return events;
-  
+}
+
 export async function updateEventAction(
   eventId: string,
   eventUpdatesReqest: UpdateEventRequest

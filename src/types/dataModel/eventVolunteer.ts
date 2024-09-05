@@ -1,6 +1,4 @@
 import { z } from 'zod';
-import zVolunteer from './volunteer';
-import zEvent from './event';
 import EventVolunteer from '@/server/models/EventVolunteer';
 import { zObjectId } from './base';
 

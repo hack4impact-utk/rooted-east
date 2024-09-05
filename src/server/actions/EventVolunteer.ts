@@ -1,4 +1,3 @@
-
 import { CheckInVolunteerRequest } from '@/types/dataModel/eventVolunteer';
 import dbConnect from '@/utils/db-connect';
 import CMError, { CMErrorType } from '@/utils/cmerror';
@@ -32,7 +31,9 @@ export async function checkInVolunteerRequest(
       }
     }
     throw new CMError(CMErrorType.InternalError);
-    
+  }
+}
+
 export async function deleteEventVolunteer(
   eventVolunteerId: string
 ): Promise<void> {
