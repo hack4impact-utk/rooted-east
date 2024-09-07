@@ -51,7 +51,7 @@ export default function NewVolunteerForm({
         sx={{ mt: 2 }}
       />
       <TextField
-        label="Phones number"
+        label="Phone number"
         value={volunteerData.phoneNumber || ''}
         onChange={(e) =>
           onChange({ ...volunteerData, phoneNumber: e.target.value })
