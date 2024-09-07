@@ -12,7 +12,6 @@ export async function checkOutVolunteer(
 ): Promise<void> {
   try {
     await dbConnect();
-
     const res = await EventVolunteerSchema.findByIdAndUpdate(
       CheckOutVolunteerRequest.eventVolunteerId,
       { checkOutTime: CheckOutVolunteerRequest.checkOutTime }
@@ -35,7 +34,7 @@ export async function checkOutVolunteer(
   }
 }
  
-export async function checkInVolunteerRequest(
+export async function checkInVolunteerAction(
   checkInVolunteerRequest: CheckInVolunteerRequest
 ): Promise<void> {
   try {
@@ -62,8 +61,6 @@ export async function checkInVolunteerRequest(
     throw new CMError(CMErrorType.InternalError);
   }
 }
-        
- 
 
 export async function deleteEventVolunteer(
   eventVolunteerId: string
