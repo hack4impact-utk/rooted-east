@@ -6,7 +6,7 @@ import { checkInVolunteerAction } from '@/server/actions/EventVolunteer';
 
 export async function PUT(
   req: NextRequest,
-  { params }: { params: { eventVolunteerId: string; checkInTime: Date } }
+  { params }: { params: { eventVolunteerId: string } }
 ) {
   try {
     const idValidationResult = zObjectId.safeParse(params.eventVolunteerId);
