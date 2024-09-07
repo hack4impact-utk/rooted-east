@@ -32,7 +32,7 @@ export async function PUT(
     if (!idValidationResult.success) {
       return new CMError(
         CMErrorType.BadValue,
-        'EventVolunteer Id'
+        'EventVolunteer Ids'
       ).toNextResponse();
     }
 
