@@ -1,12 +1,11 @@
-
 import dbConnect from '@/utils/db-connect';
 import CMError, { CMErrorType } from '@/utils/cmerror';
 import EventVolunteerSchema from '@/server/models/EventVolunteer';
 import { CheckInVolunteerRequest } from '@/types/dataModel/eventVolunteer';
 import { mongo } from 'mongoose';
 import { CheckOutVolunteerRequest } from '@/types/dataModel/eventVolunteer';
-import EventVolunteer from '../models/EventVolunteer'
-   
+import EventVolunteer from '../models/EventVolunteer';
+
 export async function checkOutVolunteer(
   CheckOutVolunteerRequest: CheckOutVolunteerRequest
 ): Promise<void> {
@@ -33,7 +32,7 @@ export async function checkOutVolunteer(
     throw new CMError(CMErrorType.InternalError);
   }
 }
- 
+
 export async function checkInVolunteerAction(
   checkInVolunteerRequest: CheckInVolunteerRequest
 ): Promise<void> {
@@ -42,7 +41,7 @@ export async function checkInVolunteerAction(
 
     const res = await EventVolunteerSchema.findByIdAndUpdate(
       checkInVolunteerRequest.eventVolunteerId,
-      { checkInTime: checkInVolunteerRequest.checkInTime }
+      { checkInTime: Date.now() }
     );
     // TODO for #58 handle a duplicate entry fail case here (duplicate event+volunteer ID combination)
     if (!res) {
