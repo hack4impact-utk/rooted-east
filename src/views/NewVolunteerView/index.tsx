@@ -42,7 +42,7 @@ export default function NewVolunteerView() {
   return (
     <Grid2 container spacing={2} sx={{ mt: 2 }}>
       <Grid2 xs={12}>
-        <Typography variant="h4">New event</Typography>
+        <Typography variant="h4">New Volunteer</Typography>
       </Grid2>
       <Grid2 xs={12}>
         <NewVolunteerForm volunteerData={formData} onChange={setFormData} />
