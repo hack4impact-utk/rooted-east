@@ -21,7 +21,6 @@ export const zCreateEventVolunteerRequest = zEventVolunteer.extend({
 
 export const zCheckInVolunteerRequest = z.object({
   eventVolunteerId: z.string(),
-  checkInTime: z.date(),
 });
 
 export const zCheckOutVolunteerRequest = z.object({
