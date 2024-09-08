@@ -91,6 +91,27 @@ export async function getEvent(eventId: string): Promise<Event | null> {
   return target;
 }
 
+/**
+ * Takes in an event id and updates the corresponding event with the new data
+ * @param eventId  The id of the existing event
+ * @param updatedEvent The updated event
+ */
+export async function updateEvent(
+  eventId: string,
+  updatedEvent: UpdateEventRequest
+): Promise<void> {
+  let res;
+  try {
+    await dbConnect();
+    res = await EventSchema.findByIdAndUpdate(eventId, updatedEvent);
+  } catch (error) {
+    throw new CMError(CMErrorType.InternalError);
+  }
+  if (!res) {
+    throw new CMError(CMErrorType.NoSuchKey, 'Event');
+  }
+}
+
 export async function getUpcomingEvents(): Promise<Event[] | null> {
   await dbConnect();
 
