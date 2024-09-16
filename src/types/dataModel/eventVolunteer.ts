@@ -1,6 +1,6 @@
 import { z } from 'zod';
-import zVolunteer from './volunteer';
-import zEvent from './event';
+// import zVolunteer from './volunteer';
+// import zEvent from './event';
 import EventVolunteer from '@/server/models/EventVolunteer';
 import { zObjectId } from './base';
 
@@ -40,8 +40,8 @@ export interface CheckInVolunteerRequest
   extends z.infer<typeof zCheckInVolunteerRequest> {}
 
 export default zEventVolunteer;
-export interface EventVolunteerEntity
-  extends z.infer<typeof zEventVolunteerEntity> {}
+// export interface EventVolunteerEntity
+//   extends z.infer<typeof zEventVolunteerEntity> {}
 export interface CheckOutVolunteerRequest
   extends z.infer<typeof zCheckOutVolunteerRequest> {}
 export interface EventVolunteerResponse
