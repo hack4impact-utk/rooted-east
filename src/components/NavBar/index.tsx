@@ -45,6 +45,7 @@ function ResponsiveAppBar() {
     <AppBar position="static" sx={{ bgcolor: 'green' }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
+          {/* Hamburger menu for xs screens */}
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
             <IconButton
               size="large"
@@ -79,6 +80,7 @@ function ResponsiveAppBar() {
               ))}
             </Menu>
           </Box>
+          {/* Filler logo and Rooted East title for xs screens */}
           <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
           <Typography
             variant="h5"
@@ -98,6 +100,7 @@ function ResponsiveAppBar() {
           >
             Rooted East
           </Typography>
+          {/* Filler logo and Rooted East title for md screens */}
           <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 3 }} />
           <Typography
             variant="h6"
@@ -115,6 +118,7 @@ function ResponsiveAppBar() {
           >
             Rooted East
           </Typography>
+          {/* Nav Buttons for md screens */}
           <Box sx={{ display: { xs: 'none', md: 'flex' }, ml: 'auto', mr: 3 }}>
             {pages.map((page) => (
               <Button
@@ -126,6 +130,7 @@ function ResponsiveAppBar() {
               </Button>
             ))}
           </Box>
+          {/* Profile menu for all screens */}
           <Box>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
