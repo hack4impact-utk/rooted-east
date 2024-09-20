@@ -11,11 +11,11 @@ const zEventVolunteer = z.object({
   checkOutTime: z.date().optional(),
 });
 
-// const zEventVolunteerEntity = zEventVolunteer.extend({
-//   _id: zObjectId,
-//   volunteer: zObjectId,
-//   event: zObjectId,
-// });
+const zEventVolunteerEntity = zEventVolunteer.extend({
+  _id: zObjectId,
+  volunteer: zObjectId,
+  event: zObjectId,
+});
 export const zCreateEventVolunteerRequest = zEventVolunteer.extend({
   volunteer: zObjectId,
   event: zObjectId,
@@ -23,7 +23,6 @@ export const zCreateEventVolunteerRequest = zEventVolunteer.extend({
 
 export const zCheckInVolunteerRequest = z.object({
   eventVolunteerId: z.string(),
-  checkInTime: z.date(),
 });
 
 export const zCheckOutVolunteerRequest = z.object({
@@ -40,8 +39,8 @@ export interface CheckInVolunteerRequest
   extends z.infer<typeof zCheckInVolunteerRequest> {}
 
 export default zEventVolunteer;
-// export interface EventVolunteerEntity
-//   extends z.infer<typeof zEventVolunteerEntity> {}
+export interface EventVolunteerEntity
+  extends z.infer<typeof zEventVolunteerEntity> {}
 export interface CheckOutVolunteerRequest
   extends z.infer<typeof zCheckOutVolunteerRequest> {}
 export interface EventVolunteerResponse

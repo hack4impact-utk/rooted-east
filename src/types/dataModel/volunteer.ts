@@ -1,5 +1,6 @@
 import { z } from 'zod';
 import zDemographic from './demographic';
+import zBase from './base';
 
 export const roles = ['Volunteer', 'Manager', 'Admin'] as const;
 const zRole = z.enum(roles);
@@ -13,7 +14,7 @@ const zVolunteer = z.object({
   role: zRole,
 });
 
-export const zVolunteerResponse = zVolunteer;
+export const zVolunteerResponse = zVolunteer.extend({ ...zBase.shape });
 
 export const zCreateVolunteerRequest = zVolunteer.partial();
 
