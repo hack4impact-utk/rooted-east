@@ -38,12 +38,12 @@ export default function NewEventForm({
         <DemoContainer components={['DatePicker']}>
           <DatePicker
             label="Day"
-            value={eventData.date || ''}
+            value={eventData.day || ''}
             onChange={(e) => {
               if (!e) return;
               onChange({
                 ...eventData,
-                date: e,
+                day: e,
               });
             }}
             // types/forms/events

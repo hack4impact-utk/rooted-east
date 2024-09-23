@@ -14,7 +14,7 @@ export const zEventFormData = z
   .object({
     title: z.string(),
     location: z.string(),
-    date: zDayJs,
+    day: zDayJs,
     startTime: zTime,
     endTime: zTime,
     volsNeeded: z.number(),
