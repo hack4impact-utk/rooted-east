@@ -3,6 +3,7 @@ import { zObjectId } from '@/types/dataModel/base';
 import { zUpdateVolunteerRequest } from '@/types/dataModel/volunteer';
 import CMError, { CMErrorResponse, CMErrorType } from '@/utils/cmerror';
 import { NextRequest, NextResponse } from 'next/server';
+import { deleteVolunteer } from '@/server/actions/Volunteer';
 
 export async function PUT(
   //request = name of the param
@@ -35,6 +36,23 @@ export async function PUT(
       params.volunteerId,
       updateVolunteerRequestValidationResult.data
     );
+
+    return new NextResponse(undefined, { status: 204 });
+  } catch (error) {
+    return CMErrorResponse(error);
+  }
+}
+
+export async function DELETE(
+  _request: NextRequest,
+  { params }: { params: { volunteerId: string } }
+) {
+  try {
+    const validationResult = zObjectId.safeParse(params.volunteerId);
+    if (!validationResult.success) {
+      return new CMError(CMErrorType.BadValue, 'Volunteer Id').toNextResponse();
+    }
+    await deleteVolunteer(params.volunteerId);
 
     return new NextResponse(undefined, { status: 204 });
   } catch (error) {
