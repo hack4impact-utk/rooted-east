@@ -1,5 +1,13 @@
 import { z } from 'zod';
 import { zObjectId } from './base';
+// import dayjs from 'dayjs';
+// import type { Dayjs } from 'dayjs';
+
+export const zTime = z.string().regex(/^([01]?[0-9]|2[0-3]):[0-5][0-9]$/, {
+  message: 'Invalid time format',
+});
+
+// const zDayJs = z.custom<Dayjs>((val) => val instanceof dayjs, 'Invalid date');
 
 const zEvent = z.object({
   title: z.string(),

@@ -10,6 +10,7 @@ export async function POST(req: NextRequest) {
     // BUT WE NEED A USERAUTH to make it so managers / admins are the ones allowed to make events
 
     const body = await req.json();
+    console.log(body);
 
     // validate the request body
     const validationResult = zCreateEventRequest.safeParse(body);
