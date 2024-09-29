@@ -10,6 +10,7 @@ import {
 } from '@/types/dataModel/event';
 import Event from '@/server/models/Event';
 import { mongo } from 'mongoose';
+// import { get } from 'http';
 
 export async function createEventVolunteer(
   createEventVolunteerRequest: CreateEventVolunteerRequest
@@ -142,4 +143,35 @@ export async function updateEventAction(
   if (!res) {
     throw new CMError(CMErrorType.NoSuchKey, 'Event');
   }
+}
+
+// get all events associated with a volunter by volunteer id
+export async function getVolunteerEvents(
+  volunteerId: string
+): Promise<Event[] | null> {
+  const volEvents: Event[] = [];
+
+  try {
+    await dbConnect();
+    const eventVols = await EventVolunteerSchema.find(
+      {
+        volunteer: volunteerId,
+      },
+      'event'
+    );
+
+    for (let i = 0; i < eventVols.length; i++) {
+      const event = await getEvent(eventVols[i].event);
+      if (event) {
+        volEvents.push(event);
+      }
+    }
+  } catch (error) {
+    throw new CMError(CMErrorType.InternalError);
+  }
+  if (!volEvents) {
+    throw new CMError(CMErrorType.NoSuchKey, 'Event');
+  }
+
+  return volEvents;
 }
