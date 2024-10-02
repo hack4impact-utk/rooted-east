@@ -8,8 +8,8 @@ import {
   CreateEventRequest,
   UpdateEventRequest,
 } from '@/types/dataModel/event';
-import Event from '@/server/models/Event';
 import { mongo } from 'mongoose';
+import { Event } from '@/types/dataModel/event';
 // import { get } from 'http';
 
 export async function createEventVolunteer(
@@ -43,7 +43,7 @@ export async function createEvent(
   try {
     await dbConnect();
 
-    const res = await Event.create(createEventRequest);
+    const res = await EventSchema.create(createEventRequest);
     if (!res) {
       throw new Error('Event not created');
     }
@@ -148,8 +148,8 @@ export async function updateEventAction(
 // get all events associated with a volunter by volunteer id
 export async function getVolunteerEvents(
   volunteerId: string
-): Promise<Event[] | null> {
-  const volEvents: Event[] = [];
+): Promise<Event[]> {
+  let volEvents: Event[] = [];
 
   try {
     await dbConnect();
@@ -171,6 +171,10 @@ export async function getVolunteerEvents(
   }
   if (!volEvents) {
     throw new CMError(CMErrorType.NoSuchKey, 'Event');
+  }
+
+  if (volEvents == null) {
+    volEvents = [];
   }
 
   return volEvents;
