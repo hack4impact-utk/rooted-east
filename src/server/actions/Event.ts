@@ -118,7 +118,7 @@ export async function getUpcomingEvents(): Promise<Event[] | null> {
 
   const currentDate = new Date();
   const events: Event[] = (await EventSchema.find({
-    date: {
+    day: {
       $gte: currentDate,
     },
   }).lean()) as Event[];
@@ -145,7 +145,7 @@ export async function updateEventAction(
   }
 }
 
-// get all events associated with a volunter by volunteer id
+// get all events associated with a volunteer by volunteer id
 export async function getVolunteerEvents(
   volunteerId: string
 ): Promise<Event[]> {
