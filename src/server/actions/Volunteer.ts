@@ -15,7 +15,6 @@ export async function createVolunteer(
 ): Promise<string> {
   try {
     await dbConnect();
-    console.log('connected to db');
     const volunteer = await VolunteerSchema.create(request);
     return volunteer._id.toString();
   } catch (error) {
