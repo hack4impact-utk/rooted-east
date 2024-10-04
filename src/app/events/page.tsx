@@ -31,11 +31,11 @@ export default async function Events() {
     <Box>
       <h1>This is the Events Page</h1>
       <Box sx={{ display: 'flex', flexDirection: 'row' }}>
-        <Box sx={{}}>
-          <EventList events={upcomingEvents}></EventList>
-        </Box>
-        <Box sx={{}}>
+        <Box>
           <EventList events={volunteerEvents}></EventList>
+        </Box>
+        <Box>
+          <EventList events={upcomingEvents}></EventList>
         </Box>
       </Box>
     </Box>
