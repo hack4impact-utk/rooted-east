@@ -143,3 +143,13 @@ export async function getAllVolunteersForEvent(
   }
   return eventVols;
 }
+
+export async function getAdminVolunteers(): Promise<Volunteer[]> {
+  try {
+    await dbConnect();
+    const admins = await VolunteerSchema.find({ role: 'Admin' }).lean();
+    return admins;
+  } catch (error) {
+    throw new CMError(CMErrorType.InternalError);
+  }
+}
