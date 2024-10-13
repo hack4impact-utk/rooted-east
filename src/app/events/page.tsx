@@ -1,4 +1,5 @@
-import EventList from '@/components/EventList';
+import VolunteerEventsList from '@/components/VolunteerEventsList';
+import UpcomingEventsList from '@/components/UpcomingEventsList';
 import { getUpcomingEvents, getVolunteerEvents } from '@/server/actions/Event';
 import { Box } from '@mui/material';
 import dayjs from 'dayjs';
@@ -32,10 +33,10 @@ export default async function Events() {
       <h1>This is the Events Page</h1>
       <Box sx={{ display: 'flex', flexDirection: 'row' }}>
         <Box>
-          <EventList events={volunteerEvents}></EventList>
+          <VolunteerEventsList events={volunteerEvents}></VolunteerEventsList>
         </Box>
         <Box>
-          <EventList events={upcomingEvents}></EventList>
+          <UpcomingEventsList events={upcomingEvents}></UpcomingEventsList>
         </Box>
       </Box>
     </Box>
