@@ -10,6 +10,7 @@ import {
 } from '@/types/dataModel/event';
 import { mongo } from 'mongoose';
 import { Event } from '@/types/dataModel/event';
+import { EventEntity } from '@/types/dataModel/event';
 // import { get } from 'http';
 
 export async function createEventVolunteer(
@@ -76,8 +77,8 @@ export async function deleteEvent(eventId: string): Promise<void> {
   }
 }
 
-export async function getEvent(eventId: string): Promise<Event | null> {
-  let target: Event | null;
+export async function getEvent(eventId: string): Promise<EventEntity | null> {
+  let target: EventEntity | null;
   try {
     await dbConnect();
     target = await EventSchema.findById(eventId).lean();
@@ -145,8 +146,8 @@ export async function updateEventAction(
 // get all events associated with a volunteer by volunteer id
 export async function getVolunteerEvents(
   volunteerId: string
-): Promise<Event[]> {
-  let volEvents: Event[] = [];
+): Promise<EventEntity[]> {
+  let volEvents: EventEntity[] = [];
 
   try {
     await dbConnect();

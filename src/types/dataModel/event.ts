@@ -20,6 +20,10 @@ const zEvent = z.object({
   manager: zObjectId,
 });
 
+const zEventEntity = zEvent.extend({
+  _id: zObjectId,
+});
+
 export const zCreateEventRequest = zEvent;
 
 export const zUpdateEventRequest = zEvent.partial();
@@ -29,5 +33,7 @@ export interface CreateEventRequest
   extends z.infer<typeof zCreateEventRequest> {}
 export interface UpdateEventRequest
   extends z.infer<typeof zUpdateEventRequest> {}
+
+export interface EventEntity extends z.infer<typeof zEventEntity> {}
 
 export default zEvent;
