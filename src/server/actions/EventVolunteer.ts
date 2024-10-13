@@ -33,7 +33,7 @@ export async function checkOutVolunteer(
   }
 }
 
-export async function checkInVolunteerAction(
+export async function checkInVolunteer(
   checkInVolunteerRequest: CheckInVolunteerRequest
 ): Promise<void> {
   try {
@@ -41,8 +41,9 @@ export async function checkInVolunteerAction(
 
     const res = await EventVolunteerSchema.findByIdAndUpdate(
       checkInVolunteerRequest.eventVolunteerId,
-      { checkInTime: Date.now() }
+      { checkInTime: checkInVolunteerRequest.checkInTime }
     );
+
     // TODO for #58 handle a duplicate entry fail case here (duplicate event+volunteer ID combination)
     if (!res) {
       throw new Error('Volunteer could not be signed in.');

@@ -6,27 +6,29 @@ import { zObjectId } from './base';
 const zEventVolunteer = z.object({
   volunteer: zObjectId,
   event: zObjectId,
-  checkInTime: z.date().optional(),
-  checkOutTime: z.date().optional(),
+  checkInTime: z.coerce.date().optional(),
+  checkOutTime: z.coerce.date().optional(),
 });
 
-const zEventVolunteerEntity = zEventVolunteer.extend({
-  _id: zObjectId,
-  volunteer: zObjectId,
-  event: zObjectId,
-});
+// const zEventVolunteerEntity = zEventVolunteer.extend({
+//   _id: zObjectId,
+//   volunteer: zObjectId,
+//   event: zObjectId,
+// });
+
 export const zCreateEventVolunteerRequest = zEventVolunteer.extend({
   volunteer: zObjectId,
   event: zObjectId,
 });
 
 export const zCheckInVolunteerRequest = z.object({
-  eventVolunteerId: z.string(),
+  eventVolunteerId: zObjectId,
+  checkInTime: z.coerce.date(),
 });
 
 export const zCheckOutVolunteerRequest = z.object({
-  eventVolunteerId: z.string(),
-  checkOutTime: z.date(),
+  eventVolunteerId: zObjectId,
+  checkOutTime: z.coerce.date(),
 });
 
 export const zEventVolunteerResponse = zEventVolunteer;

@@ -133,10 +133,7 @@ export async function updateEventAction(
   let res;
   try {
     await dbConnect();
-    res = await EventVolunteerSchema.findByIdAndUpdate(
-      eventId,
-      eventUpdatesReqest
-    );
+    res = await EventSchema.findByIdAndUpdate(eventId, eventUpdatesReqest);
   } catch (error) {
     throw new CMError(CMErrorType.InternalError);
   }

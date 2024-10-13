@@ -3,7 +3,9 @@ import CMError, { CMErrorResponse, CMErrorType } from '@/utils/cmerror';
 import { zObjectId } from '@/types/dataModel/base';
 import { deleteEventVolunteer } from '@/server/actions/EventVolunteer';
 import { zCheckInVolunteerRequest } from '@/types/dataModel/eventVolunteer';
-import { checkInVolunteerAction } from '@/server/actions/EventVolunteer';
+import { zCheckOutVolunteerRequest } from '@/types/dataModel/eventVolunteer';
+import { checkInVolunteer } from '@/server/actions/EventVolunteer';
+import { checkOutVolunteer } from '@/server/actions/EventVolunteer';
 
 export async function DELETE(
   _request: NextRequest,
@@ -39,14 +41,39 @@ export async function PUT(
     }
 
     const data = await req.json();
-    const validationResult = zCheckInVolunteerRequest.safeParse(data);
-    if (!validationResult.success) {
+
+    if (data.checkInTime != undefined) {
+      const request = {
+        eventVolunteerId: params.eventVolunteerId,
+        checkInTime: data.checkInTime,
+      };
+      const validationResult = zCheckInVolunteerRequest.safeParse(request);
+      if (!validationResult.success) {
+        return new CMError(
+          CMErrorType.BadValue,
+          'EventVolunteer'
+        ).toNextResponse();
+      }
+      await checkInVolunteer(request);
+    } else if (data.checkOutTime != undefined) {
+      const request = {
+        eventVolunteerId: params.eventVolunteerId,
+        checkOutTime: data.checkOutTime,
+      };
+      const validationResult = zCheckOutVolunteerRequest.safeParse(request);
+      if (!validationResult.success) {
+        return new CMError(
+          CMErrorType.BadValue,
+          'EventVolunteer'
+        ).toNextResponse();
+      }
+      await checkOutVolunteer(request);
+    } else {
       return new CMError(
         CMErrorType.BadValue,
-        'EventVolunteer'
+        'checkInTime/checkOutTime'
       ).toNextResponse();
     }
-    await checkInVolunteerAction(params);
 
     return new NextResponse(undefined, { status: 204 });
   } catch (e) {
