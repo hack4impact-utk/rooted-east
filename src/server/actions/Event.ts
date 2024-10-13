@@ -9,7 +9,6 @@ import {
   UpdateEventRequest,
 } from '@/types/dataModel/event';
 import { mongo } from 'mongoose';
-import { Event } from '@/types/dataModel/event';
 import { EventEntity } from '@/types/dataModel/event';
 // import { get } from 'http';
 
@@ -114,15 +113,15 @@ export async function updateEvent(
   }
 }
 
-export async function getUpcomingEvents(): Promise<Event[] | null> {
+export async function getUpcomingEvents(): Promise<EventEntity[] | null> {
   await dbConnect();
 
   const currentDate = new Date();
-  const events: Event[] = (await EventSchema.find({
+  const events: EventEntity[] = (await EventSchema.find({
     day: {
       $gte: currentDate,
     },
-  }).lean()) as Event[];
+  }).lean()) as EventEntity[];
 
   return events;
 }
