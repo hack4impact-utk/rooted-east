@@ -1,7 +1,6 @@
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
 import React from 'react';
 import { EventEntity } from '@/types/dataModel/event';
+import { Box, Button, List, ListItem } from '@mui/material';
 
 interface EventObjectList {
   events: EventEntity[];
@@ -9,13 +8,24 @@ interface EventObjectList {
 
 export default function UpcomingEventsList(props: EventObjectList) {
   return (
-    <div>
-      <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'grey' }}>
-        {/* <List> */}
+    <Box sx={{ overflow: 'auto', maxHeight: '80vh', bgcolor: 'grey' }}>
+      <List>
         {props.events.map((event: EventEntity, index) => (
-          <ListItem key={index}>{event.title}</ListItem>
+          <ListItem
+            key={index}
+            sx={{
+              bgcolor: 'white',
+              maxWidth: '90%',
+              margin: 2,
+              flex: 1,
+              justifyContent: 'space-between',
+            }}
+          >
+            {event.title}
+            <Button variant="contained">Cancel Sign up</Button>
+          </ListItem>
         ))}
       </List>
-    </div>
+    </Box>
   );
 }

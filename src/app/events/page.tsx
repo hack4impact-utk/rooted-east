@@ -17,7 +17,7 @@ export default async function Events() {
   }
 
   // get volunteer events
-  const volunteerEvents = await getVolunteerEvents('66d1374dc497b7361aa51451');
+  const volunteerEvents = await getVolunteerEvents('670c85e8c68ff08582eb0717');
 
   if (!volunteerEvents) {
     return <div>Failed to load volunteer events</div>;
@@ -32,10 +32,12 @@ export default async function Events() {
     <Box>
       <h1>This is the Events Page</h1>
       <Box sx={{ display: 'flex', flexDirection: 'row' }}>
-        <Box>
+        <Box flex={2} marginLeft={4} marginRight={2}>
+          <h3>Your Events</h3>
           <VolunteerEventsList events={volunteerEvents}></VolunteerEventsList>
         </Box>
-        <Box>
+        <Box flex={3} marginLeft={2} marginRight={4}>
+          <h3>Upcoming Events</h3>
           <UpcomingEventsList events={upcomingEvents}></UpcomingEventsList>
         </Box>
       </Box>
