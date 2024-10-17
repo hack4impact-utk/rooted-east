@@ -48,8 +48,13 @@ const CancelSignUp = (props: { event: EventEntity }) => {
 };
 
 export default function VolunteerEventsList(props: EventObjectList) {
+  const isFutureEvent = (eventDate: Date) => {
+    const today = new Date();
+    return eventDate > today;
+  };
+
   return (
-    <Box sx={{ overflow: 'auto', maxHeight: '75vh', bgcolor: 'grey' }}>
+    <Box sx={{ overflow: 'auto', maxHeight: '65vh', bgcolor: 'grey' }}>
       <List>
         {props.events.map((event: EventEntity, index) => (
           <ListItem
@@ -63,7 +68,9 @@ export default function VolunteerEventsList(props: EventObjectList) {
             }}
           >
             {event.title}
-            <CancelSignUp event={event}></CancelSignUp>
+            {isFutureEvent(event.day) && (
+              <CancelSignUp event={event}></CancelSignUp>
+            )}
           </ListItem>
         ))}
       </List>
