@@ -1,10 +1,51 @@
+'use client';
 import React from 'react';
 import { EventEntity } from '@/types/dataModel/event';
-import { Box, Button, List, ListItem } from '@mui/material';
+import {
+  Box,
+  Button,
+  Dialog,
+  DialogActions,
+  DialogContentText,
+  List,
+  ListItem,
+} from '@mui/material';
 
 interface EventObjectList {
   events: EventEntity[];
 }
+
+const CancelSignUp = (props: { event: EventEntity }) => {
+  const [open, setOpen] = React.useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+    console.log(props.event.title);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  return (
+    <>
+      <Button variant="contained" onClick={handleClickOpen}>
+        Cancel Sign up
+      </Button>
+      <Dialog onClose={handleClose} open={open}>
+        <DialogContentText>
+          You have cancelled your sign-up for event &quot;{props.event.title}
+          &quot;
+        </DialogContentText>
+        <DialogActions>
+          <Button onClick={handleClose} autoFocus>
+            OK
+          </Button>
+        </DialogActions>
+      </Dialog>
+    </>
+  );
+};
 
 export default function VolunteerEventsList(props: EventObjectList) {
   return (
@@ -22,7 +63,7 @@ export default function VolunteerEventsList(props: EventObjectList) {
             }}
           >
             {event.title}
-            <Button variant="contained">Cancel Sign up</Button>
+            <CancelSignUp event={event}></CancelSignUp>
           </ListItem>
         ))}
       </List>
