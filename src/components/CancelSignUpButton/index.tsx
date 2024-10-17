@@ -7,7 +7,11 @@ import {
 } from '@mui/material';
 import { EventEntity } from '@/types/dataModel/event';
 
-export default function CancelSignUpButton(props: { event: EventEntity }) {
+interface CancelSignUpButtonProps {
+  event: EventEntity;
+}
+
+export default function CancelSignUpButton(props: CancelSignUpButtonProps) {
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
