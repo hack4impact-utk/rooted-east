@@ -29,6 +29,16 @@ export default async function Events() {
     });
   }
 
+  // change ObjectIds from ObjectId to string
+  volunteerEvents.forEach((event) => {
+    event._id = event._id.toString();
+    event.manager = event.manager.toString();
+  });
+  upcomingEvents.forEach((event) => {
+    event._id = event._id.toString();
+    event.manager = event.manager.toString();
+  });
+
   return (
     <Box>
       <h1>This is the Events Page</h1>
