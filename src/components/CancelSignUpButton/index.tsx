@@ -6,17 +6,25 @@ import {
   DialogContentText,
 } from '@mui/material';
 import { EventEntity } from '@/types/dataModel/event';
+// import { deleteEventVolunteer, getEventVolunteer } from '@/server/actions/EventVolunteer';
+// import { getEvent } from '@/server/actions/Event';
 
 interface CancelSignUpButtonProps {
   event: EventEntity;
+  volunteerID: string;
 }
 
 export default function CancelSignUpButton(props: CancelSignUpButtonProps) {
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
+    // let unsignUp = getEventVolunteer(props.event._id, props.volunteerID);
+    // if (!unsignUp) {
+    //     console.log("EventVolunteer does not exist");
+    // } else {
+    //   deleteEventVolunteer(unsignUp._id);
+    // }
     setOpen(true);
-    console.log(props.event.title);
   };
 
   const handleClose = () => {
