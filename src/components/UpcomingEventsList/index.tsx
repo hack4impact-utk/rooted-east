@@ -10,11 +10,6 @@ interface EventObjectList {
 }
 
 export default function UpcomingEventsList(props: EventObjectList) {
-  const isFutureEvent = (eventDate: Date) => {
-    const today = new Date();
-    return eventDate > today;
-  };
-
   return (
     <Box sx={{ overflow: 'auto', maxHeight: '65vh', bgcolor: 'grey' }}>
       <List>
@@ -30,9 +25,8 @@ export default function UpcomingEventsList(props: EventObjectList) {
             }}
           >
             {event.title}
-            {isFutureEvent(event.day) && (
-              <CancelSignUpButton event={event}></CancelSignUpButton>
-            )}
+            {/* needs to say if eventVolunteer exists, then show CancelSignUpButton, else show Sign Up Button */}
+            <CancelSignUpButton event={event}></CancelSignUpButton>
           </ListItem>
         ))}
       </List>
