@@ -1,10 +1,13 @@
 import dbConnect from '@/utils/db-connect';
 import CMError, { CMErrorType } from '@/utils/cmerror';
 import EventVolunteerSchema from '@/server/models/EventVolunteer';
-import { CheckInVolunteerRequest } from '@/types/dataModel/eventVolunteer';
+import {} from '@/types/dataModel/eventVolunteer';
 import { mongo } from 'mongoose';
-import { CheckOutVolunteerRequest } from '@/types/dataModel/eventVolunteer';
-import EventVolunteer from '../models/EventVolunteer';
+import {
+  EventVolunteer,
+  CheckInVolunteerRequest,
+  CheckOutVolunteerRequest,
+} from '@/types/dataModel/eventVolunteer';
 
 export async function checkOutVolunteer(
   CheckOutVolunteerRequest: CheckOutVolunteerRequest
@@ -67,9 +70,45 @@ export async function deleteEventVolunteer(
 ): Promise<void> {
   try {
     await dbConnect();
-    await EventVolunteer.findOneAndDelete({ _id: eventVolunteerId });
+    await EventVolunteerSchema.findOneAndDelete({ _id: eventVolunteerId });
     return;
   } catch (error) {
     throw error;
+  }
+}
+
+export async function getEventVolunteer(
+  eventId: string,
+  volunteerId: string
+): Promise<EventVolunteer | null> {
+  try {
+    await dbConnect();
+    const eventVol = await EventVolunteerSchema.findOne({
+      event: eventId,
+      volunteer: volunteerId,
+    });
+    if (!eventVol) {
+      throw new CMError(CMErrorType.NoSuchKey, 'EventVolunteer');
+    }
+    return eventVol;
+  } catch (error) {
+    throw new CMError(CMErrorType.InternalError);
+  }
+}
+
+// returns true if the eventvolunteer exists and false if it does not
+export async function checkIfEventVolunteerExists(
+  eventId: string,
+  volunteerId: string
+): Promise<boolean> {
+  try {
+    await dbConnect();
+    const eventVol = await EventVolunteerSchema.findOne({
+      event: eventId,
+      volunteer: volunteerId,
+    });
+    return !(eventVol === null);
+  } catch (error) {
+    throw new CMError(CMErrorType.InternalError);
   }
 }
