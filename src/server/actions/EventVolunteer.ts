@@ -5,6 +5,33 @@ import { CheckInVolunteerRequest } from '@/types/dataModel/eventVolunteer';
 import { mongo } from 'mongoose';
 import { CheckOutVolunteerRequest } from '@/types/dataModel/eventVolunteer';
 import EventVolunteer from '../models/EventVolunteer';
+import { EventVolunteerResponse } from '@/types/dataModel/eventVolunteer';
+import { CreateEventVolunteerRequest } from '@/types/dataModel/eventVolunteer';
+
+export async function createEventVolunteer(
+  createEventVolunteerRequest: CreateEventVolunteerRequest
+): Promise<string> {
+  try {
+    await dbConnect();
+
+    const res = await EventVolunteer.create(createEventVolunteerRequest);
+    if (!res) {
+      throw new Error('Event not created');
+    }
+
+    return res._id.toString();
+  } catch (error) {
+    if (
+      error instanceof mongo.MongoError ||
+      error instanceof mongo.MongoServerError
+    ) {
+      if (error.code === 11000) {
+        throw new CMError(CMErrorType.DuplicateKey, 'EventVolunteer');
+      }
+    }
+    throw new CMError(CMErrorType.InternalError);
+  }
+}
 
 export async function checkOutVolunteer(
   CheckOutVolunteerRequest: CheckOutVolunteerRequest
@@ -72,4 +99,18 @@ export async function deleteEventVolunteer(
   } catch (error) {
     throw error;
   }
+}
+
+export async function getAllEventVolunteersForEvent(
+  eventId: string
+): Promise<EventVolunteerResponse[]> {
+  let eventVols: EventVolunteerResponse[];
+  try {
+    await dbConnect();
+    eventVols = await EventVolunteerSchema.find({ event: eventId });
+  } catch (error) {
+    console.error(error);
+    throw new CMError(CMErrorType.InternalError);
+  }
+  return eventVols;
 }
