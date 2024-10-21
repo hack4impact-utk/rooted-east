@@ -6,6 +6,7 @@ import {
   UpdateVolunteerRequest,
   CreateVolunteerRequest,
   Volunteer,
+  VolunteerEntity,
 } from '@/types/dataModel/volunteer';
 import { EventVolunteerResponse } from '@/types/dataModel/eventVolunteer';
 import CMError, { CMErrorType } from '@/utils/cmerror';
@@ -132,8 +133,9 @@ export async function getAllVolunteersNumbers(): Promise<string[]> {
 
 export async function getAllVolunteersForEvent(
   eventId: string
-): Promise<EventVolunteerResponse[]> {
+): Promise<VolunteerEntity[]> {
   let eventVols: EventVolunteerResponse[];
+  const volunteers: VolunteerEntity[] = [];
   try {
     await dbConnect();
     eventVols = await EventVolunteerSchema.find({ event: eventId });
@@ -141,7 +143,18 @@ export async function getAllVolunteersForEvent(
     console.error(error);
     throw new CMError(CMErrorType.InternalError);
   }
-  return eventVols;
+  try {
+    for (const eVol of eventVols) {
+      const vol: VolunteerEntity | null = await VolunteerSchema.findById(
+        eVol.volunteer
+      ).lean();
+      if (vol) volunteers.push(vol);
+    }
+  } catch (error) {
+    console.error(error);
+    throw new CMError(CMErrorType.InternalError);
+  }
+  return volunteers;
 }
 
 export async function getAdminVolunteers(): Promise<Volunteer[]> {

@@ -12,8 +12,6 @@ const zEventVolunteer = z.object({
 
 const zEventVolunteerEntity = zEventVolunteer.extend({
   _id: zObjectId,
-  volunteer: zObjectId,
-  event: zObjectId,
 });
 
 export const zCreateEventVolunteerRequest = zEventVolunteer.extend({

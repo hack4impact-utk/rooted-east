@@ -1,4 +1,4 @@
-import { createEventVolunteer } from '@/server/actions/Event';
+import { createEventVolunteer } from '@/server/actions/EventVolunteer';
 import { NextRequest, NextResponse } from 'next/server';
 import { zCreateEventVolunteerRequest } from '@/types/dataModel/eventVolunteer';
 import CMError, { CMErrorResponse, CMErrorType } from '@/utils/cmerror';
