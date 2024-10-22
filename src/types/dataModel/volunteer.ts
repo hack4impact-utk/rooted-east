@@ -52,6 +52,8 @@ export const zCreateVolunteerRequest = zVolunteer.partial();
 
 export const zUpdateVolunteerRequest = zVolunteer.partial();
 
+export interface EventEntity extends z.infer<typeof zVolunteerEntity> {}
+
 export interface Volunteer extends z.infer<typeof zVolunteer> {}
 export interface UpdateVolunteerRequest
   extends z.infer<typeof zUpdateVolunteerRequest> {}
