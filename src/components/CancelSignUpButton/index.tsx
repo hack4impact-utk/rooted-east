@@ -25,8 +25,9 @@ export default function CancelSignUpButton(props: CancelSignUpButtonProps) {
     console.log('test');
     try {
       console.log('Checking if volunteer exists...');
-      // const unsignUp = await getEvent(
+      // const unsignUp = await getEventVolunteer(
       //   props.event._id,
+      //   props.volunteerID
       // );
 
       // if (!unsignUp) {
