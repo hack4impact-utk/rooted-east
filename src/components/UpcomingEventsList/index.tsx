@@ -1,8 +1,9 @@
-'use client';
 import React from 'react';
 import { EventEntity } from '@/types/dataModel/event';
 import { Box, List, ListItem } from '@mui/material';
 import CancelSignUpButton from '../CancelSignUpButton';
+import { checkIfEventVolunteerExists } from '@/server/actions/EventVolunteer';
+import SignUpButton from '../SignUpButton';
 // import SignUpButton from '../SignUpButton';
 
 interface EventObjectList {
@@ -14,7 +15,7 @@ export default function UpcomingEventsList(props: EventObjectList) {
   return (
     <Box sx={{ overflow: 'auto', maxHeight: '65vh', bgcolor: 'grey' }}>
       <List>
-        {props.events.map((event: EventEntity, index) => (
+        {props.events.map(async (event: EventEntity, index) => (
           <ListItem
             key={index}
             sx={{
@@ -26,12 +27,20 @@ export default function UpcomingEventsList(props: EventObjectList) {
             }}
           >
             {event.title}
-            {/* needs to say if eventVolunteer exists, then show CancelSignUpButton, else show Sign Up Button 
-            use checkIfEventVolunteerExists to check if eventVolunteer exists */}
-            <CancelSignUpButton
-              event={event}
-              volunteerID={props.volunteerID}
-            ></CancelSignUpButton>
+            {(await checkIfEventVolunteerExists(
+              event._id,
+              props.volunteerID
+            )) ? (
+              <CancelSignUpButton
+                event={event}
+                volunteerID={props.volunteerID}
+              ></CancelSignUpButton>
+            ) : (
+              <SignUpButton
+                event={event._id.toString()}
+                volunteer={props.volunteerID}
+              ></SignUpButton>
+            )}
           </ListItem>
         ))}
       </List>

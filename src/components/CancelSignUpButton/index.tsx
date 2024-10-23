@@ -20,44 +20,36 @@ interface CancelSignUpButtonProps {
 
 export default function CancelSignUpButton(props: CancelSignUpButtonProps) {
   const [open, setOpen] = useState(false);
+  if (!props.event._id) {
+    console.log('Event does not exist');
+    return;
+  }
+
+  if (!props.volunteerID) {
+    console.log('Volunteer does not exist');
+    return;
+  }
 
   const handleClickOpen = async () => {
     console.log('test');
     try {
-      console.log('Checking if volunteer exists...');
-      // const unsignUp = await checkIfEventVolunteerExists(
-      //   props.event._id,
-      //   props.volunteerID
-      // );
-
-      // if (!unsignUp) {
-      //   console.log('EventVolunteer does not exist');
-      // } else {
-      //   console.log("EventVolunteer exists. Fetching EventVolunteer data...");
-      //   const eventVol = await getEventVolunteer(props.event._id, props.volunteerID);
-      //   console.log('EventVolunteer data fetched:', eventVol);
-
-      //   if(!eventVol) {
-      //     console.log("EventVolunteer does not exist");
-      //     return;
-      //   }
-      //   console.log("Deleting EventVolunteer...");
-      //   await deleteEventVolunteer(eventVol._id);
-      //   console.log("Volunteer sign-up cancelled");
+      // const eventVol = await getEventVolunteer(props.event._id, props.volunteerID);
+      // if(!eventVol) {
+      //   console.log("EventVolunteer does not exist");
+      //   return;
       // }
-
-      /* const response = await fetch('../api/eventVolunteer', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(props),
-      });
-      if (!response.ok) {
-        throw new Error('Failed to sign up. Please try again.');
-      }
-      console.log(response); 
-      alert('signed up'); */
+      // console.log('EventVolunteer data fetched:', eventVol);
+      // const response = await fetch ('.../api/eventVolunteer', {
+      //   method: "DELETE",
+      //   headers: {
+      //     'Content-Type': 'application/json',
+      //   },
+      //   body: eventVol._id
+      // })
+      // if (!response.ok) {
+      //   throw new Error('Failed to delete EventVol. Please try again.');
+      // }
+      // console.log(response);
     } catch (error) {
       console.log('Error during volunteer sign-up cancellation: ', error);
     }

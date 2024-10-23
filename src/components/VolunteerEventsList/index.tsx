@@ -1,4 +1,3 @@
-'use client';
 import React from 'react';
 import { EventEntity } from '@/types/dataModel/event';
 import { Box, List, ListItem } from '@mui/material';
