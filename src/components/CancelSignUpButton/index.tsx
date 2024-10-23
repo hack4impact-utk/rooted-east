@@ -1,5 +1,5 @@
 'use client';
-import React from 'react';
+import { useState } from 'react';
 import {
   Button,
   Dialog,
@@ -7,10 +7,11 @@ import {
   DialogContentText,
 } from '@mui/material';
 import { EventEntity } from '@/types/dataModel/event';
-import {
-  deleteEventVolunteer,
-  getEventVolunteer,
-} from '@/server/actions/EventVolunteer';
+// import {
+//   checkIfEventVolunteerExists,
+//   deleteEventVolunteer,
+//   getEventVolunteer,
+// } from '@/server/actions/EventVolunteer';
 
 interface CancelSignUpButtonProps {
   event: EventEntity;
@@ -18,17 +19,46 @@ interface CancelSignUpButtonProps {
 }
 
 export default function CancelSignUpButton(props: CancelSignUpButtonProps) {
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
 
   const handleClickOpen = async () => {
-    const unsignUp = await getEventVolunteer(
-      props.event._id,
-      props.volunteerID
-    );
-    if (!unsignUp) {
-      console.log('EventVolunteer does not exist');
-    } else {
-      deleteEventVolunteer(unsignUp._id);
+    console.log('test');
+    try {
+      console.log('Checking if volunteer exists...');
+      // const unsignUp = await getEvent(
+      //   props.event._id,
+      // );
+
+      // if (!unsignUp) {
+      //   console.log('EventVolunteer does not exist');
+      // } else {
+      //   console.log("EventVolunteer exists. Fetching EventVolunteer data...");
+      //   const eventVol = await getEventVolunteer(props.event._id, props.volunteerID);
+      //   console.log('EventVolunteer data fetched:', eventVol);
+
+      //   if(!eventVol) {
+      //     console.log("EventVolunteer does not exist");
+      //     return;
+      //   }
+      //   console.log("Deleting EventVolunteer...");
+      //   await deleteEventVolunteer(eventVol._id);
+      //   console.log("Volunteer sign-up cancelled");
+      // }
+
+      /* const response = await fetch('../api/eventVolunteer', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(props),
+      });
+      if (!response.ok) {
+        throw new Error('Failed to sign up. Please try again.');
+      }
+      console.log(response); 
+      alert('signed up'); */
+    } catch (error) {
+      console.log('Error during volunteer sign-up cancellation: ', error);
     }
     setOpen(true);
   };
