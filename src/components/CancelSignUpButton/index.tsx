@@ -7,15 +7,10 @@ import {
   DialogContentText,
 } from '@mui/material';
 import { EventEntity } from '@/types/dataModel/event';
-// import {
-//   checkIfEventVolunteerExists,
-//   deleteEventVolunteer,
-//   getEventVolunteer,
-// } from '@/server/actions/EventVolunteer';
 
 interface CancelSignUpButtonProps {
   event: EventEntity;
-  volunteerID: string;
+  eventVolId: string;
 }
 
 export default function CancelSignUpButton(props: CancelSignUpButtonProps) {
@@ -25,31 +20,25 @@ export default function CancelSignUpButton(props: CancelSignUpButtonProps) {
     return;
   }
 
-  if (!props.volunteerID) {
-    console.log('Volunteer does not exist');
+  if (!props.eventVolId) {
+    console.log('EventVolunteer does not exist');
     return;
   }
 
   const handleClickOpen = async () => {
     console.log('test');
     try {
-      // const eventVol = await getEventVolunteer(props.event._id, props.volunteerID);
-      // if(!eventVol) {
-      //   console.log("EventVolunteer does not exist");
-      //   return;
-      // }
-      // console.log('EventVolunteer data fetched:', eventVol);
-      // const response = await fetch ('.../api/eventVolunteer', {
-      //   method: "DELETE",
-      //   headers: {
-      //     'Content-Type': 'application/json',
-      //   },
-      //   body: eventVol._id
-      // })
-      // if (!response.ok) {
-      //   throw new Error('Failed to delete EventVol. Please try again.');
-      // }
-      // console.log(response);
+      const response = await fetch(`/api/eventVolunteer/${props.eventVolId}`, {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ eventVolId: props.eventVolId }),
+      });
+      if (!response.ok) {
+        throw new Error('Failed to delete EventVol. Please try again.');
+      }
+      console.log(response);
     } catch (error) {
       console.log('Error during volunteer sign-up cancellation: ', error);
     }

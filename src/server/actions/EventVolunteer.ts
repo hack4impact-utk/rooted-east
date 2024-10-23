@@ -107,7 +107,7 @@ export async function deleteEventVolunteer(
 export async function getEventVolunteer(
   eventId: string,
   volunteerId: string
-): Promise<EventVolunteerEntity | null> {
+): Promise<EventVolunteerEntity> {
   let eventVol: EventVolunteerEntity | null;
   try {
     await dbConnect();
