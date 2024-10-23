@@ -3,6 +3,7 @@ import React from 'react';
 import { EventEntity } from '@/types/dataModel/event';
 import { Box, List, ListItem } from '@mui/material';
 import CancelSignUpButton from '../CancelSignUpButton';
+// import SignUpButton from '../SignUpButton';
 
 interface EventObjectList {
   events: EventEntity[];
