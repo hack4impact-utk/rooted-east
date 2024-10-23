@@ -25,7 +25,8 @@ export default function UpcomingEventsList(props: EventObjectList) {
             }}
           >
             {event.title}
-            {/* needs to say if eventVolunteer exists, then show CancelSignUpButton, else show Sign Up Button */}
+            {/* needs to say if eventVolunteer exists, then show CancelSignUpButton, else show Sign Up Button 
+            use checkIfEventVolunteerExists to check if eventVolunteer exists */}
             <CancelSignUpButton
               event={event}
               volunteerID={props.volunteerID}
