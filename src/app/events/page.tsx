@@ -45,7 +45,10 @@ export default async function Events() {
       <Box sx={{ display: 'flex', flexDirection: { xs: 'column', md: 'row' } }}>
         <Box sx={{ flex: 2, marginLeft: { xs: 2, md: 4 }, marginRight: 2 }}>
           <h3>Your Events</h3>
-          <VolunteerEventsList events={volunteerEvents}></VolunteerEventsList>
+          <VolunteerEventsList
+            events={volunteerEvents}
+            volunteerID={tempPlaceholderVolunteerID}
+          ></VolunteerEventsList>
         </Box>
         <Box sx={{ flex: 3, marginLeft: 2, marginRight: { xs: 2, md: 4 } }}>
           <h3>Upcoming Events</h3>

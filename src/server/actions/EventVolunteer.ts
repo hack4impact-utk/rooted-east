@@ -1,10 +1,9 @@
 import dbConnect from '@/utils/db-connect';
 import CMError, { CMErrorType } from '@/utils/cmerror';
 import EventVolunteerSchema from '@/server/models/EventVolunteer';
-import {} from '@/types/dataModel/eventVolunteer';
+import { EventVolunteerEntity } from '@/types/dataModel/eventVolunteer';
 import { mongo } from 'mongoose';
 import {
-  EventVolunteer,
   CheckInVolunteerRequest,
   CheckOutVolunteerRequest,
 } from '@/types/dataModel/eventVolunteer';
@@ -80,10 +79,11 @@ export async function deleteEventVolunteer(
 export async function getEventVolunteer(
   eventId: string,
   volunteerId: string
-): Promise<EventVolunteer | null> {
+): Promise<EventVolunteerEntity | null> {
+  let eventVol: EventVolunteerEntity | null;
   try {
     await dbConnect();
-    const eventVol = await EventVolunteerSchema.findOne({
+    eventVol = await EventVolunteerSchema.findOne({
       event: eventId,
       volunteer: volunteerId,
     });

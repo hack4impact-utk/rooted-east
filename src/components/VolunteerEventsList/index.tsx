@@ -6,6 +6,7 @@ import CancelSignUpButton from '../CancelSignUpButton';
 
 interface EventObjectList {
   events: EventEntity[];
+  volunteerID: string;
 }
 
 export default function VolunteerEventsList(props: EventObjectList) {
@@ -30,7 +31,10 @@ export default function VolunteerEventsList(props: EventObjectList) {
           >
             {event.title}
             {isFutureEvent(event.day) && (
-              <CancelSignUpButton event={event}></CancelSignUpButton>
+              <CancelSignUpButton
+                event={event}
+                volunteerID={props.volunteerID}
+              ></CancelSignUpButton>
             )}
           </ListItem>
         ))}
