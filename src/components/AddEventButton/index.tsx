@@ -130,7 +130,10 @@ function AddEventButton({ managers }: { managers: Volunteer[] }) {
                 onChange={(e) => setManager(e.target.value)}
               >
                 {managers.map((manager, index) => (
-                  <option key={index} value={manager.email}>
+                  <option
+                    key={index}
+                    value={manager.firstName + ' ' + manager.lastName}
+                  >
                     {`${manager.firstName} ${manager.lastName}`}
                   </option>
                 ))}
