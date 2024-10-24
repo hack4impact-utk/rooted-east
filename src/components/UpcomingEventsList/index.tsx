@@ -4,6 +4,7 @@ import React from 'react';
 import { EventEntity } from '@/types/dataModel/event';
 import SignUpButton from '../SignUpButton';
 import { Box } from '@mui/material';
+import ManageEventButton from '../ManageEventPage';
 
 interface EventObjectList {
   events: EventEntity[];
@@ -21,6 +22,7 @@ export default function UpcomingEventsList(props: EventObjectList) {
               event={event._id.toString()}
               volunteer="670c2800a5f0ecb9ef0d0d31"
             ></SignUpButton>
+            <ManageEventButton event={event._id.toString()} />
           </Box>
         ))}
       </List>
