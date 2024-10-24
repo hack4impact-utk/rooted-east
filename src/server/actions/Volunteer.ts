@@ -166,3 +166,13 @@ export async function getAdminVolunteers(): Promise<Volunteer[]> {
     throw new CMError(CMErrorType.InternalError);
   }
 }
+
+export async function getManagerVolunteers(): Promise<Volunteer[]> {
+  try {
+    await dbConnect();
+    const managers = await VolunteerSchema.find({ role: 'Manager' }).lean();
+    return managers;
+  } catch (error) {
+    throw new CMError(CMErrorType.InternalError);
+  }
+}
