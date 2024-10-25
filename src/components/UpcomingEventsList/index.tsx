@@ -8,7 +8,6 @@ import {
   getEventVolunteer,
 } from '@/server/actions/EventVolunteer';
 import SignUpButton from '../SignUpButton';
-import { Box } from '@mui/material';
 import ManageEventButton from '../ManageEventPage';
 import { EventVolunteerEntity } from '@/types/dataModel/eventVolunteer';
 
@@ -57,8 +56,10 @@ export default function UpcomingEventsList(props: EventObjectList) {
                   volunteer={props.volunteerID}
                 ></SignUpButton>
               )}
-              
-              <ManageEventButton event={event._id.toString()}></ManageEventButton>
+
+              <ManageEventButton
+                event={event._id.toString()}
+              ></ManageEventButton>
               <MoreInfoButton event={event}></MoreInfoButton>
             </ListItem>
           );
