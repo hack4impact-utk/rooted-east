@@ -1,5 +1,6 @@
 import React from 'react';
 import { EventEntity } from '@/types/dataModel/event';
+import MoreInfoButton from '../MoreInfoButton';
 import { Box, List, ListItem } from '@mui/material';
 import CancelSignUpButton from '../CancelSignUpButton';
 import {
@@ -54,6 +55,7 @@ export default function UpcomingEventsList(props: EventObjectList) {
                   volunteer={props.volunteerID}
                 ></SignUpButton>
               )}
+              <MoreInfoButton event={event}></MoreInfoButton>
             </ListItem>
           );
         })}
