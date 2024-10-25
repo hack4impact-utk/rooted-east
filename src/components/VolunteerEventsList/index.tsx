@@ -1,5 +1,6 @@
 import React from 'react';
 import { EventEntity } from '@/types/dataModel/event';
+import ManageEventButton from '../ManageEventPage';
 import { Box, List, ListItem } from '@mui/material';
 import CancelSignUpButton from '../CancelSignUpButton';
 import {
@@ -53,6 +54,8 @@ export default function VolunteerEventsList(props: EventObjectList) {
                   eventVolId={eventVol._id.toString()}
                 ></CancelSignUpButton>
               )}
+              
+            <ManageEventButton event={event._id.toString()} />
             </ListItem>
           );
         })}
