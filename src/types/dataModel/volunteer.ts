@@ -1,6 +1,6 @@
 import { z } from 'zod';
 // import zDemographic from './demographic';
-import zBase from './base';
+import zBase, { zObjectId } from './base';
 
 export const roles = ['Volunteer', 'Manager', 'Admin'] as const;
 const zRole = z.enum(roles);
@@ -42,17 +42,24 @@ const zVolunteer = z.object({
   formCreationDate: z.string().optional(),
 });
 
+const zVolunteerEntity = zVolunteer.extend({
+  _id: zObjectId,
+});
+
 export const zVolunteerResponse = zVolunteer.extend({ ...zBase.shape });
 
 export const zCreateVolunteerRequest = zVolunteer.partial();
 
 export const zUpdateVolunteerRequest = zVolunteer.partial();
 
+export interface EventEntity extends z.infer<typeof zVolunteerEntity> {}
+
 export interface Volunteer extends z.infer<typeof zVolunteer> {}
 export interface UpdateVolunteerRequest
   extends z.infer<typeof zUpdateVolunteerRequest> {}
 export interface CreateVolunteerRequest
   extends z.infer<typeof zCreateVolunteerRequest> {}
+export interface VolunteerEntity extends z.infer<typeof zVolunteerEntity> {}
 
 export default zVolunteer;
 export interface VolunteerResponse extends z.infer<typeof zVolunteerResponse> {}
