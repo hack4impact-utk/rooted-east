@@ -1,6 +1,8 @@
 import NavBar from '@/components/NavBar';
 import { getEvent } from '@/server/actions/Event';
 import { Button, Typography } from '@mui/material';
+import RegisteredVolsList from '@/components/RegisteredVolsList';
+import { getAllVolunteersForEvent } from '@/server/actions/Volunteer';
 
 export default async function ManageEvent({
   params,
@@ -8,6 +10,8 @@ export default async function ManageEvent({
   params: { eventId: string };
 }) {
   const event = await getEvent(params.eventId);
+  const vols = await getAllVolunteersForEvent(params.eventId);
+
   return (
     <div>
       <NavBar />
@@ -54,6 +58,7 @@ export default async function ManageEvent({
       >
         Copy emails
       </Button>
+      <RegisteredVolsList vols={vols} />
     </div>
   );
 }
