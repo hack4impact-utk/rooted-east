@@ -1,5 +1,6 @@
 import { getAdminVolunteers } from '@/server/actions/Volunteer';
 import AdminVolunteers from '@/components/AdminContactInfo';
+import NavBar from '@/components/NavBar';
 
 const AdminVolunteersPage = async () => {
   let volunteers = [];
@@ -11,7 +12,12 @@ const AdminVolunteersPage = async () => {
     return <div>Error fetching volunteers</div>;
   }
 
-  return <AdminVolunteers volunteers={volunteers} />;
+  return (
+    <>
+      <NavBar />
+      <AdminVolunteers volunteers={volunteers} />;
+    </>
+  );
 };
 
 export default AdminVolunteersPage;
