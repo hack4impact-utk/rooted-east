@@ -3,6 +3,7 @@ import { getEvent } from '@/server/actions/Event';
 import { Button, Typography } from '@mui/material';
 import RegisteredVolsList from '@/components/RegisteredVolsList';
 import { getAllVolunteersForEvent } from '@/server/actions/Volunteer';
+import EditEventButton from '@/components/EditEventButton';
 
 export default async function ManageEvent({
   params,
@@ -18,16 +19,7 @@ export default async function ManageEvent({
       <Typography variant="h3" textAlign={'center'} marginTop={'10px'}>
         Manage Event = {event?.title}{' '}
       </Typography>
-      <Button
-        variant="contained"
-        style={{
-          backgroundColor: '#459863',
-          color: 'white',
-          marginLeft: '45px',
-        }}
-      >
-        Edit Event
-      </Button>
+      <EditEventButton event={event} />
       <Button
         variant="contained"
         style={{
