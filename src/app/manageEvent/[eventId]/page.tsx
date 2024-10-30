@@ -19,7 +19,7 @@ export default async function ManageEvent({
       <Typography variant="h3" textAlign={'center'} marginTop={'10px'}>
         Manage Event = {event?.title}{' '}
       </Typography>
-      <EditEventButton event={event} />
+      <EditEventButton event={JSON.parse(JSON.stringify(event))} />
       <Button
         variant="contained"
         style={{
