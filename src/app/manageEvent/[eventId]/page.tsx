@@ -3,7 +3,7 @@ import { getEvent } from '@/server/actions/Event';
 import { Button, Typography } from '@mui/material';
 import RegisteredVolsList from '@/components/RegisteredVolsList';
 import { getAllVolunteersForEvent } from '@/server/actions/Volunteer';
-
+import DeleteEventButton from '@/components/DeleteEventButton';
 export default async function ManageEvent({
   params,
 }: {
@@ -28,16 +28,7 @@ export default async function ManageEvent({
       >
         Edit Event
       </Button>
-      <Button
-        variant="contained"
-        style={{
-          backgroundColor: '#459863',
-          color: 'white',
-          marginLeft: '10px',
-        }}
-      >
-        Delete Event
-      </Button>
+      <DeleteEventButton eventId={params.eventId} />
       <Button
         variant="contained"
         style={{
