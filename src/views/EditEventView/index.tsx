@@ -11,7 +11,9 @@ interface NeweventViewProps {
 }
 
 export default function NeweventView({ event }: NeweventViewProps) {
-  const [formData, setFormData] = useState<EventEntity>(event || ({} as EventEntity));
+  const [formData, setFormData] = useState<EventEntity>(
+    event || ({} as EventEntity)
+  );
 
   useEffect(() => {
     // If event prop changes, update formData state
@@ -22,7 +24,10 @@ export default function NeweventView({ event }: NeweventViewProps) {
 
   const submitHandler = async () => {
     const reqBody = formData;
-  
+    if (!event) {
+      console.log('Event is null');
+      return;
+    }
     console.log(reqBody);
     try {
       const res = await fetch(`/api/event/${event._id}`, {
@@ -32,7 +37,7 @@ export default function NeweventView({ event }: NeweventViewProps) {
         },
         body: JSON.stringify(reqBody),
       });
-  
+
       if (res.ok) {
         // Optionally: Handle success, e.g., notify the user or redirect
         console.log('Event updated successfully');
@@ -52,7 +57,8 @@ export default function NeweventView({ event }: NeweventViewProps) {
         <Typography variant="h4">Edit Event</Typography>
       </Grid2>
       <Grid2 xs={12}>
-        <EditEventForm eventData={formData} onChange={setFormData} /> {/* Pass eventData instead of event */}
+        <EditEventForm eventData={formData} onChange={setFormData} />{' '}
+        {/* Pass eventData instead of event */}
       </Grid2>
       <Grid2 xs={12}>
         <Button

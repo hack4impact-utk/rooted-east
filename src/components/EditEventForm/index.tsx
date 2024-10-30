@@ -40,7 +40,7 @@ export default function EditEventForm({
               if (!e) return;
               onChange({
                 ...eventData,
-                day: e,
+                day: e.toDate(),
               });
             }}
           />
@@ -50,12 +50,12 @@ export default function EditEventForm({
         <DemoContainer components={['TimePicker', 'TimePicker']}>
           <TimePicker
             label="Start Time"
-            value={eventData.startTime ? dayjs(eventData.startTime) : null} 
+            value={eventData.startTime ? dayjs(eventData.startTime) : null}
             onChange={(e) => {
               if (!e) return;
               onChange({
                 ...eventData,
-                startTime: e,
+                startTime: e.toDate(),
               });
             }}
           />
@@ -66,7 +66,7 @@ export default function EditEventForm({
               if (!e) return;
               onChange({
                 ...eventData,
-                endTime: e,
+                endTime: e.toDate(),
               });
             }}
           />
