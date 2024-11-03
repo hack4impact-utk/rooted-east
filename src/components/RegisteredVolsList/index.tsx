@@ -1,6 +1,7 @@
 import React from 'react';
 import { Box, List, ListItem } from '@mui/material';
 import { VolunteerEntity } from '@/types/dataModel/volunteer';
+import MoreParticipantInfo from '../MoreParticipantInfo';
 
 interface VolObjectList {
   vols: VolunteerEntity[];
@@ -23,6 +24,7 @@ export default function RegisteredVolsList(props: VolObjectList) {
               }}
             >
               {vol.firstName} {vol.lastName} {vol.email}
+              <MoreParticipantInfo person={vol} />
             </ListItem>
           );
         })}
