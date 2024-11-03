@@ -12,10 +12,10 @@ import {
   Select,
   SelectChangeEvent,
 } from '@mui/material';
-import { Volunteer } from '@/types/dataModel/volunteer';
+import { VolunteerEntity } from '@/types/dataModel/volunteer';
 
 interface VolunteerUserProfileProps {
-  person: Volunteer;
+  person: VolunteerEntity;
 }
 
 export default function UserProfilePage({
@@ -23,7 +23,7 @@ export default function UserProfilePage({
   person,
 }: VolunteerUserProfileProps) {
   const [editable, setEditable] = useState(false);
-  const [formData, setFormData] = useState<Volunteer>(person);
+  const [formData, setFormData] = useState<VolunteerEntity>(person);
   const [contactPreference, setContactPreference] = useState({
     email: false,
     phone: false,

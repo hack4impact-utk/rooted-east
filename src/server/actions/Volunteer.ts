@@ -83,8 +83,8 @@ export async function getVolunteerTotalHours(volunteerId: string) {
 
 export async function getVolunteer(
   volunteerId: string
-): Promise<Volunteer | null> {
-  let target: Volunteer | null;
+): Promise<VolunteerEntity | null> {
+  let target: VolunteerEntity | null;
 
   try {
     await dbConnect();
