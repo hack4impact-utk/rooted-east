@@ -6,10 +6,11 @@ import {
   Typography,
   Grid,
   Box,
-  FormControlLabel,
-  Checkbox,
-  MenuItem,
+  Paper,
   Select,
+  MenuItem,
+  FormControl,
+  InputLabel,
   SelectChangeEvent,
 } from '@mui/material';
 import { Volunteer } from '@/types/dataModel/volunteer';
@@ -18,460 +19,443 @@ interface VolunteerUserProfileProps {
   person: Volunteer;
 }
 
-export default function UserProfilePage({
-  //   onChange,
-  person,
-}: VolunteerUserProfileProps) {
+export default function UserProfilePage({ person }: VolunteerUserProfileProps) {
   const [editable, setEditable] = useState(false);
-  const [formData, setFormData] = useState<Volunteer>(person);
-  const [contactPreference, setContactPreference] = useState({
-    email: false,
-    phone: false,
+  const [formData, setFormData] = useState<Volunteer>({
+    ...person,
+    formCreationDate: new Date().toLocaleDateString(),
   });
-  const [checkBoxInfo, setCheckBoxInfo] = useState({
-    homeOwner: false,
-    renter: false,
-    na: false,
-    snap: false,
-    wic: false,
-  });
-  if (person.renterHomeowner === 'homeowner') {
-    person.renterHomeowner = 'homeowner';
-  }
-  if (person.renterHomeowner === 'renter') {
-    person.renterHomeowner = 'renter';
-  }
-  if (person.renterHomeowner === 'homeowner and renter') {
-  }
 
-  // Sync formData with person prop
+  // Sync formData with person prop on update
   useEffect(() => {
-    setFormData(person);
+    setFormData({ ...person, formCreationDate: formData.formCreationDate });
   }, [person]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    if (typeof name === 'string') {
-      setFormData((prev) => ({ ...prev, [name]: value }));
-    }
+    setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleCheckboxChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, checked } = event.target;
-    setContactPreference((prev) => ({ ...prev, [name]: checked }));
-  };
-  const handleBottomCheckboxChange = (
-    event: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    const { name, checked } = event.target;
-    setCheckBoxInfo((prev) => ({ ...prev, [name]: checked }));
-  };
-  const handleSelectionChange = (
-    e: React.ChangeEvent<HTMLInputElement> | SelectChangeEvent<string>
-  ) => {
+  const handleSelectionChange = (e: SelectChangeEvent<string>) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
   const handleEdit = () => setEditable(true);
-  const handleFinish = () => {
-    // onChange({ ...formData, ...contactPreference }); // Save changes here
-    if (checkBoxInfo.homeOwner && !checkBoxInfo.renter) {
-      person.renterHomeowner = 'homeowner';
-    } else if (checkBoxInfo.renter && !checkBoxInfo.homeOwner) {
-      person.renterHomeowner = 'renter';
-    } else if (checkBoxInfo.homeOwner && checkBoxInfo.renter) {
-      person.renterHomeowner = 'homeowner and renter';
-    } else {
-      person.renterHomeowner = '';
-    }
+  const handleCancel = () => {
+    setFormData(person); // Revert changes
     setEditable(false);
-    alert('submitted');
+  };
+  const handleSave = () => {
+    // Save changes (for now, just disable edit mode)
+    setEditable(false);
+    alert('Profile saved');
   };
 
   return (
     <Box
       sx={{
         width: '100%',
-        maxWidth: 1000,
+        maxWidth: 900,
         mx: 'auto',
         mt: 4,
-        bgcolor: '#088a49',
         p: 3,
+        bgcolor: '#459863',
+        borderRadius: 2,
+        boxShadow: 3,
       }}
     >
-      <Typography variant="h5" component="h2" align="center" gutterBottom>
-        General
+      <Typography variant="h4" component="h2" align="center" gutterBottom>
+        {editable ? 'Edit Profile' : 'User Profile'}
       </Typography>
+
       <form onSubmit={(e) => e.preventDefault()}>
-        <Grid container spacing={1}>
-          <Grid item xs={4}>
-            <Typography variant="body1">First Name:</Typography>
-            <TextField
-              fullWidth
-              variant="outlined"
-              name="firstName"
-              value={formData.firstName}
-              onChange={handleChange}
-              InputProps={{ readOnly: !editable }}
-            />
-          </Grid>
-          <Grid item xs={4}>
-            <Typography variant="body1">Last Name:</Typography>
-            <TextField
-              fullWidth
-              variant="outlined"
-              name="lastName"
-              value={formData.lastName}
-              onChange={handleChange}
-              InputProps={{ readOnly: !editable }}
-            />
-          </Grid>
-          <Grid item xs={4}>
-            <Typography variant="body1">Pronouns:</Typography>
-            <TextField
-              fullWidth
-              variant="outlined"
-              name="pronouns"
-              value={formData.pronoun}
-              onChange={handleChange}
-              InputProps={{ readOnly: !editable }}
-            />
-          </Grid>
-        </Grid>
-        <Grid container spacing={1}>
-          <Grid item xs={4}>
-            <Typography variant="body1">Email:</Typography>
-            <TextField
-              fullWidth
-              variant="outlined"
-              name="email"
-              value={formData.email}
-              onChange={handleChange}
-              InputProps={{ readOnly: !editable }}
-            />
-          </Grid>
-          <Grid item xs={4}>
-            <Typography variant="body1">Phone Number:</Typography>
-            <TextField
-              fullWidth
-              variant="outlined"
-              name="phoneNumber"
-              value={formData.phoneNumber}
-              onChange={handleChange}
-              InputProps={{ readOnly: !editable }}
-            />
-          </Grid>
-          <Grid item xs={4}>
-            <Typography variant="body1">Contact Preference:</Typography>
-            <FormControlLabel
-              control={
-                <Checkbox
-                  name="email"
-                  checked={contactPreference.email}
-                  onChange={handleCheckboxChange}
-                />
-              }
-              label="Email"
-            />
-            <FormControlLabel
-              control={
-                <Checkbox
-                  name="phone"
-                  checked={contactPreference.phone}
-                  onChange={handleCheckboxChange}
-                />
-              }
-              label="Phone"
-            />
-          </Grid>
-        </Grid>
-        <Grid container spacing={1}>
-          <Grid item xs={4}>
-            <Typography variant="body1">Street Address:</Typography>
-            <TextField
-              fullWidth
-              variant="outlined"
-              name="address"
-              value={formData.address}
-              onChange={handleChange}
-              InputProps={{ readOnly: !editable }}
-            />
-          </Grid>
-          <Grid item xs={4}>
-            <Typography variant="body1">Zip Code:</Typography>
-            <TextField
-              fullWidth
-              variant="outlined"
-              name="zipCode"
-              value={formData.zipCode}
-              onChange={handleChange}
-              InputProps={{ readOnly: !editable }}
-            />
-          </Grid>
-        </Grid>
-        <Grid container spacing={1}>
-          <Grid item xs={8}>
-            <Typography variant="body1">Tell me about yourself:</Typography>
-            <TextField
-              fullWidth
-              variant="outlined"
-              name="notes"
-              value={formData.notes}
-              onChange={handleChange}
-              multiline
-              rows={2}
-              InputProps={{ readOnly: !editable }}
-            />
-          </Grid>
-          <Grid item xs={4}>
-            <Typography variant="body1">Password:</Typography>
-            <TextField
-              fullWidth
-              variant="outlined"
-              name="password"
-              onChange={handleChange}
-              type="password"
-              InputProps={{ readOnly: !editable }}
-            />
-            <Typography variant="body1">Confirm Password:</Typography>
-            <TextField
-              fullWidth
-              variant="outlined"
-              name="confirmPassword"
-              onChange={handleChange}
-              type="password"
-              InputProps={{ readOnly: !editable }}
-            />
-          </Grid>
-        </Grid>
-        {/* Demographics Section */}
-        <Typography
-          variant="h5"
-          component="h2"
-          align="center"
-          gutterBottom
-          sx={{ mt: 4 }}
-        >
-          Demographics
-        </Typography>
-        <Grid container spacing={1}>
-          <Grid item xs={4}>
-            <Typography variant="body1">Race/Ethnicity:</Typography>
-            <Select
-              fullWidth
-              variant="outlined"
-              name="raceEthnicity"
-              value={formData.raceEthnicity}
-              onChange={handleSelectionChange}
-              inputProps={{ readOnly: !editable }}
-            >
-              <MenuItem value="Asian">Asian</MenuItem>
-              <MenuItem value="Black">Black</MenuItem>
-              <MenuItem value="Hispanic">Hispanic</MenuItem>
-              <MenuItem value="White">White</MenuItem>
-              <MenuItem value="Other">Other</MenuItem>
-            </Select>
-          </Grid>
-          <Grid item xs={4}>
-            <Typography variant="body1">Household Size:</Typography>
-            <Select
-              fullWidth
-              variant="outlined"
-              name="householdOccupants"
-              value={formData.householdOccupants}
-              onChange={handleSelectionChange}
-              inputProps={{ readOnly: !editable }}
-            >
-              {[...Array(14)].map((_, index) => (
-                <MenuItem key={index} value={index}>
-                  {index}
-                </MenuItem>
-              ))}
-            </Select>
-          </Grid>
-          <Grid item xs={4}>
-            <Typography variant="body1">Average Household Income:</Typography>
-            <TextField
-              fullWidth
-              variant="outlined"
-              name="income"
-              value={formData.income}
-              onChange={handleChange}
-              InputProps={{ readOnly: !editable }}
-            />
-          </Grid>
-        </Grid>
-        <Grid container spacing={1}>
-          <Grid item xs={4}>
-            <Typography variant="body1">Gender:</Typography>
-            <TextField
-              fullWidth
-              variant="outlined"
-              name="gender"
-              value={formData.gender}
-              onChange={handleChange}
-              InputProps={{ readOnly: !editable }}
-            />
-          </Grid>
-          <Grid item xs={4}>
-            <Typography variant="body1">Children Under 12:</Typography>
-            <Select
-              fullWidth
-              variant="outlined"
-              name="householdOccupants"
-              value={formData.householdOccupants}
-              onChange={handleSelectionChange}
-              inputProps={{ readOnly: !editable }}
-            >
-              {[...Array(14)].map((_, index) => (
-                <MenuItem key={index} value={index}>
-                  {index}
-                </MenuItem>
-              ))}
-            </Select>
-          </Grid>
-          <Grid item xs={4}>
-            <Typography variant="body1">Current Occupation:</Typography>
-            <TextField
-              fullWidth
-              variant="outlined"
-              name="gender"
-              value={formData.gender}
-              onChange={handleChange}
-              InputProps={{ readOnly: !editable }}
-            />
-          </Grid>
-          <Grid item xs={4}>
-            <Typography variant="body1">Age Bracket:</Typography>
-            <Select
-              fullWidth
-              variant="outlined"
-              name="ageBracket"
-              value={formData.ageBracket}
-              onChange={handleSelectionChange}
-              inputProps={{ readOnly: !editable }}
-            >
-              <MenuItem value="18-24">18-24</MenuItem>
-              <MenuItem value="25-34">25-34</MenuItem>
-              <MenuItem value="35-44">35-44</MenuItem>
-              <MenuItem value="45-54">45-54</MenuItem>
-              <MenuItem value="55-64">55-64</MenuItem>
-              <MenuItem value="65+">65+</MenuItem>
-            </Select>
-          </Grid>
-          <Grid item xs={4}>
-            <Typography variant="body1">Children 13 to 18:</Typography>
-            <Select
-              fullWidth
-              variant="outlined"
-              name="children0to12"
-              value={formData.children0to12}
-              onChange={handleSelectionChange}
-              inputProps={{ readOnly: !editable }}
-            >
-              {[...Array(14)].map((_, index) => (
-                <MenuItem key={index} value={index}>
-                  {index}
-                </MenuItem>
-              ))}
-            </Select>
-          </Grid>
-          <Grid item xs={4}>
-            <Typography variant="body1">Seniors 60+ years old:</Typography>
-            <Select
-              fullWidth
-              variant="outlined"
-              name="seniors60plus"
-              value={formData.seniors60plus}
-              onChange={handleSelectionChange}
-              inputProps={{ readOnly: !editable }}
-            >
-              {[...Array(14)].map((_, index) => (
-                <MenuItem key={index} value={index}>
-                  {index}
-                </MenuItem>
-              ))}
-            </Select>
-          </Grid>
-        </Grid>
-        <Grid item xs={12}>
-          <Box
-            display="flex"
-            justifyContent="space-between"
-            alignItems="center"
-          >
-            {/* First Set of Checkboxes */}
-            <Box display="flex" alignItems="center">
-              <Typography variant="body1" sx={{ marginRight: 1 }}>
-                Are you a renter?
-              </Typography>
-              <Checkbox
-                name="renter"
-                checked={checkBoxInfo.renter}
-                onChange={handleBottomCheckboxChange}
+        <Paper elevation={3} sx={{ p: 2, mb: 3 }}>
+          <Typography variant="h6" gutterBottom>
+            Personal Information
+          </Typography>
+          <Grid container spacing={3}>
+            <Grid item xs={6}>
+              <TextField
+                fullWidth
+                label="First Name"
+                name="firstName"
+                value={formData.firstName}
+                onChange={handleChange}
+                InputProps={{ readOnly: !editable }}
               />
-
-              <Typography
-                variant="body1"
-                sx={{ marginRight: 1, marginLeft: 2 }}
-              >
-                or homeowner
-              </Typography>
-              <Checkbox
-                name="homeOwner"
-                checked={checkBoxInfo.homeOwner}
-                onChange={handleBottomCheckboxChange}
+            </Grid>
+            <Grid item xs={6}>
+              <TextField
+                fullWidth
+                label="Last Name"
+                name="lastName"
+                value={formData.lastName}
+                onChange={handleChange}
+                InputProps={{ readOnly: !editable }}
               />
+            </Grid>
+          </Grid>
+        </Paper>
 
-              <Typography
-                variant="body1"
-                sx={{ marginRight: 1, marginLeft: 2 }}
-              >
-                N/A
-              </Typography>
-              <Checkbox
-                name="na"
-                checked={checkBoxInfo.na}
-                onChange={handleBottomCheckboxChange}
+        <Paper elevation={3} sx={{ p: 2, mb: 3 }}>
+          <Typography variant="h6" gutterBottom>
+            Contact Information
+          </Typography>
+          <Grid container spacing={2}>
+            <Grid item xs={4}>
+              <TextField
+                fullWidth
+                label="Address"
+                name="address"
+                value={formData.address}
+                onChange={handleChange}
+                InputProps={{ readOnly: !editable }}
               />
-            </Box>
+            </Grid>
+            <Grid item xs={4}>
+              <TextField
+                fullWidth
+                label="Zip Code"
+                name="zipCode"
+                value={formData.zipCode}
+                onChange={handleChange}
+                InputProps={{ readOnly: !editable }}
+              />
+            </Grid>
+            <Grid item xs={4}>
+              <TextField
+                fullWidth
+                label="Phone Number"
+                name="phoneNumber"
+                value={formData.phoneNumber}
+                onChange={handleChange}
+                InputProps={{ readOnly: !editable }}
+              />
+            </Grid>
+            <Grid item xs={4}>
+              <TextField
+                fullWidth
+                label="Email"
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
+                InputProps={{ readOnly: !editable }}
+              />
+            </Grid>
+            <Grid item xs={4}>
+              <TextField
+                fullWidth
+                label="Preferred Contact Method"
+                name="preferredContactMethod"
+                value={formData.preferredContactMethod}
+                onChange={handleChange}
+                InputProps={{ readOnly: !editable }}
+              />
+            </Grid>
+          </Grid>
+        </Paper>
 
-            {/* Second Set of Checkboxes */}
-            <Box display="flex" alignItems="center" sx={{ marginLeft: 4 }}>
-              <Typography variant="body1" sx={{ marginRight: 1 }}>
-                Are you a part of SNAP?
-              </Typography>
-              <Checkbox
+        <Paper elevation={3} sx={{ p: 2, mb: 3 }}>
+          <Typography variant="h6" gutterBottom>
+            Demographics
+          </Typography>
+          <Grid container spacing={2}>
+            <Grid item xs={4}>
+              <TextField
+                fullWidth
+                label="Race/Ethnicity"
+                name="raceEthnicity"
+                value={formData.raceEthnicity}
+                onChange={handleChange}
+                InputProps={{ readOnly: !editable }}
+              />
+            </Grid>
+            <Grid item xs={4}>
+              <TextField
+                fullWidth
+                label="Gender"
+                name="gender"
+                value={formData.gender}
+                onChange={handleChange}
+                InputProps={{ readOnly: !editable }}
+              />
+            </Grid>
+            <Grid item xs={4}>
+              <TextField
+                fullWidth
+                label="Pronoun"
+                name="pronoun"
+                value={formData.pronoun}
+                onChange={handleChange}
+                InputProps={{ readOnly: !editable }}
+              />
+            </Grid>
+            <Grid item xs={6}>
+              <FormControl fullWidth>
+                <InputLabel>Age Bracket</InputLabel>
+                <Select
+                  fullWidth
+                  label="Age Bracket"
+                  name="ageBracket"
+                  value={formData.ageBracket}
+                  onChange={handleSelectionChange}
+                  disabled={!editable}
+                >
+                  <MenuItem value="0-18">0 - 18</MenuItem>
+                  <MenuItem value="18-24">18 - 24</MenuItem>
+                  <MenuItem value="25-35">25 - 35</MenuItem>
+                  <MenuItem value="35-44">35 - 44</MenuItem>
+                  <MenuItem value="45-54">45 - 54</MenuItem>
+                  <MenuItem value="55-64">55 - 64</MenuItem>
+                  <MenuItem value="65+">65 or over</MenuItem>
+                </Select>
+              </FormControl>
+            </Grid>
+            <Grid item xs={6}>
+              <TextField
+                fullWidth
+                label="Renter or Homeowner"
+                name="renterHomeowner"
+                value={formData.renterHomeowner}
+                onChange={handleChange}
+                InputProps={{ readOnly: !editable }}
+              />
+            </Grid>
+            <Grid item xs={6}>
+              <TextField
+                fullWidth
+                label="Occupation"
+                name="occupation"
+                value={formData.occupation}
+                onChange={handleChange}
+                InputProps={{ readOnly: !editable }}
+              />
+            </Grid>
+            <Grid item xs={6}>
+              <TextField
+                fullWidth
+                label="Annual Income"
+                name="income"
+                value={formData.income}
+                onChange={handleChange}
+                InputProps={{ readOnly: !editable }}
+              />
+            </Grid>
+            <Grid item xs={3}>
+              <TextField
+                fullWidth
+                label="#People in Household"
+                name="householdOccupants"
+                value={formData.householdOccupants}
+                onChange={handleChange}
+                InputProps={{ readOnly: !editable }}
+              />
+            </Grid>
+            <Grid item xs={3}>
+              <TextField
+                fullWidth
+                label="Children (0-12)"
+                name="children0to12"
+                value={formData.children0to12}
+                onChange={handleChange}
+                InputProps={{ readOnly: !editable }}
+              />
+            </Grid>
+            <Grid item xs={3}>
+              <TextField
+                fullWidth
+                label="Children (13-18)"
+                name="children13to18"
+                value={formData.children13to18}
+                onChange={handleChange}
+                InputProps={{ readOnly: !editable }}
+              />
+            </Grid>
+            <Grid item xs={3}>
+              <TextField
+                fullWidth
+                label="Seniors in household(60+)"
+                name="seniors60plus"
+                value={formData.seniors60plus}
+                onChange={handleChange}
+                InputProps={{ readOnly: !editable }}
+              />
+            </Grid>
+            <Grid item xs={6}>
+              <TextField
+                fullWidth
+                label="Are you receiving SNAP"
                 name="snap"
-                checked={checkBoxInfo.snap}
-                onChange={handleBottomCheckboxChange}
+                value={formData.snap}
+                onChange={handleChange}
+                InputProps={{ readOnly: !editable }}
               />
-
-              <Typography
-                variant="body1"
-                sx={{ marginRight: 1, marginLeft: 2 }}
-              >
-                or WIC
-              </Typography>
-              <Checkbox
+            </Grid>
+            <Grid item xs={6}>
+              <TextField
+                fullWidth
+                label="Are you receiving WIC"
                 name="wic"
-                checked={checkBoxInfo.wic}
-                onChange={handleBottomCheckboxChange}
+                value={formData.wic}
+                onChange={handleChange}
+                InputProps={{ readOnly: !editable }}
               />
-            </Box>
-          </Box>
-        </Grid>
-        {/* Action Buttons */}
-        <Box sx={{ display: 'flex', justifyContent: 'space-between', mt: 4 }}>
-          {!editable && (
+            </Grid>
+          </Grid>
+        </Paper>
+
+        <Paper elevation={3} sx={{ p: 2, mb: 3 }}>
+          <Typography variant="h6" gutterBottom>
+            Membership Data
+          </Typography>
+          <Grid container spacing={2}>
+            <Grid item xs={4}>
+              <TextField
+                fullWidth
+                label="Cohort"
+                name="cohort"
+                value={formData.cohort}
+                onChange={handleChange}
+                InputProps={{ readOnly: !editable }}
+              />
+            </Grid>
+            <Grid item xs={4}>
+              <TextField
+                fullWidth
+                label="Cohort Year"
+                name="cohortYear"
+                value={formData.cohortYear}
+                onChange={handleChange}
+                InputProps={{ readOnly: !editable }}
+              />
+            </Grid>
+            <Grid item xs={4}>
+              <TextField
+                fullWidth
+                label="Active (yes/no)"
+                name="active"
+                value={formData.active}
+                onChange={handleChange}
+                InputProps={{ readOnly: !editable }}
+              />
+            </Grid>
+            <Grid item xs={4}>
+              <TextField
+                fullWidth
+                label="HGP_Phase2_member"
+                name="HGP_Phase2_member"
+                value={formData.HGP_Phase2_member}
+                onChange={handleChange}
+                InputProps={{ readOnly: !editable }}
+              />
+            </Grid>
+            <Grid item xs={4}>
+              <TextField
+                fullWidth
+                label="Reason for Leaving"
+                name="reasonForLeaving"
+                value={formData.reasonForLeaving}
+                onChange={handleChange}
+                InputProps={{ readOnly: !editable }}
+              />
+            </Grid>
+            <Grid item xs={4}>
+              <TextField
+                fullWidth
+                label="Cohort Year"
+                name="cohortYear"
+                value={formData.cohortYear}
+                onChange={handleChange}
+                InputProps={{ readOnly: !editable }}
+              />
+            </Grid>
+          </Grid>
+        </Paper>
+
+        <Paper elevation={3} sx={{ p: 2, mb: 3 }}>
+          <Typography variant="h6" gutterBottom>
+            Notes
+          </Typography>
+          <Grid container spacing={2}>
+            <Grid item xs={12}>
+              <TextField
+                fullWidth
+                label="Other skills"
+                name="otherSkills"
+                value={formData.otherSkills}
+                onChange={handleChange}
+                multiline
+                rows={4}
+                InputProps={{ readOnly: !editable }}
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                fullWidth
+                label="Notes"
+                name="notes"
+                value={formData.notes}
+                onChange={handleChange}
+                multiline
+                rows={4}
+                InputProps={{ readOnly: !editable }}
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                fullWidth
+                label="Gardening Experience"
+                name="gardeningExperience"
+                value={formData.gardeningExperience}
+                onChange={handleChange}
+                multiline
+                rows={4}
+                InputProps={{ readOnly: !editable }}
+              />
+            </Grid>
+            <Grid item xs={6}>
+              <TextField
+                fullWidth
+                label="Growing Space"
+                name="growingSpace"
+                value={formData.growingSpace}
+                onChange={handleChange}
+                multiline
+                rows={4}
+                InputProps={{ readOnly: !editable }}
+              />
+            </Grid>
+            <Grid item xs={6}>
+              <TextField
+                fullWidth
+                label="Garden Infrastructure"
+                name="gardenInfrastructure"
+                value={formData.gardenInfrastructure}
+                onChange={handleChange}
+                multiline
+                rows={4}
+                InputProps={{ readOnly: !editable }}
+              />
+            </Grid>
+          </Grid>
+        </Paper>
+
+        <Box
+          sx={{ display: 'flex', justifyContent: 'flex-end', gap: 2, mt: 3 }}
+        >
+          {editable ? (
+            <>
+              <Button variant="outlined" onClick={handleCancel}>
+                Cancel
+              </Button>
+              <Button variant="contained" onClick={handleSave}>
+                Save
+              </Button>
+            </>
+          ) : (
             <Button variant="contained" onClick={handleEdit}>
               Edit
-            </Button>
-          )}
-          {editable && (
-            <Button variant="contained" onClick={handleFinish}>
-              Finish
             </Button>
           )}
         </Box>
