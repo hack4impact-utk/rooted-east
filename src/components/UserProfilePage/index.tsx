@@ -13,17 +13,31 @@ import {
   InputLabel,
   SelectChangeEvent,
 } from '@mui/material';
-import { Volunteer } from '@/types/dataModel/volunteer';
+import { VolunteerEntity } from '@/types/dataModel/volunteer';
 
 interface VolunteerUserProfileProps {
-  person: Volunteer;
+  person: VolunteerEntity;
 }
 
 export default function UserProfilePage({ person }: VolunteerUserProfileProps) {
   const [editable, setEditable] = useState(false);
-  const [formData, setFormData] = useState<Volunteer>({
+  
+  const [formData, setFormData] = useState<VolunteerEntity>({
     ...person,
     formCreationDate: new Date().toLocaleDateString(),
+  });
+    
+  const [contactPreference, setContactPreference] = useState({
+    email: false,
+    phone: false,
+  });
+    
+  const [checkBoxInfo, setCheckBoxInfo] = useState({
+    homeOwner: false,
+    renter: false,
+    na: false,
+    snap: false,
+    wic: false,
   });
 
   // Sync formData with person prop on update

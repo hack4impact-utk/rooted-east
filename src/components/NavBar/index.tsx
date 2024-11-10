@@ -15,7 +15,12 @@ import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 
-const pages = ['Contact', 'Events', 'Database'];
+const pages = [
+  ['Contact', '/contactinfo'],
+  ['Events', '/events'],
+  ['Database', '/adminDatabase'],
+  ['Profile', '/userprofile'],
+];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
 function NavBar() {
@@ -42,7 +47,7 @@ function NavBar() {
   };
 
   return (
-    <AppBar position="static" sx={{ bgcolor: 'green' }}>
+    <AppBar position="sticky" sx={{ bgcolor: 'green' }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           {/* Hamburger menu for xs screens */}
@@ -73,9 +78,11 @@ function NavBar() {
               onClose={handleCloseNavMenu}
               sx={{ display: { xs: 'block', md: 'none' } }}
             >
-              {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography sx={{ textAlign: 'center' }}>{page}</Typography>
+              {pages.map((page, index) => (
+                <MenuItem key={index} href={page[1]}>
+                  <Typography sx={{ textAlign: 'center' }}>
+                    {page[0]}
+                  </Typography>
                 </MenuItem>
               ))}
             </Menu>
@@ -120,13 +127,13 @@ function NavBar() {
           </Typography>
           {/* Nav Buttons for md screens */}
           <Box sx={{ display: { xs: 'none', md: 'flex' }, ml: 'auto', mr: 3 }}>
-            {pages.map((page) => (
+            {pages.map((page, index) => (
               <Button
-                key={page}
-                onClick={handleCloseNavMenu}
+                key={index}
+                href={page[1]}
                 sx={{ my: 2, color: 'white', display: 'block', ml: 3 }}
               >
-                {page}
+                {page[0]}
               </Button>
             ))}
           </Box>

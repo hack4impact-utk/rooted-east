@@ -83,8 +83,8 @@ export async function getVolunteerTotalHours(volunteerId: string) {
 
 export async function getVolunteer(
   volunteerId: string
-): Promise<Volunteer | null> {
-  let target: Volunteer | null;
+): Promise<VolunteerEntity | null> {
+  let target: VolunteerEntity | null;
 
   try {
     await dbConnect();
@@ -162,6 +162,16 @@ export async function getAdminVolunteers(): Promise<Volunteer[]> {
     await dbConnect();
     const admins = await VolunteerSchema.find({ role: 'Admin' }).lean();
     return admins;
+  } catch (error) {
+    throw new CMError(CMErrorType.InternalError);
+  }
+}
+
+export async function getManagerVolunteers(): Promise<Volunteer[]> {
+  try {
+    await dbConnect();
+    const managers = await VolunteerSchema.find({ role: 'Manager' }).lean();
+    return managers;
   } catch (error) {
     throw new CMError(CMErrorType.InternalError);
   }
