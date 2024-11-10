@@ -5,9 +5,10 @@ import UserProfilePage from '@/components/UserProfilePage';
 import NavBar from '@/components/NavBar';
 
 export default async function UserProfile() {
-  const person: VolunteerEntity | null = await getVolunteer(
-    '670c85e7c68ff08582eb070b'
-  );
+  let person: Volunteer | null = await getVolunteer('670c85e7c68ff08582eb070b');
+
+  person = JSON.parse(JSON.stringify(person));
+                           
   if (person) {
     return (
       <>
