@@ -1,10 +1,12 @@
 import NavBar from '@/components/NavBar';
 import { getEvent } from '@/server/actions/Event';
-import { Button, Typography } from '@mui/material';
+import { Typography } from '@mui/material';
 import RegisteredVolsList from '@/components/RegisteredVolsList';
 import { getAllVolunteersForEvent } from '@/server/actions/Volunteer';
 import EditEventButton from '@/components/EditEventButton';
 import DeleteEventButton from '@/components/DeleteEventButton';
+import CopyPhoneNumbersButton from '@/components/CopyPhoneNumbersButton';
+import CopyEmailsButton from '@/components/CopyEmailsButton';
 
 export default async function ManageEvent({
   params,
@@ -22,27 +24,9 @@ export default async function ManageEvent({
       </Typography>
       <EditEventButton event={JSON.parse(JSON.stringify(event))} />
       <DeleteEventButton eventId={params.eventId} />
-      <Button
-        variant="contained"
-        style={{
-          backgroundColor: '#459863',
-          color: 'white',
-          marginLeft: '10px',
-        }}
-      >
-        Copy phone #s
-      </Button>
-      <Button
-        variant="contained"
-        style={{
-          backgroundColor: '#459863',
-          color: 'white',
-          marginLeft: '10px',
-        }}
-      >
-        Copy emails
-      </Button>
-      <RegisteredVolsList vols={vols} />
+      <CopyPhoneNumbersButton vols={JSON.parse(JSON.stringify(vols))} />
+      <CopyEmailsButton vols={JSON.parse(JSON.stringify(vols))} />
+      <RegisteredVolsList vols={JSON.parse(JSON.stringify(vols))} />
     </div>
   );
 }
