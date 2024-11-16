@@ -18,7 +18,7 @@ import AdbIcon from '@mui/icons-material/Adb';
 const pages = [
   ['Contact', '/contactinfo'],
   ['Events', '/events'],
-  ['Database', '/adminDatabase'],
+  ['Database', '/database'],
   ['Profile', '/userprofile'],
 ];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
