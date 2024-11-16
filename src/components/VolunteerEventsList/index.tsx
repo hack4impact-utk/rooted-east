@@ -23,9 +23,9 @@ export default function VolunteerEventsList(props: EventObjectList) {
   return (
     <Box
       sx={{
+        bgcolor: '#324033',
         overflow: 'auto',
         maxHeight: '65vh',
-        bgcolor: 'grey',
         borderRadius: '8px',
         padding: '15px',
       }}
@@ -48,8 +48,8 @@ export default function VolunteerEventsList(props: EventObjectList) {
             <ListItem
               key={index}
               sx={{
-                bgcolor: 'white',
-                maxWidth: '95%',
+                bgcolor: '#f5efeb',
+                maxWidth: '90%',
                 margin: 2,
                 display: 'flex',
                 justifyContent: 'space-between',

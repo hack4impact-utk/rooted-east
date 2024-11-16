@@ -1,6 +1,7 @@
 import { getAdminVolunteers } from '@/server/actions/Volunteer';
 import AdminVolunteers from '@/components/AdminContactInfo';
 import NavBar from '@/components/NavBar';
+import '@/styles.css';
 
 const AdminVolunteersPage = async () => {
   let volunteers = [];
@@ -13,10 +14,10 @@ const AdminVolunteersPage = async () => {
   }
 
   return (
-    <>
+    <div className="admin-volunteers-page">
       <NavBar />
-      <AdminVolunteers volunteers={volunteers} />;
-    </>
+      <AdminVolunteers volunteers={volunteers} />
+    </div>
   );
 };
 

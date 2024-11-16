@@ -1,6 +1,7 @@
 import DatabaseVolunteersList from '@/components/DatabaseVolunteersList';
 import NavBar from '@/components/NavBar';
 import { getAllVolunteers } from '@/server/actions/Volunteer';
+import '@/styles.css';
 import CSVButton from '@/components/CSVButton';
 import CopyPhoneNumbersButton from '@/components/CopyPhoneNumbersButton';
 import CopyEmailsButton from '@/components/CopyEmailsButton';

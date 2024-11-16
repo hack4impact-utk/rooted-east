@@ -4,6 +4,7 @@ import { getUpcomingEvents, getVolunteerEvents } from '@/server/actions/Event';
 import { Box } from '@mui/material';
 import NavBar from '@/components/NavBar';
 import dayjs from 'dayjs';
+import '@/styles.css';
 import { getId } from '@/utils/getUserId';
 
 export default async function Events() {
@@ -45,8 +46,7 @@ export default async function Events() {
   return (
     <>
       <NavBar />
-      <Box>
-        <h1>This is the Events Page</h1>
+      <Box bgcolor={'#D5C7BC'} padding={4}>
         <Box
           sx={{
             display: 'flex',
@@ -68,7 +68,7 @@ export default async function Events() {
             <VolunteerEventsList
               events={volunteerEvents}
               volunteerID={tempPlaceholderVolunteerID}
-            ></VolunteerEventsList>
+            />
           </Box>
           <Box
             sx={{
@@ -84,7 +84,7 @@ export default async function Events() {
             <UpcomingEventsList
               events={upcomingEvents}
               volunteerID={tempPlaceholderVolunteerID}
-            ></UpcomingEventsList>
+            />
           </Box>
         </Box>
       </Box>
