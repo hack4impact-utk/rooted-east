@@ -1,18 +1,6 @@
 'use client';
 
-import {
-  Box,
-  // Checkbox,
-  // FormControl,
-  // FormControlLabel,
-  // FormGroup,
-  // FormHelperText,
-  // FormLabel,
-  TextField,
-  Select,
-  MenuItem,
-} from '@mui/material';
-//   import { useEffect } from 'react';
+import { Box, TextField, Select, MenuItem } from '@mui/material';
 import { NewVolunteerFormData } from '@/types/forms/volunteer';
 
 interface NewVolunteerFormProps {
