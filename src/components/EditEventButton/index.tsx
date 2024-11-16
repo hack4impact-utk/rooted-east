@@ -5,7 +5,7 @@ import React, { useState } from 'react';
 import { EventEntity } from '@/types/dataModel/event';
 
 interface EditEventButtonProps {
-  event: EventEntity | null; // Use the correct type
+  event: EventEntity | null;
 }
 
 export default function EditEventButton({ event }: EditEventButtonProps) {
@@ -21,14 +21,15 @@ export default function EditEventButton({ event }: EditEventButtonProps) {
         style={{
           backgroundColor: '#459863',
           color: 'white',
-          marginLeft: '45px',
+          width: '9.5rem',
+          marginRight: '.5rem',
         }}
         onClick={handleClick}
       >
         Edit Event
       </Button>
       <Dialog open={open} onClose={handleClose} maxWidth="sm" fullWidth>
-        <EditEventView event={event} /> {/* Pass the event data directly */}
+        <EditEventView event={event} />
       </Dialog>
     </>
   );

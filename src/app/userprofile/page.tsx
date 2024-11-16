@@ -6,6 +6,7 @@ import NavBar from '@/components/NavBar';
 import { getId } from '@/utils/getUserId';
 
 export default async function UserProfile() {
+
   const userId = await getId();
   let person: VolunteerEntity | null = await getVolunteer(userId);
 

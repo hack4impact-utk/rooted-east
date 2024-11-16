@@ -3,9 +3,9 @@ import CMError, { CMErrorResponse, CMErrorType } from '@/utils/cmerror';
 import { zObjectId } from '@/types/dataModel/base';
 import { deleteEventVolunteer } from '@/server/actions/EventVolunteer';
 import { zCheckInVolunteerRequest } from '@/types/dataModel/eventVolunteer';
-import { zCheckOutVolunteerRequest } from '@/types/dataModel/eventVolunteer';
+// import { zCheckOutVolunteerRequest } from '@/types/dataModel/eventVolunteer';
 import { checkInVolunteer } from '@/server/actions/EventVolunteer';
-import { checkOutVolunteer } from '@/server/actions/EventVolunteer';
+// import { checkOutVolunteer } from '@/server/actions/EventVolunteer';
 
 export async function DELETE(
   _request: NextRequest,
@@ -42,7 +42,7 @@ export async function PUT(
 
     const data = await req.json();
 
-    if (data.checkInTime != undefined) {
+    if ('checkInTime' in data) {
       const request = {
         eventVolunteerId: params.eventVolunteerId,
         checkInTime: data.checkInTime,
@@ -55,24 +55,8 @@ export async function PUT(
         ).toNextResponse();
       }
       await checkInVolunteer(request);
-    } else if (data.checkOutTime != undefined) {
-      const request = {
-        eventVolunteerId: params.eventVolunteerId,
-        checkOutTime: data.checkOutTime,
-      };
-      const validationResult = zCheckOutVolunteerRequest.safeParse(request);
-      if (!validationResult.success) {
-        return new CMError(
-          CMErrorType.BadValue,
-          'EventVolunteer'
-        ).toNextResponse();
-      }
-      await checkOutVolunteer(request);
     } else {
-      return new CMError(
-        CMErrorType.BadValue,
-        'checkInTime/checkOutTime'
-      ).toNextResponse();
+      return new CMError(CMErrorType.BadValue, 'checkInTime').toNextResponse();
     }
 
     return new NextResponse(undefined, { status: 204 });
