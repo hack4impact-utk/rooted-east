@@ -99,6 +99,26 @@ export async function getVolunteer(
 
   return target;
 }
+export async function getVolunteerByEmail(
+  volunteerEmail: string
+): Promise<VolunteerEntity | null> {
+  let target: VolunteerEntity | null;
+
+  try {
+    await dbConnect();
+    target = await VolunteerSchema.findOne({ email: volunteerEmail });
+  } catch (error) {
+    throw new CMError(CMErrorType.InternalError);
+  }
+  console.log(target);
+
+  if (!target) {
+    throw new CMError(CMErrorType.NoSuchKey, 'Volunteer');
+  }
+  console.log(target._id);
+
+  return target;
+}
 
 /**
  * Deletes a volunteer from all their events first then themselves.
@@ -129,6 +149,17 @@ export async function getAllVolunteersNumbers(): Promise<string[]> {
     throw new CMError(CMErrorType.InternalError);
   }
   return volunteersNums;
+}
+
+export async function getAllVolunteers(): Promise<VolunteerEntity[]> {
+  let volunteers: VolunteerEntity[];
+  try {
+    await dbConnect();
+    volunteers = await VolunteerSchema.find({});
+  } catch (error) {
+    throw new CMError(CMErrorType.InternalError);
+  }
+  return volunteers;
 }
 
 export async function getAllVolunteersForEvent(

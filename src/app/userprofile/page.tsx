@@ -3,11 +3,12 @@ import { VolunteerEntity } from '@/types/dataModel/volunteer';
 import { getVolunteer } from '@/server/actions/Volunteer';
 import UserProfilePage from '@/components/UserProfilePage';
 import NavBar from '@/components/NavBar';
+import { getId } from '@/utils/getUserId';
 
 export default async function UserProfile() {
-  let person: VolunteerEntity | null = await getVolunteer(
-    '670c85e7c68ff08582eb070b'
-  );
+
+  const userId = await getId();
+  let person: VolunteerEntity | null = await getVolunteer(userId);
 
   person = JSON.parse(JSON.stringify(person));
 
