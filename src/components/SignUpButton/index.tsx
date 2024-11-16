@@ -26,7 +26,14 @@ export default function SignUpButton(props: CreateEventVolunteerRequest) {
     <Button
       variant="contained"
       onClick={handleSignUp}
-      style={{ backgroundColor: '#459863', color: 'white' }}
+      sx={{
+        backgroundColor: '#459863',
+        padding: '6px 20px',
+        margin: '0 2px',
+        color: 'white',
+        whiteSpace: 'nowrap',
+        overflow: 'hidden',
+      }}
     >
       Sign Up
     </Button>

@@ -53,7 +53,17 @@ export default function CancelSignUpButton(props: CancelSignUpButtonProps) {
 
   return (
     <>
-      <Button variant="contained" onClick={handleClickOpen}>
+      <Button
+        variant="contained"
+        sx={{
+          padding: '6px 10px',
+          margin: '0 2px',
+          color: 'white',
+          whiteSpace: 'nowrap',
+          overflow: 'hidden',
+        }}
+        onClick={handleClickOpen}
+      >
         Cancel Sign up
       </Button>
       <Dialog onClose={handleClose} open={open}>

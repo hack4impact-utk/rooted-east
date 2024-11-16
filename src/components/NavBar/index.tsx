@@ -77,7 +77,7 @@ function NavBar() {
   };
 
   return (
-    <AppBar position="sticky" sx={{ bgcolor: '#459863' }}>
+    <AppBar position="sticky" sx={{ bgcolor: '#459863', borderRadius: '6px' }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           {/* Hamburger menu for xs screens */}

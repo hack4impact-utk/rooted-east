@@ -48,16 +48,38 @@ export default async function Events() {
       <Box>
         <h1>This is the Events Page</h1>
         <Box
-          sx={{ display: 'flex', flexDirection: { xs: 'column', md: 'row' } }}
+          sx={{
+            display: 'flex',
+            flexDirection: { xs: 'column', md: 'row' },
+            justifyContent: 'space-between',
+          }}
         >
-          <Box sx={{ flex: 2, marginLeft: { xs: 2, md: 4 }, marginRight: 2 }}>
+          <Box
+            sx={{
+              flexGrow: 1,
+              marginLeft: { xs: 1, md: 2 },
+              marginRight: 2,
+              borderRadius: '8px',
+              backgroundColor: 'lightgrey',
+              padding: '20px',
+            }}
+          >
             <h3>Your Events</h3>
             <VolunteerEventsList
               events={volunteerEvents}
               volunteerID={tempPlaceholderVolunteerID}
             ></VolunteerEventsList>
           </Box>
-          <Box sx={{ flex: 3, marginLeft: 2, marginRight: { xs: 2, md: 4 } }}>
+          <Box
+            sx={{
+              flexGrow: 2,
+              marginLeft: 2,
+              marginRight: { xs: 1, md: 2 },
+              borderRadius: '8px',
+              backgroundColor: 'lightgrey',
+              padding: '20px',
+            }}
+          >
             <h3>Upcoming Events</h3>
             <UpcomingEventsList
               events={upcomingEvents}
