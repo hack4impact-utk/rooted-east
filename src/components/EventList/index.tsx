@@ -11,7 +11,7 @@ interface EventObjectList {
 export default function EventList({ events }: EventObjectList) {
   return (
     <div>
-      <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'grey' }}>
+      <List sx={{ width: '100%', maxWidth: 360, bgcolor: '#23231A' }}>
         {events.map((event: EventEntity, index) => (
           <ListItem key={index}>
             {event.title}

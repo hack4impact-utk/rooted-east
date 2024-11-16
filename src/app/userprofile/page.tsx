@@ -3,6 +3,7 @@ import { VolunteerEntity } from '@/types/dataModel/volunteer';
 import { getVolunteer } from '@/server/actions/Volunteer';
 import UserProfilePage from '@/components/UserProfilePage';
 import NavBar from '@/components/NavBar';
+import '@/styles.css';
 
 export default async function UserProfile() {
   let person: VolunteerEntity | null = await getVolunteer(

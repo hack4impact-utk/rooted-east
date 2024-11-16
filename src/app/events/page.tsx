@@ -4,6 +4,7 @@ import { getUpcomingEvents, getVolunteerEvents } from '@/server/actions/Event';
 import { Box } from '@mui/material';
 import NavBar from '@/components/NavBar';
 import dayjs from 'dayjs';
+import '@/styles.css';
 
 export default async function Events() {
   // get upcoming events
@@ -43,24 +44,43 @@ export default async function Events() {
   return (
     <>
       <NavBar />
-      <Box>
-        <h1>This is the Events Page</h1>
+      <Box bgcolor={'#D5C7BC'} padding={4}>
         <Box
-          sx={{ display: 'flex', flexDirection: { xs: 'column', md: 'row' } }}
+          sx={{
+            display: 'flex',
+            flexDirection: { xs: 'column', md: 'row' },
+            gap: 4, // spacing between the boxes
+          }}
         >
-          <Box sx={{ flex: 2, marginLeft: { xs: 2, md: 4 }, marginRight: 2 }}>
-            <h3>Your Events</h3>
+          <Box
+            sx={{
+              flex: 1,
+              padding: 2,
+              backgroundColor: '#324033',
+              borderRadius: 2,
+              boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.1)',
+            }}
+          >
+            <h2 style={{ color: '#f5efeb' }}>Your Events</h2>
             <VolunteerEventsList
               events={volunteerEvents}
               volunteerID={tempPlaceholderVolunteerID}
-            ></VolunteerEventsList>
+            />
           </Box>
-          <Box sx={{ flex: 3, marginLeft: 2, marginRight: { xs: 2, md: 4 } }}>
-            <h3>Upcoming Events</h3>
+          <Box
+            sx={{
+              flex: 1,
+              padding: 2,
+              backgroundColor: '#324033',
+              borderRadius: 2,
+              boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.1)',
+            }}
+          >
+            <h2 style={{ color: '#f5efeb' }}>Upcoming Events</h2>
             <UpcomingEventsList
               events={upcomingEvents}
               volunteerID={tempPlaceholderVolunteerID}
-            ></UpcomingEventsList>
+            />
           </Box>
         </Box>
       </Box>

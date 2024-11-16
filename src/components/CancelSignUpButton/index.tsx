@@ -17,12 +17,12 @@ export default function CancelSignUpButton(props: CancelSignUpButtonProps) {
   const [open, setOpen] = useState(false);
   if (!props.event._id) {
     console.log('Event does not exist');
-    return;
+    return <></>;
   }
 
   if (!props.eventVolId) {
     console.log('EventVolunteer does not exist');
-    return;
+    return <></>;
   }
 
   const handleClickOpen = async () => {
@@ -51,7 +51,14 @@ export default function CancelSignUpButton(props: CancelSignUpButtonProps) {
 
   return (
     <>
-      <Button variant="contained" onClick={handleClickOpen}>
+      <Button
+        variant="contained"
+        onClick={handleClickOpen}
+        sx={{
+          backgroundColor: '#459863',
+          '&:hover': { backgroundColor: '#D93C63' },
+        }}
+      >
         Cancel Sign up
       </Button>
       <Dialog onClose={handleClose} open={open}>

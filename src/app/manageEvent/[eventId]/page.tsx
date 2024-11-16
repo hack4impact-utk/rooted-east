@@ -7,6 +7,7 @@ import EditEventButton from '@/components/EditEventButton';
 import DeleteEventButton from '@/components/DeleteEventButton';
 import CopyPhoneNumbersButton from '@/components/CopyPhoneNumbersButton';
 import CopyEmailsButton from '@/components/CopyEmailsButton';
+import '@/styles.css';
 
 export default async function ManageEvent({
   params,

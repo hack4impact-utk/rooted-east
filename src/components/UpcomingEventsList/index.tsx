@@ -18,7 +18,7 @@ interface EventObjectList {
 
 export default function UpcomingEventsList(props: EventObjectList) {
   return (
-    <Box sx={{ overflow: 'auto', maxHeight: '65vh', bgcolor: 'grey' }}>
+    <Box sx={{ overflow: 'auto', maxHeight: '65vh', bgcolor: '#324033' }}>
       <List>
         {props.events.map(async (event: EventEntity, index) => {
           const isSignedUp = await checkIfEventVolunteerExists(
@@ -37,7 +37,7 @@ export default function UpcomingEventsList(props: EventObjectList) {
             <ListItem
               key={index}
               sx={{
-                bgcolor: 'white',
+                bgcolor: '#f5efeb',
                 maxWidth: '90%',
                 margin: 2,
                 flex: 1,
