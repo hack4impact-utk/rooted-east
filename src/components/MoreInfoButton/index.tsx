@@ -1,6 +1,9 @@
 'use client';
 import React, { useState } from 'react';
 import { Event } from '@/types/dataModel/event';
+import { Button } from '@mui/material';
+import IconButton from '@mui/material/IconButton';
+import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 
 const modalStyles: React.CSSProperties = {
   position: 'fixed',
@@ -37,7 +40,10 @@ export default function MoreInfoButton({ event }: MoreInfoButtonProps) {
 
   return (
     <div>
-      <button onClick={handleToggleDetails}>More Info!</button>
+
+      <IconButton aria-label="more info" onClick={handleToggleDetails}>
+        <MoreHorizIcon />
+      </IconButton>
       {showDetails && (
         <>
           <div style={overlayStyles} onClick={handleToggleDetails}></div>
@@ -50,7 +56,7 @@ export default function MoreInfoButton({ event }: MoreInfoButtonProps) {
             <p>Event Manager: {event.manager}</p>
             <p>Details: {event.description}</p>
 
-            <button onClick={handleToggleDetails}>Close</button>
+            <Button onClick={handleToggleDetails}>Close</Button>
           </div>
         </>
       )}

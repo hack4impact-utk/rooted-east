@@ -29,7 +29,7 @@ const modalStyles: React.CSSProperties = {
   top: '50%',
   left: '50%',
   transform: 'translate(-50%, -50%)',
-  backgroundColor: 'white',
+  backgroundColor: 'D5C78B',
   padding: '20px',
   borderRadius: '8px',
   boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
@@ -77,7 +77,7 @@ function NavBar() {
   };
 
   return (
-    <AppBar position="sticky" sx={{ bgcolor: '#459863' }}>
+    <AppBar position="sticky" sx={{ bgcolor: '#459863', borderRadius: '6px' }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           {/* Hamburger menu for xs screens */}
@@ -132,7 +132,7 @@ function NavBar() {
               fontFamily: 'monospace',
               fontWeight: 700,
               letterSpacing: '.3rem',
-              color: 'inherit',
+              color: '#D5C7BC',
               textDecoration: 'none',
             }}
           >
@@ -150,11 +150,11 @@ function NavBar() {
               fontFamily: 'monospace',
               fontWeight: 700,
               letterSpacing: '.3rem',
-              color: 'inherit',
+              color: '#D5C7BC',
               textDecoration: 'none',
             }}
           >
-            Rooted East
+            ROOTED EAST
           </Typography>
           {/* Nav Buttons for md screens */}
           <Box sx={{ display: { xs: 'none', md: 'flex' }, ml: 'auto', mr: 3 }}>
@@ -162,14 +162,14 @@ function NavBar() {
               <Button
                 key={index}
                 href={page[1]}
-                sx={{ my: 2, color: 'white', display: 'block', ml: 3 }}
+                sx={{ my: 2, color: '#D5C7BC', display: 'block', ml: 3 }}
               >
                 {page[0]}
               </Button>
             ))}
             <Button
               onClick={toggleHelpModal}
-              sx={{ my: 2, color: 'white', display: 'block', ml: 3 }}
+              sx={{ my: 2, color: '#D5C7BC', display: 'block', ml: 3 }}
             >
               Help
             </Button>
@@ -199,7 +199,7 @@ function NavBar() {
                   Need Help?
                 </Typography>
                 <Typography id="help-modal-description" sx={{ mt: 2 }}>
-                  HELP!!!!!!!!!!
+                  TOO BAD!!!!!!!!!!
                 </Typography>
               </div>
             </div>

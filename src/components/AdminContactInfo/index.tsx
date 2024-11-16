@@ -41,9 +41,9 @@ const AdminVolunteers = ({ volunteers }: { volunteers: Volunteer[] }) => {
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
-          backgroundColor: '#429761',
+          backgroundColor: '#324033',
           borderRadius: 2,
-          color: 'white',
+          color: '#D5C7BC',
           maxHeight: 550,
           maxWidth: 450,
           justifyContent: 'center',
@@ -61,13 +61,13 @@ const AdminVolunteers = ({ volunteers }: { volunteers: Volunteer[] }) => {
             marginBottom: '60px',
           }}
         >
-          Contact Us!
+          Contact Us
         </Typography>
 
         {volunteers.map((volunteer) => (
           <div
             key={volunteer.email}
-            style={{ textAlign: 'center', color: 'white' }}
+            style={{ textAlign: 'center', color: '#D5C7BC' }}
           >
             <Typography variant="h5" sx={{ marginBottom: 1 }}>
               {volunteer.firstName} {volunteer.lastName}
@@ -78,7 +78,7 @@ const AdminVolunteers = ({ volunteers }: { volunteers: Volunteer[] }) => {
             <Typography variant="body1" sx={{ marginBottom: 3 }}>
               <strong>Phone:</strong> {formatPhoneNumber(volunteer.phoneNumber)}
             </Typography>
-            <hr style={{ width: '100%', borderColor: 'white' }} />
+            <hr style={{ width: '100%', borderColor: '#D5C7BC' }} />
           </div>
         ))}
       </Paper>
