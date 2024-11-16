@@ -131,6 +131,17 @@ export async function getAllVolunteersNumbers(): Promise<string[]> {
   return volunteersNums;
 }
 
+export async function getAllVolunteers(): Promise<VolunteerEntity[]> {
+  let volunteers: VolunteerEntity[];
+  try {
+    await dbConnect();
+    volunteers = await VolunteerSchema.find({});
+  } catch (error) {
+    throw new CMError(CMErrorType.InternalError);
+  }
+  return volunteers;
+}
+
 export async function getAllVolunteersForEvent(
   eventId: string
 ): Promise<VolunteerEntity[]> {
