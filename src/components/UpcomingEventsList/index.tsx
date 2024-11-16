@@ -18,7 +18,15 @@ interface EventObjectList {
 
 export default function UpcomingEventsList(props: EventObjectList) {
   return (
-    <Box sx={{ overflow: 'auto', maxHeight: '65vh', bgcolor: 'grey' }}>
+    <Box
+      sx={{
+        overflow: 'auto',
+        maxHeight: '65vh',
+        bgcolor: 'grey',
+        borderRadius: '8px',
+        padding: '15px',
+      }}
+    >
       <List>
         {props.events.map(async (event: EventEntity, index) => {
           const isSignedUp = await checkIfEventVolunteerExists(
@@ -38,29 +46,43 @@ export default function UpcomingEventsList(props: EventObjectList) {
               key={index}
               sx={{
                 bgcolor: 'white',
-                maxWidth: '90%',
+                maxWidth: '95%',
                 margin: 2,
-                flex: 1,
+                display: 'flex',
                 justifyContent: 'space-between',
+                alignItems: 'center',
+                borderRadius: '4px',
+                whiteSpace: 'nowrap',
+                padding: '10px',
+                boxSizing: 'border-box',
               }}
             >
-              {event.title}
+              <Box
+                sx={{
+                  flexGrow: 1,
+                  // maxWidth: 'calc(100% - 200px)', // Limit title width to leave space for buttons (adjust 200px based on button widths)
+                  overflow: 'hidden',
+                  marginRight: 1,
+                }}
+              >
+                {event.title}
+              </Box>
+
+              {/* Conditional Buttons */}
               {eventVol ? (
                 <CancelSignUpButton
                   event={event}
                   eventVolId={eventVol._id.toString()}
-                ></CancelSignUpButton>
+                />
               ) : (
                 <SignUpButton
                   event={event._id.toString()}
                   volunteer={props.volunteerID}
-                ></SignUpButton>
+                />
               )}
 
-              <ManageEventButton
-                event={event._id.toString()}
-              ></ManageEventButton>
-              <MoreInfoButton event={event}></MoreInfoButton>
+              <ManageEventButton event={event._id.toString()} />
+              <MoreInfoButton event={event} />
             </ListItem>
           );
         })}
