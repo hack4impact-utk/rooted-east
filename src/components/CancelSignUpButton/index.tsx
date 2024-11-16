@@ -65,7 +65,6 @@ export default function CancelSignUpButton(props: CancelSignUpButtonProps) {
           whiteSpace: 'nowrap',
           overflow: 'hidden',
         }}
-        onClick={handleClickOpen}
       >
         Cancel Sign up
       </Button>

@@ -21,8 +21,9 @@ export default function VolunteerEventsList(props: EventObjectList) {
   };
 
   return (
-    <Box sx={{
-        bgcolor: '#324033' 
+    <Box
+      sx={{
+        bgcolor: '#324033',
         overflow: 'auto',
         maxHeight: '65vh',
         borderRadius: '8px',

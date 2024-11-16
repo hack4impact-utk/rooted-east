@@ -18,11 +18,11 @@ interface EventObjectList {
 
 export default function UpcomingEventsList(props: EventObjectList) {
   return (
-    <Box sx={{ 
-        bgcolor: '#324033'
+    <Box
+      sx={{
+        bgcolor: '#324033',
         overflow: 'auto',
         maxHeight: '65vh',
-        bgcolor: 'grey',
         borderRadius: '8px',
         padding: '15px',
       }}
