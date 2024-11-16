@@ -8,6 +8,10 @@ import { getId } from '@/utils/getUserId';
 export default async function UserProfile() {
   const userId = await getId();
   const person: VolunteerEntity | null = await getVolunteer(userId);
+
+
+  person = JSON.parse(JSON.stringify(person));
+
   if (person) {
     return (
       <>

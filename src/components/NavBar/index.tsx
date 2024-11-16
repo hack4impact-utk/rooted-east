@@ -14,14 +14,39 @@ import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
+import { useState } from 'react';
 
 const pages = [
   ['Contact', '/contactinfo'],
   ['Events', '/events'],
-  ['Database', '/adminDatabase'],
+  ['Database', '/database'],
   ['Profile', '/userprofile'],
 ];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
+
+const modalStyles: React.CSSProperties = {
+  position: 'fixed',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  backgroundColor: 'white',
+  padding: '20px',
+  borderRadius: '8px',
+  boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
+  width: 400,
+  zIndex: 1000,
+  color: 'black',
+};
+
+const overlayStyles: React.CSSProperties = {
+  position: 'fixed',
+  top: 0,
+  left: 0,
+  right: 0,
+  bottom: 0,
+  backgroundColor: 'rgba(0, 0, 0, 0.5)',
+  zIndex: 1000,
+};
 
 function NavBar() {
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
@@ -30,6 +55,7 @@ function NavBar() {
   const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(
     null
   );
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget);
@@ -46,8 +72,12 @@ function NavBar() {
     setAnchorElUser(null);
   };
 
+  const toggleHelpModal = () => {
+    setIsModalOpen(!isModalOpen);
+  };
+
   return (
-    <AppBar position="sticky" sx={{ bgcolor: 'green' }}>
+    <AppBar position="sticky" sx={{ bgcolor: '#459863' }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           {/* Hamburger menu for xs screens */}
@@ -89,6 +119,7 @@ function NavBar() {
           </Box>
           {/* Filler logo and Rooted East title for xs screens */}
           <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
+
           <Typography
             variant="h5"
             noWrap
@@ -136,7 +167,43 @@ function NavBar() {
                 {page[0]}
               </Button>
             ))}
+            <Button
+              onClick={toggleHelpModal}
+              sx={{ my: 2, color: 'white', display: 'block', ml: 3 }}
+            >
+              Help
+            </Button>
           </Box>
+          {isModalOpen && (
+            <div>
+              {/* Overlay */}
+              <div
+                style={overlayStyles}
+                onClick={toggleHelpModal} // Close modal on clicking the overlay
+              />
+              {/* Modal Content */}
+              <div style={modalStyles}>
+                <IconButton
+                  onClick={toggleHelpModal}
+                  sx={{
+                    position: 'absolute',
+                    top: 8,
+                    right: 8,
+                    color: 'black',
+                  }}
+                  aria-label="close"
+                >
+                  ✕
+                </IconButton>
+                <Typography id="help-modal-title" variant="h6" component="h2">
+                  Need Help?
+                </Typography>
+                <Typography id="help-modal-description" sx={{ mt: 2 }}>
+                  HELP!!!!!!!!!!
+                </Typography>
+              </div>
+            </div>
+          )}
           {/* Profile menu for all screens */}
           <Box>
             <Tooltip title="Open settings">
