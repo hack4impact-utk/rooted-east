@@ -43,7 +43,6 @@ export default function DeleteEventButton({ eventId }: DeleteEventButtonProps) {
         style={{
           backgroundColor: '#459863',
           color: 'white',
-          marginLeft: '45px',
         }}
         onClick={handleClick}
       >
