@@ -71,14 +71,17 @@ export async function checkInVolunteer(
 
     const res = await EventVolunteerSchema.findByIdAndUpdate(
       checkInVolunteerRequest.eventVolunteerId,
-      { checkInTime: checkInVolunteerRequest.checkInTime }
+      { $set: { checkInTime: checkInVolunteerRequest.checkInTime } }
     );
 
-    // TODO for #58 handle a duplicate entry fail case here (duplicate event+volunteer ID combination)
     if (!res) {
       throw new Error('Volunteer could not be signed in.');
     }
-    console.log('Volunteer signed in.');
+    console.log(
+      checkInVolunteerRequest.checkInTime
+        ? 'Volunteer signed in.'
+        : 'Check in undone.'
+    );
   } catch (error) {
     if (
       error instanceof mongo.MongoError ||

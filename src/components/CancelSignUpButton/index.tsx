@@ -42,7 +42,9 @@ export default function CancelSignUpButton(props: CancelSignUpButtonProps) {
     } catch (error) {
       console.log('Error during volunteer sign-up cancellation: ', error);
     }
-    setOpen(true);
+    // setOpen(true);
+
+    location.reload();
   };
 
   const handleClose = () => {
@@ -57,7 +59,13 @@ export default function CancelSignUpButton(props: CancelSignUpButtonProps) {
         sx={{
           backgroundColor: '#459863',
           '&:hover': { backgroundColor: '#D93C63' },
+          padding: '6px 10px',
+          margin: '0 2px',
+          color: 'white',
+          whiteSpace: 'nowrap',
+          overflow: 'hidden',
         }}
+        onClick={handleClickOpen}
       >
         Cancel Sign up
       </Button>

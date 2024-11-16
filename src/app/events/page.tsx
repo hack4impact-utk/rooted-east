@@ -5,6 +5,7 @@ import { Box } from '@mui/material';
 import NavBar from '@/components/NavBar';
 import dayjs from 'dayjs';
 import '@/styles.css';
+import { getId } from '@/utils/getUserId';
 
 export default async function Events() {
   // get upcoming events
@@ -17,8 +18,9 @@ export default async function Events() {
       return dayjs(b.day).valueOf() - dayjs(a.day).valueOf();
     });
   }
+  const userId = await getId();
 
-  const tempPlaceholderVolunteerID: string = '670c85e8c68ff08582eb0717'; // delete this in the end! its just a placeholder til i figure out how to get the user's volunteerID
+  const tempPlaceholderVolunteerID: string = userId; // delete this in the end! its just a placeholder til i figure out how to get the user's volunteerID
   // get volunteer events
   const volunteerEvents = await getVolunteerEvents(tempPlaceholderVolunteerID);
 
@@ -49,19 +51,20 @@ export default async function Events() {
           sx={{
             display: 'flex',
             flexDirection: { xs: 'column', md: 'row' },
-            gap: 4, // spacing between the boxes
+            justifyContent: 'space-between',
           }}
         >
           <Box
             sx={{
-              flex: 1,
-              padding: 2,
-              backgroundColor: '#324033',
-              borderRadius: 2,
-              boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.1)',
+              flexGrow: 1,
+              marginLeft: { xs: 1, md: 2 },
+              marginRight: 2,
+              borderRadius: '8px',
+              backgroundColor: 'lightgrey',
+              padding: '20px',
             }}
           >
-            <h2 style={{ color: '#f5efeb' }}>Your Events</h2>
+            <h3>Your Events</h3>
             <VolunteerEventsList
               events={volunteerEvents}
               volunteerID={tempPlaceholderVolunteerID}
@@ -69,14 +72,15 @@ export default async function Events() {
           </Box>
           <Box
             sx={{
-              flex: 1,
-              padding: 2,
-              backgroundColor: '#324033',
-              borderRadius: 2,
-              boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.1)',
+              flexGrow: 2,
+              marginLeft: 2,
+              marginRight: { xs: 1, md: 2 },
+              borderRadius: '8px',
+              backgroundColor: 'lightgrey',
+              padding: '20px',
             }}
           >
-            <h2 style={{ color: '#f5efeb' }}>Upcoming Events</h2>
+            <h3>Upcoming Events</h3>
             <UpcomingEventsList
               events={upcomingEvents}
               volunteerID={tempPlaceholderVolunteerID}

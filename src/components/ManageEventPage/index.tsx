@@ -13,7 +13,14 @@ export default function ManageEventButton({ event }: Props) {
       variant="contained"
       type="button"
       onClick={() => router.push(`/manageEvent/${event}`)}
-      style={{ backgroundColor: '#459863', color: 'white', marginLeft: '10px' }}
+      style={{
+        backgroundColor: '#459863',
+        padding: '6px 10px',
+        margin: '0 2px',
+        color: 'white',
+        whiteSpace: 'nowrap',
+        overflow: 'hidden',
+      }}
     >
       Manage Event
     </Button>
