@@ -4,6 +4,7 @@ import { getUpcomingEvents, getVolunteerEvents } from '@/server/actions/Event';
 import { Box } from '@mui/material';
 import NavBar from '@/components/NavBar';
 import dayjs from 'dayjs';
+import { getId } from '@/utils/getUserId';
 
 export default async function Events() {
   // get upcoming events
@@ -16,8 +17,9 @@ export default async function Events() {
       return dayjs(b.day).valueOf() - dayjs(a.day).valueOf();
     });
   }
+  const userId = await getId();
 
-  const tempPlaceholderVolunteerID: string = '670c85e8c68ff08582eb0717'; // delete this in the end! its just a placeholder til i figure out how to get the user's volunteerID
+  const tempPlaceholderVolunteerID: string = userId; // delete this in the end! its just a placeholder til i figure out how to get the user's volunteerID
   // get volunteer events
   const volunteerEvents = await getVolunteerEvents(tempPlaceholderVolunteerID);
 
