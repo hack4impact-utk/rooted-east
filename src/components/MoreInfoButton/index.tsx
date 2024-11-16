@@ -2,6 +2,8 @@
 import React, { useState } from 'react';
 import { Event } from '@/types/dataModel/event';
 import { Button } from '@mui/material';
+import IconButton from '@mui/material/IconButton';
+import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 
 const modalStyles: React.CSSProperties = {
   position: 'fixed',
@@ -38,20 +40,10 @@ export default function MoreInfoButton({ event }: MoreInfoButtonProps) {
 
   return (
     <div>
-      <Button
-        variant="contained"
-        sx={{
-          padding: '6px 10px',
-          margin: '0 2px',
-          color: 'white',
-          whiteSpace: 'nowrap',
-          overflow: 'hidden',
-          backgroundColor: '#459863',
-        }}
-        onClick={handleToggleDetails}
-      >
-        More Info!
-      </Button>
+
+      <IconButton aria-label="more info" onClick={handleToggleDetails}>
+        <MoreHorizIcon />
+      </IconButton>
       {showDetails && (
         <>
           <div style={overlayStyles} onClick={handleToggleDetails}></div>
