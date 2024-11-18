@@ -29,7 +29,7 @@ const modalStyles: React.CSSProperties = {
   top: '50%',
   left: '50%',
   transform: 'translate(-50%, -50%)',
-  backgroundColor: 'D5C78B',
+  backgroundColor: 'white',
   padding: '20px',
   borderRadius: '8px',
   boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
