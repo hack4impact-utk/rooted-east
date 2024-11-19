@@ -2,7 +2,7 @@ import DatabaseVolunteersList from '@/components/DatabaseVolunteersList';
 import NavBar from '@/components/NavBar';
 import { getAllVolunteers } from '@/server/actions/Volunteer';
 import '@/styles.css';
-// import CSVButton from '@/components/CSVButton';
+import CSVButton from '@/components/CSVButton';
 import CopyPhoneNumbersButton from '@/components/CopyPhoneNumbersButton';
 import CopyEmailsButton from '@/components/CopyEmailsButton';
 import { Box } from '@mui/material';
@@ -15,7 +15,7 @@ export default async function Home() {
     <div>
       <NavBar />
       <Box margin={'1rem'}>
-        {/* <CSVButton vols={newVols}></CSVButton> */}
+        <CSVButton vols={newVols}></CSVButton>
         <CopyPhoneNumbersButton vols={newVols}></CopyPhoneNumbersButton>
         <CopyEmailsButton vols={newVols}></CopyEmailsButton>
       </Box>
