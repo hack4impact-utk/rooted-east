@@ -26,6 +26,8 @@ export default function DeleteEventButton({ eventId }: DeleteEventButtonProps) {
 
       if (response.ok) {
         console.log('Event deleted successfully');
+        const url = location.href;
+        location.replace(url.replace(/\/manageEvent\/.*/, '/events/'));
       } else {
         console.error('Failed to delete the event');
       }

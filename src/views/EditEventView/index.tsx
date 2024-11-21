@@ -41,6 +41,7 @@ export default function NeweventView({ event }: NeweventViewProps) {
       if (res.ok) {
         // Optionally: Handle success, e.g., notify the user or redirect
         console.log('Event updated successfully');
+        location.reload();
       } else {
         // Handle failure cases
         const errorResponse = await res.json();
