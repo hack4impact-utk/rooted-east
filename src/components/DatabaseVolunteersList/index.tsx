@@ -9,7 +9,7 @@ interface VolObjectList {
 
 export default function DatabaseVolunteersList(props: VolObjectList) {
   return (
-    <Box sx={{ overflow: 'auto', maxHeight: '65vh', bgcolor: 'd5c7bc' }}>
+    <Box sx={{ overflow: 'auto', bgcolor: 'd5c7bc' }}>
       <List>
         {props.vols.map(async (vol: VolunteerEntity, index) => {
           return (

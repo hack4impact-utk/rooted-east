@@ -2,18 +2,28 @@
 import { TextField } from '@mui/material';
 import { useRouter } from 'next/navigation';
 
-export default function VolunteerSearchBar({ eventId }: { eventId: string }) {
+interface SearchBarProps {
+  eventId?: string; // Make eventId optional
+  basePath?: string; // Add optional base path
+}
+
+export default function VolunteerSearchBar({
+  eventId,
+  basePath = '/database',
+}: SearchBarProps) {
   const router = useRouter();
 
   const handleSearch = (searchTerm: string) => {
-    // Update URL with search term
     const searchParams = new URLSearchParams(window.location.search);
     if (searchTerm) {
       searchParams.set('search', searchTerm);
     } else {
       searchParams.delete('search');
     }
-    router.push(`/manageEvent/${eventId}?${searchParams.toString()}`);
+
+    // Use eventId path if provided, otherwise use basePath
+    const path = eventId ? `/manageEvent/${eventId}` : basePath;
+    router.push(`${path}?${searchParams.toString()}`);
   };
 
   return (
@@ -25,6 +35,7 @@ export default function VolunteerSearchBar({ eventId }: { eventId: string }) {
       size="small"
       sx={{
         backgroundColor: '#f5efeb',
+        width: '400px',
         '& .MuiOutlinedInput-root': {
           '&:hover fieldset': {
             borderColor: '#459863',
