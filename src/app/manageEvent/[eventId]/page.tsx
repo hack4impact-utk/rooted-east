@@ -7,15 +7,26 @@ import EditEventButton from '@/components/EditEventButton';
 import DeleteEventButton from '@/components/DeleteEventButton';
 import CopyPhoneNumbersButton from '@/components/CopyPhoneNumbersButton';
 import CopyEmailsButton from '@/components/CopyEmailsButton';
+import VolunteerSearchBar from '@/components/VolunteerSearchBar';
 import '@/styles.css';
 
 export default async function ManageEvent({
   params,
+  searchParams,
 }: {
   params: { eventId: string };
+  searchParams: { search?: string };
 }) {
   const event = await getEvent(params.eventId);
   const vols = await getAllVolunteersForEvent(params.eventId);
+
+  // Filter volunteers based on search term
+  const filteredVols = searchParams.search
+    ? vols.filter((vol) => {
+        const fullName = `${vol.firstName} ${vol.lastName}`.toLowerCase();
+        return fullName.includes(searchParams.search!.toLowerCase());
+      })
+    : vols;
 
   return (
     <div>
@@ -51,11 +62,14 @@ export default async function ManageEvent({
       >
         <EditEventButton event={JSON.parse(JSON.stringify(event))} />
         <DeleteEventButton eventId={params.eventId} />
-        <CopyPhoneNumbersButton vols={JSON.parse(JSON.stringify(vols))} />
-        <CopyEmailsButton vols={JSON.parse(JSON.stringify(vols))} />
+        <CopyPhoneNumbersButton
+          vols={JSON.parse(JSON.stringify(filteredVols))}
+        />
+        <CopyEmailsButton vols={JSON.parse(JSON.stringify(filteredVols))} />
       </Box>
+      <VolunteerSearchBar eventId={params.eventId} />
       <RegisteredVolsList
-        vols={JSON.parse(JSON.stringify(vols))}
+        vols={JSON.parse(JSON.stringify(filteredVols))}
         eventId={params.eventId}
       />
     </div>
