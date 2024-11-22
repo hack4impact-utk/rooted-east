@@ -13,16 +13,17 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
-import AdbIcon from '@mui/icons-material/Adb';
 import { useState } from 'react';
 
 const pages = [
   ['Contact', '/contactinfo'],
   ['Events', '/events'],
   ['Database', '/database'],
-  ['Profile', '/userprofile'],
 ];
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
+const settings = [
+  ['Profile', '/userprofile'],
+  ['Logout', 'api/auth/signout'],
+];
 
 const modalStyles: React.CSSProperties = {
   position: 'fixed',
@@ -117,9 +118,7 @@ function NavBar() {
               ))}
             </Menu>
           </Box>
-          {/* Filler logo and Rooted East title for xs screens */}
-          <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
-
+          {/* Rooted East title for xs screens */}
           <Typography
             variant="h5"
             noWrap
@@ -138,8 +137,7 @@ function NavBar() {
           >
             Rooted East
           </Typography>
-          {/* Filler logo and Rooted East title for md screens */}
-          <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 3 }} />
+          {/* Rooted East title for md screens */}
           <Typography
             variant="h6"
             noWrap
@@ -177,10 +175,7 @@ function NavBar() {
           {isModalOpen && (
             <div>
               {/* Overlay */}
-              <div
-                style={overlayStyles}
-                onClick={toggleHelpModal} // Close modal on clicking the overlay
-              />
+              <div style={overlayStyles} onClick={toggleHelpModal} />
               {/* Modal Content */}
               <div style={modalStyles}>
                 <IconButton
@@ -227,10 +222,14 @@ function NavBar() {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography sx={{ textAlign: 'center' }}>
-                    {setting}
+              {settings.map((setting, index) => (
+                <MenuItem key={index}>
+                  <Typography
+                    component="a"
+                    href={setting[1]}
+                    sx={{ textAlign: 'center' }}
+                  >
+                    {setting[0]}
                   </Typography>
                 </MenuItem>
               ))}
