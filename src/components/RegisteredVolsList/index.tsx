@@ -39,7 +39,7 @@ export default function RegisteredVolsList(props: VolObjectList) {
                 display: 'flex',
                 alignItems: 'center',
                 gap: '1rem',
-                marginBottom: '0.5rem',
+                marginBottom: '1rem',
               }}
             >
               <Box sx={{ width: '8.5rem' }}>

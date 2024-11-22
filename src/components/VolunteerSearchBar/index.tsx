@@ -24,8 +24,6 @@ export default function VolunteerSearchBar({ eventId }: { eventId: string }) {
       onChange={(e) => handleSearch(e.target.value)}
       size="small"
       sx={{
-        mb: 2,
-        mx: 1,
         backgroundColor: '#f5efeb',
         '& .MuiOutlinedInput-root': {
           '&:hover fieldset': {
