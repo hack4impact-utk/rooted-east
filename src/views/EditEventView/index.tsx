@@ -28,7 +28,6 @@ export default function NeweventView({ event }: NeweventViewProps) {
       console.log('Event is null');
       return;
     }
-    console.log(reqBody);
     try {
       const res = await fetch(`/api/event/${event._id}`, {
         method: 'PUT',
