@@ -24,7 +24,11 @@ export default async function ManageEvent({
   const filteredVols = searchParams.search
     ? vols.filter((vol) => {
         const fullName = `${vol.firstName} ${vol.lastName}`.toLowerCase();
-        return fullName.includes(searchParams.search!.toLowerCase());
+        const email = vol.email.toLowerCase();
+        return (
+          fullName.includes(searchParams.search!.toLowerCase()) ||
+          email.includes(searchParams.search!.toLowerCase())
+        );
       })
     : vols;
 

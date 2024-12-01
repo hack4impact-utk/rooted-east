@@ -20,7 +20,11 @@ export default async function Home({
   const filteredVols = searchParams.search
     ? newVols.filter((vol: any) => {
         const fullName = `${vol.firstName} ${vol.lastName}`.toLowerCase();
-        return fullName.includes(searchParams.search!.toLowerCase());
+        const email = vol.email.toLowerCase();
+        return (
+          fullName.includes(searchParams.search!.toLowerCase()) ||
+          email.includes(searchParams.search!.toLowerCase())
+        );
       })
     : newVols;
 
