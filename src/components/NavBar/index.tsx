@@ -110,8 +110,12 @@ function NavBar() {
               sx={{ display: { xs: 'block', md: 'none' } }}
             >
               {pages.map((page, index) => (
-                <MenuItem key={index} href={page[1]}>
-                  <Typography sx={{ textAlign: 'center' }}>
+                <MenuItem key={index}>
+                  <Typography
+                    component="a"
+                    href={page[1]}
+                    sx={{ textAlign: 'center' }}
+                  >
                     {page[0]}
                   </Typography>
                 </MenuItem>
