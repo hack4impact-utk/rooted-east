@@ -58,10 +58,11 @@ export default async function Events() {
             sx={{
               flexGrow: 1,
               marginLeft: { xs: 1, md: 2 },
-              marginRight: 2,
+              marginRight: { xs: 1, md: 2 },
               borderRadius: '8px',
               backgroundColor: 'lightgrey',
               padding: '20px',
+              marginBottom: { xs: 1, md: 2 },
             }}
           >
             <h3>Your Events</h3>
@@ -73,7 +74,7 @@ export default async function Events() {
           <Box
             sx={{
               flexGrow: 2,
-              marginLeft: 2,
+              marginLeft: { xs: 1, md: 2 },
               marginRight: { xs: 1, md: 2 },
               borderRadius: '8px',
               backgroundColor: 'lightgrey',
