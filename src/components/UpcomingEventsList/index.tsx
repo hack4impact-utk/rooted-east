@@ -77,7 +77,7 @@ export default function UpcomingEventsList(props: EventObjectList) {
               ) : (
                 <SignUpButton
                   event={event._id.toString()}
-                  volunteer={props.volunteerID}
+                  volunteer={props.volunteerID.toString()}
                 />
               )}
 

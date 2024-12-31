@@ -27,18 +27,19 @@ const AdminVolunteers = ({ volunteers }: { volunteers: Volunteer[] }) => {
       sx={{
         flex: 1,
         display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        height: '100vh',
-        backgroundColor: 'transparent',
+        flexGrow: 0,
+        flexShrink: 0,
+        flexBasis: '30vw',
       }}
     >
       <Paper
         elevation={4}
         sx={{
           padding: 4,
-          width: '80%',
           display: 'flex',
+          width: '30vw',
+          height: '70vh',
+          margin: '3vw',
           flexDirection: 'column',
           alignItems: 'center',
           backgroundColor: '#324033',

@@ -16,13 +16,13 @@ import MenuItem from '@mui/material/MenuItem';
 import { useState } from 'react';
 
 const pages = [
-  ['Contact', '/contactinfo'],
+  ['Home', '/'],
   ['Events', '/events'],
   ['Database', '/database'],
 ];
 const settings = [
   ['Profile', '/userprofile'],
-  ['Logout', 'api/auth/signout'],
+  ['Logout', '/api/auth/signout'],
 ];
 
 const modalStyles: React.CSSProperties = {

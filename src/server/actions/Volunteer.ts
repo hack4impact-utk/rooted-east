@@ -110,12 +110,12 @@ export async function getVolunteerByEmail(
   } catch (error) {
     throw new CMError(CMErrorType.InternalError);
   }
-  console.log(target);
+  // console.log(target);
 
   if (!target) {
     throw new CMError(CMErrorType.NoSuchKey, 'Volunteer');
   }
-  console.log(target._id);
+  // console.log(target._id);
 
   return target;
 }
