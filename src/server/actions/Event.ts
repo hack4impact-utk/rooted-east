@@ -6,13 +6,17 @@ import {
   CreateEventRequest,
   UpdateEventRequest,
 } from '@/types/dataModel/event';
-import { mongo } from 'mongoose';
+import { mongo, isValidObjectId } from 'mongoose';
 import { EventEntity } from '@/types/dataModel/event';
-// import { get } from 'http';
 
 export async function createEvent(
   createEventRequest: CreateEventRequest
 ): Promise<string> {
+  if (!createEventRequest || Object.keys(createEventRequest).length === 0) {
+    throw new CMError(CMErrorType.BadValue, 'Invalid input for CreateEventRequest');
+
+  }
+
   try {
     await dbConnect();
 
@@ -36,6 +40,10 @@ export async function createEvent(
 }
 
 export async function deleteEvent(eventId: string): Promise<void> {
+  if (!isValidObjectId(eventId)) {
+    throw new CMError(CMErrorType.BadValue, 'EventId');
+  }
+
   try {
     await dbConnect();
 
@@ -43,13 +51,20 @@ export async function deleteEvent(eventId: string): Promise<void> {
       event: eventId,
     });
 
-    await EventSchema.findByIdAndDelete(eventId);
+    const res = await EventSchema.findByIdAndDelete(eventId);
+    if (!res) {
+      throw new CMError(CMErrorType.NoSuchKey, 'Event');
+    }
   } catch (error) {
     throw new CMError(CMErrorType.InternalError);
   }
 }
 
 export async function getEvent(eventId: string): Promise<EventEntity | null> {
+  if (!isValidObjectId(eventId)) {
+    throw new CMError(CMErrorType.BadValue, 'EventId');
+  }
+
   let target: EventEntity | null;
   try {
     await dbConnect();
@@ -65,15 +80,18 @@ export async function getEvent(eventId: string): Promise<EventEntity | null> {
   return target;
 }
 
-/**
- * Takes in an event id and updates the corresponding event with the new data
- * @param eventId  The id of the existing event
- * @param updatedEvent The updated event
- */
 export async function updateEvent(
   eventId: string,
   updatedEvent: UpdateEventRequest
 ): Promise<void> {
+  if (!isValidObjectId(eventId)) {
+    throw new CMError(CMErrorType.BadValue, 'EventId');
+  }
+
+  if (!updatedEvent || Object.keys(updatedEvent).length === 0) {
+    throw new CMError(CMErrorType.BadValue, 'UpdateEventRequest');
+  }
+
   let res;
   try {
     await dbConnect();
@@ -81,45 +99,62 @@ export async function updateEvent(
   } catch (error) {
     throw new CMError(CMErrorType.InternalError);
   }
+
   if (!res) {
     throw new CMError(CMErrorType.NoSuchKey, 'Event');
   }
 }
 
 export async function getUpcomingEvents(): Promise<EventEntity[] | null> {
-  await dbConnect();
+  try {
+    await dbConnect();
 
-  const currentDate = new Date();
-  const events: EventEntity[] = (await EventSchema.find({
-    day: {
-      $gte: currentDate,
-    },
-  }).lean()) as EventEntity[];
+    const currentDate = new Date();
+    const events: EventEntity[] = (await EventSchema.find({
+      day: {
+        $gte: currentDate,
+      },
+    }).lean()) as EventEntity[];
 
-  return events;
+    return events;
+  } catch (error) {
+    throw new CMError(CMErrorType.InternalError);
+  }
 }
 
 export async function updateEventAction(
   eventId: string,
-  eventUpdatesReqest: UpdateEventRequest
+  eventUpdatesRequest: UpdateEventRequest
 ): Promise<void> {
+  if (!isValidObjectId(eventId)) {
+    throw new CMError(CMErrorType.BadValue, 'EventId');
+  }
+
+  if (!eventUpdatesRequest || Object.keys(eventUpdatesRequest).length === 0) {
+    throw new CMError(CMErrorType.BadValue, 'UpdateEventRequest');
+  }
+
   let res;
   try {
     await dbConnect();
-    res = await EventSchema.findByIdAndUpdate(eventId, eventUpdatesReqest);
+    res = await EventSchema.findByIdAndUpdate(eventId, eventUpdatesRequest);
   } catch (error) {
     throw new CMError(CMErrorType.InternalError);
   }
+
   if (!res) {
     throw new CMError(CMErrorType.NoSuchKey, 'Event');
   }
 }
 
-// get all events associated with a volunteer by volunteer id
 export async function getVolunteerEvents(
   volunteerId: string
 ): Promise<EventEntity[]> {
-  let volEvents: EventEntity[] = [];
+  if (!isValidObjectId(volunteerId)) {
+    throw new CMError(CMErrorType.BadValue, 'VolunteerId');
+  }
+
+  const volEvents: EventEntity[] = [];
 
   try {
     await dbConnect();
@@ -138,13 +173,6 @@ export async function getVolunteerEvents(
     }
   } catch (error) {
     throw new CMError(CMErrorType.InternalError);
-  }
-  if (!volEvents) {
-    throw new CMError(CMErrorType.NoSuchKey, 'Event');
-  }
-
-  if (volEvents == null) {
-    volEvents = [];
   }
 
   return volEvents;

@@ -2,7 +2,7 @@ import dbConnect from '@/utils/db-connect';
 import CMError, { CMErrorType } from '@/utils/cmerror';
 import EventVolunteerSchema from '@/server/models/EventVolunteer';
 import { EventVolunteerEntity } from '@/types/dataModel/eventVolunteer';
-import { mongo } from 'mongoose';
+import { mongo, isValidObjectId } from 'mongoose';
 import {
   CheckInVolunteerRequest,
   CheckOutVolunteerRequest,
@@ -14,12 +14,16 @@ import { CreateEventVolunteerRequest } from '@/types/dataModel/eventVolunteer';
 export async function createEventVolunteer(
   createEventVolunteerRequest: CreateEventVolunteerRequest
 ): Promise<string> {
+  if (!createEventVolunteerRequest || Object.keys(createEventVolunteerRequest).length === 0) {
+    throw new CMError(CMErrorType.BadValue, 'Invalid input for CreateEventVolunteerRequest');
+  }
+
   try {
     await dbConnect();
 
     const res = await EventVolunteer.create(createEventVolunteerRequest);
     if (!res) {
-      throw new Error('Event not created');
+      throw new Error('EventVolunteer not created');
     }
 
     return res._id.toString();
@@ -37,28 +41,26 @@ export async function createEventVolunteer(
 }
 
 export async function checkOutVolunteer(
-  CheckOutVolunteerRequest: CheckOutVolunteerRequest
+  checkOutVolunteerRequest: CheckOutVolunteerRequest
 ): Promise<void> {
+  if (!isValidObjectId(checkOutVolunteerRequest.eventVolunteerId)) {
+    throw new CMError(CMErrorType.BadValue, 'Invalid EventVolunteerId');
+  }
+
   try {
     await dbConnect();
+
     const res = await EventVolunteerSchema.findByIdAndUpdate(
-      CheckOutVolunteerRequest.eventVolunteerId,
-      { checkOutTime: CheckOutVolunteerRequest.checkOutTime }
+      checkOutVolunteerRequest.eventVolunteerId,
+      { checkOutTime: checkOutVolunteerRequest.checkOutTime }
     );
 
     if (!res) {
-      throw new Error('Volunteer could not be checked out.');
+      throw new CMError(CMErrorType.NoSuchKey, 'EventVolunteer');
     }
+
     console.log('Volunteer checked out.');
   } catch (error) {
-    if (
-      error instanceof mongo.MongoError ||
-      error instanceof mongo.MongoServerError
-    ) {
-      if (error.code === 11000) {
-        throw new CMError(CMErrorType.DuplicateKey, 'EventVolunteer');
-      }
-    }
     throw new CMError(CMErrorType.InternalError);
   }
 }
@@ -66,6 +68,10 @@ export async function checkOutVolunteer(
 export async function checkInVolunteer(
   checkInVolunteerRequest: CheckInVolunteerRequest
 ): Promise<void> {
+  if (!isValidObjectId(checkInVolunteerRequest.eventVolunteerId)) {
+    throw new CMError(CMErrorType.BadValue, 'Invalid EventVolunteerId');
+  }
+
   try {
     await dbConnect();
 
@@ -75,22 +81,15 @@ export async function checkInVolunteer(
     );
 
     if (!res) {
-      throw new Error('Volunteer could not be signed in.');
+      throw new CMError(CMErrorType.NoSuchKey, 'EventVolunteer');
     }
+
     console.log(
       checkInVolunteerRequest.checkInTime
         ? 'Volunteer signed in.'
         : 'Check in undone.'
     );
   } catch (error) {
-    if (
-      error instanceof mongo.MongoError ||
-      error instanceof mongo.MongoServerError
-    ) {
-      if (error.code === 11000) {
-        throw new CMError(CMErrorType.DuplicateKey, 'EventVolunteer');
-      }
-    }
     throw new CMError(CMErrorType.InternalError);
   }
 }
@@ -98,12 +97,19 @@ export async function checkInVolunteer(
 export async function deleteEventVolunteer(
   eventVolunteerId: string
 ): Promise<void> {
+  if (!isValidObjectId(eventVolunteerId)) {
+    throw new CMError(CMErrorType.BadValue, 'Invalid EventVolunteerId');
+  }
+
   try {
     await dbConnect();
-    await EventVolunteerSchema.findOneAndDelete({ _id: eventVolunteerId });
-    return;
+    const res = await EventVolunteerSchema.findOneAndDelete({ _id: eventVolunteerId });
+
+    if (!res) {
+      throw new CMError(CMErrorType.NoSuchKey, 'EventVolunteer');
+    }
   } catch (error) {
-    throw error;
+    throw new CMError(CMErrorType.InternalError);
   }
 }
 
@@ -111,34 +117,44 @@ export async function getEventVolunteer(
   eventId: string,
   volunteerId: string
 ): Promise<EventVolunteerEntity> {
-  let eventVol: EventVolunteerEntity | null;
+  if (!isValidObjectId(eventId) || !isValidObjectId(volunteerId)) {
+    throw new CMError(CMErrorType.BadValue, 'Invalid EventId or VolunteerId');
+  }
+
   try {
     await dbConnect();
-    eventVol = await EventVolunteerSchema.findOne({
+    const eventVol: EventVolunteerEntity | null = await EventVolunteerSchema.findOne({
       event: eventId,
       volunteer: volunteerId,
     });
-    if (!eventVol) {
+
+    if (eventVol) {
+      return eventVol;
+    } else {
       throw new CMError(CMErrorType.NoSuchKey, 'EventVolunteer');
     }
-    return eventVol;
+
   } catch (error) {
     throw new CMError(CMErrorType.InternalError);
   }
 }
 
-// returns true if the eventvolunteer exists and false if it does not
 export async function checkIfEventVolunteerExists(
   eventId: string,
   volunteerId: string
 ): Promise<boolean> {
+  if (!isValidObjectId(eventId) || !isValidObjectId(volunteerId)) {
+    throw new CMError(CMErrorType.BadValue, 'Invalid EventId or VolunteerId');
+  }
+
   try {
     await dbConnect();
     const eventVol = await EventVolunteerSchema.findOne({
       event: eventId,
       volunteer: volunteerId,
     });
-    return !(eventVol === null);
+
+    return !!eventVol;
   } catch (error) {
     throw new CMError(CMErrorType.InternalError);
   }
@@ -147,13 +163,16 @@ export async function checkIfEventVolunteerExists(
 export async function getAllEventVolunteersForEvent(
   eventId: string
 ): Promise<EventVolunteerResponse[]> {
-  let eventVols: EventVolunteerResponse[];
+  if (!isValidObjectId(eventId)) {
+    throw new CMError(CMErrorType.BadValue, 'Invalid EventId');
+  }
+
   try {
     await dbConnect();
-    eventVols = await EventVolunteerSchema.find({ event: eventId });
+    const eventVols = await EventVolunteerSchema.find({ event: eventId });
+
+    return eventVols as EventVolunteerResponse[];
   } catch (error) {
-    console.error(error);
     throw new CMError(CMErrorType.InternalError);
   }
-  return eventVols;
 }
