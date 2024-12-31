@@ -4,6 +4,7 @@ import Welcome from '@/components/welcome';
 import NavBar from '@/components/NavBar';
 import { Box } from '@mui/material';
 import '@/styles.css';
+// testing commits
 
 const Home = async () => {
   let volunteers = [];
