@@ -1,5 +1,5 @@
 ---
-name: Repair Issue
+name: Standard Issue
 about: An issue that requests the repair of an existing feature.
 title: ''
 labels: ''
@@ -7,8 +7,10 @@ assignees: ''
 
 ---
 
-**Location**
+**Locations**
 
 **Problem**
 
 **Tasks**
+
+**Details**
