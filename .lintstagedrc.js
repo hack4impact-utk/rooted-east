@@ -5,7 +5,7 @@ const eslintPattern = `!(${ignoredFiles.join(',')})*.{ts,tsx}`;
 // [eslintPattern]: ['prettier --write', 'eslint --fix --color', 'git add'],
 module.exports = {
   // Type check TypeScript files
-  eslintPattern: () => 'npx tsc --noEmit',
+  '**/*.(ts|tsx)': () => 'npx tsc --noEmit',
 
   // Lint & Prettify TS and JS files
   '**/*.(ts|tsx|js)': (filenames) => [
