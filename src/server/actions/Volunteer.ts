@@ -1,26 +1,27 @@
 import VolunteerSchema from '@/server/models/Volunteer';
 import EventVolunteerSchema from '@/server/models/EventVolunteer';
 import dbConnect from '@/utils/db-connect';
-import { mongo } from 'mongoose';
+import { mongo, isValidObjectId } from 'mongoose';
 import {
   UpdateVolunteerRequest,
   CreateVolunteerRequest,
   Volunteer,
   VolunteerEntity,
 } from '@/types/dataModel/volunteer';
-import { EventVolunteerResponse } from '@/types/dataModel/eventVolunteer';
 import CMError, { CMErrorType } from '@/utils/cmerror';
 
 export async function createVolunteer(
   request: CreateVolunteerRequest
 ): Promise<string> {
+  if (!request || Object.keys(request).length === 0) {
+    throw new CMError(CMErrorType.BadValue, 'Invalid input for CreateVolunteerRequest');
+  }
+
   try {
     await dbConnect();
     const volunteer = await VolunteerSchema.create(request);
     return volunteer._id.toString();
   } catch (error) {
-    console.log(error);
-
     if (
       error instanceof mongo.MongoError ||
       error instanceof mongo.MongoServerError
@@ -29,170 +30,162 @@ export async function createVolunteer(
         throw new CMError(CMErrorType.DuplicateKey, 'Volunteer Phone/Email');
       }
     }
+    throw new CMError(CMErrorType.InternalError);
   }
-  throw 'Error in create volunteer action';
 }
 
 export async function updateVolunteer(
   volunteerId: string,
   updatedVolunteer: UpdateVolunteerRequest
 ): Promise<void> {
-  let res;
+  if (!isValidObjectId(volunteerId)) {
+    throw new CMError(CMErrorType.BadValue, 'Invalid VolunteerId');
+  }
+
+  if (!updatedVolunteer || Object.keys(updatedVolunteer).length === 0) {
+    throw new CMError(CMErrorType.BadValue, 'No data provided to update Volunteer');
+  }
+
   try {
     await dbConnect();
-    res = await VolunteerSchema.findByIdAndUpdate(
-      volunteerId,
-      updatedVolunteer
-    );
+    const res = await VolunteerSchema.findByIdAndUpdate(volunteerId, updatedVolunteer);
+
+    if (!res) {
+      throw new CMError(CMErrorType.NoSuchKey, 'Volunteer');
+    }
   } catch (error) {
     throw new CMError(CMErrorType.InternalError);
   }
-  if (!res) {
-    throw new CMError(CMErrorType.NoSuchKey, 'Volunteer');
-  }
 }
 
-/**
- * Get total hours that a volunteer has volunteered
- * @param volunteerId // Id of the volunteer
- * @returns // Total Hours of Volunteer
- */
-export async function getVolunteerTotalHours(volunteerId: string) {
-  let volunteer;
+export async function getVolunteerTotalHours(volunteerId: string): Promise<number> {
+  if (!isValidObjectId(volunteerId)) {
+    throw new CMError(CMErrorType.BadValue, 'Invalid VolunteerId');
+  }
+
   let totalTime = 0;
   try {
     await dbConnect();
-    volunteer = await EventVolunteerSchema.find({
-      volunteer: volunteerId,
-    }).lean();
+    const events = await EventVolunteerSchema.find({ volunteer: volunteerId }).lean();
 
-    volunteer.forEach((ev) => {
+    events.forEach((ev) => {
       if (ev.checkOutTime && ev.checkInTime) {
         totalTime += ev.checkOutTime.getTime() - ev.checkInTime.getTime();
       }
     });
+
+    if (!events.length) {
+      throw new CMError(CMErrorType.NoSuchKey, 'Volunteer');
+    }
   } catch (error) {
     throw new CMError(CMErrorType.InternalError);
   }
-  if (!volunteer) {
-    throw new CMError(CMErrorType.NoSuchKey, 'Volunteer');
-  }
-  // converting miliseconds to hours
-  return totalTime / 3600000;
+
+  return totalTime / 3600000; // Convert milliseconds to hours
 }
 
-export async function getVolunteer(
-  volunteerId: string
-): Promise<VolunteerEntity | null> {
-  let target: VolunteerEntity | null;
+export async function getVolunteer(volunteerId: string): Promise<VolunteerEntity | null> {
+  if (!isValidObjectId(volunteerId)) {
+    throw new CMError(CMErrorType.BadValue, 'Invalid VolunteerId');
+  }
 
   try {
     await dbConnect();
-    target = await VolunteerSchema.findById(volunteerId).lean();
+    const target : VolunteerEntity | null = await VolunteerSchema.findById(volunteerId).lean();
+
+    if (!target) {
+      throw new CMError(CMErrorType.NoSuchKey, 'Volunteer');
+    }
+
+    return target;
   } catch (error) {
     throw new CMError(CMErrorType.InternalError);
   }
-
-  if (!target) {
-    throw new CMError(CMErrorType.NoSuchKey, 'Volunteer');
-  }
-
-  return target;
 }
-export async function getVolunteerByEmail(
-  volunteerEmail: string
-): Promise<VolunteerEntity | null> {
-  let target: VolunteerEntity | null;
+
+export async function getVolunteerByEmail(volunteerEmail: string): Promise<VolunteerEntity | null> {
+  if (!volunteerEmail) {
+    throw new CMError(CMErrorType.BadValue, 'Email cannot be empty');
+  }
 
   try {
     await dbConnect();
-    target = await VolunteerSchema.findOne({ email: volunteerEmail });
+    const target: VolunteerEntity | null = await VolunteerSchema.findOne({ email: volunteerEmail });
+
+    if (!target) {
+      throw new CMError(CMErrorType.NoSuchKey, 'Volunteer');
+    }
+
+    return target;
   } catch (error) {
     throw new CMError(CMErrorType.InternalError);
   }
-  // console.log(target);
-
-  if (!target) {
-    throw new CMError(CMErrorType.NoSuchKey, 'Volunteer');
-  }
-  // console.log(target._id);
-
-  return target;
 }
 
-/**
- * Deletes a volunteer from all their events first then themselves.
- * @param volunteerId // Id of the volunteer
- * @returns // Deleted Volunteer
- */
-export async function deleteVolunteer(volunteerId: string) {
+export async function deleteVolunteer(volunteerId: string): Promise<void> {
+  if (!isValidObjectId(volunteerId)) {
+    throw new CMError(CMErrorType.BadValue, 'Invalid VolunteerId');
+  }
+
   try {
     await dbConnect();
+    await EventVolunteerSchema.deleteMany({ volunteer: volunteerId });
+    const deletedVolunteer = await VolunteerSchema.findByIdAndDelete(volunteerId);
 
-    await EventVolunteerSchema.deleteMany({
-      volunteer: volunteerId,
-    });
-
-    return await VolunteerSchema.findByIdAndDelete(volunteerId);
+    if (!deletedVolunteer) {
+      throw new CMError(CMErrorType.NoSuchKey, 'Volunteer');
+    }
   } catch (error) {
     throw new CMError(CMErrorType.InternalError);
   }
 }
 
-// Function to return all volunteer's phone numbers.
 export async function getAllVolunteersNumbers(): Promise<string[]> {
-  let volunteersNums: string[];
   try {
     await dbConnect();
-    volunteersNums = await VolunteerSchema.find({}).select('phoneNumber');
+    const volunteersNums = await VolunteerSchema.find({}).select('phoneNumber').lean();
+    return volunteersNums.map((vol) => vol.phoneNumber);
   } catch (error) {
     throw new CMError(CMErrorType.InternalError);
   }
-  return volunteersNums;
 }
 
 export async function getAllVolunteers(): Promise<VolunteerEntity[]> {
-  let volunteers: VolunteerEntity[];
   try {
     await dbConnect();
-    volunteers = await VolunteerSchema.find({});
+    return await VolunteerSchema.find({}).lean();
   } catch (error) {
     throw new CMError(CMErrorType.InternalError);
   }
-  return volunteers;
 }
 
-export async function getAllVolunteersForEvent(
-  eventId: string
-): Promise<VolunteerEntity[]> {
-  let eventVols: EventVolunteerResponse[];
+export async function getAllVolunteersForEvent(eventId: string): Promise<VolunteerEntity[]> {
+  if (!isValidObjectId(eventId)) {
+    throw new CMError(CMErrorType.BadValue, 'Invalid EventId');
+  }
+
   const volunteers: VolunteerEntity[] = [];
   try {
     await dbConnect();
-    eventVols = await EventVolunteerSchema.find({ event: eventId });
-  } catch (error) {
-    console.error(error);
-    throw new CMError(CMErrorType.InternalError);
-  }
-  try {
+    const eventVols = await EventVolunteerSchema.find({ event: eventId });
+
     for (const eVol of eventVols) {
-      const vol: VolunteerEntity | null = await VolunteerSchema.findById(
-        eVol.volunteer
-      ).lean();
-      if (vol) volunteers.push(vol);
+      const vol: VolunteerEntity | null = await VolunteerSchema.findById(eVol.volunteer).lean();
+      if (vol) {
+        volunteers.push(vol);
+      }
     }
   } catch (error) {
-    console.error(error);
     throw new CMError(CMErrorType.InternalError);
   }
+
   return volunteers;
 }
 
 export async function getAdminVolunteers(): Promise<Volunteer[]> {
   try {
     await dbConnect();
-    const admins = await VolunteerSchema.find({ role: 'Admin' }).lean();
-    return admins;
+    return await VolunteerSchema.find({ role: 'Admin' }).lean();
   } catch (error) {
     throw new CMError(CMErrorType.InternalError);
   }
@@ -201,8 +194,7 @@ export async function getAdminVolunteers(): Promise<Volunteer[]> {
 export async function getManagerVolunteers(): Promise<Volunteer[]> {
   try {
     await dbConnect();
-    const managers = await VolunteerSchema.find({ role: 'Manager' }).lean();
-    return managers;
+    return await VolunteerSchema.find({ role: 'Manager' }).lean();
   } catch (error) {
     throw new CMError(CMErrorType.InternalError);
   }
