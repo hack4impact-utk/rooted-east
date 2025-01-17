@@ -1,3 +1,8 @@
+const ignoredFiles = ['.next/**/*'];
+
+const eslintPattern = `!(${ignoredFiles.join(',')})*.{ts,tsx}`;
+
+// [eslintPattern]: ['prettier --write', 'eslint --fix --color', 'git add'],
 module.exports = {
   // Type check TypeScript files
   '**/*.(ts|tsx)': () => 'npx tsc --noEmit',
