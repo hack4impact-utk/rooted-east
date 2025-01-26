@@ -7,6 +7,7 @@ import CopyPhoneNumbersButton from '@/components/CopyPhoneNumbersButton';
 import CopyEmailsButton from '@/components/CopyEmailsButton';
 import VolunteerSearchBar from '@/components/VolunteerSearchBar';
 import { Box } from '@mui/material';
+import AddVolunteerButton from '@/components/AddVolunteerButton';
 
 export default async function Home({
   searchParams,
@@ -43,6 +44,7 @@ export default async function Home({
           <CSVButton vols={filteredVols} />
           <CopyPhoneNumbersButton vols={filteredVols} />
           <CopyEmailsButton vols={filteredVols} />
+          <AddVolunteerButton />
         </Box>
         <VolunteerSearchBar basePath="/database" />
       </Box>
