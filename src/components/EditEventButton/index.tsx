@@ -6,9 +6,13 @@ import { EventEntity } from '@/types/dataModel/event';
 
 interface EditEventButtonProps {
   event: EventEntity | null;
+  managers: { id: string; name: string }[];
 }
 
-export default function EditEventButton({ event }: EditEventButtonProps) {
+export default function EditEventButton({
+  event,
+  managers,
+}: EditEventButtonProps) {
   const [open, setOpen] = useState(false);
 
   const handleClick = () => setOpen(true);
@@ -29,7 +33,7 @@ export default function EditEventButton({ event }: EditEventButtonProps) {
         Edit Event
       </Button>
       <Dialog open={open} onClose={handleClose} maxWidth="sm" fullWidth>
-        <EditEventView event={event} />
+        <EditEventView event={event} managers={managers} />
       </Dialog>
     </>
   );

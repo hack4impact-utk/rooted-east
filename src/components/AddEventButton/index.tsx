@@ -3,7 +3,11 @@ import NeweventView from '@/views/NewEventView';
 import React, { useState } from 'react';
 import { Button, Box, Dialog } from '@mui/material';
 
-function AddEventButton() {
+interface AddEventButtonProps {
+  managers: { id: string; name: string }[];
+}
+
+function AddEventButton({ managers }: AddEventButtonProps) {
   const [open, setOpen] = useState(false);
 
   const handleClick = () => setOpen(true);
@@ -27,7 +31,7 @@ function AddEventButton() {
       </Button>
 
       <Dialog open={open} onClose={handleClose} maxWidth="sm" fullWidth>
-        <NeweventView />
+        <NeweventView managers={managers} />
       </Dialog>
     </Box>
   );
