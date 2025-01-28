@@ -13,8 +13,10 @@ export async function createEvent(
   createEventRequest: CreateEventRequest
 ): Promise<string> {
   if (!createEventRequest || Object.keys(createEventRequest).length === 0) {
-    throw new CMError(CMErrorType.BadValue, 'Invalid input for CreateEventRequest');
-
+    throw new CMError(
+      CMErrorType.BadValue,
+      'Invalid input for CreateEventRequest'
+    );
   }
 
   try {
@@ -148,7 +150,7 @@ export async function updateEventAction(
 }
 
 export async function getVolunteerEvents(
-  volunteerId: string
+  volunteerId: string | null
 ): Promise<EventEntity[]> {
   if (!isValidObjectId(volunteerId)) {
     throw new CMError(CMErrorType.BadValue, 'VolunteerId');

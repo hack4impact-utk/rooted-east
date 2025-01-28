@@ -5,7 +5,8 @@ import { Box } from '@mui/material';
 import NavBar from '@/components/NavBar';
 import dayjs from 'dayjs';
 import '@/styles.css';
-import { getId } from '@/utils/getUserId';
+import { getCurrentUser } from '@/utils/getCurrentUser';
+import CMError, { CMErrorType } from '@/utils/cmerror';
 
 export default async function Events() {
   // get upcoming events
@@ -18,11 +19,16 @@ export default async function Events() {
       return dayjs(b.day).valueOf() - dayjs(a.day).valueOf();
     });
   }
-  const userId = await getId();
+  const user = await getCurrentUser();
+  const userId = user?._id.toString();
 
-  const tempPlaceholderVolunteerID: string = userId; // delete this in the end! its just a placeholder til i figure out how to get the user's volunteerID
+  if (!userId) {
+    throw new CMError(CMErrorType.NoSuchKey, 'Volunteer');
+  }
+
+  //const tempPlaceholderVolunteerID: string = userId; // delete this in the end! its just a placeholder til i figure out how to get the user's volunteerID
   // get volunteer events
-  const volunteerEvents = await getVolunteerEvents(tempPlaceholderVolunteerID);
+  const volunteerEvents = await getVolunteerEvents(userId);
 
   if (!volunteerEvents) {
     return <div>Failed to load volunteer events</div>;
@@ -68,7 +74,7 @@ export default async function Events() {
             <h3>Your Events</h3>
             <VolunteerEventsList
               events={volunteerEvents}
-              volunteerID={tempPlaceholderVolunteerID}
+              volunteerID={userId}
             />
           </Box>
           <Box
@@ -82,10 +88,7 @@ export default async function Events() {
             }}
           >
             <h3>Upcoming Events</h3>
-            <UpcomingEventsList
-              events={upcomingEvents}
-              volunteerID={tempPlaceholderVolunteerID}
-            />
+            <UpcomingEventsList events={upcomingEvents} volunteerID={userId} />
           </Box>
         </Box>
       </Box>
