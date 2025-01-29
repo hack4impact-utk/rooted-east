@@ -5,11 +5,20 @@ import { Box } from '@mui/material';
 import NavBar from '@/components/NavBar';
 import dayjs from 'dayjs';
 import '@/styles.css';
-import { getId } from '@/utils/getUserId';
+import { getCurrentUser } from '@/utils/getCurrentUser';
+import CMError, { CMErrorType } from '@/utils/cmerror';
+import AddEventButton from '@/components/AddEventButton';
+import { VolunteerEntity } from '@/types/dataModel/volunteer';
+import { getManagerVolunteers } from '@/server/actions/Volunteer';
 
 export default async function Events() {
   // get upcoming events
   const upcomingEvents = await getUpcomingEvents();
+  const managers: VolunteerEntity[] = await getManagerVolunteers();
+  const formattedManagers = managers.map((manager) => ({
+    id: manager._id, // Ensure each manager has an 'id' property
+    name: `${manager.firstName} ${manager.lastName}`, // Create a 'name' property
+  }));
 
   if (!upcomingEvents) {
     return <div>Failed to load upcoming events</div>;
@@ -18,11 +27,16 @@ export default async function Events() {
       return dayjs(b.day).valueOf() - dayjs(a.day).valueOf();
     });
   }
-  const userId = await getId();
+  const user = await getCurrentUser();
+  const userId = user?._id.toString();
 
-  const tempPlaceholderVolunteerID: string = userId; // delete this in the end! its just a placeholder til i figure out how to get the user's volunteerID
+  if (!userId) {
+    throw new CMError(CMErrorType.NoSuchKey, 'Volunteer');
+  }
+
+  //const tempPlaceholderVolunteerID: string = userId; // delete this in the end! its just a placeholder til i figure out how to get the user's volunteerID
   // get volunteer events
-  const volunteerEvents = await getVolunteerEvents(tempPlaceholderVolunteerID);
+  const volunteerEvents = await getVolunteerEvents(userId);
 
   if (!volunteerEvents) {
     return <div>Failed to load volunteer events</div>;
@@ -68,7 +82,7 @@ export default async function Events() {
             <h3>Your Events</h3>
             <VolunteerEventsList
               events={volunteerEvents}
-              volunteerID={tempPlaceholderVolunteerID}
+              volunteerID={userId}
             />
           </Box>
           <Box
@@ -81,11 +95,17 @@ export default async function Events() {
               padding: '20px',
             }}
           >
-            <h3>Upcoming Events</h3>
-            <UpcomingEventsList
-              events={upcomingEvents}
-              volunteerID={tempPlaceholderVolunteerID}
-            />
+            <Box
+              sx={{
+                display: 'flex',
+                justifyContent: 'space-between',
+                alignItems: 'center',
+              }}
+            >
+              <h3>Upcoming Events</h3>
+              <AddEventButton managers={formattedManagers} />
+            </Box>
+            <UpcomingEventsList events={upcomingEvents} volunteerID={userId} />
           </Box>
         </Box>
       </Box>

@@ -2,13 +2,17 @@ import NavBar from '@/components/NavBar';
 import { getEvent } from '@/server/actions/Event';
 import { Typography, Box } from '@mui/material';
 import RegisteredVolsList from '@/components/RegisteredVolsList';
-import { getAllVolunteersForEvent } from '@/server/actions/Volunteer';
+import {
+  getAllVolunteersForEvent,
+  getManagerVolunteers,
+} from '@/server/actions/Volunteer';
 import EditEventButton from '@/components/EditEventButton';
 import DeleteEventButton from '@/components/DeleteEventButton';
 import CopyPhoneNumbersButton from '@/components/CopyPhoneNumbersButton';
 import CopyEmailsButton from '@/components/CopyEmailsButton';
 import VolunteerSearchBar from '@/components/VolunteerSearchBar';
 import '@/styles.css';
+import { VolunteerEntity } from '@/types/dataModel/volunteer';
 
 export default async function ManageEvent({
   params,
@@ -19,6 +23,11 @@ export default async function ManageEvent({
 }) {
   const event = await getEvent(params.eventId);
   const vols = await getAllVolunteersForEvent(params.eventId);
+  const managers: VolunteerEntity[] = await getManagerVolunteers();
+  const formattedManagers = managers.map((manager) => ({
+    id: manager._id, // Ensure each manager has an 'id' property
+    name: `${manager.firstName} ${manager.lastName}`, // Create a 'name' property
+  }));
 
   // Filter volunteers based on search term
   const filteredVols = searchParams.search
@@ -97,7 +106,10 @@ export default async function ManageEvent({
             },
           }}
         >
-          <EditEventButton event={JSON.parse(JSON.stringify(event))} />
+          <EditEventButton
+            event={JSON.parse(JSON.stringify(event))}
+            managers={formattedManagers}
+          />
           <DeleteEventButton eventId={params.eventId} />
           <CopyPhoneNumbersButton
             vols={JSON.parse(JSON.stringify(filteredVols))}
