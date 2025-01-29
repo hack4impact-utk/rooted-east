@@ -1,13 +1,9 @@
 'use client';
-import NeweventView from '@/views/NewEventView';
+import NewVolunteerView from '@/views/NewVolunteerView';
 import React, { useState } from 'react';
 import { Button, Box, Dialog } from '@mui/material';
 
-interface AddEventButtonProps {
-  managers: { id: string; name: string }[];
-}
-
-function AddEventButton({ managers }: AddEventButtonProps) {
+function AddVolunteerButton() {
   const [open, setOpen] = useState(false);
 
   const handleClick = () => setOpen(true);
@@ -20,19 +16,18 @@ function AddEventButton({ managers }: AddEventButtonProps) {
         style={{
           backgroundColor: '#459863',
           color: 'white',
-          width: '9.5rem',
-          marginRight: '.5rem',
+          marginLeft: '10px',
         }}
         onClick={handleClick}
       >
-        ADD EVENT
+        ADD VOLUNTEER
       </Button>
 
       <Dialog open={open} onClose={handleClose} maxWidth="sm" fullWidth>
-        <NeweventView managers={managers} />
+        <NewVolunteerView />
       </Dialog>
     </Box>
   );
 }
 
-export default AddEventButton;
+export default AddVolunteerButton;

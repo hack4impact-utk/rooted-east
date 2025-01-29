@@ -1,4 +1,11 @@
-import { Box, TextField } from '@mui/material';
+import {
+  Box,
+  TextField,
+  FormControl,
+  MenuItem,
+  Select,
+  InputLabel,
+} from '@mui/material';
 import * as React from 'react';
 // import dayjs, { Dayjs } from 'dayjs';
 import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
@@ -13,11 +20,13 @@ import { EventFormData } from '@/types/forms/event';
 interface NewEventFormProps {
   onChange: (eventData: EventFormData) => void;
   eventData: EventFormData;
+  managers: { id: string; name: string }[];
 }
 
 export default function NewEventForm({
   onChange,
   eventData,
+  managers,
 }: NewEventFormProps) {
   return (
     <Box sx={{ pt: 2 }}>
@@ -95,13 +104,24 @@ export default function NewEventForm({
         fullWidth
         sx={{ mt: 2 }}
       />
-      <TextField
-        label="Manager"
-        value={eventData.manager || ''}
-        onChange={(e) => onChange({ ...eventData, manager: e.target.value })}
-        fullWidth
-        sx={{ mt: 2 }}
-      />
+      <Box sx={{ mt: 2 }}>
+        <FormControl fullWidth variant="outlined">
+          <InputLabel>Manager</InputLabel>
+          <Select
+            label="Manager"
+            value={eventData.manager || ''}
+            onChange={(e) =>
+              onChange({ ...eventData, manager: e.target.value })
+            }
+          >
+            {managers.map((manager) => (
+              <MenuItem key={manager.id} value={manager.id}>
+                {manager.name}
+              </MenuItem>
+            ))}
+          </Select>
+        </FormControl>
+      </Box>
     </Box>
   );
 }

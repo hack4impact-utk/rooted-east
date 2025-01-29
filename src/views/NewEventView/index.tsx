@@ -6,7 +6,11 @@ import Grid2 from '@mui/material/Unstable_Grid2';
 import { useState } from 'react';
 import { EventFormData } from '@/types/forms/event';
 
-export default function NeweventView() {
+interface NeweventViewProps {
+  managers: { id: string; name: string }[];
+}
+
+export default function NeweventView({ managers }: NeweventViewProps) {
   const [formData, setFormData] = useState<EventFormData>({} as EventFormData);
 
   const submitHandler = async () => {
@@ -32,6 +36,8 @@ export default function NeweventView() {
       if (res.status != 201) {
         console.log('failed to add event');
         return;
+      } else {
+        location.reload();
       }
     } catch (e) {
       console.error(e);
@@ -44,7 +50,11 @@ export default function NeweventView() {
         <Typography variant="h4">New Event</Typography>
       </Grid2>
       <Grid2 xs={12}>
-        <NewEventForm eventData={formData} onChange={setFormData} />
+        <NewEventForm
+          eventData={formData}
+          managers={managers}
+          onChange={setFormData}
+        />
       </Grid2>
       <Grid2 xs={12}>
         <Button
