@@ -226,3 +226,16 @@ export async function getManagerVolunteers(): Promise<VolunteerEntity[]> {
     throw new CMError(CMErrorType.InternalError);
   }
 }
+
+export async function getAdminAndManagerVolunteers(): Promise<
+  VolunteerEntity[]
+> {
+  try {
+    await dbConnect();
+    return await VolunteerSchema.find({
+      role: { $in: ['Admin', 'Manager'] },
+    }).lean();
+  } catch (error) {
+    throw new CMError(CMErrorType.InternalError);
+  }
+}
