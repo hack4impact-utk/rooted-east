@@ -4,7 +4,7 @@ import { Typography, Box } from '@mui/material';
 import RegisteredVolsList from '@/components/RegisteredVolsList';
 import {
   getAllVolunteersForEvent,
-  getManagerVolunteers,
+  getAdminAndManagerVolunteers,
 } from '@/server/actions/Volunteer';
 import EditEventButton from '@/components/EditEventButton';
 import DeleteEventButton from '@/components/DeleteEventButton';
@@ -23,7 +23,7 @@ export default async function ManageEvent({
 }) {
   const event = await getEvent(params.eventId);
   const vols = await getAllVolunteersForEvent(params.eventId);
-  const managers: VolunteerEntity[] = await getManagerVolunteers();
+  const managers: VolunteerEntity[] = await getAdminAndManagerVolunteers();
   const formattedManagers = managers.map((manager) => ({
     id: manager._id, // Ensure each manager has an 'id' property
     name: `${manager.firstName} ${manager.lastName}`, // Create a 'name' property
