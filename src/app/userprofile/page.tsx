@@ -1,6 +1,4 @@
 import { Box } from '@mui/material';
-import { VolunteerEntity } from '@/types/dataModel/volunteer';
-import { getVolunteer } from '@/server/actions/Volunteer';
 import UserProfilePage from '@/components/UserProfilePage';
 import NavBar from '@/components/NavBar';
 import '@/styles.css';
@@ -16,20 +14,17 @@ export default async function UserProfile() {
     throw new CMError(CMErrorType.NoSuchKey, 'Volunteer');
   }
 
-  let person: VolunteerEntity | null;
   if (userId) {
-    person = await getVolunteer(userId);
-    person = JSON.parse(JSON.stringify(person));
-    if (person) {
-      return (
-        <>
-          <NavBar />
-          <Box>
-            <UserProfilePage person={person}></UserProfilePage>
-          </Box>
-        </>
-      );
-    }
+    return (
+      <>
+        <NavBar />
+        <Box>
+          <UserProfilePage
+            person={JSON.parse(JSON.stringify(user))}
+          ></UserProfilePage>
+        </Box>
+      </>
+    );
   } else {
     return <Loading></Loading>;
   }
