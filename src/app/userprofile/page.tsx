@@ -8,13 +8,12 @@ import CMError, { CMErrorType } from '@/utils/cmerror';
 
 export default async function UserProfile() {
   const user = await getCurrentUser();
-  //check for undefined userID/user
-  const userId = user?._id.toString();
-  if (!userId) {
+  //check for undefined user
+  if (!user) {
     throw new CMError(CMErrorType.NoSuchKey, 'Volunteer');
   }
 
-  if (userId) {
+  if (user) {
     return (
       <>
         <NavBar />
