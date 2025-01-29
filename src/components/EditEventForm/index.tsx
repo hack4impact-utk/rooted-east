@@ -1,4 +1,11 @@
-import { Box, TextField } from '@mui/material';
+import {
+  Box,
+  TextField,
+  Select,
+  MenuItem,
+  FormControl,
+  InputLabel,
+} from '@mui/material';
 import * as React from 'react';
 import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
@@ -10,11 +17,13 @@ import { EventEntity } from '@/types/dataModel/event';
 interface EditEventFormProps {
   onChange: (eventData: EventEntity) => void;
   eventData: EventEntity;
+  managers: { id: string; name: string }[];
 }
 
 export default function EditEventForm({
   onChange,
   eventData,
+  managers,
 }: EditEventFormProps) {
   return (
     <Box sx={{ pt: 2 }}>
@@ -90,13 +99,24 @@ export default function EditEventForm({
         fullWidth
         sx={{ mt: 2 }}
       />
-      <TextField
-        label="Manager"
-        value={eventData.manager || ''}
-        onChange={(e) => onChange({ ...eventData, manager: e.target.value })}
-        fullWidth
-        sx={{ mt: 2 }}
-      />
+      <Box sx={{ mt: 2 }}>
+        <FormControl fullWidth variant="outlined">
+          <InputLabel>Manager</InputLabel>
+          <Select
+            label="Manager"
+            value={eventData.manager || ''}
+            onChange={(e) =>
+              onChange({ ...eventData, manager: e.target.value })
+            }
+          >
+            {managers.map((manager) => (
+              <MenuItem key={manager.id} value={manager.id}>
+                {manager.name}
+              </MenuItem>
+            ))}
+          </Select>
+        </FormControl>
+      </Box>
     </Box>
   );
 }

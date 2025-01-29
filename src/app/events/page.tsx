@@ -6,10 +6,18 @@ import NavBar from '@/components/NavBar';
 import dayjs from 'dayjs';
 import '@/styles.css';
 import { getId } from '@/utils/getUserId';
+import AddEventButton from '@/components/AddEventButton';
+import { VolunteerEntity } from '@/types/dataModel/volunteer';
+import { getManagerVolunteers } from '@/server/actions/Volunteer';
 
 export default async function Events() {
   // get upcoming events
   const upcomingEvents = await getUpcomingEvents();
+  const managers: VolunteerEntity[] = await getManagerVolunteers();
+  const formattedManagers = managers.map((manager) => ({
+    id: manager._id, // Ensure each manager has an 'id' property
+    name: `${manager.firstName} ${manager.lastName}`, // Create a 'name' property
+  }));
 
   if (!upcomingEvents) {
     return <div>Failed to load upcoming events</div>;
@@ -81,7 +89,16 @@ export default async function Events() {
               padding: '20px',
             }}
           >
-            <h3>Upcoming Events</h3>
+            <Box
+              sx={{
+                display: 'flex',
+                justifyContent: 'space-between',
+                alignItems: 'center',
+              }}
+            >
+              <h3>Upcoming Events</h3>
+              <AddEventButton managers={formattedManagers} />
+            </Box>
             <UpcomingEventsList
               events={upcomingEvents}
               volunteerID={tempPlaceholderVolunteerID}

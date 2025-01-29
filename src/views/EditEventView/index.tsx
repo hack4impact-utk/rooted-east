@@ -8,9 +8,10 @@ import { EventEntity } from '@/types/dataModel/event';
 
 interface NeweventViewProps {
   event: EventEntity | null; // Use the correct type
+  managers: { id: string; name: string }[];
 }
 
-export default function NeweventView({ event }: NeweventViewProps) {
+export default function NeweventView({ event, managers }: NeweventViewProps) {
   const [formData, setFormData] = useState<EventEntity>(
     event || ({} as EventEntity)
   );
@@ -57,7 +58,11 @@ export default function NeweventView({ event }: NeweventViewProps) {
         <Typography variant="h4">Edit Event</Typography>
       </Grid2>
       <Grid2 xs={12}>
-        <EditEventForm eventData={formData} onChange={setFormData} />{' '}
+        <EditEventForm
+          eventData={formData}
+          managers={managers}
+          onChange={setFormData}
+        />{' '}
         {/* Pass eventData instead of event */}
       </Grid2>
       <Grid2 xs={12}>

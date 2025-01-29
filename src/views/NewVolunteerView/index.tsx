@@ -33,6 +33,8 @@ export default function NewVolunteerView() {
       if (res.status != 201) {
         console.log('failed to add volunteer');
         return;
+      } else {
+        location.reload();
       }
     } catch (e) {
       console.error(e);
