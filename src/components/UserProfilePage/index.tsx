@@ -12,6 +12,8 @@ import {
   FormControl,
   InputLabel,
   SelectChangeEvent,
+  Snackbar,
+  Alert,
 } from '@mui/material';
 import { VolunteerEntity } from '@/types/dataModel/volunteer';
 
@@ -21,23 +23,13 @@ interface VolunteerUserProfileProps {
 
 export default function UserProfilePage({ person }: VolunteerUserProfileProps) {
   const [editable, setEditable] = useState(false);
-  
+
+  const [snackbarOpen, setSnackbarOpen] = useState(false);
+  const [snackbarMessage, setSnackbarMessage] = useState('');
+
   const [formData, setFormData] = useState<VolunteerEntity>({
     ...person,
     formCreationDate: new Date().toLocaleDateString(),
-  });
-    
-  const [contactPreference, setContactPreference] = useState({
-    email: false,
-    phone: false,
-  });
-    
-  const [checkBoxInfo, setCheckBoxInfo] = useState({
-    homeOwner: false,
-    renter: false,
-    na: false,
-    snap: false,
-    wic: false,
   });
 
   // Sync formData with person prop on update
@@ -60,10 +52,24 @@ export default function UserProfilePage({ person }: VolunteerUserProfileProps) {
     setFormData(person); // Revert changes
     setEditable(false);
   };
-  const handleSave = () => {
-    // Save changes (for now, just disable edit mode)
+  const handleSave = async () => {
     setEditable(false);
-    alert('Profile saved');
+
+    const res = await fetch(`/api/volunteer/${person._id}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(formData),
+    });
+
+    if (res.ok) {
+      setSnackbarMessage('Profile saved successfully!');
+    } else {
+      setSnackbarMessage('Failed to save profile. Please try again.');
+    }
+
+    setSnackbarOpen(true);
   };
 
   return (
@@ -96,7 +102,9 @@ export default function UserProfilePage({ person }: VolunteerUserProfileProps) {
                 name="firstName"
                 value={formData.firstName}
                 onChange={handleChange}
-                InputProps={{ readOnly: !editable }}
+                InputProps={{
+                  readOnly: !editable,
+                }}
               />
             </Grid>
             <Grid item xs={6}>
@@ -474,6 +482,16 @@ export default function UserProfilePage({ person }: VolunteerUserProfileProps) {
           )}
         </Box>
       </form>
+      <Snackbar
+        open={snackbarOpen}
+        autoHideDuration={3000}
+        onClose={() => setSnackbarOpen(false)}
+        anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
+      >
+        <Alert severity="success" onClose={() => setSnackbarOpen(false)}>
+          {snackbarMessage}
+        </Alert>
+      </Snackbar>
     </Box>
   );
 }
