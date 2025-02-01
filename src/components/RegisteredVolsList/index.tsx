@@ -4,13 +4,21 @@ import { VolunteerEntity } from '@/types/dataModel/volunteer';
 import MoreParticipantInfo from '../MoreParticipantInfo';
 import CheckInButton from '../CheckInButton';
 import { getEventVolunteer } from '@/server/actions/EventVolunteer';
+import { getCurrentUser } from '@/utils/getCurrentUser';
+import CMError, { CMErrorType } from '@/utils/cmerror';
 
 interface VolObjectList {
   vols: VolunteerEntity[];
   eventId: string;
 }
 
-export default function RegisteredVolsList(props: VolObjectList) {
+export default async function RegisteredVolsList(props: VolObjectList) {
+  const currentUser = await getCurrentUser();
+  //check for undefined user
+  if (!currentUser) {
+    throw new CMError(CMErrorType.NoSuchKey, 'Volunteer');
+  }
+
   return (
     <Box
       sx={{
@@ -65,7 +73,10 @@ export default function RegisteredVolsList(props: VolObjectList) {
                 }}
               >
                 {vol.firstName} {vol.lastName} {vol.email}
-                <MoreParticipantInfo person={vol} />
+                <MoreParticipantInfo
+                  currentUser={JSON.parse(JSON.stringify(currentUser))}
+                  person={vol}
+                />
               </ListItem>
             </Box>
           );

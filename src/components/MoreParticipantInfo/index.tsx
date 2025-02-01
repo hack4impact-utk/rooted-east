@@ -10,9 +10,11 @@ import React, { useState } from 'react';
 
 interface MoreParticipantInfoProps {
   person: VolunteerEntity | null;
+  currentUser: VolunteerEntity | null;
 }
 
 export default function MoreParticipantInfo({
+  currentUser,
   person,
 }: MoreParticipantInfoProps) {
   const [open, setOpen] = useState(false);
@@ -26,7 +28,12 @@ export default function MoreParticipantInfo({
         <MoreHorizIcon />
       </IconButton>
       <Dialog open={open} onClose={handleClose} maxWidth="sm" fullWidth>
-        {person && <UserProfilePage person={person}></UserProfilePage>}
+        {currentUser && person && (
+          <UserProfilePage
+            currentUser={currentUser}
+            person={person}
+          ></UserProfilePage>
+        )}
       </Dialog>
     </>
   );

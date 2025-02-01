@@ -18,10 +18,14 @@ import {
 import { VolunteerEntity } from '@/types/dataModel/volunteer';
 
 interface VolunteerUserProfileProps {
+  currentUser: VolunteerEntity;
   person: VolunteerEntity;
 }
 
-export default function UserProfilePage({ person }: VolunteerUserProfileProps) {
+export default function UserProfilePage({
+  currentUser,
+  person,
+}: VolunteerUserProfileProps) {
   const [editable, setEditable] = useState(false);
 
   const [snackbarOpen, setSnackbarOpen] = useState(false);
@@ -327,73 +331,75 @@ export default function UserProfilePage({ person }: VolunteerUserProfileProps) {
           </Grid>
         </Paper>
 
-        <Paper elevation={3} sx={{ p: 2, mb: 3 }}>
-          <Typography variant="h6" gutterBottom>
-            Membership Data
-          </Typography>
-          <Grid container spacing={2}>
-            <Grid item xs={4}>
-              <TextField
-                fullWidth
-                label="Cohort"
-                name="cohort"
-                value={formData.cohort}
-                onChange={handleChange}
-                InputProps={{ readOnly: !editable }}
-              />
+        {currentUser.role === 'Admin' && (
+          <Paper elevation={3} sx={{ p: 2, mb: 3 }}>
+            <Typography variant="h6" gutterBottom>
+              Membership Data
+            </Typography>
+            <Grid container spacing={2}>
+              <Grid item xs={4}>
+                <TextField
+                  fullWidth
+                  label="Cohort"
+                  name="cohort"
+                  value={formData.cohort}
+                  onChange={handleChange}
+                  InputProps={{ readOnly: !editable }}
+                />
+              </Grid>
+              <Grid item xs={4}>
+                <TextField
+                  fullWidth
+                  label="Cohort Year"
+                  name="cohortYear"
+                  value={formData.cohortYear}
+                  onChange={handleChange}
+                  InputProps={{ readOnly: !editable }}
+                />
+              </Grid>
+              <Grid item xs={4}>
+                <TextField
+                  fullWidth
+                  label="Active (yes/no)"
+                  name="active"
+                  value={formData.active}
+                  onChange={handleChange}
+                  InputProps={{ readOnly: !editable }}
+                />
+              </Grid>
+              <Grid item xs={4}>
+                <TextField
+                  fullWidth
+                  label="HGP_Phase2_member"
+                  name="HGP_Phase2_member"
+                  value={formData.HGP_Phase2_member}
+                  onChange={handleChange}
+                  InputProps={{ readOnly: !editable }}
+                />
+              </Grid>
+              <Grid item xs={4}>
+                <TextField
+                  fullWidth
+                  label="Reason for Leaving"
+                  name="reasonForLeaving"
+                  value={formData.reasonForLeaving}
+                  onChange={handleChange}
+                  InputProps={{ readOnly: !editable }}
+                />
+              </Grid>
+              <Grid item xs={4}>
+                <TextField
+                  fullWidth
+                  label="Cohort Year"
+                  name="cohortYear"
+                  value={formData.cohortYear}
+                  onChange={handleChange}
+                  InputProps={{ readOnly: !editable }}
+                />
+              </Grid>
             </Grid>
-            <Grid item xs={4}>
-              <TextField
-                fullWidth
-                label="Cohort Year"
-                name="cohortYear"
-                value={formData.cohortYear}
-                onChange={handleChange}
-                InputProps={{ readOnly: !editable }}
-              />
-            </Grid>
-            <Grid item xs={4}>
-              <TextField
-                fullWidth
-                label="Active (yes/no)"
-                name="active"
-                value={formData.active}
-                onChange={handleChange}
-                InputProps={{ readOnly: !editable }}
-              />
-            </Grid>
-            <Grid item xs={4}>
-              <TextField
-                fullWidth
-                label="HGP_Phase2_member"
-                name="HGP_Phase2_member"
-                value={formData.HGP_Phase2_member}
-                onChange={handleChange}
-                InputProps={{ readOnly: !editable }}
-              />
-            </Grid>
-            <Grid item xs={4}>
-              <TextField
-                fullWidth
-                label="Reason for Leaving"
-                name="reasonForLeaving"
-                value={formData.reasonForLeaving}
-                onChange={handleChange}
-                InputProps={{ readOnly: !editable }}
-              />
-            </Grid>
-            <Grid item xs={4}>
-              <TextField
-                fullWidth
-                label="Cohort Year"
-                name="cohortYear"
-                value={formData.cohortYear}
-                onChange={handleChange}
-                InputProps={{ readOnly: !editable }}
-              />
-            </Grid>
-          </Grid>
-        </Paper>
+          </Paper>
+        )}
 
         <Paper elevation={3} sx={{ p: 2, mb: 3 }}>
           <Typography variant="h6" gutterBottom>
