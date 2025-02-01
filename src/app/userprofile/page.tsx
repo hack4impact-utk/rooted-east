@@ -19,6 +19,7 @@ export default async function UserProfile() {
         <NavBar />
         <Box>
           <UserProfilePage
+            currentUser={JSON.parse(JSON.stringify(user))}
             person={JSON.parse(JSON.stringify(user))}
           ></UserProfilePage>
         </Box>
