@@ -9,12 +9,12 @@ import { getCurrentUser } from '@/utils/getCurrentUser';
 import CMError, { CMErrorType } from '@/utils/cmerror';
 import AddEventButton from '@/components/AddEventButton';
 import { VolunteerEntity } from '@/types/dataModel/volunteer';
-import { getManagerVolunteers } from '@/server/actions/Volunteer';
+import { getAdminAndManagerVolunteers } from '@/server/actions/Volunteer';
 
 export default async function Events() {
   // get upcoming events
   const upcomingEvents = await getUpcomingEvents();
-  const managers: VolunteerEntity[] = await getManagerVolunteers();
+  const managers: VolunteerEntity[] = await getAdminAndManagerVolunteers();
   const formattedManagers = managers.map((manager) => ({
     id: manager._id, // Ensure each manager has an 'id' property
     name: `${manager.firstName} ${manager.lastName}`, // Create a 'name' property
