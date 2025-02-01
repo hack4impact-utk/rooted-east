@@ -1,4 +1,6 @@
 import { Box, Paper, Typography } from '@mui/material';
+import React from '@mui/material';
+import LoginButton from '../LoginButton';
 
 const Welcome = () => {
   return (
@@ -48,6 +50,7 @@ const Welcome = () => {
         <hr style={{ width: '100%', borderColor: '#D5C7BC' }} />
         <Typography variant="h5" sx={{ marginBottom: 1 }}>
           Log In to register for events or edit your profile information
+          <LoginButton></LoginButton>
         </Typography>
         <hr style={{ width: '100%', borderColor: '#D5C7BC' }} />
         <Typography variant="h5" sx={{ marginBottom: 1 }}>
