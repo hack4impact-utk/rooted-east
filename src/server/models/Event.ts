@@ -27,6 +27,10 @@ const EventSchema = new Schema({
     type: Number,
     required: false,
   },
+  volsSignUp: {
+    type: Number,
+    required: false,
+  },
   description: {
     type: String,
     required: false,
