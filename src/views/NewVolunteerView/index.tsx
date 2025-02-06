@@ -7,21 +7,11 @@ import { useState } from 'react';
 import { NewVolunteerFormData } from '@/types/forms/volunteer';
 
 export default function NewVolunteerView() {
-  const [formData, setFormData] = useState<NewVolunteerFormData>(
-    {} as NewVolunteerFormData
-  );
+  const [formData, setFormData] = useState<NewVolunteerFormData>({
+    profileFinished: false,
+  } as NewVolunteerFormData);
 
   const submitHandler = async () => {
-    // Validate the form
-    // const validationResult = validate(formData);
-    // if (validationResult) {
-    //   setValidationErrors(validationResult);
-    //   return;
-    // }
-
-    // Clear validation errors
-    // setValidationErrors(undefined);
-
     const reqBody = formData;
 
     try {

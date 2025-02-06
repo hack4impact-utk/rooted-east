@@ -40,6 +40,8 @@ const zVolunteer = z.object({
   growingSpace: z.string().optional(),
   gardenInfrastructure: z.string().optional(),
   formCreationDate: z.string().optional(),
+
+  profileFinished: z.boolean(),
 });
 
 const zVolunteerEntity = zVolunteer.extend({

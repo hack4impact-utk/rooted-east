@@ -132,6 +132,11 @@ const VolunteerSchema = new Schema({
     type: String,
     required: false,
   },
+  profileFinished: {
+    type: Boolean,
+    required: true,
+    default: false,
+  },
 });
 
 export type VolunteerDocument = Volunteer & Document;
