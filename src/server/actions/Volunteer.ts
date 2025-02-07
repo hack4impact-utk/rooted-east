@@ -142,6 +142,36 @@ export async function getVolunteerByEmail(
   }
 }
 
+// used to check if an email is in DB for google sign in
+export async function checkExistingEmail(
+  volunteerEmail: string
+): Promise<VolunteerEntity | null> {
+  if (!volunteerEmail) {
+    throw new CMError(CMErrorType.BadValue, 'Email cannot be empty');
+  }
+
+  try {
+    await dbConnect();
+    const target: VolunteerEntity | null = await VolunteerSchema.findOne({
+      email: volunteerEmail,
+    });
+
+    if (!target) {
+      if (typeof window !== 'undefined') {
+        alert('Access Denied');
+      } else {
+        console.log('Unauthorized email attempt:', volunteerEmail);
+      }
+      return null;
+    }
+
+    return target;
+  } catch (error) {
+    console.error('Database error:', error);
+    return null;
+  }
+}
+
 export async function deleteVolunteer(volunteerId: string): Promise<void> {
   if (!isValidObjectId(volunteerId)) {
     throw new CMError(CMErrorType.BadValue, 'Invalid VolunteerId');

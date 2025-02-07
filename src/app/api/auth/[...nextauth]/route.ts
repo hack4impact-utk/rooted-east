@@ -1,7 +1,7 @@
 import GoogleProvider from 'next-auth/providers/google';
-
 import NextAuth from 'next-auth';
 import type { AuthOptions } from 'next-auth';
+import { checkExistingEmail } from '@/server/actions/Volunteer';
 
 export const authOptions: AuthOptions = {
   providers: [
@@ -15,8 +15,26 @@ export const authOptions: AuthOptions = {
   secret: process.env.NEXTAUTH_SECRET,
 
   pages: {
-    signIn: '/auth/signin', // Custom sign-in page
-    signOut: '/auth/signout', // Custom sign-out page
+    signIn: '/auth/signin',
+    signOut: '/auth/signout',
+    error: '/auth/error',
+  },
+  callbacks: {
+    async signIn({ user }) {
+      // Only allow sign-in if the email exists in DB
+      if (!user.email) {
+        // Deny sign-in if no email is provided
+        return false;
+      }
+
+      const userExist = await checkExistingEmail(user.email);
+      if (!userExist) {
+        // redirect to the auth error page
+        return '/auth/error';
+      } else {
+        return true;
+      }
+    },
   },
 };
 
