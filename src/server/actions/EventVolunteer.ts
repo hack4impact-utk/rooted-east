@@ -10,18 +10,30 @@ import {
 import EventVolunteer from '../models/EventVolunteer';
 import { EventVolunteerResponse } from '@/types/dataModel/eventVolunteer';
 import { CreateEventVolunteerRequest } from '@/types/dataModel/eventVolunteer';
+import Event from '../models/Event';
 
 export async function createEventVolunteer(
   createEventVolunteerRequest: CreateEventVolunteerRequest
 ): Promise<string> {
-  if (!createEventVolunteerRequest || Object.keys(createEventVolunteerRequest).length === 0) {
-    throw new CMError(CMErrorType.BadValue, 'Invalid input for CreateEventVolunteerRequest');
+  if (
+    !createEventVolunteerRequest ||
+    Object.keys(createEventVolunteerRequest).length === 0
+  ) {
+    throw new CMError(
+      CMErrorType.BadValue,
+      'Invalid input for CreateEventVolunteerRequest'
+    );
   }
 
   try {
     await dbConnect();
 
     const res = await EventVolunteer.create(createEventVolunteerRequest);
+    await Event.updateOne(
+      { _id: createEventVolunteerRequest.event },
+      { $inc: { volsSignUp: 1 } }
+    );
+
     if (!res) {
       throw new Error('EventVolunteer not created');
     }
@@ -103,7 +115,17 @@ export async function deleteEventVolunteer(
 
   try {
     await dbConnect();
-    const res = await EventVolunteerSchema.findOneAndDelete({ _id: eventVolunteerId });
+    const eventVolRes: EventVolunteerEntity | null =
+      await EventVolunteerSchema.findById({ _id: eventVolunteerId });
+    if (eventVolRes) {
+      await Event.updateOne(
+        { _id: eventVolRes?.event },
+        { $inc: { volsSignUp: -1 } }
+      );
+    }
+    const res = await EventVolunteerSchema.findOneAndDelete({
+      _id: eventVolunteerId,
+    });
 
     if (!res) {
       throw new CMError(CMErrorType.NoSuchKey, 'EventVolunteer');
@@ -123,17 +145,17 @@ export async function getEventVolunteer(
 
   try {
     await dbConnect();
-    const eventVol: EventVolunteerEntity | null = await EventVolunteerSchema.findOne({
-      event: eventId,
-      volunteer: volunteerId,
-    });
+    const eventVol: EventVolunteerEntity | null =
+      await EventVolunteerSchema.findOne({
+        event: eventId,
+        volunteer: volunteerId,
+      });
 
     if (eventVol) {
       return eventVol;
     } else {
       throw new CMError(CMErrorType.NoSuchKey, 'EventVolunteer');
     }
-
   } catch (error) {
     throw new CMError(CMErrorType.InternalError);
   }
