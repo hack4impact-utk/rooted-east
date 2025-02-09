@@ -1,5 +1,6 @@
 import NextAuth, { AuthOptions } from 'next-auth';
 import GoogleProvider from 'next-auth/providers/google';
+import { checkExistingEmail } from '@/server/actions/Volunteer';
 import { MongoClient } from 'mongodb';
 
 const uri = process.env.MONGODB_URI!;
@@ -17,6 +18,7 @@ export const authOptions: AuthOptions = {
   pages: {
     signIn: '/auth/signin',
     signOut: '/auth/signout',
+    error: '/auth/error',
   },
   callbacks: {
     async jwt({ token, account }) {
@@ -45,6 +47,21 @@ export const authOptions: AuthOptions = {
         session.user.role = token.role; // Attach role to session
       }
       return session;
+    },
+    async signIn({ user }) {
+      // Only allow sign-in if the email exists in DB
+      if (!user.email) {
+        // Deny sign-in if no email is provided
+        return false;
+      }
+
+      const userExist = await checkExistingEmail(user.email);
+      if (!userExist) {
+        // redirect to the auth error page
+        return '/auth/error';
+      } else {
+        return true;
+      }
     },
   },
 };
