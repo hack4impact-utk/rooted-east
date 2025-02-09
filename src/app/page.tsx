@@ -3,7 +3,6 @@ import AdminVolunteers from '@/components/AdminContactInfo';
 import Welcome from '@/components/welcome';
 import NavBar from '@/components/NavBar';
 import { Box } from '@mui/material';
-import '@/styles.css';
 
 const Home = async () => {
   let volunteers = [];
