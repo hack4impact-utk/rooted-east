@@ -1,0 +1,5 @@
+.home-mui-box{
+    flex: 1;
+    display: flex;
+    justify-content: center;
+}
