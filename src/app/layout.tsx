@@ -1,6 +1,7 @@
 import { authOptions } from './api/auth/[...nextauth]/route';
 import Provider from './context/client-provider';
 import { getServerSession } from 'next-auth/next';
+import '@/styles.css';
 
 //👇 Import Open Sans font
 import { PT_Sans } from 'next/font/google';

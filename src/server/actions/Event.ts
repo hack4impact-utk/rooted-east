@@ -179,3 +179,37 @@ export async function getVolunteerEvents(
 
   return volEvents;
 }
+
+// Used to repopulate num of volunteers signed up for an event if needed.
+export async function repopulateEventVols() {
+  try {
+    await dbConnect();
+
+    const res = (await EventSchema.find().lean()) as EventEntity[];
+    if (!res) {
+      throw new Error('Events not found');
+    }
+    for (let i = 0; i < res.length; i++) {
+      const eventVols = await EventVolunteerSchema.find(
+        {
+          event: res[i]._id,
+        },
+        'event'
+      );
+      await EventSchema.updateOne(
+        { _id: res[i]._id },
+        { volsSignUp: eventVols.length }
+      );
+    }
+  } catch (error) {
+    if (
+      error instanceof mongo.MongoError ||
+      error instanceof mongo.MongoServerError
+    ) {
+      if (error.code === 11000) {
+        throw new CMError(CMErrorType.DuplicateKey, 'Event');
+      }
+    }
+    throw new CMError(CMErrorType.InternalError);
+  }
+}

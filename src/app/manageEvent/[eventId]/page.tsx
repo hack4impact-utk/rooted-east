@@ -121,6 +121,21 @@ export default async function ManageEvent({
           <VolunteerSearchBar eventId={params.eventId} />
         </Box>
       </Box>
+      <Box
+        sx={{
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          marginLeft: '1rem',
+        }}
+      >
+        <Typography
+          variant="subtitle1"
+          sx={{ color: '#666666', textAlign: 'center' }}
+        >
+          Volunteers Signed Up: {event?.volsSignUp}/{event?.volsNeeded}
+        </Typography>
+      </Box>
 
       {/* Volunteers List */}
       <RegisteredVolsList

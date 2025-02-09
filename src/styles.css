@@ -14,3 +14,9 @@ a {
   text-decoration: none;
   color: #0066cc;
 }
+
+.home-mui-box{
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}

@@ -18,6 +18,7 @@ export const zEventFormData = z
     startTime: zTime,
     endTime: zTime,
     volsNeeded: z.number(),
+    volsSignedUp: z.number(),
     description: z.string(),
     manager: zObjectId,
   })

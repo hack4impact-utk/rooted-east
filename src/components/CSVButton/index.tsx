@@ -1,7 +1,7 @@
 'use client';
 import { VolunteerEntity } from '@/types/dataModel/volunteer';
 import { Button } from '@mui/material';
-import { saveAs } from 'file-saver'; // Add this package to handle downloads
+import { saveAs } from 'file-saver';
 
 interface Props {
   vols: VolunteerEntity[];
@@ -9,17 +9,23 @@ interface Props {
 
 export default function CSVButton({ vols }: Props) {
   async function onChange() {
-    // Dynamically import json-2-csv since it's a client-side operation
     const converter = await import('json-2-csv');
 
     try {
-      // Convert JSON to CSV
-      const csv = await converter.json2csv(vols);
+      // Explicitly remove _id and __v
+      const formattedVols = vols.map((vol) => {
+        const newVol = { ...vol } as any;
+        delete newVol._id;
+        delete newVol.__v;
+        return newVol;
+      });
+
+      const csv = await converter.json2csv(formattedVols);
 
       // Create a Blob from the CSV string
       const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
 
-      // Use the file-saver library to trigger download
+      // Trigger file download
       saveAs(blob, 'volunteers.csv');
     } catch (error) {
       console.error('Error converting to CSV:', error);

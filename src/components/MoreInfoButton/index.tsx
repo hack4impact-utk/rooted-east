@@ -40,7 +40,6 @@ export default function MoreInfoButton({ event }: MoreInfoButtonProps) {
 
   return (
     <div>
-
       <IconButton aria-label="more info" onClick={handleToggleDetails}>
         <MoreHorizIcon />
       </IconButton>
@@ -55,6 +54,7 @@ export default function MoreInfoButton({ event }: MoreInfoButtonProps) {
             <p>Location: {event.location}</p>
             <p>Event Manager: {event.manager}</p>
             <p>Details: {event.description}</p>
+            <p>Volunteers Signed Up: {event.volsSignUp}</p>
 
             <Button onClick={handleToggleDetails}>Close</Button>
           </div>
