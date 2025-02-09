@@ -3,7 +3,6 @@ import AdminVolunteers from '@/components/AdminContactInfo';
 import Welcome from '@/components/welcome';
 import NavBar from '@/components/NavBar';
 import { Box } from '@mui/material';
-import '@/styles.css';
 
 const Home = async () => {
   let volunteers = [];
@@ -18,13 +17,7 @@ const Home = async () => {
   return (
     <div className="admin-volunteers-page">
       <NavBar />
-      <Box
-        sx={{
-          flex: 1,
-          display: 'flex',
-          justifyContent: 'center',
-        }}
-      >
+      <Box className="home-mui-box">
         <Welcome />
         <AdminVolunteers volunteers={volunteers} />
       </Box>

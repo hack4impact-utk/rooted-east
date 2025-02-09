@@ -16,6 +16,7 @@ const zEvent = z.object({
   startTime: z.coerce.date(),
   endTime: z.coerce.date(),
   volsNeeded: z.number(),
+  volsSignUp: z.number(),
   description: z.string(),
   manager: zObjectId,
 });
