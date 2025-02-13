@@ -1,5 +1,5 @@
 'use client';
-import { Button } from '@mui/material';
+import { Box, Button, Typography } from '@mui/material';
 import React from 'react';
 
 export default function LoginButton() {
@@ -9,26 +9,56 @@ export default function LoginButton() {
   };
 
   return (
-    <div
-      style={{
+    <Box
+      sx={{
+        flex: 1,
         display: 'flex',
-        justifyContent: 'center', //centers button
-        marginTop: '10px', //new line for button
+        flexGrow: 0,
+        flexShrink: 0,
+        flexDirection: 'column',
+        alignItems: 'center',
+        backgroundColor: '#324033',
+        color: '#D5C7BC',
+        maxWidth: 450,
+        justifyContent: 'center',
       }}
     >
-      <Button
-        variant="contained"
-        onClick={handleLogin}
-        sx={{
-          backgroundColor: '#459863',
-          padding: '6px 20px',
-          color: 'white',
-          whiteSpace: 'nowrap',
-          overflow: 'hidden',
+      <div
+        style={{
+          display: 'flex',
+          justifyContent: 'center', //centers button
         }}
       >
-        Login
-      </Button>
-    </div>
+        <Typography variant="h5" align="center" sx={{ marginBottom: 1 }}>
+          Log In to register for events or edit your profile information
+          <div
+            style={{
+              display: 'flex',
+              justifyContent: 'center', //centers button
+            }}
+          >
+            <Button
+              variant="contained"
+              onClick={handleLogin}
+              sx={{
+                backgroundColor: '#459863',
+                padding: '6px 20px',
+                color: 'white',
+                whiteSpace: 'nowrap',
+                overflow: 'hidden',
+                marginTop: 1,
+              }}
+            >
+              Login
+            </Button>
+          </div>
+        </Typography>
+      </div>
+      <hr style={{ width: '100%', borderColor: '#D5C7BC' }} />
+      <Typography variant="h5" align="center">
+        If you are not in our database contact one of our administrators to get
+        connected
+      </Typography>
+    </Box>
   );
 }
