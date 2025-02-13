@@ -32,7 +32,6 @@ const modalStyles: React.CSSProperties = {
   transform: 'translate(-50%, -50%)',
   backgroundColor: 'white',
   padding: '20px',
-  borderRadius: '8px',
   boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
   width: 400,
   zIndex: 1000,
@@ -78,7 +77,7 @@ function NavBar() {
   };
 
   return (
-    <AppBar position="sticky" sx={{ bgcolor: '#459863', borderRadius: '6px' }}>
+    <AppBar position="sticky" sx={{ bgcolor: '#459863' }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           {/* Hamburger menu for xs screens */}
