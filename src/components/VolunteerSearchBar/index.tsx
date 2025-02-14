@@ -28,23 +28,12 @@ export default function VolunteerSearchBar({
 
   return (
     <TextField
+      className="search-volunteers"
       fullWidth
       label="Search volunteers by name or email"
       variant="outlined"
       onChange={(e) => handleSearch(e.target.value)}
       size="small"
-      sx={{
-        backgroundColor: '#f5efeb',
-        width: '400px',
-        '& .MuiOutlinedInput-root': {
-          '&:hover fieldset': {
-            borderColor: '#459863',
-          },
-          '&.Mui-focused fieldset': {
-            borderColor: '#459863',
-          },
-        },
-      }}
     />
   );
 }

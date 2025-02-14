@@ -77,24 +77,13 @@ export default function UserProfilePage({
   };
 
   return (
-    <Box
-      sx={{
-        width: '100%',
-        maxWidth: 900,
-        mx: 'auto',
-        mt: 4,
-        p: 3,
-        bgcolor: '#459863',
-        borderRadius: 2,
-        boxShadow: 3,
-      }}
-    >
+    <Box className="user-profile-container">
       <Typography variant="h4" component="h2" align="center" gutterBottom>
         {editable ? 'Edit Profile' : 'User Profile'}
       </Typography>
 
       <form onSubmit={(e) => e.preventDefault()}>
-        <Paper elevation={3} sx={{ p: 2, mb: 3 }}>
+        <Paper elevation={3} className="user-profile-form">
           <Typography variant="h6" gutterBottom>
             Personal Information
           </Typography>
@@ -124,7 +113,7 @@ export default function UserProfilePage({
           </Grid>
         </Paper>
 
-        <Paper elevation={3} sx={{ p: 2, mb: 3 }}>
+        <Paper elevation={3} className="user-profile-form">
           <Typography variant="h6" gutterBottom>
             Contact Information
           </Typography>
@@ -182,7 +171,7 @@ export default function UserProfilePage({
           </Grid>
         </Paper>
 
-        <Paper elevation={3} sx={{ p: 2, mb: 3 }}>
+        <Paper elevation={3} className="user-profile-form">
           <Typography variant="h6" gutterBottom>
             Demographics
           </Typography>
@@ -332,7 +321,7 @@ export default function UserProfilePage({
         </Paper>
 
         {currentUser.role === 'Admin' && (
-          <Paper elevation={3} sx={{ p: 2, mb: 3 }}>
+          <Paper elevation={3} className="user-profile-form">
             <Typography variant="h6" gutterBottom>
               Membership Data
             </Typography>
@@ -401,7 +390,7 @@ export default function UserProfilePage({
           </Paper>
         )}
 
-        <Paper elevation={3} sx={{ p: 2, mb: 3 }}>
+        <Paper elevation={3} className="user-profile-form">
           <Typography variant="h6" gutterBottom>
             Notes
           </Typography>
@@ -469,9 +458,7 @@ export default function UserProfilePage({
           </Grid>
         </Paper>
 
-        <Box
-          sx={{ display: 'flex', justifyContent: 'flex-end', gap: 2, mt: 3 }}
-        >
+        <Box className="user-profile-buttons">
           {editable ? (
             <>
               <Button variant="outlined" onClick={handleCancel}>

@@ -17,25 +17,21 @@ export default async function DatabaseVolunteersList(props: VolObjectList) {
   }
 
   return (
-    <Box sx={{ overflow: 'auto', bgcolor: 'd5c7bc' }}>
+    <Box className="database-container">
       <List>
         {props.vols.map(async (vol: VolunteerEntity, index) => {
           return (
-            <ListItem
-              key={index}
-              sx={{
-                bgcolor: '#f5efeb',
-                maxWidth: '90%',
-                margin: 2,
-                flex: 1,
-                justifyContent: 'space-between',
-              }}
-            >
-              {vol.firstName} {vol.lastName} {vol.email}
-              <MoreParticipantInfo
-                currentUser={JSON.parse(JSON.stringify(currentUser))}
-                person={vol}
-              />
+            <ListItem key={index} className="database-list-item">
+              <Box className="database-names">
+                {vol.firstName} {vol.lastName}
+              </Box>
+              <Box className="database-emails">{vol.email}</Box>
+              <Box className="database-more-info">
+                <MoreParticipantInfo
+                  currentUser={JSON.parse(JSON.stringify(currentUser))}
+                  person={vol}
+                />
+              </Box>
             </ListItem>
           );
         })}
