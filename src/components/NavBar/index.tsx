@@ -1,5 +1,7 @@
 'use client';
 
+import Image from 'next/image';
+import RELogo from '@/assets/RE_logo.png';
 import * as React from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -142,22 +144,21 @@ function NavBar() {
             Rooted East
           </Typography>
           {/* Rooted East title for md screens */}
-          <Typography
-            variant="h6"
-            noWrap
-            component="a"
-            href="/#home"
-            sx={{
-              display: { xs: 'none', md: 'flex' },
-              fontFamily: 'monospace',
-              fontWeight: 700,
-              letterSpacing: '.3rem',
-              color: '#D5C7BC',
-              textDecoration: 'none',
-            }}
-          >
-            ROOTED EAST
-          </Typography>
+          <Button href="/#home" sx={{ padding: 0, minWidth: 'auto' }}>
+            <Image
+              src={RELogo}
+              alt="Rooted East Logo"
+              width={300}
+              height={300}
+              style={{
+                cursor: 'pointer',
+                objectFit: 'contain',
+                maxHeight: '64px',
+                width: 'auto',
+              }}
+            />
+          </Button>
+
           {/* Nav Buttons for md screens */}
           <Box sx={{ display: { xs: 'none', md: 'flex' }, ml: 'auto', mr: 3 }}>
             {pages.map((page, index) => (
