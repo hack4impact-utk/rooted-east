@@ -8,7 +8,6 @@
 
 .manage-event-search {
   margin-left: 0.5rem;
-  align-items: center;
   margin-right: 1rem;
   margin-top: 1rem;
   margin-bottom: 1rem;
@@ -34,7 +33,6 @@
 
 .manage-event-boxes {
   display: flex;
-  gap: 10rem;
   align-items: center;
   margin-left: 1rem;
   margin-right: 1rem;
@@ -50,7 +48,7 @@
 }
 .manage-event-buttons {
   display: flex;
-  gap: 2rem;
+  gap: 1.8rem;
   margin-left: 0.5rem;
 }
 
@@ -64,7 +62,7 @@
 
 .search-volunteers {
   background-color: #f5efeb;
-  width: 45.8rem;
+  width: 45.3rem;
   border-radius: 0.25rem;
 }
 
@@ -157,9 +155,12 @@
 /* User Profile Styling */
 
 .user-profile-container {
+  overflow: auto;
+  max-height: 76vh;
+  position: absolute;
   width: 100%;
-  max-width: 37.5rem;
-  margin-top: 5.3rem;
+  max-width: 36rem;
+  margin-top: 5.25rem;
   margin-bottom: 1rem;
   margin-left: 1.5rem;
   padding: 3rem;
@@ -180,4 +181,75 @@
   justify-content: flex-end;
   gap: 1rem;
   margin-top: 3rem;
+}
+
+/* Database styling */
+
+.database-search {
+  margin-left: 0.5rem;
+  margin-right: 1rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.database-parent {
+  margin-left: 0.5rem;
+  margin-top: 1rem;
+  width: 50%;
+}
+
+.database-buttons {
+  display: flex;
+  align-items: center;
+  margin-right: 1rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  margin-left: 1rem;
+  gap: 1rem;
+}
+
+.database-container {
+  overflow: auto;
+  max-height: 74vh;
+  margin-left: 1.5rem;
+  background-color: #d5c7bc;
+}
+.database-list-item {
+  color: #000000;
+  background-color: #f5efeb;
+  flex: 1;
+  max-width: 50.25%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-radius: 0.25rem;
+  padding: .5rem;
+  margin-bottom: 1.5rem;
+}
+
+.database-names,
+.database-emails,
+.database-more-info {
+  display: flex;
+  align-items: center;
+  text-align: left;
+}
+
+.database-names,
+.database-email {
+  width: 12rem;
+  overflow: hidden;
+}
+
+.database-names {
+  justify-content: flex-start;
+}
+
+.database-emails {
+  justify-content: flex-start;
+}
+
+.database-more-info {
+  flex-grow: 1;
+  justify-content: flex-end;
 }

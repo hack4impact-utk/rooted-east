@@ -20,7 +20,13 @@ export default async function RegisteredVolsList(props: VolObjectList) {
   }
 
   return (
-    <Box className="registered-vols-list-container">
+    <Box
+      sx={{
+        overflow: 'auto',
+        maxHeight: '65vh',
+        marginLeft: '1rem',
+      }}
+    >
       <List>
         {props.vols.map(async (vol: VolunteerEntity, index) => {
           const eventVol = await getEventVolunteer(
@@ -35,8 +41,16 @@ export default async function RegisteredVolsList(props: VolObjectList) {
             return null;
           }
           return (
-            <Box key={index} className="registered-vols-item">
-              <Box className="check-in-button-container">
+            <Box
+              key={index}
+              sx={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: '1rem',
+                marginBottom: '1rem',
+              }}
+            >
+              <Box sx={{ width: '8.5rem' }}>
                 <CheckInButton
                   eventVolId={eventVol._id.toString()}
                   isCheckedIn={
@@ -45,17 +59,24 @@ export default async function RegisteredVolsList(props: VolObjectList) {
                   }
                 />
               </Box>
-              <ListItem key={index} className="registered-vols-list-item">
-                <Box className="registered-vols-name">
-                  {vol.firstName} {vol.lastName}
-                </Box>
-                <Box className="registered-vols-email">{vol.email}</Box>
-                <Box className="registered-vols-more-info">
-                  <MoreParticipantInfo
-                    currentUser={JSON.parse(JSON.stringify(currentUser))}
-                    person={vol}
-                  />
-                </Box>
+              <ListItem
+                key={index}
+                sx={{
+                  color: '#000022',
+                  bgcolor: '#459863',
+                  opacity: 0.8,
+                  maxWidth: '90%',
+                  margin: '0.5rem',
+                  flex: 1,
+                  justifyContent: 'space-between',
+                  borderRadius: '0.25rem',
+                }}
+              >
+                {vol.firstName} {vol.lastName} {vol.email}
+                <MoreParticipantInfo
+                  currentUser={JSON.parse(JSON.stringify(currentUser))}
+                  person={vol}
+                />
               </ListItem>
             </Box>
           );

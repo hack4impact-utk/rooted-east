@@ -1,7 +1,7 @@
 import DatabaseVolunteersList from '@/components/DatabaseVolunteersList';
 import NavBar from '@/components/NavBar';
 import { getAllVolunteers } from '@/server/actions/Volunteer';
-import '@/styles.css';
+import '@/app/global.styles.css';
 import CSVButton from '@/components/CSVButton';
 import CopyPhoneNumbersButton from '@/components/CopyPhoneNumbersButton';
 import CopyEmailsButton from '@/components/CopyEmailsButton';
@@ -32,21 +32,18 @@ export default async function Home({
   return (
     <div>
       <NavBar />
-      <Box
-        sx={{
-          display: 'flex',
-          gap: '2rem',
-          alignItems: 'center',
-          margin: '1rem',
-        }}
-      >
-        <Box sx={{ display: 'flex', gap: '0.5rem' }}>
+      <Box className="database-parent">
+        <Box className="database-buttons">
           <CSVButton vols={filteredVols} />
           <CopyPhoneNumbersButton vols={filteredVols} />
           <CopyEmailsButton vols={filteredVols} />
           <AddVolunteerButton />
         </Box>
-        <VolunteerSearchBar basePath="/database" />
+        <Box className="database-parent">
+          <Box className="database-search">
+            <VolunteerSearchBar basePath="/database" />
+          </Box>
+        </Box>
       </Box>
       <DatabaseVolunteersList vols={filteredVols} />
     </div>

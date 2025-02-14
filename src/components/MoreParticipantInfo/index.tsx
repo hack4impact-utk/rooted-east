@@ -25,7 +25,6 @@ export default function MoreParticipantInfo({
       <IconButton aria-label="more info" onClick={handleClick}>
         <MoreHorizIcon />
       </IconButton>
-
       {open && (
         <Box className="more-info-button">
           {currentUser && person && (
