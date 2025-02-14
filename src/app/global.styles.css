@@ -4,34 +4,65 @@
   justify-content: center;
 }
 
-.database-search {
+/* Manage Event Styling */
+
+.manage-event-search {
   margin-left: 0.5rem;
-  align-items: center;
   margin-right: 1rem;
   margin-top: 1rem;
   margin-bottom: 1rem;
 }
 
-.database-parent {
+.manage-event-title {
+  background-color: #324033;
+  color: #d5c7bc;
+  padding: 1rem;
+  margin-top: 1rem;
+  margin-bottom: 0.5rem;
+  border-radius: 0.5rem;
+  margin-left: 0.5rem;
+  width: 43.8rem;
+  text-align: center;
+}
+
+.manage-event-text {
+  color: #37403a;
+  text-align: center;
+  align-items: center;
+}
+
+.manage-event-boxes {
+  display: flex;
+  align-items: center;
+  margin-left: 1rem;
+  margin-right: 1rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  justify-content: center;
+}
+
+.manage-event-parent {
   margin-left: 0.5rem;
   margin-top: 1rem;
   width: 50%;
 }
-
-.database-buttons {
+.manage-event-buttons {
   display: flex;
-  gap: 10rem;
-  align-items: center;
-  margin-right: 1rem;
-  margin-top: 1rem;
-  margin-bottom: 1rem;
-  margin-left: 1rem;
-  gap: 1rem;
+  gap: 1.8rem;
+  margin-left: 0.5rem;
 }
+
+.manage-event-buttons > *,
+.manage-event-buttons > * > button {
+  width: 9.5rem !important;
+  min-width: 9.5rem !important;
+}
+
+/* Search Bar Styling */
 
 .search-volunteers {
   background-color: #f5efeb;
-  width: 41.9rem;
+  width: 45.3rem;
   border-radius: 0.25rem;
 }
 
@@ -49,7 +80,133 @@
   border-radius: 0.25rem;
 }
 
-/* Database Styling */
+/* Registered Vols Styling */
+
+.registered-vols-list-container {
+  overflow: auto;
+  max-height: 65vh;
+  margin-left: 1rem;
+}
+
+.registered-vols-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.check-in-button-container {
+  width: 8.5rem;
+}
+
+.registered-vols-list-item {
+  color: #02100b;
+  background-color: #459863;
+  opacity: 0.8;
+  margin: 0.5rem;
+  flex: 1;
+  max-width: 39%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-radius: 0.25rem;
+  padding: 0.5rem;
+}
+
+.registered-vols-name,
+.registered-vols-email,
+.registered-vols-more-info {
+  display: flex;
+  align-items: center;
+  text-align: left;
+}
+
+.registered-vols-name,
+.registered-vols-email {
+  width: 12rem;
+  overflow: hidden;
+}
+
+.registered-vols-name {
+  justify-content: flex-start;
+}
+
+.registered-vols-email {
+  justify-content: flex-start;
+}
+
+.registered-vols-more-info {
+  flex-grow: 1;
+  justify-content: flex-end;
+}
+
+/* More Info Button Styling */
+  
+.more-info-button {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 50%;
+  height: 100%;
+  z-index: 1300;
+  overflow-y: auto;
+}
+
+/* User Profile Styling */
+
+.user-profile-container {
+  overflow: auto;
+  max-height: 76vh;
+  position: absolute;
+  width: 100%;
+  max-width: 36rem;
+  margin-top: 5.25rem;
+  margin-bottom: 1rem;
+  margin-left: 1.5rem;
+  padding: 3rem;
+  background-color: #459863;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Paper formatting */
+.user-profile-form {
+  padding: 2rem;
+  margin-bottom: 3rem;
+}
+
+/* Button container for cancel, save, edit */
+.user-profile-buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  margin-top: 3rem;
+}
+
+/* Database styling */
+
+.database-search {
+  margin-left: 0.5rem;
+  margin-right: 1rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.database-parent {
+  margin-left: 0.5rem;
+  margin-top: 1rem;
+  width: 50%;
+}
+
+.database-buttons {
+  display: flex;
+  align-items: center;
+  margin-right: 1rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  margin-left: 1rem;
+  gap: 1rem;
+}
 
 .database-container {
   overflow: auto;
@@ -57,12 +214,11 @@
   margin-left: 1.5rem;
   background-color: #d5c7bc;
 }
-
 .database-list-item {
   color: #000000;
   background-color: #f5efeb;
   flex: 1;
-  max-width: 46.4%;
+  max-width: 50.25%;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -96,46 +252,4 @@
 .database-more-info {
   flex-grow: 1;
   justify-content: flex-end;
-}
-
-/* More Info Button Styling */
-
-.more-info-button {
-  position: fixed;
-  top: 0;
-  right: 0;
-  width: 50%;
-  height: 100%;
-  z-index: 1300;
-  overflow-y: auto;
-}
-
-/* User Profile Styling */
-
-.user-profile-container {
-  overflow: auto;
-  max-height: 76vh;
-  position: absolute;
-  width: 100%;
-  max-width: 38rem;
-  margin-top: 5.25rem;
-  margin-bottom: 1rem;
-  padding: 3rem;
-  background-color: #459863;
-  border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-/* Paper formatting */
-.user-profile-form {
-  padding: 2rem;
-  margin-bottom: 3rem;
-}
-
-/* Button container for cancel, save, edit */
-.user-profile-buttons {
-  display: flex;
-  justify-content: flex-end;
-  gap: 1rem;
-  margin-top: 3rem;
 }
