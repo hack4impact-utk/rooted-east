@@ -11,6 +11,15 @@
   margin-top: 1rem;
   margin-bottom: 1rem;
 }
+/* Manage Event Styling */
+
+.manage-event-search {
+  margin-left: 0.5rem;
+  align-items: center;
+  margin-right: 1rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
 
 .database-parent {
   margin-left: 0.5rem;
@@ -29,9 +38,57 @@
   gap: 1rem;
 }
 
+.manage-event-title {
+  background-color: #324033;
+  color: #d5c7bc;
+  padding: 1rem;
+  margin-top: 1rem;
+  margin-bottom: 0.5rem;
+  border-radius: 0.5rem;
+  margin-left: 0.5rem;
+  width: 43.8rem;
+  text-align: center;
+}
+
+.manage-event-text {
+  color: #37403a;
+  text-align: center;
+  align-items: center;
+}
+
+.manage-event-boxes {
+  display: flex;
+  gap: 10rem;
+  align-items: center;
+  margin-left: 1rem;
+  margin-right: 1rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  justify-content: center;
+}
+
+.manage-event-parent {
+  margin-left: 0.5rem;
+  margin-top: 1rem;
+  width: 50%;
+}
+.manage-event-buttons {
+  display: flex;
+  gap: 2rem;
+  margin-left: 0.5rem;
+}
+
+.manage-event-buttons > *,
+.manage-event-buttons > * > button {
+  width: 9.5rem !important;
+  min-width: 9.5rem !important;
+}
+
+/* Search Bar Styling */
+
 .search-volunteers {
   background-color: #f5efeb;
-  width: 41.9rem;
+  width: 45.8rem;
   border-radius: 0.25rem;
 }
 
@@ -63,6 +120,32 @@
   background-color: #f5efeb;
   flex: 1;
   max-width: 46.4%;
+/* Registered Vols Styling */
+
+.registered-vols-list-container {
+  overflow: auto;
+  max-height: 65vh;
+  margin-left: 1rem;
+}
+
+.registered-vols-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.check-in-button-container {
+  width: 8.5rem;
+}
+
+.registered-vols-list-item {
+  color: #02100b;
+  background-color: #459863;
+  opacity: 0.8;
+  margin: 0.5rem;
+  flex: 1;
+  max-width: 39%;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -74,6 +157,12 @@
 .database-names,
 .database-emails,
 .database-more-info {
+  padding: 0.5rem;
+}
+
+.registered-vols-name,
+.registered-vols-email,
+.registered-vols-more-info {
   display: flex;
   align-items: center;
   text-align: left;
@@ -81,6 +170,8 @@
 
 .database-names,
 .database-email {
+.registered-vols-name,
+.registered-vols-email {
   width: 12rem;
   overflow: hidden;
 }
@@ -93,13 +184,20 @@
   justify-content: flex-start;
 }
 
-.database-more-info {
+.registered-vols-name {
+  justify-content: flex-start;
+}
+
+.registered-vols-email {
+  justify-content: flex-start;
+}
+
+.registered-vols-more-info, .database-more-info {
   flex-grow: 1;
   justify-content: flex-end;
 }
 
 /* More Info Button Styling */
-
 .more-info-button {
   position: fixed;
   top: 0;
@@ -120,6 +218,8 @@
   max-width: 38rem;
   margin-top: 5.25rem;
   margin-bottom: 1rem;
+  width: 100%;
+  margin-left: 1.5rem;
   padding: 3rem;
   background-color: #459863;
   border-radius: 8px;

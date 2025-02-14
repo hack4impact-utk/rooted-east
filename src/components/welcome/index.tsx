@@ -1,8 +1,10 @@
 import { Box, Paper, Typography } from '@mui/material';
 import React from '@mui/material';
 import LoginButton from '../LoginButton';
+import { getCurrentUser } from '@/utils/getCurrentUser';
 
-const Welcome = () => {
+const Welcome = async () => {
+  const signedIn = await getCurrentUser();
   return (
     <Box
       sx={{
@@ -18,7 +20,6 @@ const Welcome = () => {
         sx={{
           padding: 4,
           width: '30vw',
-          height: '70vh',
           margin: '3vw',
           display: 'flex',
           flexDirection: 'column',
@@ -39,24 +40,26 @@ const Welcome = () => {
             overflow: 'hidden',
             textOverflow: 'ellipsis',
             marginTop: '10px',
-            marginBottom: '60px',
+            marginBottom: '40px',
           }}
         >
           Welcome
         </Typography>
-        <Typography variant="h5" sx={{ marginBottom: 1 }}>
+        <Typography variant="h5" align="center" sx={{ marginBottom: 1 }}>
           This is the Rooted East Participant Management System
         </Typography>
         <hr style={{ width: '100%', borderColor: '#D5C7BC' }} />
-        <Typography variant="h5" sx={{ marginBottom: 1 }}>
-          Log In to register for events or edit your profile information
+        {signedIn ? (
+          <Typography
+            variant="h5"
+            align="center"
+            sx={{ marginBottom: 1, marginTop: 1 }}
+          >
+            Hello {signedIn.firstName}, nice of you to join us.
+          </Typography>
+        ) : (
           <LoginButton></LoginButton>
-        </Typography>
-        <hr style={{ width: '100%', borderColor: '#D5C7BC' }} />
-        <Typography variant="h5" sx={{ marginBottom: 1 }}>
-          If you are not in our database contact one of our administrators to
-          get connected
-        </Typography>
+        )}
         <hr style={{ width: '100%', borderColor: '#D5C7BC' }} />
       </Paper>
     </Box>
