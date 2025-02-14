@@ -144,20 +144,30 @@ function NavBar() {
             Rooted East
           </Typography>
           {/* Rooted East title for md screens */}
-          <Button href="/#home" sx={{ padding: 0, minWidth: 'auto' }}>
-            <Image
-              src={RELogo}
-              alt="Rooted East Logo"
-              width={300}
-              height={300}
-              style={{
-                cursor: 'pointer',
-                objectFit: 'contain',
-                maxHeight: '64px',
-                width: 'auto',
+          <Box sx={{ position: 'fixed', height: '64px', overflow: 'visible' }}>
+            <Button
+              href="/#home"
+              sx={{
+                padding: 0,
+                minWidth: 'auto',
+                position: 'absolute',
+                top: -5,
+                left: -40,
               }}
-            />
-          </Button>
+            >
+              <Image
+                src={RELogo}
+                alt="Rooted East Logo"
+                width={100}
+                height={70}
+                style={{
+                  cursor: 'pointer',
+                  objectFit: 'contain',
+                  width: 'auto',
+                }}
+              />
+            </Button>
+          </Box>
 
           {/* Nav Buttons for md screens */}
           <Box sx={{ display: { xs: 'none', md: 'flex' }, ml: 'auto', mr: 3 }}>
