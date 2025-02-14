@@ -29,9 +29,13 @@ const overlayStyles: React.CSSProperties = {
 
 interface MoreInfoButtonProps {
   event: Event;
+  managerName: string;
 }
 
-export default function MoreInfoButton({ event }: MoreInfoButtonProps) {
+export default function MoreInfoButton({
+  event,
+  managerName,
+}: MoreInfoButtonProps) {
   const [showDetails, setShowDetails] = useState(false);
 
   const handleToggleDetails = () => {
@@ -52,7 +56,7 @@ export default function MoreInfoButton({ event }: MoreInfoButtonProps) {
             <p>Start Time: {event.startTime.toLocaleTimeString()}</p>
             <p>End Time: {event.endTime.toLocaleTimeString()}</p>
             <p>Location: {event.location}</p>
-            <p>Event Manager: {event.manager}</p>
+            <p>Event Manager: {managerName}</p>
             <p>Details: {event.description}</p>
             <p>Volunteers Signed Up: {event.volsSignUp}</p>
 

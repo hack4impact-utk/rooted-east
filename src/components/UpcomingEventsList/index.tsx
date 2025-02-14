@@ -10,6 +10,7 @@ import {
 import SignUpButton from '../SignUpButton';
 import ManageEventButton from '../ManageEventPage';
 import { EventVolunteerEntity } from '@/types/dataModel/eventVolunteer';
+import { getVolunteer } from '@/server/actions/Volunteer';
 
 interface EventObjectList {
   events: EventEntity[];
@@ -41,6 +42,8 @@ export default function UpcomingEventsList(props: EventObjectList) {
               return;
             }
           }
+          const manager = await getVolunteer(event.manager);
+          const managerName = manager?.firstName + ' ' + manager?.lastName;
           return (
             <ListItem
               key={index}
@@ -82,7 +85,7 @@ export default function UpcomingEventsList(props: EventObjectList) {
               )}
 
               <ManageEventButton event={event._id.toString()} />
-              <MoreInfoButton event={event} />
+              <MoreInfoButton event={event} managerName={managerName} />
             </ListItem>
           );
         })}
