@@ -10,16 +10,8 @@ function AddVolunteerButton() {
   const handleClose = () => setOpen(false);
 
   return (
-    <Box sx={{ display: 'flex', padding: 0 }}>
-      <Button
-        variant="contained"
-        style={{
-          backgroundColor: '#459863',
-          color: 'white',
-          marginLeft: '10px',
-        }}
-        onClick={handleClick}
-      >
+    <Box className="add-volunteer-container">
+      <Button className="add-volunteer-button" onClick={handleClick}>
         ADD VOLUNTEER
       </Button>
 

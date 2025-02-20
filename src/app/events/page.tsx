@@ -4,7 +4,7 @@ import { getUpcomingEvents, getVolunteerEvents } from '@/server/actions/Event';
 import { Box } from '@mui/material';
 import NavBar from '@/components/NavBar';
 import dayjs from 'dayjs';
-import '@/styles.css';
+import '@/app/global.styles.css';
 import { getCurrentUser } from '@/utils/getCurrentUser';
 import CMError, { CMErrorType } from '@/utils/cmerror';
 import AddEventButton from '@/components/AddEventButton';
@@ -60,48 +60,17 @@ export default async function Events() {
   return (
     <>
       <NavBar />
-      <Box bgcolor={'#D5C7BC'} padding={4}>
-        <Box
-          sx={{
-            display: 'flex',
-            flexDirection: { xs: 'column', md: 'row' },
-            justifyContent: 'space-between',
-          }}
-        >
-          <Box
-            sx={{
-              flexGrow: 1,
-              marginLeft: { xs: 1, md: 2 },
-              marginRight: { xs: 1, md: 2 },
-              borderRadius: '8px',
-              backgroundColor: 'lightgrey',
-              padding: '20px',
-              marginBottom: { xs: 1, md: 2 },
-            }}
-          >
+      <Box className="events-container">
+        <Box className="events-flex-container">
+          <Box className="your-events-container">
             <h3>Your Events</h3>
             <VolunteerEventsList
               events={volunteerEvents}
               volunteerID={userId}
             />
           </Box>
-          <Box
-            sx={{
-              flexGrow: 2,
-              marginLeft: { xs: 1, md: 2 },
-              marginRight: { xs: 1, md: 2 },
-              borderRadius: '8px',
-              backgroundColor: 'lightgrey',
-              padding: '20px',
-            }}
-          >
-            <Box
-              sx={{
-                display: 'flex',
-                justifyContent: 'space-between',
-                alignItems: 'center',
-              }}
-            >
+          <Box className="upcoming-events-container">
+            <Box className="upcoming-events-header">
               <h3>Upcoming Events</h3>
               <AddEventButton managers={formattedManagers} />
             </Box>

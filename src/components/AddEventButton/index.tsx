@@ -14,17 +14,8 @@ function AddEventButton({ managers }: AddEventButtonProps) {
   const handleClose = () => setOpen(false);
 
   return (
-    <Box sx={{ display: 'flex', padding: 0 }}>
-      <Button
-        variant="contained"
-        style={{
-          backgroundColor: '#459863',
-          color: 'white',
-          width: '9.5rem',
-          marginRight: '.5rem',
-        }}
-        onClick={handleClick}
-      >
+    <Box className="add-event-container">
+      <Button className="add-event-button" onClick={handleClick}>
         ADD EVENT
       </Button>
 
