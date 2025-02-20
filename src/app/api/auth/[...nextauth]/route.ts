@@ -31,10 +31,11 @@ export const authOptions: AuthOptions = {
           // Find the user by email and get their role
           const user = await usersCollection.findOne(
             { email: token.email },
-            { projection: { role: 1 } } // Only fetch the role field
+            { projection: { role: 1, profileFinished: 1 } } // Only fetch the role field
           );
 
           token.role = user?.role || 'Volunteer'; // Default role is "user"
+          token.profileFinished = user?.profileFinished || false;
         } catch (error) {
           console.error('Error fetching user role from MongoDB:', error);
         }
@@ -45,6 +46,7 @@ export const authOptions: AuthOptions = {
     async session({ session, token }) {
       if (session.user) {
         session.user.role = token.role; // Attach role to session
+        session.user.profileFinished = token.profileFinished;
       }
       return session;
     },
