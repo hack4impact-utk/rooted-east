@@ -25,7 +25,7 @@ export default function UpcomingEventsList(props: EventObjectList) {
         overflow: 'auto',
         maxHeight: '65vh',
         borderRadius: '8px',
-        padding: '15px',
+        padding: '0px',
       }}
     >
       <List>
