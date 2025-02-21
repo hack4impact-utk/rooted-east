@@ -25,7 +25,7 @@ const zEventEntity = zEvent.extend({
   _id: zObjectId,
 });
 
-export const zCreateEventRequest = zEvent;
+export const zCreateEventRequest = zEvent.omit({ volsSignUp: true });
 
 export const zUpdateEventRequest = zEvent.partial();
 

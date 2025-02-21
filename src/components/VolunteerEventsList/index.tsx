@@ -23,11 +23,11 @@ export default function VolunteerEventsList(props: EventObjectList) {
   return (
     <Box
       sx={{
-        bgcolor: '#324033',
+        bgcolor: '',
         overflow: 'auto',
         maxHeight: '65vh',
         borderRadius: '8px',
-        padding: '15px',
+        padding: '0px',
       }}
     >
       <List>
@@ -49,12 +49,14 @@ export default function VolunteerEventsList(props: EventObjectList) {
               key={index}
               sx={{
                 bgcolor: '#f5efeb',
-                maxWidth: '90%',
+                padding: '10px',
+                maxWidth: '95%',
                 margin: 2,
                 display: 'flex',
                 justifyContent: 'space-between',
                 alignItems: 'center',
                 borderRadius: '4px',
+                boxShadow: '0px 6px 6px rgb(14, 120, 21)', // boxshadow
                 // whiteSpace: 'nowrap',
               }}
             >
