@@ -21,7 +21,7 @@ export default function UpcomingEventsList(props: EventObjectList) {
   return (
     <Box
       sx={{
-        bgcolor: '#324033',
+        bgcolor: '',
         overflow: 'auto',
         maxHeight: '65vh',
         borderRadius: '8px',
@@ -49,7 +49,7 @@ export default function UpcomingEventsList(props: EventObjectList) {
               key={index}
               sx={{
                 bgcolor: '#f5efeb',
-                maxWidth: '90%',
+                maxWidth: '95%',
                 margin: 2,
                 display: 'flex',
                 justifyContent: 'space-between',
@@ -58,6 +58,7 @@ export default function UpcomingEventsList(props: EventObjectList) {
                 whiteSpace: 'nowrap',
                 padding: '10px',
                 boxSizing: 'border-box',
+                boxShadow: '0px 6px 6px rgb(14, 120, 21)', // boxshadow
               }}
             >
               <Box
