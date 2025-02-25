@@ -47,11 +47,7 @@ const Welcome = () => {
         <Typography variant="h5" sx={{ marginBottom: 1 }}>
           This is the Rooted East Participant Management System
         </Typography>
-        <hr style={{ width: '100%', borderColor: '#D5C7BC' }} />
-        <Typography variant="h5" sx={{ marginBottom: 1 }}>
-          Log In to register for events or edit your profile information
-          <LoginButton></LoginButton>
-        </Typography>
+        <LoginButton></LoginButton>
         <hr style={{ width: '100%', borderColor: '#D5C7BC' }} />
         <Typography variant="h5" sx={{ marginBottom: 1 }}>
           If you are not in our database contact one of our administrators to
