@@ -16,6 +16,7 @@ import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import { useState } from 'react';
+import '../../app/global.styles.css';
 
 const pages = [
   ['Home', '/'],
@@ -26,29 +27,6 @@ const settings = [
   ['Profile', '/userprofile'],
   ['Logout', '/api/auth/signout'],
 ];
-
-const modalStyles: React.CSSProperties = {
-  position: 'fixed',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
-  backgroundColor: 'white',
-  padding: '20px',
-  boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
-  width: 400,
-  zIndex: 1000,
-  color: 'black',
-};
-
-const overlayStyles: React.CSSProperties = {
-  position: 'fixed',
-  top: 0,
-  left: 0,
-  right: 0,
-  bottom: 0,
-  backgroundColor: 'rgba(0, 0, 0, 0.5)',
-  zIndex: 1000,
-};
 
 function NavBar() {
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
@@ -79,16 +57,13 @@ function NavBar() {
   };
 
   return (
-    <AppBar position="sticky" sx={{ bgcolor: '#459863' }}>
+    <AppBar position="sticky" className="navbar">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           {/* Hamburger menu for xs screens */}
-          <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
+          <Box className="nav-hamburger">
             <IconButton
               size="large"
-              aria-label="account of current user"
-              aria-controls="menu-appbar"
-              aria-haspopup="true"
               onClick={handleOpenNavMenu}
               color="inherit"
             >
@@ -97,25 +72,16 @@ function NavBar() {
             <Menu
               id="menu-appbar"
               anchorEl={anchorElNav}
-              anchorOrigin={{
-                vertical: 'bottom',
-                horizontal: 'left',
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: 'top',
-                horizontal: 'left',
-              }}
               open={Boolean(anchorElNav)}
               onClose={handleCloseNavMenu}
-              sx={{ display: { xs: 'block', md: 'none' } }}
+              className="nav-menu"
             >
               {pages.map((page, index) => (
                 <MenuItem key={index}>
                   <Typography
                     component="a"
                     href={page[1]}
-                    sx={{ textAlign: 'center' }}
+                    className="nav-menu-item"
                   >
                     {page[0]}
                   </Typography>
@@ -123,125 +89,73 @@ function NavBar() {
               ))}
             </Menu>
           </Box>
-          {/* Rooted East title for xs screens */}
-          <Typography
-            variant="h5"
-            noWrap
-            component="a"
-            href="/#home"
-            sx={{
-              mr: 2,
-              display: { xs: 'flex', md: 'none' },
-              flexGrow: 1,
-              fontFamily: 'monospace',
-              fontWeight: 700,
-              letterSpacing: '.3rem',
-              color: '#D5C7BC',
-              textDecoration: 'none',
-            }}
-          >
+
+          {/* Rooted East title */}
+          {/* <Typography variant="h5" component="a" href="/#home" className="navbar-title-xs">
             Rooted East
-          </Typography>
-          {/* Rooted East title for md screens */}
-          <Box sx={{ position: 'fixed', height: '64px', overflow: 'visible' }}>
-            <Button
-              href="/#home"
-              sx={{
-                padding: 0,
-                minWidth: 'auto',
-                position: 'absolute',
-                top: -5,
-                left: -40,
-              }}
-            >
+          </Typography> */}
+          <Box className="logo-container">
+            <Button href="/#home" className="logo-button">
               <Image
                 src={RELogo}
                 alt="Rooted East Logo"
                 width={100}
                 height={70}
-                style={{
-                  cursor: 'pointer',
-                  objectFit: 'contain',
-                  width: 'auto',
-                }}
+                className="logo-image"
               />
             </Button>
           </Box>
 
-          {/* Nav Buttons for md screens */}
-          <Box sx={{ display: { xs: 'none', md: 'flex' }, ml: 'auto', mr: 3 }}>
+          {/* Navigation Buttons */}
+          <Box className="nav-buttons">
             {pages.map((page, index) => (
-              <Button
-                key={index}
-                href={page[1]}
-                sx={{ my: 2, color: '#D5C7BC', display: 'block', ml: 3 }}
-              >
+              <Button key={index} href={page[1]} className="nav-button">
                 {page[0]}
               </Button>
             ))}
-            <Button
-              onClick={toggleHelpModal}
-              sx={{ my: 2, color: '#D5C7BC', display: 'block', ml: 3 }}
-            >
+            <Button onClick={toggleHelpModal} className="nav-button">
               Help
             </Button>
           </Box>
+
+          {/* Help Modal */}
           {isModalOpen && (
             <div>
-              {/* Overlay */}
-              <div style={overlayStyles} onClick={toggleHelpModal} />
-              {/* Modal Content */}
-              <div style={modalStyles}>
-                <IconButton
-                  onClick={toggleHelpModal}
-                  sx={{
-                    position: 'absolute',
-                    top: 8,
-                    right: 8,
-                    color: 'black',
-                  }}
-                  aria-label="close"
-                >
+              <div className="modal-overlay" onClick={toggleHelpModal} />
+              <div className="modal">
+                <IconButton onClick={toggleHelpModal} className="modal-close">
                   ✕
                 </IconButton>
-                <Typography id="help-modal-title" variant="h6" component="h2">
+                <Typography variant="h6" className="modal-title">
                   Need Help?
                 </Typography>
-                <Typography id="help-modal-description" sx={{ mt: 2 }}>
+                <Typography className="modal-text">
                   TOO BAD!!!!!!!!!!
                 </Typography>
               </div>
             </div>
           )}
-          {/* Profile menu for all screens */}
+
+          {/* Profile menu */}
           <Box>
             <Tooltip title="Open settings">
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+              <IconButton onClick={handleOpenUserMenu} className="profile-icon">
                 <Avatar src="/static/images/avatar/2.jpg" />
               </IconButton>
             </Tooltip>
             <Menu
-              sx={{ mt: '45px' }}
               id="menu-appbar"
               anchorEl={anchorElUser}
-              anchorOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-              }}
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
+              className="profile-menu"
             >
               {settings.map((setting, index) => (
                 <MenuItem key={index}>
                   <Typography
                     component="a"
                     href={setting[1]}
-                    sx={{ textAlign: 'center' }}
+                    className="profile-menu-item"
                   >
                     {setting[0]}
                   </Typography>
@@ -254,4 +168,5 @@ function NavBar() {
     </AppBar>
   );
 }
+
 export default NavBar;
