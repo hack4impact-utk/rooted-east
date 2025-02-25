@@ -312,81 +312,179 @@
 /* Navbar container */
 .navbar {
     background-color: #459863;
-  }
-  
-  /* Hamburger menu for small screens */
-  .nav-hamburger {
-    flex-grow: 1;
-    display: flex;
-  }
-  
-  /* Navbar title for small screens */
-  .navbar-title-xs {
-    display: flex;
-    flex-grow: 1;
-    font-family: monospace;
-    font-weight: 700;
-    letter-spacing: 0.3rem;
-    color: #D5C7BC;
-    text-decoration: none;
-    justify-content: center;
-  }
-  
-  /* Logo positioning */
+}
+
+/* Hamburger menu for small screens */
+.nav-hamburger {
+  flex-grow: 1;
+  display: flex;
+}
+
+/* Navbar title for small screens */
+.navbar-title-xs {
+  display: flex;
+  flex-grow: 1;
+  font-family: monospace;
+  font-weight: 700;
+  letter-spacing: 0.3rem;
+  color: #D5C7BC;
+  text-decoration: none;
+  justify-content: center;
+}
+
+/* Logo positioning */
+.logo-container {
+  position: fixed;
+  height: 64px;
+  overflow: visible;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+/* Center logo on small screens, left-align on larger screens */
+.logo-image {
+  cursor: pointer;
+  object-fit: contain;
+  width: auto;
+}
+
+@media (min-width: 900px) {
   .logo-container {
-    position: fixed;
-    height: 64px;
-    overflow: visible;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
+    justify-content: flex-start;
+    left: 20px;
   }
-  
-  /* Center logo on small screens, left-align on larger screens */
-  .logo-image {
-    cursor: pointer;
-    object-fit: contain;
-    width: auto;
-  }
-  
-  @media (min-width: 900px) {
-    .logo-container {
-      justify-content: flex-start;
-      left: 20px;
-    }
-    .nav-hamburger {
-        display: none;
-      }
-    .nav-buttons {
-      display: flex;
-    }
-  
-    .nav-button {
-      display: flex; /* Ensure buttons are visible */
-      margin: 0 1rem;
-      color: #D5C7BC;
-    }
-  }
-  
-  @media (max-width: 900px) {
-    .nav-buttons {
+  .nav-hamburger {
       display: none;
     }
-  }
-  
-  /* Navigation buttons */
   .nav-buttons {
-    margin-left: auto;
-    margin-right: 3rem;
+    display: flex;
   }
-  
-  /* Profile menu */
-  .profile-icon {
-    padding: 0;
+
+  .nav-button {
+    display: flex; /* Ensure buttons are visible */
+    margin: 0 1rem;
+    color: #D5C7BC;
   }
-  
-  .profile-menu-item {
-    text-align: center;
+}
+
+@media (max-width: 900px) {
+  .nav-buttons {
+    display: none;
   }
-  
+}
+
+/* Navigation buttons */
+.nav-buttons {
+  margin-left: auto;
+  margin-right: 3rem;
+}
+
+/* Profile menu */
+.profile-icon {
+  padding: 0;
+}
+
+.profile-menu-item {
+  text-align: center;
+}
+
+
+/* Volunteer Events List */
+
+.vol-events-list-box {
+  overflow: auto;
+  max-height: 65vh;
+  border-radius: 8px;
+  padding: 0;
+}
+
+.vol-events-list-item {
+  background-color: #f5efeb;
+  padding: 10px;
+  max-width: 95%;
+  margin: 2%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 4px;
+  box-shadow: 0px 6px 6px rgb(14, 120, 21);
+}
+
+.vol-events-list-item-box {
+  flex-grow: 1;
+  margin-right: 1vh;
+}
+
+/* Welcome */
+
+.welcome-box {
+  flex: 1;
+  display: flex;
+  flex-grow: 0;
+  flex-shrink: 0;
+  flex-basis: 30vw;
+}
+
+.welcome-content-box {
+  padding: 32px;
+  width: 30vw;
+  height: 70vh;
+  margin: 3vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #324033;
+  border-radius: 8px;
+  color:#D5C7BC;
+  max-width: 450px;
+  justify-content: center;
+}
+
+.welcome-h4 {
+  margin: 0;
+  font-family: "Roboto","Helvetica","Arial",sans-serif;
+  font-weight: 400;
+  font-size: 2.125rem;
+  line-height: 1.235;
+  letter-spacing: 0.00735em;
+  align-items: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-top: 1vh;
+  margin-bottom: 5vh;
+}
+
+.welcome-h5 {
+  font-family: "Roboto","Helvetica","Arial",sans-serif;
+  font-weight: 400;
+  font-size: 1.5rem;
+  line-height: 1.334;
+  letter-spacing: 0em;
+  margin: 0;
+  margin-bottom: 8px;
+  margin-top: 8px;
+}
+
+.welcome-hr {
+  width: 100%;
+  border-color: #D5C7BC;
+}
+
+/* Login Button */
+
+.login-button-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 1vh;
+}
+
+.login-button {
+  background-color: #459863;
+  padding: .8vh 3vh;
+  color: white;
+  white-space: nowrap;
+  overflow: hidden;
+}
