@@ -17,7 +17,15 @@ const Home = async () => {
   return (
     <div className="admin-volunteers-page">
       <NavBar />
-      <Box className="home-mui-box">
+      <Box
+        className="home-mui-box"
+        sx={{
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          justifyContent: 'center',
+        }}
+      >
         <Welcome />
         <AdminVolunteers volunteers={volunteers} />
       </Box>
