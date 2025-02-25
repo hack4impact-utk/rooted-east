@@ -21,7 +21,10 @@ export const authOptions: AuthOptions = {
     error: '/auth/error',
   },
   callbacks: {
-    async jwt({ token, account }) {
+    async jwt({ token, account, trigger, session }) {
+      if (trigger === 'update') {
+        token.profileFinished = session.profileFinished;
+      }
       if (account) {
         try {
           await client.connect();
