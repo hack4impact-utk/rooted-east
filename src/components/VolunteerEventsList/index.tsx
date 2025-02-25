@@ -21,15 +21,7 @@ export default function VolunteerEventsList(props: EventObjectList) {
   };
 
   return (
-    <Box
-      sx={{
-        bgcolor: '',
-        overflow: 'auto',
-        maxHeight: '65vh',
-        borderRadius: '8px',
-        padding: '0px',
-      }}
-    >
+    <Box className="vol-events-list-box">
       <List>
         {props.events.map(async (event: EventEntity, index) => {
           const isSignedUp = await checkIfEventVolunteerExists(
@@ -45,29 +37,14 @@ export default function VolunteerEventsList(props: EventObjectList) {
             }
           }
           return (
-            <ListItem
-              key={index}
-              sx={{
-                bgcolor: '#f5efeb',
-                padding: '10px',
-                maxWidth: '95%',
-                margin: 2,
-                display: 'flex',
-                justifyContent: 'space-between',
-                alignItems: 'center',
-                borderRadius: '4px',
-                boxShadow: '0px 6px 6px rgb(14, 120, 21)', // boxshadow
-                // whiteSpace: 'nowrap',
-              }}
-            >
-              <Box sx={{ flexGrow: 1, marginRight: 1 }}>{event.title}</Box>
+            <ListItem className="vol-events-list-item" key={index}>
+              <Box className="vol-events-list-item-box">{event.title}</Box>
               {isFutureEvent(event.day) && eventVol && (
                 <CancelSignUpButton
                   event={event}
                   eventVolId={eventVol._id.toString()}
                 ></CancelSignUpButton>
               )}
-
               <ManageEventButton event={event._id.toString()} />
             </ListItem>
           );
