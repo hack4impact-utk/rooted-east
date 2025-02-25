@@ -16,6 +16,7 @@ import {
   Alert,
 } from '@mui/material';
 import { VolunteerEntity } from '@/types/dataModel/volunteer';
+import { useSession } from 'next-auth/react';
 
 interface VolunteerUserProfileProps {
   currentUser: VolunteerEntity;
@@ -26,6 +27,8 @@ export default function UserProfilePage({
   currentUser,
   person,
 }: VolunteerUserProfileProps) {
+  const { update: sessionUpdate } = useSession();
+
   const [editable, setEditable] = useState(false);
 
   const [snackbarOpen, setSnackbarOpen] = useState(false);
@@ -57,6 +60,7 @@ export default function UserProfilePage({
     setEditable(false);
   };
   const handleSave = async () => {
+    setFormData((prev) => ({ ...prev, profileFinished: true }));
     setEditable(false);
 
     const res = await fetch(`/api/volunteer/${person._id}`, {
@@ -69,6 +73,9 @@ export default function UserProfilePage({
 
     if (res.ok) {
       setSnackbarMessage('Profile saved successfully!');
+      sessionUpdate({
+        profileFinished: true,
+      });
     } else {
       setSnackbarMessage('Failed to save profile. Please try again.');
     }
