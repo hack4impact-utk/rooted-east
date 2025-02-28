@@ -491,3 +491,48 @@
   white-space: nowrap;
   overflow: hidden;
 }
+
+/* Delete event button */
+.delete-event-button {
+  background-color: #459863 !important;
+  color: white !important;
+}
+
+
+.dialog-actions .cancel-delete-button {
+  color: #3f51b5; 
+}
+
+.dialog-actions .delete-event-button {
+  color: #f50057; 
+}
+
+
+/* Edit Event Button */
+.edit-event-button {
+  background-color: #459863 !important;
+  color: white !important;
+  width: 9.5rem;
+  margin-right: 0.5rem;
+}
+
+/* Edit Event Form */
+.edit-event-form {
+  padding-top: 1rem; 
+}
+
+.edit-event-form .text-field {
+  margin-top: 1rem; 
+}
+
+.edit-event-form .form-control {
+  margin-top: 1rem;
+}
+
+/* EventList */
+.event-list {
+  width: 100%;
+  max-width: 22.5rem; 
+  background-color: #23231a;
+}
+
