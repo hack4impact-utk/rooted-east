@@ -334,13 +334,11 @@
 
 /* Logo positioning */
 .logo-container {
-  position: fixed;
-  height: 64px;
+  height: 4rem;
   overflow: visible;
   display: flex;
   align-items: center;
-  justify-content: center;
-  width: 100%;
+  justify-content: flex-start;
 }
 
 /* Center logo on small screens, left-align on larger screens */
@@ -353,7 +351,6 @@
 @media (min-width: 900px) {
   .logo-container {
     justify-content: flex-start;
-    left: 20px;
   }
   .nav-hamburger {
       display: none;
