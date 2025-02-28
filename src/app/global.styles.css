@@ -1,3 +1,9 @@
+:root {
+  --main-bgc: #d5c7bc;
+  --box-bgc: #f5efeb;
+}
+
+
 .home-mui-box {
   flex: 1;
   display: flex;
@@ -15,7 +21,7 @@
 
 .manage-event-title {
   background-color: #324033;
-  color: #d5c7bc;
+  color: var(--main-bgc);
   padding: 1rem;
   margin-top: 1rem;
   margin-bottom: 0.5rem;
@@ -61,14 +67,14 @@
 /* Search Bar Styling */
 
 .search-volunteers {
-  background-color: #f5efeb;
+  background-color: var(--box-bgc);
   width: 45.3rem;
   border-radius: 0.25rem;
 }
 
 .search-volunteers .MuiOutlinedInput-root {
   border-radius: 0.25rem;
-  border-color: #f5efeb;
+  border-color: var(--box-bgc);
 }
 
 .search-volunteers .MuiOutlinedInput-root:hover fieldset {
@@ -212,11 +218,11 @@
   overflow: auto;
   max-height: 74vh;
   margin-left: 1.5rem;
-  background-color: #d5c7bc;
+  background-color: var(--main-bgc);
 }
 .database-list-item {
   color: #000000;
-  background-color: #f5efeb;
+  background-color: var(--box-bgc);
   flex: 1;
   max-width: 50.25%;
   display: flex;
@@ -278,7 +284,7 @@
 }
 
 .events-container {
-  background-color: #D5C7BC;
+  background-color: var(--main-bgc);
   padding: 16px;
 }
 
@@ -327,7 +333,7 @@
   font-family: monospace;
   font-weight: 700;
   letter-spacing: 0.3rem;
-  color: #D5C7BC;
+  color: var(--main-bgc);
   text-decoration: none;
   justify-content: center;
 }
@@ -365,7 +371,7 @@
   .nav-button {
     display: flex; /* Ensure buttons are visible */
     margin: 0 1rem;
-    color: #D5C7BC;
+    color: var(--main-bgc);
   }
 }
 
@@ -401,7 +407,7 @@
 }
 
 .vol-events-list-item {
-  background-color: #f5efeb;
+  background-color: var(--box-bgc);
   padding: 10px;
   max-width: 95%;
   margin: 2%;
@@ -437,7 +443,7 @@
   align-items: center;
   background-color: #324033;
   border-radius: 8px;
-  color:#D5C7BC;
+  color:var(--main-bgc);
   max-width: 450px;
   justify-content: center;
 }
@@ -470,7 +476,7 @@
 
 .welcome-hr {
   width: 100%;
-  border-color: #D5C7BC;
+  border-color: var(--main-bgc);
 }
 
 /* Login Button */
