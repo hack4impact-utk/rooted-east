@@ -26,7 +26,7 @@ export default function EditEventForm({
   managers,
 }: EditEventFormProps) {
   return (
-    <Box sx={{ pt: 2 }}>
+    <Box className="edit-event-form">
       <TextField
         label="Title"
         value={eventData.title || ''}
@@ -38,7 +38,7 @@ export default function EditEventForm({
         value={eventData.location || ''}
         onChange={(e) => onChange({ ...eventData, location: e.target.value })}
         fullWidth
-        sx={{ mt: 2 }}
+        className="text-field"
       />
       <LocalizationProvider dateAdapter={AdapterDayjs}>
         <DemoContainer components={['DatePicker']}>
@@ -88,7 +88,7 @@ export default function EditEventForm({
           onChange({ ...eventData, volsNeeded: Number(e.target.value) })
         }
         fullWidth
-        sx={{ mt: 2 }}
+        className="text-field"
       />
       <TextField
         label="Description"
@@ -97,9 +97,9 @@ export default function EditEventForm({
           onChange({ ...eventData, description: e.target.value })
         }
         fullWidth
-        sx={{ mt: 2 }}
+        className="text-field"
       />
-      <Box sx={{ mt: 2 }}>
+      <Box className="form-control">
         <FormControl fullWidth variant="outlined">
           <InputLabel>Manager</InputLabel>
           <Select

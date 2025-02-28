@@ -22,12 +22,7 @@ export default function EditEventButton({
     <>
       <Button
         variant="contained"
-        style={{
-          backgroundColor: '#459863',
-          color: 'white',
-          width: '9.5rem',
-          marginRight: '.5rem',
-        }}
+        className="edit-event-button"
         onClick={handleClick}
       >
         Edit Event

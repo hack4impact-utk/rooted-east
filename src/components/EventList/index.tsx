@@ -12,7 +12,7 @@ interface EventObjectList {
 export default function EventList({ events }: EventObjectList) {
   return (
     <div>
-      <List sx={{ width: '100%', maxWidth: 360, bgcolor: '#23231A' }}>
+      <List className="event-list">
         {events.map(async (event: EventEntity, index) => {
           const manager = await getVolunteer(event.manager);
           const managerName = manager?.firstName + ' ' + manager?.lastName;
