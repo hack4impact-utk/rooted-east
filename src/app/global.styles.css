@@ -19,6 +19,15 @@
   margin-bottom: 1rem;
 }
 
+.manage-event-parent {
+  margin-left: 0.5rem;
+  margin-top: 1rem;
+  width: 50%;
+
+  margin: 2vw 0;
+  width: 100vw;
+}
+
 .manage-event-title {
   background-color: #324033;
   color: var(--main-bgc);
@@ -27,9 +36,22 @@
   margin-bottom: 0.5rem;
   border-radius: 0.5rem;
   margin-left: 0.5rem;
-  width: 43.8rem;
+  width: 96vw;
+
+  font-family: "Roboto","Helvetica","Arial",sans-serif;
+  font-weight: 400;
+  font-size: 2.125rem;
+  line-height: 1.235;
+  letter-spacing: 0.00735em;
+
   text-align: center;
+  padding: 0;
+  margin: auto;
+  @media (max-width: 400px) {
+    font-size: 1.3rem;
+  }
 }
+
 
 .manage-event-text {
   color: #37403a;
@@ -47,11 +69,6 @@
   justify-content: center;
 }
 
-.manage-event-parent {
-  margin-left: 0.5rem;
-  margin-top: 1rem;
-  width: 50%;
-}
 .manage-event-buttons {
   display: flex;
   gap: 1.8rem;

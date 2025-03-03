@@ -47,9 +47,7 @@ export default async function ManageEvent({
 
       {/* Title and Date Section */}
       <Box className="manage-event-parent">
-        <Box className="manage-event-title">
-          <Typography variant="h4">{event?.title}</Typography>
-        </Box>
+        <Box className="manage-event-title">{event?.title}</Box>
         <Box className="manage-event-boxes">
           <Typography variant="subtitle1" className="manage-event-text">
             {event?.day.toLocaleDateString('en-US', {
