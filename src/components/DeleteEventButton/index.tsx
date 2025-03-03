@@ -42,10 +42,7 @@ export default function DeleteEventButton({ eventId }: DeleteEventButtonProps) {
     <>
       <Button
         variant="contained"
-        style={{
-          backgroundColor: '#459863',
-          color: 'white',
-        }}
+        className="delete-event-button"
         onClick={handleClick}
       >
         Delete Event
@@ -59,10 +56,10 @@ export default function DeleteEventButton({ eventId }: DeleteEventButtonProps) {
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose} color="primary">
+          <Button onClick={handleClose} className="cancel-delete-button">
             Cancel
           </Button>
-          <Button onClick={handleDelete} color="secondary">
+          <Button onClick={handleDelete} className="delete-event-button">
             Delete
           </Button>
         </DialogActions>
