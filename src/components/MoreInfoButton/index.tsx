@@ -4,28 +4,7 @@ import { Event } from '@/types/dataModel/event';
 import { Button } from '@mui/material';
 import IconButton from '@mui/material/IconButton';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
-
-const modalStyles: React.CSSProperties = {
-  position: 'fixed',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
-  backgroundColor: 'white',
-  padding: '20px',
-  borderRadius: '8px',
-  boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
-  zIndex: 1000,
-};
-
-const overlayStyles: React.CSSProperties = {
-  position: 'fixed',
-  top: 0,
-  left: 0,
-  right: 0,
-  bottom: 0,
-  backgroundColor: 'rgba(0, 0, 0, 0.5)',
-  zIndex: 1000,
-};
+import '@/app/global.styles.css';
 
 interface MoreInfoButtonProps {
   event: Event;
@@ -49,8 +28,11 @@ export default function MoreInfoButton({
       </IconButton>
       {showDetails && (
         <>
-          <div style={overlayStyles} onClick={handleToggleDetails}></div>
-          <div style={modalStyles}>
+          <div
+            className="more-info-overlay"
+            onClick={handleToggleDetails}
+          ></div>
+          <div className="more-info-modal">
             <h3>{event.title}</h3>
             <p>Date: {event.day.toLocaleDateString()}</p>
             <p>Start Time: {event.startTime.toLocaleTimeString()}</p>
