@@ -36,15 +36,13 @@ export default async function RegisteredVolsList(props: VolObjectList) {
           }
           return (
             <Box key={index} className="registered-vols-item">
-              <Box className="check-in-button-container">
-                <CheckInButton
-                  eventVolId={eventVol._id.toString()}
-                  isCheckedIn={
-                    eventVol.checkInTime !== null &&
-                    eventVol.checkInTime !== undefined
-                  }
-                />
-              </Box>
+              <CheckInButton
+                eventVolId={eventVol._id.toString()}
+                isCheckedIn={
+                  eventVol.checkInTime !== null &&
+                  eventVol.checkInTime !== undefined
+                }
+              />
               <ListItem key={index} className="registered-vols-list-item">
                 <Box className="registered-vols-name">
                   {vol.firstName} {vol.lastName}

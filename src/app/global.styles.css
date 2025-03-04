@@ -127,10 +127,6 @@
   margin-bottom: 1rem;
 }
 
-.check-in-button-container {
-  width: 8.5rem;
-}
-
 .registered-vols-list-item {
   color: #02100b;
   background-color: #459863;
@@ -170,6 +166,20 @@
 .registered-vols-more-info {
   flex-grow: 1;
   justify-content: flex-end;
+}
+
+/* Check In Button Styles */
+.check-in-button-checkbox {
+  border: 0.3rem solid #459863;
+  border-radius: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: #459863;
+  padding: 0.3rem;
+}
+.css-12wnr2w-MuiButtonBase-root-MuiCheckbox-root.Mui-checked {
+  color: #459863;
 }
 
 /* More Info Button Styling */
