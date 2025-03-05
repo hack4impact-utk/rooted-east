@@ -42,7 +42,7 @@ export default function DeleteEventButton({ eventId }: DeleteEventButtonProps) {
     <>
       <Button
         variant="contained"
-        className="delete-event-button"
+        className="manage-event-buttons"
         onClick={handleClick}
       >
         Delete Event
