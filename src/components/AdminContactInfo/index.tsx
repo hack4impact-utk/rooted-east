@@ -17,7 +17,7 @@ const formatPhoneNumber = (phoneNumber: string) => {
   return phoneNumber;
 };
 
-const AdminVolunteers = ({ volunteers }: { volunteers: Volunteer[] }) => {
+const AdminContactInfo = ({ volunteers }: { volunteers: Volunteer[] }) => {
   if (volunteers.length === 0) {
     return <div>No admin volunteers found.</div>;
   }
@@ -87,4 +87,4 @@ const AdminVolunteers = ({ volunteers }: { volunteers: Volunteer[] }) => {
   );
 };
 
-export default AdminVolunteers;
+export default AdminContactInfo;

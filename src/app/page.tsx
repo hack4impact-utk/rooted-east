@@ -1,5 +1,5 @@
 import { getAdminVolunteers } from '@/server/actions/Volunteer';
-import AdminVolunteers from '@/components/AdminContactInfo';
+import AdminContactInfo from '@/components/AdminContactInfo';
 import Welcome from '@/components/welcome';
 import NavBar from '@/components/NavBar';
 import { Box } from '@mui/material';
@@ -19,7 +19,7 @@ const Home = async () => {
       <NavBar />
       <Box className="home-mui-box">
         <Welcome />
-        <AdminVolunteers volunteers={volunteers} />
+        <AdminContactInfo volunteers={volunteers} />
       </Box>
     </div>
   );
