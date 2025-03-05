@@ -7,7 +7,24 @@ export default function LoginButton() {
   const { data: session } = useSession();
 
   if (session) {
-    return null; // If user is logged in, don't show the button
+    // return null; // This displays when user *is* logged in
+    return (
+      <>
+        {/* <hr className="welcome-hr" /> */}
+        <h5 className="welcome-h5">
+          This is the Rooted East Participant Management System.
+        </h5>
+        <hr className="welcome-hr" />
+        <h5 className="welcome-h5">
+          After completing your profile information, you will be able to sign up
+          for events.
+        </h5>
+        <hr className="welcome-hr" />
+        <h5 className="welcome-h5">
+          {'Click the "Help" tab for asistance navigating the page.'}
+        </h5>
+      </>
+    );
   }
   //reroutes user to login page
   const handleLogin = () => {
@@ -18,12 +35,12 @@ export default function LoginButton() {
     <>
       <hr className="welcome-hr" />
       <h5 className="welcome-h5">
-        Log in to register for events or edit your profile information
+        Login to continue to the Rooted East Participant Management System.
       </h5>
       <hr className="welcome-hr" />
       <h5 className="welcome-h5">
-        If you are not in our database contact one of our administrators to get
-        connected
+        {/* this is when user is not logged in! */}
+        To create an account, please contact a Rooted East administrator.
       </h5>
       <div className="login-button-container">
         <Button
