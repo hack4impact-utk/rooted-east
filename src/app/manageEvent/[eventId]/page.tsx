@@ -49,7 +49,7 @@ export default async function ManageEvent({
       <Box className="manage-event-parent">
         <Box className="manage-event-title">{event?.title}</Box>
         <Box className="manage-event-boxes">
-          <Typography variant="subtitle1" className="manage-event-text">
+          <h6 className="manage-event-text">
             {event?.day.toLocaleDateString('en-US', {
               weekday: 'long',
               year: 'numeric',
@@ -66,7 +66,7 @@ export default async function ManageEvent({
               hour: 'numeric',
               minute: '2-digit',
             })}
-          </Typography>
+          </h6>
         </Box>
       </Box>
 
@@ -74,7 +74,7 @@ export default async function ManageEvent({
       <Box className="manage-event-parent">
         {/* Buttons and Search Bar Section */}
         <Box className="manage-event-boxes">
-          <Box className="manage-event-buttons">
+          <Box className="manage-event-buttons-box">
             <EditEventButton
               event={JSON.parse(JSON.stringify(event))}
               managers={formattedManagers}

@@ -21,7 +21,7 @@ export default function CopyEmailsButton({ vols }: Props) {
   return (
     <Button
       variant="contained"
-      style={{ backgroundColor: '#459863', color: 'white', marginLeft: '10px' }}
+      className="manage-event-buttons"
       onClick={() => {
         handleCopy();
       }}

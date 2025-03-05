@@ -13,10 +13,7 @@
 /* Manage Event Styling */
 
 .manage-event-search {
-  margin-left: 0.5rem;
-  margin-right: 1rem;
-  margin-top: 1rem;
-  margin-bottom: 1rem;
+  margin: 0 2vw
 }
 
 .manage-event-parent {
@@ -57,29 +54,45 @@
   color: #37403a;
   text-align: center;
   align-items: center;
+
+  margin: 0;
+  font-family: "Roboto","Helvetica","Arial",sans-serif;
+  font-weight: 400;
+  font-size: 1rem;
+  line-height: 1.75;
+  letter-spacing: 0.00938em;
+  @media (max-width: 400px) {
+    font-size: 0.7rem;
+  }
 }
 
 .manage-event-boxes {
   display: flex;
   align-items: center;
-  margin-left: 1rem;
-  margin-right: 1rem;
-  margin-top: 1rem;
-  margin-bottom: 1rem;
+  margin: 1vw;
   justify-content: center;
 }
 
-.manage-event-buttons {
+.manage-event-buttons-box {
   display: flex;
-  gap: 1.8rem;
-  margin-left: 0.5rem;
+  gap: 3vw;
+  @media (max-width: 700px) {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
 }
 
-.manage-event-buttons > *,
-.manage-event-buttons > * > button {
-  width: 9.5rem !important;
-  min-width: 9.5rem !important;
+.manage-event-buttons {
+  background-color: #459863 !important;
+  color: white !important;
+  @media (max-width: 700px) {
+    min-width: 8rem;
+    max-width: 8rem;
+    font-size: 0.7rem;
+    padding: 0;
+  }
 }
+
 
 .manage-event-button {
   background-color: #459863;
@@ -94,7 +107,6 @@
 
 .search-volunteers {
   background-color: var(--box-bgc);
-  width: 45.3rem;
   border-radius: 0.25rem;
 }
 
@@ -115,9 +127,12 @@
 /* Registered Vols Styling */
 
 .registered-vols-list-container {
-  overflow: auto;
+  overflow: scroll;
   max-height: 65vh;
-  margin-left: 1rem;
+  margin-left: 2vw;
+  @media (max-width:400px) {
+    max-height: 45vh;
+  }
 }
 
 .registered-vols-item {
@@ -125,6 +140,10 @@
   align-items: center;
   gap: 1rem;
   margin-bottom: 1rem;
+  @media (max-width: 400px) {
+    margin-bottom: 0;
+    gap: 0;
+  }
 }
 
 .registered-vols-list-item {
@@ -133,40 +152,44 @@
   opacity: 0.8;
   margin: 0.5rem;
   flex: 1;
-  max-width: 39%;
   display: flex;
   align-items: center;
   justify-content: space-between;
   border-radius: 0.25rem;
   padding: 0.5rem;
+  @media (max-width:400px) {
+    font-size: 0.8rem;
+    padding: 0 3vw;
+    margin: 0.5vh 2vw;
+  }
 }
 
-.registered-vols-name,
+/* .registered-vols-name,
 .registered-vols-email,
 .registered-vols-more-info {
   display: flex;
   align-items: center;
   text-align: left;
-}
+} */
 
-.registered-vols-name,
+/* .registered-vols-name,
 .registered-vols-email {
   width: 12rem;
   overflow: hidden;
-}
-
+} */
+/* 
 .registered-vols-name {
   justify-content: flex-start;
-}
+} */
 
-.registered-vols-email {
+/* .registered-vols-email {
   justify-content: flex-start;
-}
-
+} */
+/* 
 .registered-vols-more-info {
   flex-grow: 1;
   justify-content: flex-end;
-}
+} */
 
 /* Check In Button Styles */
 .check-in-button-checkbox {
@@ -551,11 +574,6 @@
 }
 
 /* Delete event button */
-.delete-event-button {
-  background-color: #459863 !important;
-  color: white !important;
-}
-
 
 .dialog-actions .cancel-delete-button {
   color: #3f51b5; 
@@ -566,13 +584,6 @@
 }
 
 
-/* Edit Event Button */
-.edit-event-button {
-  background-color: #459863 !important;
-  color: white !important;
-  width: 9.5rem;
-  margin-right: 0.5rem;
-}
 
 /* Edit Event Form */
 .edit-event-form {

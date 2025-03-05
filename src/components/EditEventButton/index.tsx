@@ -22,7 +22,7 @@ export default function EditEventButton({
     <>
       <Button
         variant="contained"
-        className="edit-event-button"
+        className="manage-event-buttons"
         onClick={handleClick}
       >
         Edit Event
