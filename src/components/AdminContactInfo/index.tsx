@@ -23,63 +23,21 @@ const AdminContactInfo = ({ volunteers }: { volunteers: Volunteer[] }) => {
   }
 
   return (
-    <Box
-      sx={{
-        flex: 1,
-        display: 'flex',
-        flexGrow: 0,
-        flexShrink: 0,
-        flexBasis: '30vw',
-      }}
-    >
-      <Paper
-        elevation={4}
-        sx={{
-          padding: 4,
-          display: 'flex',
-          width: '30vw',
-          height: '70vh',
-          margin: '3vw',
-          flexDirection: 'column',
-          alignItems: 'center',
-          backgroundColor: '#324033',
-          borderRadius: 2,
-          color: '#D5C7BC',
-          maxHeight: 550,
-          maxWidth: 450,
-          justifyContent: 'center',
-        }}
-      >
-        <Typography
-          variant="h4"
-          align="center"
-          gutterBottom
-          sx={{
-            whiteSpace: 'nowrap',
-            overflow: 'hidden',
-            textOverflow: 'ellipsis',
-            marginTop: '10px',
-            marginBottom: '60px',
-          }}
-        >
-          Contact Us
-        </Typography>
-
+    <Box className="admin-contact-container">
+      <Paper className="admin-contact-card">
+        <Typography className="admin-contact-title">Contact Us</Typography>
         {volunteers.map((volunteer) => (
-          <div
-            key={volunteer.email}
-            style={{ textAlign: 'center', color: '#D5C7BC' }}
-          >
-            <Typography variant="h5" sx={{ marginBottom: 1 }}>
+          <div key={volunteer.email} className="admin-contact-item">
+            <Typography className="admin-contact-name">
               {volunteer.firstName} {volunteer.lastName}
             </Typography>
-            <Typography variant="body1" sx={{ marginBottom: 1 }}>
+            <Typography className="admin-contact-email">
               <strong>Email:</strong> {volunteer.email}
             </Typography>
-            <Typography variant="body1" sx={{ marginBottom: 3 }}>
+            <Typography className="admin-contact-phone">
               <strong>Phone:</strong> {formatPhoneNumber(volunteer.phoneNumber)}
             </Typography>
-            <hr style={{ width: '100%', borderColor: '#D5C7BC' }} />
+            <hr className="admin-contact-divider" />
           </div>
         ))}
       </Paper>
