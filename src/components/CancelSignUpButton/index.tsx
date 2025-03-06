@@ -42,7 +42,6 @@ export default function CancelSignUpButton(props: CancelSignUpButtonProps) {
     } catch (error) {
       console.log('Error during volunteer sign-up cancellation: ', error);
     }
-    // setOpen(true);
 
     location.reload();
   };
@@ -56,20 +55,12 @@ export default function CancelSignUpButton(props: CancelSignUpButtonProps) {
       <Button
         variant="contained"
         onClick={handleClickOpen}
-        sx={{
-          backgroundColor: '#459863',
-          '&:hover': { backgroundColor: '#D93C63' },
-          padding: '6px 10px',
-          margin: '0 2px',
-          color: 'white',
-          whiteSpace: 'nowrap',
-          overflow: 'hidden',
-        }}
+        className="cancel-signup-button"
       >
         Cancel Sign up
       </Button>
       <Dialog onClose={handleClose} open={open}>
-        <DialogContentText sx={{ margin: '15px' }}>
+        <DialogContentText className="cancel-signup-dialog-text">
           You have cancelled your sign-up for event &quot;{props.event.title}
           &quot;
         </DialogContentText>
