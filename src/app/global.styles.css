@@ -1,6 +1,7 @@
 :root {
   --main-bgc: #d5c7bc;
   --box-bgc: #f5efeb;
+  --lighter-green: #459863;
 }
 
 
@@ -83,7 +84,7 @@
 }
 
 .manage-event-buttons {
-  background-color: #459863 !important;
+  background-color: var(--lighter-green) !important;
   color: white !important;
   @media (max-width: 700px) {
     min-width: 8rem;
@@ -95,7 +96,7 @@
 
 
 .manage-event-button {
-  background-color: #459863;
+  background-color: var(--lighter-green) !important;
   padding: 0.4rem 0.6rem;
   margin: 0 0.2rem;
   color: white;
@@ -116,11 +117,11 @@
 }
 
 .search-volunteers .MuiOutlinedInput-root:hover fieldset {
-  border-color: #459863;
+  border-color: var(--lighter-green) !important;
 }
 
 .search-volunteers .MuiOutlinedInput-root.Mui-focused fieldset {
-  border-color: #459863;
+  border-color: var(--lighter-green) !important;
   border-radius: 0.25rem;
 }
 
@@ -148,15 +149,15 @@
 
 .registered-vols-list-item {
   color: #02100b;
-  background-color: #459863;
+  background-color: var(--lighter-green) !important;
   opacity: 0.8;
-  margin: 0.5rem;
+  margin: 0.5rem !important;
   flex: 1;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: space-between !important;
   border-radius: 0.25rem;
-  padding: 0.5rem;
+  padding: 0.5rem !important;
   @media (max-width:400px) {
     font-size: 0.8rem;
     padding: 0 3vw;
@@ -164,45 +165,18 @@
   }
 }
 
-/* .registered-vols-name,
-.registered-vols-email,
-.registered-vols-more-info {
-  display: flex;
-  align-items: center;
-  text-align: left;
-} */
-
-/* .registered-vols-name,
-.registered-vols-email {
-  width: 12rem;
-  overflow: hidden;
-} */
-/* 
-.registered-vols-name {
-  justify-content: flex-start;
-} */
-
-/* .registered-vols-email {
-  justify-content: flex-start;
-} */
-/* 
-.registered-vols-more-info {
-  flex-grow: 1;
-  justify-content: flex-end;
-} */
-
 /* Check In Button Styles */
 .check-in-button-checkbox {
-  border: 0.3rem solid #459863;
-  border-radius: 0.5rem;
+  border: 0.3rem solid var(--lighter-green) !important;
+  border-radius: 0.5rem !important;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  color: #459863;
-  padding: 0.3rem;
+  color: var(--lighter-green) !important;
+  padding: 0.3rem !important;
 }
 .css-12wnr2w-MuiButtonBase-root-MuiCheckbox-root.Mui-checked {
-  color: #459863;
+  color: var(--lighter-green) !important;
 }
 
 /* More Info Button Styling */
@@ -251,7 +225,7 @@
   margin-bottom: 1rem;
   margin-left: 1.5rem;
   padding: 3rem;
-  background-color: #459863;
+  background-color: var(--lighter-green) !important;
   border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
@@ -347,7 +321,7 @@
 }
 
 .add-event-button {
-  background-color: #459863 !important;
+  background-color: var(--lighter-green) !important;
   color: white !important;
   width: 9.5rem;
   margin-right: 0.5rem;
@@ -359,7 +333,7 @@
 }
 
 .add-volunteer-button {
-  background-color: #459863 !important;
+  background-color: var(--lighter-green) !important;
   color: white !important;
   margin-left: 10px;
 }
@@ -398,7 +372,7 @@
 
 /* Navbar container */
 .navbar {
-    background-color: #459863;
+    background-color: var(--lighter-green) !important;
 }
 
 /* Hamburger menu for small screens */
@@ -443,13 +417,13 @@
       display: none;
     }
   .nav-buttons {
-    display: flex;
+    display: flex !important;
   }
 
   .nav-button {
     display: flex; /* Ensure buttons are visible */
-    margin: 0 1rem;
-    color: var(--main-bgc);
+    margin: 0 1rem !important;
+    color: var(--main-bgc) !important;
   }
 }
 
@@ -567,7 +541,7 @@
 }
 
 .login-button {
-  background-color: #459863;
+  background-color: var(--lighter-green) !important;
   padding: .8vh 3vh;
   color: white;
   white-space: nowrap;
