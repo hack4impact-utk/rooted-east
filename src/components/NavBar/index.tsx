@@ -91,9 +91,6 @@ function NavBar() {
           </Box>
 
           {/* Rooted East title */}
-          {/* <Typography variant="h5" component="a" href="/#home" className="navbar-title-xs">
-            Rooted East
-          </Typography> */}
           <Box className="logo-container">
             <Button href="/#home" className="logo-button">
               <Image
