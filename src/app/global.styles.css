@@ -396,10 +396,10 @@
 /* Logo positioning */
 .logo-container {
   height: 4rem;
-  overflow: visible;
   display: flex;
   align-items: center;
   justify-content: flex-start;
+  width: 100%;
 }
 
 /* Center logo on small screens, left-align on larger screens */
@@ -714,4 +714,19 @@
 
 .cancel-signup-dialog-text {
   margin: 0.9375rem;
+}
+
+/* Mobile Responsiveness for Nav Bar logo */
+
+@media (max-width: 800px) {
+  .logo-container {
+    justify-content: center; 
+  }
+  
+  .logo-button {
+    display: flex;
+    justify-content: center;
+    padding: 0;
+    min-width: unset;
+  }
 }
