@@ -12,18 +12,20 @@
 }
 
 /* Manage Event Styling */
+.manage-event-buttons-and-list {
+  width: 50vw;
+}
 
 .manage-event-search {
-  margin: 0 2vw
+  margin: 0 2vw;
 }
 
 .manage-event-parent {
   margin-left: 0.5rem;
   margin-top: 1rem;
-  width: 50%;
 
   margin: 2vw 0;
-  width: 100vw;
+  width: 100%;
 }
 
 .manage-event-title {
@@ -183,12 +185,13 @@
   
 .more-info-button {
   position: fixed;
-  top: 0;
-  right: 0;
-  width: 50%;
-  height: 100%;
-  z-index: 1300;
-  overflow-y: auto;
+  overflow-y: scroll;
+  
+  position: fixed;
+  top: 25vh;
+  width: 46vw;
+  left: 52vw;
+  height: 73vh;
 }
 
 .more-info-modal {
@@ -221,9 +224,7 @@
   position: absolute;
   width: 100%;
   max-width: 36rem;
-  margin-top: 5.25rem;
-  margin-bottom: 1rem;
-  margin-left: 1.5rem;
+  margin: 0;
   padding: 3rem;
   background-color: var(--lighter-green) !important;
   border-radius: 8px;

@@ -71,38 +71,41 @@ export default async function ManageEvent({
       </Box>
 
       {/* Buttons and Search Bar Section */}
-      <Box className="manage-event-parent">
-        {/* Buttons and Search Bar Section */}
-        <Box className="manage-event-boxes">
-          <Box className="manage-event-buttons-box">
-            <EditEventButton
-              event={JSON.parse(JSON.stringify(event))}
-              managers={formattedManagers}
-            />
-            <DeleteEventButton eventId={params.eventId} />
-            <CopyPhoneNumbersButton
-              vols={JSON.parse(JSON.stringify(filteredVols))}
-            />
-            <CopyEmailsButton vols={JSON.parse(JSON.stringify(filteredVols))} />
+      <div className="manage-event-buttons-and-list">
+        <Box className="manage-event-parent">
+          <Box className="manage-event-boxes">
+            <Box className="manage-event-buttons-box">
+              <EditEventButton
+                event={JSON.parse(JSON.stringify(event))}
+                managers={formattedManagers}
+              />
+              <DeleteEventButton eventId={params.eventId} />
+              <CopyPhoneNumbersButton
+                vols={JSON.parse(JSON.stringify(filteredVols))}
+              />
+              <CopyEmailsButton
+                vols={JSON.parse(JSON.stringify(filteredVols))}
+              />
+            </Box>
           </Box>
         </Box>
-      </Box>
-      <Box className="manage-event-parent">
-        <Box className="manage-event-search">
-          <VolunteerSearchBar eventId={params.eventId} />
+        <Box className="manage-event-parent">
+          <Box className="manage-event-search">
+            <VolunteerSearchBar eventId={params.eventId} />
+          </Box>
         </Box>
-      </Box>
-      <Box className="manage-event-parent">
-        <Typography variant="subtitle1" className="manage-event-text">
-          Volunteers Signed Up: {event?.volsSignUp}/{event?.volsNeeded}
-        </Typography>
-      </Box>
+        <Box className="manage-event-parent">
+          <Typography variant="subtitle1" className="manage-event-text">
+            Volunteers Signed Up: {event?.volsSignUp}/{event?.volsNeeded}
+          </Typography>
+        </Box>
 
-      {/* Volunteers List */}
-      <RegisteredVolsList
-        vols={JSON.parse(JSON.stringify(filteredVols))}
-        eventId={params.eventId}
-      />
+        {/* Volunteers List */}
+        <RegisteredVolsList
+          vols={JSON.parse(JSON.stringify(filteredVols))}
+          eventId={params.eventId}
+        />
+      </div>
     </div>
   );
 }
