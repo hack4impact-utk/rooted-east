@@ -480,6 +480,7 @@
 .welcome-box {
   flex: 1;
   display: flex;
+  flex-direction: column;
   flex-grow: 0;
   flex-shrink: 0;
   flex-basis: 30vw;
@@ -487,7 +488,7 @@
 
 .welcome-content-box {
   padding: 32px;
-  width: 30vw;
+  width: 80%;
   height: 70vh;
   margin: 3vw;
   display: flex;
@@ -499,7 +500,6 @@
   max-width: 450px;
   justify-content: center;
 }
-
 .welcome-h4 {
   margin: 0;
   font-family: "Roboto","Helvetica","Arial",sans-serif;
@@ -531,6 +531,34 @@
   width: 100%;
   border-color: var(--main-bgc);
 }
+
+@media (max-width: 800px) {
+  .home-mui-box {
+    flex-direction: column;
+  }
+
+  .welcome-box {
+    flex-direction: column; 
+    justify-content: center;
+    align-items: center;
+  }
+
+  .welcome-content-box {
+    width: 80%; 
+    padding: 4vw; 
+  }
+
+  .login-button-container {
+    margin-top: 2vh;
+  }
+  .welcome-h4 {
+    font-size: 8vw;
+  }
+  .welcome-h5 {
+    font-size: 5vw;
+  }
+}
+
 
 /* Login Button */
 
