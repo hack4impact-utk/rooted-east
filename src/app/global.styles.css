@@ -2,6 +2,7 @@
   --main-bgc: #d5c7bc;
   --box-bgc: #f5efeb;
   --lighter-green: #459863;
+  --darker-green: #14261C;
 }
 
 
@@ -213,21 +214,32 @@
   z-index: 1000;
 }
 
+/* User Profile Page Parent*/
+.user-profile-page-parent {
+  display: flex;
+  justify-content: center;
+}
+
 /* User Profile Styling */
 
 .user-profile-container {
-  overflow: auto;
-  max-height: 76vh;
   position: absolute;
-  width: 100%;
+  width: 90%;
   max-width: 36rem;
   margin-top: 5.25rem;
   margin-bottom: 1rem;
   margin-left: 1.5rem;
+  margin-right: 1.5rem;
   padding: 3rem;
   background-color: var(--lighter-green) !important;
   border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* User Profile Title */
+.user-profile-title {
+  color: var(--darker-green);
+  margin-bottom: 2rem;
 }
 
 /* Paper formatting */
@@ -241,7 +253,31 @@
   display: flex;
   justify-content: flex-end;
   gap: 1rem;
-  margin-top: 3rem;
+}
+
+@media (max-width: 600px) {
+  .user-profile-container {
+    background-color:rgba(0, 0, 0, 0) !important;
+    box-shadow: none;
+    padding: 0;
+    margin-top: 2rem;
+    margin-bottom: 0;
+    max-height: unset;
+  }
+
+  .user-profile-form {
+    padding: 1.5rem; /* Reduce padding for smaller screens */
+    border-radius: 0.5rem;
+  }
+
+  .user-profile-buttons {
+    gap: 0.5rem;
+    margin-top: 0;
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+    margin-bottom: 0;
+  }
 }
 
 /* Database styling */
