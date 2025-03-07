@@ -218,6 +218,8 @@
 .user-profile-page-parent {
   display: flex;
   justify-content: center;
+  overflow: hidden;
+  /* max-height: 100vh; */
 }
 
 /* User Profile Styling */
@@ -226,7 +228,7 @@
   position: absolute;
   width: 90%;
   max-width: 36rem;
-  margin-top: 5.25rem;
+  margin-top: 3rem;
   margin-bottom: 1rem;
   margin-left: 1.5rem;
   margin-right: 1.5rem;
@@ -242,8 +244,13 @@
   margin-bottom: 2rem;
 }
 
-/* Paper formatting */
 .user-profile-form {
+  margin: none;
+  padding: none;
+}
+
+/* Paper formatting */
+.user-profile-form-section {
   padding: 2rem;
   margin-bottom: 3rem;
 }
@@ -265,17 +272,27 @@
     max-height: unset;
   }
 
+  .user-profile-title {
+    color: var(--darker-green);
+    margin-bottom: 1rem;
+  }
+
   .user-profile-form {
-    padding: 1.5rem; /* Reduce padding for smaller screens */
+    overflow: scroll;
+    scrollbar-width: none;
+    padding: 1rem;
+    height: 69vh;
+  }
+
+  .user-profile-form-section {
     border-radius: 0.5rem;
   }
 
   .user-profile-buttons {
-    gap: 0.5rem;
+    gap: 1rem;
     margin-top: 0;
     display: flex;
     justify-content: flex-end;
-    gap: 1rem;
     margin-bottom: 0;
   }
 }

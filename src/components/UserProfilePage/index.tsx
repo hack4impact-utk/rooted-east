@@ -110,8 +110,8 @@ export default function UserProfilePage({
         {editable ? 'Edit Profile' : 'User Profile'}
       </Typography>
 
-      <form onSubmit={(e) => e.preventDefault()}>
-        <Paper elevation={3} className="user-profile-form">
+      <form className="user-profile-form" onSubmit={(e) => e.preventDefault()}>
+        <Paper elevation={3} className="user-profile-form-section">
           <Typography variant="h6" gutterBottom>
             Personal Information
           </Typography>
@@ -141,7 +141,7 @@ export default function UserProfilePage({
           </Grid>
         </Paper>
 
-        <Paper elevation={3} className="user-profile-form">
+        <Paper elevation={3} className="user-profile-form-section">
           <Typography variant="h6" gutterBottom>
             Contact Information
           </Typography>
@@ -205,7 +205,7 @@ export default function UserProfilePage({
           </Grid>
         </Paper>
 
-        <Paper elevation={3} className="user-profile-form">
+        <Paper elevation={3} className="user-profile-form-section">
           <Typography variant="h6" gutterBottom>
             Demographics
           </Typography>
@@ -367,7 +367,7 @@ export default function UserProfilePage({
         </Paper>
 
         {currentUser.role === 'Admin' && (
-          <Paper elevation={3} className="user-profile-form">
+          <Paper elevation={3} className="user-profile-form-section">
             <Typography variant="h6" gutterBottom>
               Membership Data
             </Typography>
@@ -436,7 +436,7 @@ export default function UserProfilePage({
           </Paper>
         )}
 
-        <Paper elevation={3} className="user-profile-form">
+        <Paper elevation={3} className="user-profile-form-section">
           <Typography variant="h6" gutterBottom>
             Notes
           </Typography>
