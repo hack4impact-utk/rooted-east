@@ -480,23 +480,24 @@
 .welcome-box {
   flex: 1;
   display: flex;
+  flex-direction: column;
   flex-grow: 0;
   flex-shrink: 0;
   flex-basis: 30vw;
 }
 
 .welcome-content-box {
-  padding: 32px;
-  width: 30vw;
+  padding: 2rem;
+  width: 80%;
   height: 70vh;
   margin: 3vw;
   display: flex;
   flex-direction: column;
   align-items: center;
   background-color: #324033;
-  border-radius: 8px;
+  border-radius: .5rem;
   color:var(--main-bgc);
-  max-width: 450px;
+  max-width: 28rem;
   justify-content: center;
 }
 
@@ -530,6 +531,32 @@
 .welcome-hr {
   width: 100%;
   border-color: var(--main-bgc);
+}
+@media (max-width: 800px) {
+  .home-mui-box {
+    flex-direction: column;
+  }
+
+  .welcome-box {
+    flex-direction: column; 
+    justify-content: center;
+    align-items: center;
+  }
+
+  .welcome-content-box {
+    width: 80%; 
+    padding: 4vw; 
+  }
+
+  .login-button-container {
+    margin-top: 2vh;
+  }
+  .welcome-h4 {
+    font-size: 8vw;
+  }
+  .welcome-h5 {
+    font-size: 5vw;
+  }
 }
 
 /* Login Button */
@@ -603,8 +630,8 @@
   background-color: #324033;
   border-radius: 0.5rem;
   color: #D5C7BC;
-  max-height: 550px;
-  max-width: 450px;
+  max-height: 34rem;
+  max-width: 28rem;
   justify-content: center;
 }
 
@@ -613,9 +640,9 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  margin-top: 0.625rem;
-  margin-bottom: 3.75rem;
-  font-size: 2.25rem;
+  margin-top: -6rem;
+  margin-bottom: 2.75rem;
+  font-size: 3vw;
   font-weight: 400;
   text-align: center;
 }
@@ -623,17 +650,18 @@
 .admin-contact-item {
   text-align: center;
   color: #D5C7BC;
+  margin-top: 1rem;
 }
 
 .admin-contact-name {
-  font-size: 1.5rem;
+  font-size: 2vw;
   font-weight: 400;
   margin-bottom: 0.25rem;
 }
 
 .admin-contact-email,
 .admin-contact-phone {
-  font-size: 1rem;
+  font-size: 1vw;
   margin-bottom: 0.25rem;
 }
 
@@ -641,7 +669,32 @@
   width: 100%;
   border: none;
   border-top: 0.0625rem solid #D5C7BC;
-  margin-top: 0.75rem;
+  margin-top: 2rem;
+}
+
+@media (max-width: 800px) {
+  .admin-contact-container {
+    flex-direction: column; 
+    justify-content: center;
+    align-items: center;
+  }
+  .admin-contact-card {
+    width: 80%; 
+    padding: 4vw; 
+  }
+  .admin-contact-title {
+    font-size: 8vw;
+  }
+  .admin-contact-name {
+    font-size: 6vw;
+  }
+  .admin-contact-item {
+    font-size: 6vw;
+  } 
+  .admin-contact-email,
+  .admin-contact-phone {
+    font-size: 4vw;
+  }
 }
 
 /* Cancel Signup Button */
