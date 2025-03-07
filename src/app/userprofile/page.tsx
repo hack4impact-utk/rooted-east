@@ -12,7 +12,7 @@ export default async function UserProfile() {
     return (
       <>
         <NavBar />
-        <Box>
+        <Box className="user-profile-page-parent">
           <UserProfilePage
             currentUser={JSON.parse(JSON.stringify(user))}
             person={JSON.parse(JSON.stringify(user))}
