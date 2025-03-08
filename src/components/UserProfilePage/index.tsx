@@ -85,17 +85,38 @@ export default function UserProfilePage({
 
   return (
     <Box className="user-profile-container">
-      <Typography variant="h4" component="h2" align="center" gutterBottom>
+      <Box className="user-profile-buttons">
+        {editable ? (
+          <>
+            <Button variant="contained" color="error" onClick={handleCancel}>
+              Cancel
+            </Button>
+            <Button variant="contained" onClick={handleSave}>
+              Save
+            </Button>
+          </>
+        ) : (
+          <Button variant="contained" onClick={handleEdit}>
+            Edit
+          </Button>
+        )}
+      </Box>
+      <Typography
+        className="user-profile-title"
+        variant="h4"
+        component="h2"
+        align="center"
+      >
         {editable ? 'Edit Profile' : 'User Profile'}
       </Typography>
 
-      <form onSubmit={(e) => e.preventDefault()}>
-        <Paper elevation={3} className="user-profile-form">
+      <form className="user-profile-form" onSubmit={(e) => e.preventDefault()}>
+        <Paper elevation={3} className="user-profile-form-section">
           <Typography variant="h6" gutterBottom>
             Personal Information
           </Typography>
           <Grid container spacing={3}>
-            <Grid item xs={6}>
+            <Grid item xs={12} sm={6}>
               <TextField
                 fullWidth
                 label="First Name"
@@ -107,7 +128,7 @@ export default function UserProfilePage({
                 }}
               />
             </Grid>
-            <Grid item xs={6}>
+            <Grid item xs={12} sm={6}>
               <TextField
                 fullWidth
                 label="Last Name"
@@ -120,12 +141,12 @@ export default function UserProfilePage({
           </Grid>
         </Paper>
 
-        <Paper elevation={3} className="user-profile-form">
+        <Paper elevation={3} className="user-profile-form-section">
           <Typography variant="h6" gutterBottom>
             Contact Information
           </Typography>
           <Grid container spacing={2}>
-            <Grid item xs={4}>
+            <Grid item xs={12} sm={6}>
               <TextField
                 fullWidth
                 label="Address"
@@ -135,7 +156,7 @@ export default function UserProfilePage({
                 InputProps={{ readOnly: !editable }}
               />
             </Grid>
-            <Grid item xs={4}>
+            <Grid item xs={12} sm={6}>
               <TextField
                 fullWidth
                 label="Zip Code"
@@ -145,7 +166,7 @@ export default function UserProfilePage({
                 InputProps={{ readOnly: !editable }}
               />
             </Grid>
-            <Grid item xs={4}>
+            <Grid item xs={12} sm={6}>
               <TextField
                 fullWidth
                 label="Phone Number"
@@ -155,7 +176,7 @@ export default function UserProfilePage({
                 InputProps={{ readOnly: !editable }}
               />
             </Grid>
-            <Grid item xs={4}>
+            <Grid item xs={12} sm={6}>
               <TextField
                 fullWidth
                 label="Email"
@@ -165,25 +186,31 @@ export default function UserProfilePage({
                 InputProps={{ readOnly: !editable }}
               />
             </Grid>
-            <Grid item xs={4}>
-              <TextField
-                fullWidth
-                label="Preferred Contact Method"
-                name="preferredContactMethod"
-                value={formData.preferredContactMethod}
-                onChange={handleChange}
-                InputProps={{ readOnly: !editable }}
-              />
+            <Grid item xs={12}>
+              <FormControl fullWidth>
+                <InputLabel>Preferred Contact Method</InputLabel>
+                <Select
+                  fullWidth
+                  label="Preferred Contact Method"
+                  name="preferredContactMethod"
+                  value={formData.preferredContactMethod}
+                  onChange={handleSelectionChange}
+                  disabled={!editable}
+                >
+                  <MenuItem value="Phone">Phone</MenuItem>
+                  <MenuItem value="Email">Email</MenuItem>
+                </Select>
+              </FormControl>
             </Grid>
           </Grid>
         </Paper>
 
-        <Paper elevation={3} className="user-profile-form">
+        <Paper elevation={3} className="user-profile-form-section">
           <Typography variant="h6" gutterBottom>
             Demographics
           </Typography>
           <Grid container spacing={2}>
-            <Grid item xs={4}>
+            <Grid item xs={12} sm={4}>
               <TextField
                 fullWidth
                 label="Race/Ethnicity"
@@ -193,7 +220,7 @@ export default function UserProfilePage({
                 InputProps={{ readOnly: !editable }}
               />
             </Grid>
-            <Grid item xs={4}>
+            <Grid item xs={6} sm={4}>
               <TextField
                 fullWidth
                 label="Gender"
@@ -203,7 +230,7 @@ export default function UserProfilePage({
                 InputProps={{ readOnly: !editable }}
               />
             </Grid>
-            <Grid item xs={4}>
+            <Grid item xs={6} sm={4}>
               <TextField
                 fullWidth
                 label="Pronoun"
@@ -213,7 +240,7 @@ export default function UserProfilePage({
                 InputProps={{ readOnly: !editable }}
               />
             </Grid>
-            <Grid item xs={6}>
+            <Grid item xs={12} sm={6}>
               <FormControl fullWidth>
                 <InputLabel>Age Bracket</InputLabel>
                 <Select
@@ -234,7 +261,7 @@ export default function UserProfilePage({
                 </Select>
               </FormControl>
             </Grid>
-            <Grid item xs={6}>
+            <Grid item xs={12} sm={6}>
               <TextField
                 fullWidth
                 label="Renter or Homeowner"
@@ -244,7 +271,7 @@ export default function UserProfilePage({
                 InputProps={{ readOnly: !editable }}
               />
             </Grid>
-            <Grid item xs={6}>
+            <Grid item xs={12} sm={6}>
               <TextField
                 fullWidth
                 label="Occupation"
@@ -254,7 +281,7 @@ export default function UserProfilePage({
                 InputProps={{ readOnly: !editable }}
               />
             </Grid>
-            <Grid item xs={6}>
+            <Grid item xs={12} sm={6}>
               <TextField
                 fullWidth
                 label="Annual Income"
@@ -264,17 +291,17 @@ export default function UserProfilePage({
                 InputProps={{ readOnly: !editable }}
               />
             </Grid>
-            <Grid item xs={3}>
+            <Grid item xs={12} sm={6}>
               <TextField
                 fullWidth
-                label="#People in Household"
+                label="# People in Household"
                 name="householdOccupants"
                 value={formData.householdOccupants}
                 onChange={handleChange}
                 InputProps={{ readOnly: !editable }}
               />
             </Grid>
-            <Grid item xs={3}>
+            <Grid item xs={6} sm={6}>
               <TextField
                 fullWidth
                 label="Children (0-12)"
@@ -284,7 +311,7 @@ export default function UserProfilePage({
                 InputProps={{ readOnly: !editable }}
               />
             </Grid>
-            <Grid item xs={3}>
+            <Grid item xs={6} sm={6}>
               <TextField
                 fullWidth
                 label="Children (13-18)"
@@ -294,7 +321,7 @@ export default function UserProfilePage({
                 InputProps={{ readOnly: !editable }}
               />
             </Grid>
-            <Grid item xs={3}>
+            <Grid item xs={12} sm={6}>
               <TextField
                 fullWidth
                 label="Seniors in household(60+)"
@@ -304,31 +331,43 @@ export default function UserProfilePage({
                 InputProps={{ readOnly: !editable }}
               />
             </Grid>
-            <Grid item xs={6}>
-              <TextField
-                fullWidth
-                label="Are you receiving SNAP"
-                name="snap"
-                value={formData.snap}
-                onChange={handleChange}
-                InputProps={{ readOnly: !editable }}
-              />
+            <Grid item xs={6} sm={6}>
+              <FormControl fullWidth>
+                <InputLabel>Are you receiving SNAP</InputLabel>
+                <Select
+                  fullWidth
+                  label="Are you receiving SNAP"
+                  name="snap"
+                  value={formData.snap}
+                  onChange={handleSelectionChange}
+                  disabled={!editable}
+                >
+                  <MenuItem value="Yes">Yes</MenuItem>
+                  <MenuItem value="No">No</MenuItem>
+                </Select>
+              </FormControl>
             </Grid>
-            <Grid item xs={6}>
-              <TextField
-                fullWidth
-                label="Are you receiving WIC"
-                name="wic"
-                value={formData.wic}
-                onChange={handleChange}
-                InputProps={{ readOnly: !editable }}
-              />
+            <Grid item xs={6} sm={6}>
+              <FormControl fullWidth>
+                <InputLabel>Are you receiving WIC</InputLabel>
+                <Select
+                  fullWidth
+                  label="Are you receiving WIC"
+                  name="wic"
+                  value={formData.wic}
+                  onChange={handleSelectionChange}
+                  disabled={!editable}
+                >
+                  <MenuItem value="Yes">Yes</MenuItem>
+                  <MenuItem value="No">No</MenuItem>
+                </Select>
+              </FormControl>
             </Grid>
           </Grid>
         </Paper>
 
         {currentUser.role === 'Admin' && (
-          <Paper elevation={3} className="user-profile-form">
+          <Paper elevation={3} className="user-profile-form-section">
             <Typography variant="h6" gutterBottom>
               Membership Data
             </Typography>
@@ -397,7 +436,7 @@ export default function UserProfilePage({
           </Paper>
         )}
 
-        <Paper elevation={3} className="user-profile-form">
+        <Paper elevation={3} className="user-profile-form-section">
           <Typography variant="h6" gutterBottom>
             Notes
           </Typography>
@@ -464,23 +503,6 @@ export default function UserProfilePage({
             </Grid>
           </Grid>
         </Paper>
-
-        <Box className="user-profile-buttons">
-          {editable ? (
-            <>
-              <Button variant="outlined" onClick={handleCancel}>
-                Cancel
-              </Button>
-              <Button variant="contained" onClick={handleSave}>
-                Save
-              </Button>
-            </>
-          ) : (
-            <Button variant="contained" onClick={handleEdit}>
-              Edit
-            </Button>
-          )}
-        </Box>
       </form>
       <Snackbar
         open={snackbarOpen}
