@@ -11,6 +11,12 @@
   justify-content: center;
 }
 
+/* Volunteer Forms Styling  */
+
+.volunteer-form {
+  padding-top: 1rem;
+}
+
 /* Manage Event Styling */
 
 .manage-event-search {
@@ -697,6 +703,15 @@
   }
 }
 
+/* Signup Button */
+.signup-button {
+  background-color: #459863;
+  padding: 0.375rem 1.25rem;
+  margin: 0 0.125rem;
+  color: white;
+  white-space: nowrap;
+  overflow: hidden;
+}
 /* Cancel Signup Button */
 
 .cancel-signup-button {

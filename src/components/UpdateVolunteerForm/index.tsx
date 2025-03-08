@@ -25,7 +25,7 @@ export default function UpdateVolunteerForm({
   volunteerData,
 }: NewVolunteerFormProps) {
   return (
-    <Box sx={{ pt: 2 }}>
+    <Box className="volunteer-form">
       <TextField
         label="First name"
         value={volunteerData.firstName || ''}
