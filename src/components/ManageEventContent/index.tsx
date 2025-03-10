@@ -39,36 +39,37 @@ export default function ManageEventContent(props: ManageEventContentProps) {
   };
 
   return (
-    <div className="manage-event-buttons-and-list">
-      <Box className="manage-event-parent">
-        <Box className="manage-event-boxes">
-          <Box className="manage-event-buttons-box">
-            <EditEventButton
-              event={JSON.parse(JSON.stringify(event))}
-              managers={managers}
-            />
-            <DeleteEventButton eventId={eventId} />
-            <CopyPhoneNumbersButton vols={JSON.parse(JSON.stringify(vols))} />
-            <CopyEmailsButton vols={JSON.parse(JSON.stringify(vols))} />
+    <div className="manage-event-box">
+      <div className="manage-event-buttons-and-list">
+        <Box className="manage-event-parent">
+          <Box className="manage-event-boxes">
+            <Box className="manage-event-buttons-box">
+              <EditEventButton
+                event={JSON.parse(JSON.stringify(event))}
+                managers={managers}
+              />
+              <DeleteEventButton eventId={eventId} />
+              <CopyPhoneNumbersButton vols={JSON.parse(JSON.stringify(vols))} />
+              <CopyEmailsButton vols={JSON.parse(JSON.stringify(vols))} />
+            </Box>
           </Box>
         </Box>
-      </Box>
-      <Box className="manage-event-parent">
-        <Box className="manage-event-search">
-          <VolunteerSearchBar eventId={eventId} />
+        <Box className="manage-event-parent">
+          <Box className="manage-event-search">
+            <VolunteerSearchBar eventId={eventId} />
+          </Box>
         </Box>
-      </Box>
-      <Box className="manage-event-parent">
-        <Typography variant="subtitle1" className="manage-event-text">
-          Volunteers Signed Up: {event?.volsSignUp}/{event?.volsNeeded}
-        </Typography>
-      </Box>
+        <Box className="manage-event-parent">
+          <Typography variant="subtitle1" className="manage-event-text">
+            Volunteers Signed Up: {event?.volsSignUp}/{event?.volsNeeded}
+          </Typography>
+        </Box>
 
-      <RegisteredVolsList
-        vols={JSON.parse(JSON.stringify(vols))}
-        handleOpenUserProfile={handleOpenUserProfile}
-      />
-
+        <RegisteredVolsList
+          vols={JSON.parse(JSON.stringify(vols))}
+          handleOpenUserProfile={handleOpenUserProfile}
+        />
+      </div>
       {currPerson && currentUser && (
         <Box className="more-info-button">
           <UserProfilePage currentUser={currentUser} person={currPerson} />

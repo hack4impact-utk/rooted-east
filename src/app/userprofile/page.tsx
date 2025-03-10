@@ -1,4 +1,3 @@
-import { Box } from '@mui/material';
 import UserProfilePage from '@/components/UserProfilePage';
 import NavBar from '@/components/NavBar';
 import '@/styles.css';
@@ -12,12 +11,12 @@ export default async function UserProfile() {
     return (
       <>
         <NavBar />
-        <Box>
+        <div className="user-profile-page-container">
           <UserProfilePage
             currentUser={JSON.parse(JSON.stringify(user))}
             person={JSON.parse(JSON.stringify(user))}
           ></UserProfilePage>
-        </Box>
+        </div>
       </>
     );
   } else {

@@ -13,12 +13,20 @@
 
 /* Manage Event Styling */
 .manage-event-buttons-and-list {
-  width: 50vw;
+  width: 46vw;
+  padding: 0 2vw;
+  @media (max-width: 700px) {
+    width: 96vw
+  }
 }
 
-.manage-event-search {
-  margin: 0 2vw;
+.manage-event-box {
+  display: flex;
 }
+
+/* .manage-event-search {
+  margin: 0 2vw;
+} */
 
 .manage-event-parent {
   margin-left: 0.5rem;
@@ -72,7 +80,7 @@
 .manage-event-boxes {
   display: flex;
   align-items: center;
-  margin: 1vw;
+  /* margin: 1vw; */
   justify-content: center;
 }
 
@@ -132,7 +140,7 @@
 .registered-vols-list-container {
   overflow: scroll;
   max-height: 65vh;
-  margin-left: 2vw;
+  /* margin-left: 2vw; */
   @media (max-width:400px) {
     max-height: 45vh;
   }
@@ -143,6 +151,7 @@
   align-items: center;
   gap: 1rem;
   margin-bottom: 1rem;
+  margin-left: 8px;
   /* position: relative;
   z-index: 0; */
 
@@ -187,14 +196,19 @@
 /* More Info Button Styling */
   
 .more-info-button {
+  display: flex;
+  justify-content: center;
+  width: 48vw;
+  overflow: scroll;
+  margin: 0 1vw;
+  height: 80vh;
   position: fixed;
-  overflow-y: scroll;
-  
-  position: fixed;
-  top: 25vh;
-  width: 46vw;
-  left: 52vw;
-  height: 73vh;
+  top: 17vh;
+  left: 49vw;
+  @media (max-width: 700px) {
+    width: 98vw;
+    left: 0;
+  }
 }
 
 .more-info-modal {
@@ -221,10 +235,16 @@
 
 /* User Profile Styling */
 
+.user-profile-page-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 2vh;
+}
+
 .user-profile-container {
   overflow: auto;
   max-height: 76vh;
-  position: absolute;
+  /* position: absolute; */
   width: 100%;
   max-width: 36rem;
   margin: 0;
