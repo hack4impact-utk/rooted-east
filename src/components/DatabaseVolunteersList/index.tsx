@@ -1,7 +1,7 @@
 import React from 'react';
 import { Box, List, ListItem } from '@mui/material';
 import { VolunteerEntity } from '@/types/dataModel/volunteer';
-import MoreParticipantInfo from '../MoreParticipantInfo';
+// import MoreParticipantInfo from '../MoreParticipantInfo';
 import { getCurrentUser } from '@/utils/getCurrentUser';
 import CMError, { CMErrorType } from '@/utils/cmerror';
 
@@ -27,10 +27,10 @@ export default async function DatabaseVolunteersList(props: VolObjectList) {
               </Box>
               <Box className="database-emails">{vol.email}</Box>
               <Box className="database-more-info">
-                <MoreParticipantInfo
+                {/* <MoreParticipantInfo
                   currentUser={JSON.parse(JSON.stringify(currentUser))}
                   person={vol}
-                />
+                /> */}
               </Box>
             </ListItem>
           );

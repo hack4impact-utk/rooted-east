@@ -1,25 +1,20 @@
 'use client';
 import { Checkbox } from '@mui/material';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
+import { EventVolVol } from '@/types/dataModel/event';
 
 interface CheckInButtonProps {
-  eventVolId: string;
-  isCheckedIn: boolean;
+  evv: EventVolVol;
 }
 
-export default function CheckInButton({
-  eventVolId,
-  isCheckedIn,
-}: CheckInButtonProps) {
-  const [isChecked, setIsChecked] = useState(isCheckedIn);
-
-  useEffect(() => {
-    setIsChecked(isCheckedIn);
-  }, [isCheckedIn]);
+export default function CheckInButton({ evv }: CheckInButtonProps) {
+  const [isChecked, setIsChecked] = useState(
+    evv.eVol.checkInTime !== null && evv.eVol.checkInTime !== undefined
+  );
 
   const handleCheckIn = async () => {
     try {
-      const response = await fetch(`/api/eventVolunteer/${eventVolId}`, {
+      const response = await fetch(`/api/eventVolunteer/${evv.eVol._id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',

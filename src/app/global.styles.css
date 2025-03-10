@@ -143,6 +143,9 @@
   align-items: center;
   gap: 1rem;
   margin-bottom: 1rem;
+  /* position: relative;
+  z-index: 0; */
+
   @media (max-width: 400px) {
     margin-bottom: 0;
     gap: 0;

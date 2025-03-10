@@ -1,57 +1,34 @@
 import React from 'react';
 import { Box, List, ListItem } from '@mui/material';
-import { VolunteerEntity } from '@/types/dataModel/volunteer';
 import MoreParticipantInfo from '../MoreParticipantInfo';
 import CheckInButton from '../CheckInButton';
-import { getEventVolunteer } from '@/server/actions/EventVolunteer';
-import { getCurrentUser } from '@/utils/getCurrentUser';
-import CMError, { CMErrorType } from '@/utils/cmerror';
+import { EventVolVol } from '@/types/dataModel/event';
+import { VolunteerEntity } from '@/types/dataModel/volunteer';
 
-interface VolObjectList {
-  vols: VolunteerEntity[];
-  eventId: string;
+interface RegisteredVolsListProps {
+  vols: EventVolVol[];
+  handleOpenUserProfile(person: VolunteerEntity | null): void;
 }
 
-export default async function RegisteredVolsList(props: VolObjectList) {
-  const currentUser = await getCurrentUser();
-  //check for undefined user
-  if (!currentUser) {
-    throw new CMError(CMErrorType.NoSuchKey, 'Volunteer');
-  }
+export default function RegisteredVolsList(props: RegisteredVolsListProps) {
+  const { vols, handleOpenUserProfile } = props;
 
   return (
     <Box className="registered-vols-list-container">
       <List>
-        {props.vols.map(async (vol: VolunteerEntity, index) => {
-          const eventVol = await getEventVolunteer(
-            props.eventId,
-            vol._id.toString()
-          );
-          if (!eventVol || !eventVol._id) {
-            console.error('No EventVolunteer found for:', {
-              eventId: props.eventId,
-              volId: vol._id.toString(),
-            });
-            return null;
-          }
+        {vols.map((evv: EventVolVol, index: React.Key) => {
           return (
             <Box key={index} className="registered-vols-item">
-              <CheckInButton
-                eventVolId={eventVol._id.toString()}
-                isCheckedIn={
-                  eventVol.checkInTime !== null &&
-                  eventVol.checkInTime !== undefined
-                }
-              />
+              <CheckInButton evv={evv} />
               <ListItem key={index} className="registered-vols-list-item">
                 <Box className="registered-vols-name">
-                  {vol.firstName} {vol.lastName}
+                  {evv.vol.firstName} {evv.vol.lastName}
                 </Box>
-                <Box className="registered-vols-email">{vol.email}</Box>
+                <Box className="registered-vols-email">{evv.vol.email}</Box>
                 <Box className="registered-vols-more-info">
                   <MoreParticipantInfo
-                    currentUser={JSON.parse(JSON.stringify(currentUser))}
-                    person={vol}
+                    handleOpenUserProfile={handleOpenUserProfile}
+                    person={evv.vol}
                   />
                 </Box>
               </ListItem>

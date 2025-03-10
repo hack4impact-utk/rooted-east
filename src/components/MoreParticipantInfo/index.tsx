@@ -2,36 +2,28 @@
 
 import IconButton from '@mui/material/IconButton';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
-import { Box } from '@mui/material';
 import { VolunteerEntity } from '@/types/dataModel/volunteer';
-import UserProfilePage from '../UserProfilePage';
-import React, { useState } from 'react';
+import React from 'react';
 
 interface MoreParticipantInfoProps {
   person: VolunteerEntity | null;
-  currentUser: VolunteerEntity | null;
+  handleOpenUserProfile(person: VolunteerEntity | null): void;
 }
 
 export default function MoreParticipantInfo({
-  currentUser,
   person,
+  handleOpenUserProfile,
 }: MoreParticipantInfoProps) {
-  const [open, setOpen] = useState(false);
-
-  const handleClick = () => setOpen(!open);
-
   return (
     <>
-      <IconButton aria-label="more info" onClick={handleClick}>
+      <IconButton
+        aria-label="more info"
+        onClick={() => {
+          handleOpenUserProfile(person);
+        }}
+      >
         <MoreHorizIcon />
       </IconButton>
-      {open && (
-        <Box className="more-info-button">
-          {currentUser && person && (
-            <UserProfilePage currentUser={currentUser} person={person} />
-          )}
-        </Box>
-      )}
     </>
   );
 }

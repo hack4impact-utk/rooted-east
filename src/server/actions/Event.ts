@@ -1,13 +1,17 @@
 import dbConnect from '@/utils/db-connect';
 import CMError, { CMErrorType } from '@/utils/cmerror';
 import EventSchema from '@/server/models/Event';
-import EventVolunteerSchema from '@/server/models/EventVolunteer';
 import {
   CreateEventRequest,
   UpdateEventRequest,
 } from '@/types/dataModel/event';
 import { mongo, isValidObjectId } from 'mongoose';
-import { EventEntity } from '@/types/dataModel/event';
+import { EventEntity, EventVolVol } from '@/types/dataModel/event';
+
+import EventVolunteerSchema from '@/server/models/EventVolunteer';
+import { VolunteerEntity } from '@/types/dataModel/volunteer';
+import VolunteerSchema from '@/server/models/Volunteer';
+import { EventVolunteerEntity } from '@/types/dataModel/eventVolunteer';
 
 export async function createEvent(
   createEventRequest: CreateEventRequest
@@ -212,4 +216,32 @@ export async function repopulateEventVols() {
     }
     throw new CMError(CMErrorType.InternalError);
   }
+}
+
+export async function getAllVolunteersAndEventVolunteersForEvent(
+  eventId: string
+): Promise<EventVolVol[]> {
+  if (!isValidObjectId(eventId)) {
+    throw new CMError(CMErrorType.BadValue, 'Invalid EventId');
+  }
+
+  const eventVolVols: EventVolVol[] = [];
+  try {
+    await dbConnect();
+    const eventVols: EventVolunteerEntity[] | null =
+      await EventVolunteerSchema.find({ event: eventId });
+
+    for (const eVol of eventVols) {
+      const vol: VolunteerEntity | null = await VolunteerSchema.findById(
+        eVol.volunteer
+      ).lean();
+      if (vol) {
+        eventVolVols.push({ vol, eVol });
+      }
+    }
+  } catch (error) {
+    throw new CMError(CMErrorType.InternalError);
+  }
+
+  return eventVolVols;
 }
