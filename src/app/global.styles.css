@@ -700,7 +700,7 @@
 /* Cancel Signup Button */
 
 .cancel-signup-button {
-  background-color: #459863;
+  background-color: #459863 !important;
   padding: 0.375rem 0.625rem;
   margin: 0 0.125rem;
   color: white;
