@@ -1,25 +1,27 @@
-import DatabaseVolunteersList from '@/components/DatabaseVolunteersList';
 import NavBar from '@/components/NavBar';
 import { getAllVolunteers } from '@/server/actions/Volunteer';
 import '@/app/global.styles.css';
-import CSVButton from '@/components/CSVButton';
-import CopyPhoneNumbersButton from '@/components/CopyPhoneNumbersButton';
-import CopyEmailsButton from '@/components/CopyEmailsButton';
-import VolunteerSearchBar from '@/components/VolunteerSearchBar';
-import { Box } from '@mui/material';
-import AddVolunteerButton from '@/components/AddVolunteerButton';
+import { getCurrentUser } from '@/utils/getCurrentUser';
+import DatabaseContent from '@/components/DatabaseContent';
+import CMError, { CMErrorType } from '@/utils/cmerror';
 
-export default async function Home({
+export default async function Database({
   searchParams,
 }: {
   searchParams: { search?: string };
 }) {
-  const vols = await getAllVolunteers();
-  const newVols = JSON.parse(JSON.stringify(vols));
+  const currentUser = await getCurrentUser();
+
+  if (!currentUser) {
+    throw new CMError(CMErrorType.NoSuchKey, 'Volunteer');
+  }
+
+  let allVols = await getAllVolunteers();
+  allVols = JSON.parse(JSON.stringify(allVols));
 
   // Add filtering logic based on search parameter
   const filteredVols = searchParams.search
-    ? newVols.filter((vol: any) => {
+    ? allVols.filter((vol: any) => {
         const fullName = `${vol.firstName} ${vol.lastName}`.toLowerCase();
         const email = vol.email.toLowerCase();
         return (
@@ -27,25 +29,12 @@ export default async function Home({
           email.includes(searchParams.search!.toLowerCase())
         );
       })
-    : newVols;
+    : allVols;
 
   return (
     <div>
       <NavBar />
-      <Box className="database-parent">
-        <Box className="database-buttons">
-          <CSVButton vols={filteredVols} />
-          <CopyPhoneNumbersButton vols={filteredVols} />
-          <CopyEmailsButton vols={filteredVols} />
-          <AddVolunteerButton />
-        </Box>
-        <Box className="database-parent">
-          <Box className="database-search">
-            <VolunteerSearchBar basePath="/database" />
-          </Box>
-        </Box>
-      </Box>
-      <DatabaseVolunteersList vols={filteredVols} />
+      <DatabaseContent vols={filteredVols} currentUser={currentUser} />
     </div>
   );
 }
