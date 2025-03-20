@@ -60,7 +60,8 @@ export default function UserProfilePage({
     setEditable(false);
   };
   const handleSave = async () => {
-    setFormData((prev) => ({ ...prev, profileFinished: true }));
+    const updatedData = { ...formData, profileFinished: true };
+    setFormData(updatedData);
     setEditable(false);
 
     const res = await fetch(`/api/volunteer/${person._id}`, {
@@ -68,7 +69,7 @@ export default function UserProfilePage({
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(formData),
+      body: JSON.stringify(updatedData),
     });
 
     if (res.ok) {
