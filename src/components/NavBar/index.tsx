@@ -17,7 +17,7 @@ import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import { useState } from 'react';
 import '../../app/global.styles.css';
-
+import { useSession } from 'next-auth/react';
 const pages = [
   ['Home', '/'],
   ['Events', '/events'],
@@ -55,6 +55,8 @@ function NavBar() {
   const toggleHelpModal = () => {
     setIsModalOpen(!isModalOpen);
   };
+  const { data: session } = useSession();
+  const userRole = session?.user?.role; // if volunteer they dont need to see this button
 
   return (
     <AppBar position="sticky" className="navbar">
@@ -105,11 +107,21 @@ function NavBar() {
 
           {/* Navigation Buttons */}
           <Box className="nav-buttons">
-            {pages.map((page, index) => (
-              <Button key={index} href={page[1]} className="nav-button">
-                {page[0]}
-              </Button>
-            ))}
+            {pages.map((page, index) => {
+              // always display home, only display events if they are logged in, display databasse if they are logged in and not a volunteer (so they are admin / manager)
+              if (
+                index === 0 ||
+                (index === 1 && session) ||
+                (index === 2 && session && userRole !== 'Volunteer')
+              ) {
+                return (
+                  <Button key={index} href={page[1]} className="nav-button">
+                    {page[0]}
+                  </Button>
+                );
+              }
+              return null;
+            })}
             <Button onClick={toggleHelpModal} className="nav-button">
               Help
             </Button>
