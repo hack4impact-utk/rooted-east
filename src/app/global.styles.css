@@ -2,6 +2,7 @@
   --main-bgc: #d5c7bc;
   --box-bgc: #f5efeb;
   --lighter-green: #459863;
+  --darker-green: #14261C;
 }
 
 
@@ -201,13 +202,17 @@
   width: 48vw;
   overflow: scroll;
   margin: 0 1vw;
-  height: 80vh;
+  height: 77vh;
   position: fixed;
-  top: 17vh;
+  top: 22vh;
   left: 49vw;
   @media (max-width: 700px) {
     width: 98vw;
     left: 0;
+    top: 18vh;
+    background-color: var(--lighter-green) !important;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   }
 }
 
@@ -233,6 +238,14 @@
   z-index: 1000;
 }
 
+/* User Profile Page Parent*/
+.user-profile-page-parent {
+  display: flex;
+  justify-content: center;
+  overflow: hidden;
+  /* max-height: 100vh; */
+}
+
 /* User Profile Styling */
 
 .user-profile-page-container {
@@ -242,20 +255,38 @@
 }
 
 .user-profile-container {
-  overflow: auto;
-  max-height: 76vh;
-  /* position: absolute; */
-  width: 100%;
-  max-width: 36rem;
-  margin: 0;
-  padding: 3rem;
+  max-width: 45rem;
+  position: absolute;
   background-color: var(--lighter-green) !important;
   border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  overflow: auto;
+  max-height: 83vh;
+
+  
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.user-profile-inner-container {
+  width: 90%;
+  margin-top: 2rem;
+}
+
+/* User Profile Title */
+.user-profile-title {
+  color: var(--darker-green);
+  margin-bottom: 2rem;
+}
+
+.user-profile-form {
+  margin: none;
+  padding: none;
 }
 
 /* Paper formatting */
-.user-profile-form {
+.user-profile-form-section {
   padding: 2rem;
   margin-bottom: 3rem;
 }
@@ -265,7 +296,41 @@
   display: flex;
   justify-content: flex-end;
   gap: 1rem;
-  margin-top: 3rem;
+}
+
+@media (max-width: 600px) {
+  .user-profile-container {
+    background-color:rgba(0, 0, 0, 0) !important;
+    box-shadow: none;
+    padding: 0;
+    margin-bottom: 0;
+    max-height: unset;
+  }
+
+  .user-profile-title {
+    color: var(--darker-green);
+    margin-bottom: 1rem;
+  }
+
+  .user-profile-form {
+    overflow: scroll;
+    scrollbar-width: none;
+    height: 69vh;
+  }
+
+  .user-profile-form-section {
+    border-radius: 0.5rem;
+    padding: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .user-profile-buttons {
+    gap: 1rem;
+    margin-top: 0;
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 0;
+  }
 }
 
 /* Database styling */
