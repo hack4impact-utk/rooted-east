@@ -13,18 +13,28 @@
 }
 
 /* Manage Event Styling */
-
-.manage-event-search {
-  margin: 0 2vw
+.manage-event-buttons-and-list {
+  width: 46vw;
+  padding: 0 2vw;
+  @media (max-width: 700px) {
+    width: 96vw
+  }
 }
+
+.manage-event-box {
+  display: flex;
+}
+
+/* .manage-event-search {
+  margin: 0 2vw;
+} */
 
 .manage-event-parent {
   margin-left: 0.5rem;
   margin-top: 1rem;
-  width: 50%;
 
   margin: 2vw 0;
-  width: 100vw;
+  width: 100%;
 }
 
 .manage-event-title {
@@ -71,7 +81,7 @@
 .manage-event-boxes {
   display: flex;
   align-items: center;
-  margin: 1vw;
+  /* margin: 1vw; */
   justify-content: center;
 }
 
@@ -131,7 +141,7 @@
 .registered-vols-list-container {
   overflow: scroll;
   max-height: 65vh;
-  margin-left: 2vw;
+  /* margin-left: 2vw; */
   @media (max-width:400px) {
     max-height: 45vh;
   }
@@ -142,6 +152,10 @@
   align-items: center;
   gap: 1rem;
   margin-bottom: 1rem;
+  margin-left: 8px;
+  /* position: relative;
+  z-index: 0; */
+
   @media (max-width: 400px) {
     margin-bottom: 0;
     gap: 0;
@@ -183,13 +197,19 @@
 /* More Info Button Styling */
   
 .more-info-button {
+  display: flex;
+  justify-content: center;
+  width: 48vw;
+  overflow: scroll;
+  margin: 0 1vw;
+  height: 80vh;
   position: fixed;
-  top: 0;
-  right: 0;
-  width: 50%;
-  height: 100%;
-  z-index: 1300;
-  overflow-y: auto;
+  top: 17vh;
+  left: 49vw;
+  @media (max-width: 700px) {
+    width: 98vw;
+    left: 0;
+  }
 }
 
 .more-info-modal {
@@ -224,14 +244,28 @@
 
 /* User Profile Styling */
 
+.user-profile-page-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 2vh;
+}
+
 .user-profile-container {
-  position: absolute;
+  
+/*   position: absolute;
   width: 90%;
   max-width: 36rem;
   margin-top: 3rem;
   margin-bottom: 1rem;
   margin-left: 1.5rem;
-  margin-right: 1.5rem;
+  margin-right: 1.5rem; */
+  
+  overflow: auto;
+  max-height: 76vh;
+  /* position: absolute; */
+  width: 100%;
+  max-width: 36rem;
+  margin: 0;
   padding: 3rem;
   background-color: var(--lighter-green) !important;
   border-radius: 8px;
@@ -449,10 +483,10 @@
 /* Logo positioning */
 .logo-container {
   height: 4rem;
-  overflow: visible;
   display: flex;
   align-items: center;
   justify-content: flex-start;
+  width: 100%;
 }
 
 /* Center logo on small screens, left-align on larger screens */
@@ -533,23 +567,24 @@
 .welcome-box {
   flex: 1;
   display: flex;
+  flex-direction: column;
   flex-grow: 0;
   flex-shrink: 0;
   flex-basis: 30vw;
 }
 
 .welcome-content-box {
-  padding: 32px;
-  width: 30vw;
+  padding: 2rem;
+  width: 80%;
   height: 70vh;
   margin: 3vw;
   display: flex;
   flex-direction: column;
   align-items: center;
   background-color: #324033;
-  border-radius: 8px;
+  border-radius: .5rem;
   color:var(--main-bgc);
-  max-width: 450px;
+  max-width: 28rem;
   justify-content: center;
 }
 
@@ -583,6 +618,32 @@
 .welcome-hr {
   width: 100%;
   border-color: var(--main-bgc);
+}
+@media (max-width: 800px) {
+  .home-mui-box {
+    flex-direction: column;
+  }
+
+  .welcome-box {
+    flex-direction: column; 
+    justify-content: center;
+    align-items: center;
+  }
+
+  .welcome-content-box {
+    width: 80%; 
+    padding: 4vw; 
+  }
+
+  .login-button-container {
+    margin-top: 2vh;
+  }
+  .welcome-h4 {
+    font-size: 8vw;
+  }
+  .welcome-h5 {
+    font-size: 5vw;
+  }
 }
 
 /* Login Button */
@@ -656,8 +717,8 @@
   background-color: #324033;
   border-radius: 0.5rem;
   color: #D5C7BC;
-  max-height: 550px;
-  max-width: 450px;
+  max-height: 34rem;
+  max-width: 28rem;
   justify-content: center;
 }
 
@@ -666,9 +727,9 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  margin-top: 0.625rem;
-  margin-bottom: 3.75rem;
-  font-size: 2.25rem;
+  margin-top: -6rem;
+  margin-bottom: 2.75rem;
+  font-size: 3vw;
   font-weight: 400;
   text-align: center;
 }
@@ -676,17 +737,18 @@
 .admin-contact-item {
   text-align: center;
   color: #D5C7BC;
+  margin-top: 1rem;
 }
 
 .admin-contact-name {
-  font-size: 1.5rem;
+  font-size: 2vw;
   font-weight: 400;
   margin-bottom: 0.25rem;
 }
 
 .admin-contact-email,
 .admin-contact-phone {
-  font-size: 1rem;
+  font-size: 1vw;
   margin-bottom: 0.25rem;
 }
 
@@ -694,7 +756,32 @@
   width: 100%;
   border: none;
   border-top: 0.0625rem solid #D5C7BC;
-  margin-top: 0.75rem;
+  margin-top: 2rem;
+}
+
+@media (max-width: 800px) {
+  .admin-contact-container {
+    flex-direction: column; 
+    justify-content: center;
+    align-items: center;
+  }
+  .admin-contact-card {
+    width: 80%; 
+    padding: 4vw; 
+  }
+  .admin-contact-title {
+    font-size: 8vw;
+  }
+  .admin-contact-name {
+    font-size: 6vw;
+  }
+  .admin-contact-item {
+    font-size: 6vw;
+  } 
+  .admin-contact-email,
+  .admin-contact-phone {
+    font-size: 4vw;
+  }
 }
 
 /* Cancel Signup Button */
@@ -714,4 +801,19 @@
 
 .cancel-signup-dialog-text {
   margin: 0.9375rem;
+}
+
+/* Mobile Responsiveness for Nav Bar logo */
+
+@media (max-width: 800px) {
+  .logo-container {
+    justify-content: center; 
+  }
+  
+  .logo-button {
+    display: flex;
+    justify-content: center;
+    padding: 0;
+    min-width: unset;
+  }
 }
