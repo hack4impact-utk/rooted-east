@@ -11,11 +11,10 @@ export default async function UserProfile() {
     return (
       <>
         <NavBar />
-        
-<!--         <Box className="user-profile-page-parent"> -->
-        
+
+        {/* <Box className="user-profile-page-parent"> */}
+
         <div className="user-profile-page-container">
-          
           <UserProfilePage
             currentUser={JSON.parse(JSON.stringify(user))}
             person={JSON.parse(JSON.stringify(user))}

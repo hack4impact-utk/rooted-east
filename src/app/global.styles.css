@@ -202,13 +202,17 @@
   width: 48vw;
   overflow: scroll;
   margin: 0 1vw;
-  height: 80vh;
+  height: 77vh;
   position: fixed;
-  top: 17vh;
+  top: 22vh;
   left: 49vw;
   @media (max-width: 700px) {
     width: 98vw;
     left: 0;
+    top: 18vh;
+    background-color: var(--lighter-green) !important;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   }
 }
 
@@ -251,25 +255,23 @@
 }
 
 .user-profile-container {
-  
-/*   position: absolute;
-  width: 90%;
-  max-width: 36rem;
-  margin-top: 3rem;
-  margin-bottom: 1rem;
-  margin-left: 1.5rem;
-  margin-right: 1.5rem; */
-  
-  overflow: auto;
-  max-height: 76vh;
-  /* position: absolute; */
-  width: 100%;
-  max-width: 36rem;
-  margin: 0;
-  padding: 3rem;
+  max-width: 45rem;
+  position: absolute;
   background-color: var(--lighter-green) !important;
   border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  overflow: auto;
+  max-height: 83vh;
+
+  
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.user-profile-inner-container {
+  width: 90%;
+  margin-top: 2rem;
 }
 
 /* User Profile Title */
@@ -301,7 +303,6 @@
     background-color:rgba(0, 0, 0, 0) !important;
     box-shadow: none;
     padding: 0;
-    margin-top: 2rem;
     margin-bottom: 0;
     max-height: unset;
   }
@@ -314,12 +315,13 @@
   .user-profile-form {
     overflow: scroll;
     scrollbar-width: none;
-    padding: 1rem;
     height: 69vh;
   }
 
   .user-profile-form-section {
     border-radius: 0.5rem;
+    padding: 1rem;
+    margin-bottom: 1rem;
   }
 
   .user-profile-buttons {
