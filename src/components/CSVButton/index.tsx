@@ -33,7 +33,11 @@ export default function CSVButton({ vols }: Props) {
   }
 
   return (
-    <Button variant="contained" onClick={onChange}>
+    <Button
+      variant="contained"
+      className="manage-event-buttons"
+      onClick={onChange}
+    >
       Download CSV
     </Button>
   );
