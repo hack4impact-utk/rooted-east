@@ -11,7 +11,7 @@ function AddVolunteerButton() {
 
   return (
     <Box className="add-volunteer-container">
-      <Button className="add-volunteer-button" onClick={handleClick}>
+      <Button className="manage-event-buttons" onClick={handleClick}>
         ADD VOLUNTEER
       </Button>
 
