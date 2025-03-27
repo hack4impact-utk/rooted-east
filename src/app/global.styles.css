@@ -466,6 +466,18 @@
 }
 
 /* Navbar container */
+.help-modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  color: #37403a;
+  padding: 1.3rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 .25rem 0.5rem rgba(0, 0, 0, 0.1);
+}
+
 .navbar {
     background-color: var(--lighter-green) !important;
 }
@@ -582,10 +594,10 @@
 }
 
 .welcome-content-box {
-  padding: 2rem;
-  width: 80%;
-  height: 70vh;
-  margin: 3vw;
+  padding: 1rem;
+  width: 40vw;
+  height: 80vh;
+  margin: 1vw;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -600,26 +612,41 @@
   margin: 0;
   font-family: "Roboto","Helvetica","Arial",sans-serif;
   font-weight: 400;
-  font-size: 3.125rem;
+  font-size: 2.25rem;
   line-height: 1.235;
   letter-spacing: 0.00735em;
   align-items: center;
   white-space: nowrap;
-  overflow: hidden;
   text-overflow: ellipsis;
-  margin-top: 1vh;
+  margin-top: 5vh;
+  margin-bottom: 2vh;
+  color: var( --main-bgc );
+}
+
+.welcome-emojis{
+  margin: 0;
+  font-family: "Roboto","Helvetica","Arial",sans-serif;
+  font-weight: 100;
+  font-size: 2rem;
+  line-height: 0;
+  letter-spacing: 0.00735em;
+  align-items: center;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  margin-top: 2vh;
   margin-bottom: 5vh;
+  color: var( --main-bgc );
 }
 
 .welcome-h5 {
   font-family: "Roboto","Helvetica","Arial",sans-serif;
   font-weight: 400;
-  font-size: 1.5rem;
-  line-height: 1.7;
+  font-size: 1.25rem;
+  line-height: 1.5;
   letter-spacing: 0em;
   margin: 0;
-  margin-bottom: 22px;
-  margin-top: 22px;
+  margin-bottom: 20px;
+  margin-top: 20px;
   text-align: center;
 }
 
@@ -715,31 +742,36 @@
 }
 
 .admin-contact-card {
-  padding: 2rem;
-  width: 30vw;
-  height: 70vh;
-  margin: 3vw;
-  display: flex;
+  padding: 1rem;
+  overflow: scroll;
+  width: 40vw;
+  height: 80vh;
+  margin: 1vw;
+  display: auto;
   flex-direction: column;
   align-items: center;
-  background-color: #324033;
-  border-radius: 0.5rem;
-  color: #D5C7BC;
-  max-height: 34rem;
+  background-color: #324033 !important;
+  border-radius: .5rem;
+  color:var(--main-bgc);
   max-width: 28rem;
   justify-content: center;
 }
 
 
 .admin-contact-title {
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  margin-top: -6rem;
-  margin-bottom: 2.75rem;
-  font-size: 3vw;
+  margin: 0;
+  font-family: "Roboto","Helvetica","Arial",sans-serif;
   font-weight: 400;
+  font-size: 2.25rem;
+  line-height: 1;
+  letter-spacing: 0.001em;
+  align-items: center;
   text-align: center;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  margin-top: 4vh;
+  margin-bottom: 5vh;
+  color: var( --main-bgc );
 }
 
 .admin-contact-item {
@@ -749,22 +781,40 @@
 }
 
 .admin-contact-name {
-  font-size: 2vw;
-  font-weight: 400;
-  margin-bottom: 0.25rem;
+  margin: 0;
+  font-family: "Roboto","Helvetica","Arial",sans-serif;
+  font-weight: 300;
+  font-size: 1.5rem;
+  line-height: 1;
+  letter-spacing: 0.001em;
+  align-items: center;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  margin-top: 4vh;
+  margin-bottom: 1vh;
+  color: var( --main-bgc );
 }
 
 .admin-contact-email,
 .admin-contact-phone {
-  font-size: 1vw;
-  margin-bottom: 0.25rem;
+  margin: 0;
+  font-family: "Roboto","Helvetica","Arial",sans-serif;
+  font-weight: 100;
+  font-size: 1rem;
+  line-height: .75;
+  letter-spacing: 0.00735em;
+  align-items: center;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  margin-top: 2.0vh;
+  margin-bottom: 1.75vh;
+  color: var( --main-bgc );
 }
 
 .admin-contact-divider {
-  width: 100%;
+  width: 75%;
   border: none;
   border-top: 0.0625rem solid #D5C7BC;
-  margin-top: 2rem;
 }
 
 @media (max-width: 800px) {

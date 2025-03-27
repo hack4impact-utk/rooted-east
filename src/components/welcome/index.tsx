@@ -6,7 +6,6 @@ const Welcome = () => {
   return (
     <Box className="welcome-box">
       <Box className="welcome-content-box">
-        <h4 className="welcome-h4"> Welcome! </h4>
         <LoginButton></LoginButton>
       </Box>
     </Box>
