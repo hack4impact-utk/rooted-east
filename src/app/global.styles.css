@@ -466,6 +466,18 @@
 }
 
 /* Navbar container */
+.help-modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  color: #37403a;
+  padding: 1.3rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 .25rem 0.5rem rgba(0, 0, 0, 0.1);
+}
+
 .navbar {
     background-color: var(--lighter-green) !important;
 }

@@ -131,7 +131,7 @@ function NavBar() {
           {isModalOpen && (
             <div>
               <div className="modal-overlay" onClick={toggleHelpModal} />
-              <div className="modal">
+              <div className="help-modal">
                 <IconButton onClick={toggleHelpModal} className="modal-close">
                   ✕
                 </IconButton>
