@@ -25,19 +25,22 @@ const AdminContactInfo = ({ volunteers }: { volunteers: Volunteer[] }) => {
   return (
     <Box className="admin-contact-container">
       <Paper className="admin-contact-card">
-        <Typography className="admin-contact-title">Contact Us</Typography>
+        <Typography className="admin-contact-title">Contact Us!</Typography>
+
         {volunteers.map((volunteer) => (
           <div key={volunteer.email} className="admin-contact-item">
+            <hr className="admin-contact-divider" />
+
             <Typography className="admin-contact-name">
               {volunteer.firstName} {volunteer.lastName}
             </Typography>
             <Typography className="admin-contact-email">
-              <strong>Email:</strong> {volunteer.email}
+              <strong>📧 Email:</strong> {volunteer.email}
             </Typography>
             <Typography className="admin-contact-phone">
-              <strong>Phone:</strong> {formatPhoneNumber(volunteer.phoneNumber)}
+              <strong>☎️ Phone:</strong>{' '}
+              {formatPhoneNumber(volunteer.phoneNumber)}
             </Typography>
-            <hr className="admin-contact-divider" />
           </div>
         ))}
       </Paper>
