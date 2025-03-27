@@ -33,6 +33,8 @@ export default function LoginButton() {
 
   return (
     <>
+      <h4 className="welcome-h4"> Welcome! </h4>
+      <h4 className="welcome-emojis">🍓🌿🥕</h4>
       <hr className="welcome-hr" />
       <h5 className="welcome-h5">
         Login to continue to the Rooted East Participant Management System.

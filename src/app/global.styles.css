@@ -600,26 +600,41 @@
   margin: 0;
   font-family: "Roboto","Helvetica","Arial",sans-serif;
   font-weight: 400;
-  font-size: 3.125rem;
+  font-size: 2.25rem;
   line-height: 1.235;
   letter-spacing: 0.00735em;
   align-items: center;
   white-space: nowrap;
-  overflow: hidden;
   text-overflow: ellipsis;
-  margin-top: 1vh;
+  margin-top: 5vh;
+  margin-bottom: 2vh;
+  color: var( --main-bgc );
+}
+
+.welcome-emojis{
+  margin: 0;
+  font-family: "Roboto","Helvetica","Arial",sans-serif;
+  font-weight: 100;
+  font-size: 2rem;
+  line-height: 0;
+  letter-spacing: 0.00735em;
+  align-items: center;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  margin-top: 2vh;
   margin-bottom: 5vh;
+  color: var( --main-bgc );
 }
 
 .welcome-h5 {
   font-family: "Roboto","Helvetica","Arial",sans-serif;
   font-weight: 400;
-  font-size: 1.5rem;
-  line-height: 1.7;
+  font-size: 1.25rem;
+  line-height: 1.5;
   letter-spacing: 0em;
   margin: 0;
-  margin-bottom: 22px;
-  margin-top: 22px;
+  margin-bottom: 20px;
+  margin-top: 20px;
   text-align: center;
 }
 
