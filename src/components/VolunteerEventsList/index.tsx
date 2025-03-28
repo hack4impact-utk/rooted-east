@@ -17,7 +17,7 @@ interface EventObjectList {
 export default function VolunteerEventsList(props: EventObjectList) {
   const isFutureEvent = (eventDate: Date) => {
     const today = new Date();
-    return eventDate > today;
+    return eventDate >= today;
   };
 
   return (
@@ -36,6 +36,8 @@ export default function VolunteerEventsList(props: EventObjectList) {
               return;
             }
           }
+          // RL: hides the event if the event is not future or current (so past due)
+          if (!isFutureEvent(event.day)) return null;
           return (
             <ListItem className="vol-events-list-item" key={index}>
               <Box className="vol-events-list-item-box">{event.title}</Box>
