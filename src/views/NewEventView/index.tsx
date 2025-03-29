@@ -45,21 +45,40 @@ export default function NeweventView({ managers }: NeweventViewProps) {
   };
 
   return (
-    <Grid2 container spacing={2} sx={{ mt: 2 }}>
-      <Grid2 xs={12}>
-        <Typography variant="h4">New Event</Typography>
+    <Grid2
+      container
+      spacing={2}
+      sx={{
+        mt: 2,
+        pt: 1,
+        px: 3,
+        pb: 3,
+        height: '100vh', // Make the whole grid fill the screen height
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center', // Center everything
+      }}
+    >
+      <Grid2 xs={12} sx={{ pb: 1 }}>
+        <Typography variant="h4" sx={{ fontSize: '1.75rem', mb: 0 }}>
+          New Event
+        </Typography>
       </Grid2>
-      <Grid2 xs={12}>
+
+      <Grid2 xs={12} sx={{ pb: 1 }}>
         <NewEventForm
           eventData={formData}
           managers={managers}
           onChange={setFormData}
         />
       </Grid2>
-      <Grid2 xs={12}>
+      <Grid2 xs={12} sx={{ pb: 1 }}>
         <Button
           variant="contained"
-          color="primary"
+          sx={{
+            backgroundColor: 'green',
+            '&:hover': { backgroundColor: 'darkgreen' },
+          }}
           fullWidth
           onClick={submitHandler}
         >
