@@ -50,7 +50,10 @@ export default function DatabaseContent(props: DatabaseContentProps) {
       </div>
       {currPerson && currentUser && (
         <Box className="more-info-button">
-          <UserProfilePage currentUser={currentUser} person={currPerson} />
+          <UserProfilePage
+            currentUser={JSON.parse(JSON.stringify(currentUser))}
+            person={JSON.parse(JSON.stringify(currPerson))}
+          />
         </Box>
       )}
     </div>
