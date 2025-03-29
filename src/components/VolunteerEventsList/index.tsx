@@ -1,5 +1,5 @@
 import React from 'react';
-import ManageEventButton from '../ManageEventPage';
+import ManageEventButton from '../ManageEventButton';
 import { Box, List, ListItem } from '@mui/material';
 import CancelSignUpButton from '../CancelSignUpButton';
 import { EventVolunteerResponsePopulatedEvent } from '@/types/dataModel/eventVolunteer';

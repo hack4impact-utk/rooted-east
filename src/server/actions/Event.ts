@@ -262,6 +262,6 @@ export async function getCurrentEventsForVolunteer(
       }).populate({ path: 'event', match: { day: { $gte: new Date() } } })
     )
   ) as EventVolunteerResponsePopulatedEvent[];
-
-  return eventVols;
+  const eventVolsFiltered = eventVols.filter((x) => x.event != null);
+  return eventVolsFiltered;
 }

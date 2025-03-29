@@ -35,6 +35,7 @@ export const zEventVolunteerResponse = zEventVolunteer;
 export const zEventVolunteerResponsePopulatedEvent =
   zEventVolunteerResponse.extend({
     event: zEventEntity,
+    _id: zObjectId,
   });
 
 export interface EventVolunteer extends z.infer<typeof zEventVolunteer> {}

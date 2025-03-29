@@ -7,7 +7,7 @@ import {
   getEventVolunteer,
 } from '@/server/actions/EventVolunteer';
 import SignUpButton from '../SignUpButton';
-import ManageEventButton from '../ManageEventPage';
+import ManageEventButton from '../ManageEventButton';
 import { EventVolunteerEntity } from '@/types/dataModel/eventVolunteer';
 import { getVolunteer } from '@/server/actions/Volunteer';
 
@@ -40,7 +40,7 @@ export default function UpcomingEventsList(props: EventObjectList) {
               <Box className="vol-events-list-item-box">{event.title}</Box>
 
               {/* Conditional Buttons */}
-              {eventVol && (
+              {!eventVol && (
                 <SignUpButton
                   event={event._id.toString()}
                   volunteer={props.volunteerID.toString()}

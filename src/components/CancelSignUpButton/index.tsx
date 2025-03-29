@@ -18,7 +18,7 @@ export default function CancelSignUpButton(props: CancelSignUpButtonProps) {
     console.log('test');
     try {
       const response = await fetch(
-        `/api/eventVolunteer/${props.eventVolunteer.event._id}`,
+        `/api/eventVolunteer/${props.eventVolunteer._id}`,
         {
           method: 'DELETE',
           headers: {
@@ -33,6 +33,7 @@ export default function CancelSignUpButton(props: CancelSignUpButtonProps) {
       console.log(response);
     } catch (error) {
       console.log('Error during volunteer sign-up cancellation: ', error);
+      console.log(error);
     }
 
     location.reload();
@@ -49,7 +50,7 @@ export default function CancelSignUpButton(props: CancelSignUpButtonProps) {
         onClick={handleClickOpen}
         className="cancel-signup-button"
       >
-        Cancel Sign up
+        Cancel
       </Button>
       <Dialog onClose={handleClose} open={open}>
         <DialogContentText className="cancel-signup-dialog-text">
