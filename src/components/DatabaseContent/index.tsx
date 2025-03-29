@@ -39,10 +39,8 @@ export default function DatabaseContent(props: DatabaseContentProps) {
             <CopyEmailsButton vols={vols} />
             <AddVolunteerButton />
           </Box>
-          <Box className="database-parent">
-            <Box className="database-search">
-              <VolunteerSearchBar basePath="/database" />
-            </Box>
+          <Box className="database-search">
+            <VolunteerSearchBar basePath="/database" />
           </Box>
         </Box>
         <DatabaseVolunteersList

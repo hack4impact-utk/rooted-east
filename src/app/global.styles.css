@@ -342,10 +342,9 @@
 /* Database styling */
 
 .database-search {
-  margin-left: 0.5rem;
-  margin-right: 1rem;
-  margin-top: 1rem;
-  margin-bottom: 1rem;
+  margin: 1rem;
+  width: 100%;
+  max-width: calc(100% - 1.2rem);
 }
 
 .database-parent {
@@ -356,12 +355,14 @@
 
 .database-buttons {
   display: flex;
-  align-items: center;
-  margin-right: 1rem;
-  margin-top: 1rem;
-  margin-bottom: 1rem;
-  margin-left: 1rem;
   gap: 1rem;
+  margin: 1rem;
+  margin-right: none;
+}
+
+.database-buttons button {
+  max-width: 200px;
+  margin-right: none;
 }
 
 .database-container {
@@ -370,17 +371,18 @@
   margin-left: 1.5rem;
   background-color: var(--main-bgc);
 }
+
 .database-list-item {
   color: #000000;
   background-color: var(--box-bgc);
   flex: 1;
-  max-width: 50.25%;
   display: flex;
   align-items: center;
   justify-content: space-between;
   border-radius: 0.25rem;
   padding: .5rem;
   margin-bottom: 1.5rem;
+  max-width: 50%;
 }
 
 .database-names,
@@ -408,6 +410,47 @@
 .database-more-info {
   flex-grow: 1;
   justify-content: flex-end;
+}
+
+@media (max-width: 768px) {
+  .database-search {
+    width: calc(100% - 3.5rem);
+    max-width: none;
+    margin-right: 1rem;
+    padding-right: 1rem;
+    margin: none;
+  }
+  
+  .database-parent {
+    width: 100%;
+    margin-left: none;
+    margin-right: 1.5rem;
+    padding-right: 1rem;
+  }
+  
+  /* .database-buttons {
+    max-width: 40%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  } */
+  .database-buttons {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    justify-content: center;
+  }
+  
+  .database-buttons button {
+    flex: 1 1 calc(50% - 1rem);
+    max-width: none;
+    margin-right: 1.7rem;
+  }
+  
+  .database-list-item {
+    width: calc(100% - 2rem);
+    max-width: none;
+  }
 }
 
 .add-event-container {
