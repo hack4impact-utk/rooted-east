@@ -58,7 +58,7 @@ export default async function Events() {
   });
 
   return (
-    <>
+    <div>
       <NavBar />
       <Box className="events-container">
         <Box className="events-flex-container">
@@ -72,12 +72,17 @@ export default async function Events() {
           <Box className="upcoming-events-container">
             <Box className="upcoming-events-header">
               <h3>Upcoming Events</h3>
-              <AddEventButton managers={formattedManagers} />
+              <AddEventButton
+                managers={JSON.parse(JSON.stringify(formattedManagers))}
+              />
             </Box>
-            <UpcomingEventsList events={upcomingEvents} volunteerID={userId} />
+            <UpcomingEventsList
+              events={JSON.parse(JSON.stringify(upcomingEvents))}
+              volunteerID={JSON.parse(JSON.stringify(userId))}
+            />
           </Box>
         </Box>
       </Box>
-    </>
+    </div>
   );
 }
