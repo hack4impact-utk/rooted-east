@@ -2,7 +2,7 @@ import UserProfilePage from '@/components/UserProfilePage';
 import NavBar from '@/components/NavBar';
 import '@/styles.css';
 import { getCurrentUser } from '@/utils/getCurrentUser';
-import CMError, { CMErrorType } from '@/utils/cmerror';
+import { redirect } from 'next/navigation';
 
 export default async function UserProfile() {
   const user = await getCurrentUser();
@@ -23,6 +23,6 @@ export default async function UserProfile() {
       </>
     );
   } else {
-    throw new CMError(CMErrorType.NoSuchKey, 'Volunteer');
+    redirect('/');
   }
 }
