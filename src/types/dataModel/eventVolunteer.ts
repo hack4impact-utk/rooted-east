@@ -2,6 +2,7 @@ import { z } from 'zod';
 
 import EventVolunteer from '@/server/models/EventVolunteer';
 import { zObjectId } from './base';
+import { zEventEntity } from './event';
 
 const zEventVolunteer = z.object({
   volunteer: zObjectId,
@@ -31,6 +32,12 @@ export const zCheckOutVolunteerRequest = z.object({
 
 export const zEventVolunteerResponse = zEventVolunteer;
 
+export const zEventVolunteerResponsePopulatedEvent =
+  zEventVolunteerResponse.extend({
+    event: zEventEntity,
+    _id: zObjectId,
+  });
+
 export interface EventVolunteer extends z.infer<typeof zEventVolunteer> {}
 export interface CreateEventVolunteerRequest
   extends z.infer<typeof zCreateEventVolunteerRequest> {}
@@ -44,3 +51,5 @@ export interface CheckOutVolunteerRequest
   extends z.infer<typeof zCheckOutVolunteerRequest> {}
 export interface EventVolunteerResponse
   extends z.infer<typeof zEventVolunteerResponse> {}
+export interface EventVolunteerResponsePopulatedEvent
+  extends z.infer<typeof zEventVolunteerResponsePopulatedEvent> {}

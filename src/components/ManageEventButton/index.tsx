@@ -24,7 +24,7 @@ export default function ManageEventButton({ event }: Props) {
       onClick={() => router.push(`/manageEvent/${event}`)}
       className="manage-event-button"
     >
-      Manage Event
+      Manage
     </Button>
   );
 }

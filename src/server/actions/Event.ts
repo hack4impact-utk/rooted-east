@@ -11,7 +11,10 @@ import { EventEntity, EventVolVol } from '@/types/dataModel/event';
 import EventVolunteerSchema from '@/server/models/EventVolunteer';
 import { VolunteerEntity } from '@/types/dataModel/volunteer';
 import VolunteerSchema from '@/server/models/Volunteer';
-import { EventVolunteerEntity } from '@/types/dataModel/eventVolunteer';
+import {
+  EventVolunteerEntity,
+  EventVolunteerResponsePopulatedEvent,
+} from '@/types/dataModel/eventVolunteer';
 
 export async function createEvent(
   createEventRequest: CreateEventRequest
@@ -244,4 +247,21 @@ export async function getAllVolunteersAndEventVolunteersForEvent(
   }
 
   return eventVolVols;
+}
+
+export async function getCurrentEventsForVolunteer(
+  volunteerId: string
+): Promise<EventVolunteerResponsePopulatedEvent[]> {
+  console.log(volunteerId);
+  await dbConnect();
+
+  const eventVols = JSON.parse(
+    JSON.stringify(
+      await EventVolunteerSchema.find({
+        volunteer: volunteerId,
+      }).populate({ path: 'event', match: { day: { $gte: new Date() } } })
+    )
+  ) as EventVolunteerResponsePopulatedEvent[];
+  const eventVolsFiltered = eventVols.filter((x) => x.event != null);
+  return eventVolsFiltered;
 }

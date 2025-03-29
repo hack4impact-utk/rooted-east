@@ -23,7 +23,7 @@ const zEvent = z.object({
   manager: zObjectId,
 });
 
-const zEventEntity = zEvent.extend({
+export const zEventEntity = zEvent.extend({
   _id: zObjectId,
 });
 

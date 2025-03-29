@@ -15,7 +15,6 @@ export default function SignUpButton(props: CreateEventVolunteerRequest) {
       if (!response.ok) {
         throw new Error('Failed to sign up. Please try again.');
       }
-      alert('signed up');
       location.reload();
     } catch (error) {
       alert(error);
