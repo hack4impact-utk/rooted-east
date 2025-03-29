@@ -8,7 +8,7 @@ import {
   getEventVolunteer,
 } from '@/server/actions/EventVolunteer';
 import SignUpButton from '../SignUpButton';
-import ManageEventButton from '../ManageEventPage';
+import ManageEventButton from '../ManageEventButton';
 import { EventVolunteerEntity } from '@/types/dataModel/eventVolunteer';
 import { getVolunteer } from '@/server/actions/Volunteer';
 

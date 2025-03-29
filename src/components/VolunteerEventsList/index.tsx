@@ -1,6 +1,6 @@
 import React from 'react';
 import { EventEntity } from '@/types/dataModel/event';
-import ManageEventButton from '../ManageEventPage';
+import ManageEventButton from '../ManageEventButton';
 import { Box, List, ListItem } from '@mui/material';
 import CancelSignUpButton from '../CancelSignUpButton';
 import {

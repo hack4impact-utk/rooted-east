@@ -57,7 +57,7 @@ export default function CancelSignUpButton(props: CancelSignUpButtonProps) {
         onClick={handleClickOpen}
         className="cancel-signup-button"
       >
-        Cancel Sign up
+        Cancel
       </Button>
       <Dialog onClose={handleClose} open={open}>
         <DialogContentText className="cancel-signup-dialog-text">
