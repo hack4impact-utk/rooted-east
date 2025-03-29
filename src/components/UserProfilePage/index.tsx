@@ -59,8 +59,20 @@ export default function UserProfilePage({
     setFormData(person); // Revert changes
     setEditable(false);
   };
+
+  const isProfileComplete = () => {
+    if (
+      formData.firstName &&
+      formData.lastName &&
+      formData.email &&
+      formData.phoneNumber
+    )
+      return true;
+    return false;
+  };
+
   const handleSave = async () => {
-    const updatedData = { ...formData, profileFinished: true };
+    const updatedData = { ...formData, profileFinished: isProfileComplete() };
     setFormData(updatedData);
     setEditable(false);
 
@@ -75,7 +87,7 @@ export default function UserProfilePage({
     if (res.ok) {
       setSnackbarMessage('Profile saved successfully!');
       sessionUpdate({
-        profileFinished: true,
+        profileFinished: isProfileComplete(),
       });
     } else {
       setSnackbarMessage('Failed to save profile. Please try again.');
