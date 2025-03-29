@@ -112,7 +112,7 @@ function NavBar() {
               if (
                 index === 0 ||
                 (index === 1 && session) ||
-                (index === 2 && session && userRole !== 'Volunteer')
+                (index === 2 && session && userRole == 'Admin')
               ) {
                 return (
                   <Button key={index} href={page[1]} className="nav-button">
