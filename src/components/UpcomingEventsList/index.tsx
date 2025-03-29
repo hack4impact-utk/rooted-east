@@ -2,7 +2,6 @@ import React from 'react';
 import { EventEntity } from '@/types/dataModel/event';
 import MoreInfoButton from '../MoreInfoButton';
 import { Box, List, ListItem } from '@mui/material';
-import CancelSignUpButton from '../CancelSignUpButton';
 import {
   checkIfEventVolunteerExists,
   getEventVolunteer,
@@ -41,12 +40,7 @@ export default function UpcomingEventsList(props: EventObjectList) {
               <Box className="vol-events-list-item-box">{event.title}</Box>
 
               {/* Conditional Buttons */}
-              {eventVol ? (
-                <CancelSignUpButton
-                  event={event}
-                  eventVolId={eventVol._id.toString()}
-                />
-              ) : (
+              {eventVol && (
                 <SignUpButton
                   event={event._id.toString()}
                   volunteer={props.volunteerID.toString()}
