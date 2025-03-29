@@ -12,8 +12,13 @@ export default async function UserProfile() {
       <>
         <NavBar />
 
-        {/* <Box className="user-profile-page-parent"> */}
-
+        {!user.profileFinished && (
+          <div className="user-profile-not-finished-warning-container">
+            <h1 className="user-profile-not-finished-warning">
+              Please Complete Profile To Continue
+            </h1>
+          </div>
+        )}
         <div className="user-profile-page-container">
           <UserProfilePage
             currentUser={JSON.parse(JSON.stringify(user))}
