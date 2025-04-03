@@ -197,17 +197,23 @@
 }
 
 /* More Info Button Styling */
-  
+.close-button {
+  position: absolute;
+  top: 3vh;
+  left: 3vh;
+  z-index: 10;
+}
+
 .more-info-button {
   display: flex;
-  justify-content: center;
-  width: 48vw;
-  overflow: scroll;
+  z-index: 1;
+  width: 45vw;
+  overflow: hidden;
   margin: 0 1vw;
   height: 77vh;
   position: fixed;
   top: 22vh;
-  left: 49vw;
+  left: 51vw;
   @media (max-width: 700px) {
     width: 98vw;
     left: 0;

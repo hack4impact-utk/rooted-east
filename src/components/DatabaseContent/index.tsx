@@ -7,9 +7,10 @@ import CSVButton from '@/components/CSVButton';
 import CopyPhoneNumbersButton from '@/components/CopyPhoneNumbersButton';
 import CopyEmailsButton from '@/components/CopyEmailsButton';
 import VolunteerSearchBar from '@/components/VolunteerSearchBar';
-import { Box } from '@mui/material';
+import { Box, IconButton } from '@mui/material';
 import AddVolunteerButton from '@/components/AddVolunteerButton';
 import UserProfilePage from '@/components/UserProfilePage';
+import CloseIcon from '@mui/icons-material/Close';
 
 interface DatabaseContentProps {
   vols: VolunteerEntity[];
@@ -27,6 +28,10 @@ export default function DatabaseContent(props: DatabaseContentProps) {
     } else {
       setCurPerson(person);
     }
+  };
+
+  const handleCloseUserProfile = () => {
+    setCurPerson(null);
   };
 
   return (
@@ -50,6 +55,14 @@ export default function DatabaseContent(props: DatabaseContentProps) {
       </div>
       {currPerson && currentUser && (
         <Box className="more-info-button">
+          <IconButton
+            className="close-button"
+            aria-label="close"
+            size="large"
+            onClick={handleCloseUserProfile}
+          >
+            <CloseIcon />
+          </IconButton>
           <UserProfilePage
             currentUser={JSON.parse(JSON.stringify(currentUser))}
             person={JSON.parse(JSON.stringify(currPerson))}
