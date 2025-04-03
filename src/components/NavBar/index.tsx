@@ -112,7 +112,7 @@ function NavBar() {
               if (
                 index === 0 ||
                 (index === 1 && session) ||
-                (index === 2 && session && userRole !== 'Volunteer')
+                (index === 2 && session && userRole == 'Admin')
               ) {
                 return (
                   <Button key={index} href={page[1]} className="nav-button">
@@ -146,32 +146,37 @@ function NavBar() {
           )}
 
           {/* Profile menu */}
-          <Box>
-            <Tooltip title="Open settings">
-              <IconButton onClick={handleOpenUserMenu} className="profile-icon">
-                <Avatar src="/static/images/avatar/2.jpg" />
-              </IconButton>
-            </Tooltip>
-            <Menu
-              id="menu-appbar"
-              anchorEl={anchorElUser}
-              open={Boolean(anchorElUser)}
-              onClose={handleCloseUserMenu}
-              className="profile-menu"
-            >
-              {settings.map((setting, index) => (
-                <MenuItem key={index}>
-                  <Typography
-                    component="a"
-                    href={setting[1]}
-                    className="profile-menu-item"
-                  >
-                    {setting[0]}
-                  </Typography>
-                </MenuItem>
-              ))}
-            </Menu>
-          </Box>
+          {session && (
+            <Box>
+              <Tooltip title="Open settings">
+                <IconButton
+                  onClick={handleOpenUserMenu}
+                  className="profile-icon"
+                >
+                  <Avatar src="/static/images/avatar/2.jpg" />
+                </IconButton>
+              </Tooltip>
+              <Menu
+                id="menu-appbar"
+                anchorEl={anchorElUser}
+                open={Boolean(anchorElUser)}
+                onClose={handleCloseUserMenu}
+                className="profile-menu"
+              >
+                {settings.map((setting, index) => (
+                  <MenuItem key={index}>
+                    <Typography
+                      component="a"
+                      href={setting[1]}
+                      className="profile-menu-item"
+                    >
+                      {setting[0]}
+                    </Typography>
+                  </MenuItem>
+                ))}
+              </Menu>
+            </Box>
+          )}
         </Toolbar>
       </Container>
     </AppBar>

@@ -80,7 +80,7 @@ export default function AuthErrorPage() {
                 backgroundColor: 'white',
                 '&:hover': { backgroundColor: '#f2f2f2' },
               }}
-              onClick={() => signIn('google', { callbackUrl: '/auth/signin' })}
+              onClick={() => signIn('google', { callbackUrl: '/' })}
             >
               Try Again
             </Button>

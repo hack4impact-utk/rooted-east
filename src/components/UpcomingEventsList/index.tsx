@@ -2,13 +2,12 @@ import React from 'react';
 import { EventEntity } from '@/types/dataModel/event';
 import MoreInfoButton from '../MoreInfoButton';
 import { Box, List, ListItem } from '@mui/material';
-import CancelSignUpButton from '../CancelSignUpButton';
 import {
   checkIfEventVolunteerExists,
   getEventVolunteer,
 } from '@/server/actions/EventVolunteer';
 import SignUpButton from '../SignUpButton';
-import ManageEventButton from '../ManageEventPage';
+import ManageEventButton from '../ManageEventButton';
 import { EventVolunteerEntity } from '@/types/dataModel/eventVolunteer';
 import { getVolunteer } from '@/server/actions/Volunteer';
 
@@ -41,12 +40,7 @@ export default function UpcomingEventsList(props: EventObjectList) {
               <Box className="vol-events-list-item-box">{event.title}</Box>
 
               {/* Conditional Buttons */}
-              {eventVol ? (
-                <CancelSignUpButton
-                  event={event}
-                  eventVolId={eventVol._id.toString()}
-                />
-              ) : (
+              {!eventVol && (
                 <SignUpButton
                   event={event._id.toString()}
                   volunteer={props.volunteerID.toString()}

@@ -1,6 +1,10 @@
 import VolunteerEventsList from '@/components/VolunteerEventsList';
 import UpcomingEventsList from '@/components/UpcomingEventsList';
-import { getUpcomingEvents, getVolunteerEvents } from '@/server/actions/Event';
+import {
+  getCurrentEventsForVolunteer,
+  getUpcomingEvents,
+  getVolunteerEvents,
+} from '@/server/actions/Event';
 import { Box } from '@mui/material';
 import NavBar from '@/components/NavBar';
 import dayjs from 'dayjs';
@@ -57,6 +61,7 @@ export default async function Events() {
     event.manager = event.manager.toString();
   });
 
+  const eventVolunteers = await getCurrentEventsForVolunteer(userId);
   return (
     <div>
       <NavBar />
@@ -64,10 +69,7 @@ export default async function Events() {
         <Box className="events-flex-container">
           <Box className="your-events-container">
             <h3>Your Events</h3>
-            <VolunteerEventsList
-              events={volunteerEvents}
-              volunteerID={userId}
-            />
+            <VolunteerEventsList eventVolunteers={eventVolunteers} />
           </Box>
           <Box className="upcoming-events-container">
             <Box className="upcoming-events-header">
