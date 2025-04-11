@@ -6,7 +6,11 @@ import {
   UpdateEventRequest,
 } from '@/types/dataModel/event';
 import { mongo, isValidObjectId } from 'mongoose';
-import { EventEntity, EventVolVol } from '@/types/dataModel/event';
+import {
+  EventEntity,
+  EventVolVol,
+  EventResponsePopulatedManager,
+} from '@/types/dataModel/event';
 
 import EventVolunteerSchema from '@/server/models/EventVolunteer';
 import { VolunteerEntity } from '@/types/dataModel/volunteer';
@@ -114,17 +118,24 @@ export async function updateEvent(
   }
 }
 
-export async function getUpcomingEvents(): Promise<EventEntity[] | null> {
+export async function getUpcomingEvents(): Promise<
+  EventResponsePopulatedManager[] | null
+> {
   try {
     await dbConnect();
 
     const currentDate = new Date();
-    const events: EventEntity[] = (await EventSchema.find({
-      day: {
-        $gte: currentDate,
-      },
-    }).lean()) as EventEntity[];
-
+    const events = JSON.parse(
+      JSON.stringify(
+        await EventSchema.find({
+          day: { $gte: currentDate },
+        })
+          .lean()
+          .populate({
+            path: 'manager',
+          })
+      )
+    ) as [EventResponsePopulatedManager];
     return events;
   } catch (error) {
     throw new CMError(CMErrorType.InternalError);

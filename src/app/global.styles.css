@@ -828,7 +828,7 @@
 
 .admin-contact-card {
   padding: 1rem;
-  overflow: scroll;
+  overflow-y: scroll;
   width: 40vw;
   height: 80vh;
   margin: 1vw;

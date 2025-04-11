@@ -8,7 +8,7 @@ export const zTime = z.string().regex(/^([01]?[0-9]|2[0-3]):[0-5][0-9]$/, {
 });
 
 import { EventVolunteerEntity } from './eventVolunteer';
-import { VolunteerEntity } from '@/types/dataModel/volunteer';
+import { VolunteerEntity, zVolunteerEntity } from '@/types/dataModel/volunteer';
 // const zDayJs = z.custom<Dayjs>((val) => val instanceof dayjs, 'Invalid date');
 
 const zEvent = z.object({
@@ -31,6 +31,13 @@ export interface EventVolVol {
   vol: VolunteerEntity;
   eVol: EventVolunteerEntity;
 }
+
+export const zEventResponsePopulatedManager = zEventEntity.extend({
+  manager: zVolunteerEntity,
+});
+
+export interface EventResponsePopulatedManager
+  extends z.infer<typeof zEventResponsePopulatedManager> {}
 
 export const zCreateEventRequest = zEvent.omit({ volsSignUp: true });
 
