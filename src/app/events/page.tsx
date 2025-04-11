@@ -58,7 +58,6 @@ export default async function Events() {
   });
   upcomingEvents.forEach((event) => {
     event._id = event._id.toString();
-    event.manager = event.manager.toString();
   });
 
   const eventVolunteers = await getCurrentEventsForVolunteer(userId);

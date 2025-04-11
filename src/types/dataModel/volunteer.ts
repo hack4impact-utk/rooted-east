@@ -44,7 +44,7 @@ const zVolunteer = z.object({
   profileFinished: z.boolean(),
 });
 
-const zVolunteerEntity = zVolunteer.extend({
+export const zVolunteerEntity = zVolunteer.extend({
   _id: zObjectId,
 });
 
