@@ -12,7 +12,7 @@ function AddVolunteerButton() {
   return (
     <Box className="add-volunteer-container">
       <Button className="manage-event-buttons" onClick={handleClick}>
-        ADD VOLUNTEER
+        ADD PARTICIPANT
       </Button>
 
       <Dialog open={open} onClose={handleClose} maxWidth="sm" fullWidth>

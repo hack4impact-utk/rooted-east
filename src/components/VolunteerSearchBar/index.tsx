@@ -30,7 +30,7 @@ export default function VolunteerSearchBar({
     <TextField
       className="search-volunteers"
       fullWidth
-      label="Search volunteers by name or email"
+      label="Search participants by name or email"
       variant="outlined"
       onChange={(e) => handleSearch(e.target.value)}
       size="small"
