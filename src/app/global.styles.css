@@ -22,6 +22,9 @@
 .manage-event-buttons-and-list {
   width: 46vw;
   padding: 0 2vw;
+  display: flex;
+  flex-direction: column;
+  max-height: 74vh;
   @media (max-width: 700px) {
     width: 96vw
   }
@@ -45,10 +48,8 @@
 .manage-event-title {
   background-color: #324033;
   color: var(--main-bgc);
-  margin-top: 1rem;
-  margin-bottom: 0.25rem;
+  margin: 0.5rem auto;
   border-radius: 0.5rem;
-  margin-left: 1.5rem;
   width: 96vw;
   font-family: "Roboto","Helvetica","Arial",sans-serif;
   font-weight: 400;
@@ -88,7 +89,9 @@
 
 .manage-event-buttons-box {
   display: flex;
-  gap: 3vw;
+  gap: 1vw;
+  width: 100%;
+  justify-content: space-between;
   @media (max-width: 700px) {
     flex-wrap: wrap;
     justify-content: center;
@@ -141,9 +144,9 @@
 /* Registered Vols Styling */
 
 .registered-vols-list-container {
-  overflow: scroll;
-  max-height: 65vh;
-  /* margin-left: 2vw; */
+  overflow-y: scroll;
+  overflow-x: hidden;
+  flex: 1 1 auto;
   @media (max-width:400px) {
     max-height: 45vh;
   }
@@ -204,11 +207,11 @@
   z-index: 10;
 }
 
-.more-info-button {
+.more-info-button-manage-event {
   display: flex;
   z-index: 1;
   width: 45vw;
-  overflow: hidden;
+  overflow-y: scroll;
   margin: 0 1vw;
   height: 77vh;
   position: fixed;
@@ -260,18 +263,26 @@
   display: flex;
   justify-content: center;
   margin-top: 2vh;
+  overflow-y: scroll;
+  height: 88vh;
+  position: fixed;
+  left: 25vw;
+  min-width: 50vw;
+  @media (max-width: 600px) {
+    width: 100%;
+    left: 0;
+  }
 }
+
+
+
 
 .user-profile-container {
   max-width: 45rem;
   position: absolute;
   background-color: var(--lighter-green) !important;
   border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  overflow: auto;
-  max-height: 83vh;
-
-  
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
   width: 100%;
   display: flex;
   justify-content: center;
@@ -381,23 +392,50 @@
 
 /* Database styling */
 
+
+.more-info-button-database {
+  display: flex;
+  z-index: 1;
+  width: 45vw;
+  overflow-y: scroll;
+  height: 87vh;
+  margin: 0 1vw;
+  position: fixed;
+  top: 11vh;
+  left: 51vw;
+  @media (max-width: 700px) {
+    width: 98vw;
+    left: 0;
+    top: 18vh;
+    background-color: var(--lighter-green) !important;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+}
+
+.database-buttons-and-list {
+  width: 46vw;
+  padding: 0 2vw;
+  display: flex;
+  flex-direction: column;
+  max-height: 90vh;
+  @media (max-width: 700px) {
+    width: 96vw
+  }
+}
+
 .database-search {
-  margin: 1rem;
-  width: 100%;
-  max-width: calc(100% - 1.2rem);
+  margin-bottom: 1rem;
 }
 
 .database-parent {
-  margin-left: 0.5rem;
   margin-top: 1rem;
-  width: 50%;
 }
 
 .database-buttons {
   display: flex;
   gap: 1rem;
-  margin: 1rem;
-  margin-right: none;
+  justify-content: space-between;
 }
 
 .database-buttons button {
@@ -405,10 +443,10 @@
   margin-right: none;
 }
 
+
 .database-container {
-  overflow: auto;
-  max-height: 74vh;
-  margin-left: 1.5rem;
+  overflow-y: scroll;
+  overflow-x: hidden;
   background-color: var(--main-bgc);
 }
 
@@ -422,7 +460,7 @@
   border-radius: 0.25rem;
   padding: .5rem;
   margin-bottom: 1.5rem;
-  max-width: 50%;
+  max-width: 95%;
 }
 
 .database-names,
@@ -468,12 +506,6 @@
     padding-right: 1rem;
   }
   
-  /* .database-buttons {
-    max-width: 40%;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-  } */
   .database-buttons {
     display: grid;
     grid-template-columns: repeat(2, 1fr);

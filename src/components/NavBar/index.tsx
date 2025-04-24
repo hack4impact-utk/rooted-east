@@ -122,9 +122,9 @@ function NavBar() {
               }
               return null;
             })}
-            <Button onClick={toggleHelpModal} className="nav-button">
+            {/* <Button onClick={toggleHelpModal} className="nav-button">
               Help
-            </Button>
+            </Button> */}
           </Box>
 
           {/* Help Modal */}

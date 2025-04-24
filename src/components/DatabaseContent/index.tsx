@@ -35,7 +35,7 @@ export default function DatabaseContent(props: DatabaseContentProps) {
   };
 
   return (
-    <div>
+    <div className="manage-event-box">
       <div className="database-buttons-and-list">
         <Box className="database-parent">
           <Box className="database-buttons">
@@ -54,7 +54,7 @@ export default function DatabaseContent(props: DatabaseContentProps) {
         />
       </div>
       {currPerson && currentUser && (
-        <Box className="more-info-button">
+        <Box className="more-info-button-database">
           <IconButton
             className="close-button"
             aria-label="close"
