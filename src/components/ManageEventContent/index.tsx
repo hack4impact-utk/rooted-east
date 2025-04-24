@@ -76,7 +76,7 @@ export default function ManageEventContent(props: ManageEventContentProps) {
         />
       </div>
       {currPerson && currentUser && (
-        <Box className="more-info-button">
+        <Box className="more-info-button-manage-event">
           <IconButton
             className="close-button"
             aria-label="close"
