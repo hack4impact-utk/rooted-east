@@ -38,7 +38,7 @@ export default function MoreInfoButton({ event }: MoreInfoButtonProps) {
             <p>Location: {event.location}</p>
             <p>Event Manager: {managerName}</p>
             <p>Details: {event.description}</p>
-            <p>Volunteers Signed Up: {event.volsSignUp}</p>
+            <p>Participants Signed Up: {event.volsSignUp}</p>
 
             <Button onClick={handleToggleDetails}>Close</Button>
           </div>

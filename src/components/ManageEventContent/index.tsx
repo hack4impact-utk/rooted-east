@@ -66,7 +66,7 @@ export default function ManageEventContent(props: ManageEventContentProps) {
         </Box>
         <Box className="manage-event-parent">
           <Typography variant="subtitle1" className="manage-event-text">
-            Volunteers Signed Up: {event?.volsSignUp}/{event?.volsNeeded}
+            Participants Signed Up: {event?.volsSignUp}/{event?.volsNeeded}
           </Typography>
         </Box>
 

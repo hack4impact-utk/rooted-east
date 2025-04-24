@@ -87,7 +87,7 @@ export default function NewEventForm({
         </DemoContainer>
       </LocalizationProvider>
       <TextField
-        label="Number of Volunteers Needed"
+        label="Number of Participants Needed"
         value={eventData.volsNeeded || ''}
         onChange={(e) =>
           onChange({ ...eventData, volsNeeded: Number(e.target.value) })
