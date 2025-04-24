@@ -89,6 +89,7 @@ export default function UserProfilePage({
       sessionUpdate({
         profileFinished: isProfileComplete(),
       });
+      window.location.reload();
     } else {
       setSnackbarMessage('Failed to save profile. Please try again.');
     }
