@@ -268,7 +268,13 @@
   position: fixed;
   left: 25vw;
   min-width: 50vw;
+  @media (max-width: 600px) {
+    width: 100%;
+    left: 0;
+  }
 }
+
+
 
 
 .user-profile-container {
