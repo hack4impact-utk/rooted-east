@@ -347,10 +347,8 @@
   align-items: center;
   border-radius: 0.5rem;
   background-color: rgba(203, 19, 19, 0.966);
-  margin-left: 30rem;
+  margin: 1rem auto;
   width: 40rem;
-  margin-top: 1rem;
-  margin-bottom: 1rem;
 }
 
 .user-profile-not-finished-warning {
