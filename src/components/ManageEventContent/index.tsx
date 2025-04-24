@@ -1,7 +1,7 @@
 'use client';
 import UserProfilePage from '@/components/UserProfilePage';
 
-import { Typography, Box } from '@mui/material';
+import { Typography, Box, IconButton } from '@mui/material';
 import EditEventButton from '@/components/EditEventButton';
 import DeleteEventButton from '@/components/DeleteEventButton';
 import CopyPhoneNumbersButton from '@/components/CopyPhoneNumbersButton';
@@ -13,6 +13,7 @@ import RegisteredVolsList from '@/components/RegisteredVolsList';
 import React, { useState } from 'react';
 import { EventEntity } from '@/types/dataModel/event';
 import { EventVolVol } from '@/types/dataModel/event';
+import CloseIcon from '@mui/icons-material/Close';
 
 interface ManageEventContentProps {
   vols: EventVolVol[];
@@ -36,6 +37,10 @@ export default function ManageEventContent(props: ManageEventContentProps) {
     } else {
       setCurPerson(person);
     }
+  };
+
+  const handleCloseUserProfile = () => {
+    setCurPerson(null);
   };
 
   return (
@@ -72,6 +77,14 @@ export default function ManageEventContent(props: ManageEventContentProps) {
       </div>
       {currPerson && currentUser && (
         <Box className="more-info-button">
+          <IconButton
+            className="close-button"
+            aria-label="close"
+            size="large"
+            onClick={handleCloseUserProfile}
+          >
+            <CloseIcon />
+          </IconButton>
           <UserProfilePage currentUser={currentUser} person={currPerson} />
         </Box>
       )}
