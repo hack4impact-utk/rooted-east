@@ -5,7 +5,6 @@ export default withAuth(
   function middleware(req) {
     const userRole = req.nextauth.token?.role; // get user's role from session token
     const userProfileFinished = req.nextauth.token?.profileFinished;
-    console.log(userRole); // check to see if working
     const adminRoutes = ['/database']; // only admins can go to database
     const adminAndManagerRoutes = ['/manageEvent']; // admin and manager can mange events
 

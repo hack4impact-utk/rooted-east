@@ -9,10 +9,16 @@ import {
   VolunteerEntity,
 } from '@/types/dataModel/volunteer';
 import CMError, { CMErrorType } from '@/utils/cmerror';
+import { getCurrentUser } from '@/utils/getCurrentUser';
 
 export async function createVolunteer(
   request: CreateVolunteerRequest
 ): Promise<string> {
+  const user = await getCurrentUser();
+  if (!(user?.role == 'Admin')) {
+    throw new Error('Unauthorized User');
+  }
+
   if (!request || Object.keys(request).length === 0) {
     throw new CMError(
       CMErrorType.BadValue,
@@ -41,6 +47,10 @@ export async function updateVolunteer(
   volunteerId: string,
   updatedVolunteer: UpdateVolunteerRequest
 ): Promise<void> {
+  const user = await getCurrentUser();
+  if (!(user?.role == 'Admin' || volunteerId == user?._id)) {
+    throw new Error('Unauthorized User');
+  }
   if (!isValidObjectId(volunteerId)) {
     throw new CMError(CMErrorType.BadValue, 'Invalid VolunteerId');
   }
@@ -97,28 +107,6 @@ export async function getVolunteerTotalHours(
   return totalTime / 3600000; // Convert milliseconds to hours
 }
 
-export async function getVolunteer(
-  volunteerId: string
-): Promise<VolunteerEntity | null> {
-  if (!isValidObjectId(volunteerId)) {
-    throw new CMError(CMErrorType.BadValue, 'Invalid VolunteerId');
-  }
-
-  try {
-    await dbConnect();
-    const target: VolunteerEntity | null =
-      await VolunteerSchema.findById(volunteerId).lean();
-
-    if (!target) {
-      throw new CMError(CMErrorType.NoSuchKey, 'Volunteer');
-    }
-
-    return target;
-  } catch (error) {
-    throw new CMError(CMErrorType.InternalError);
-  }
-}
-
 export async function getVolunteerByEmail(
   volunteerEmail: string
 ): Promise<VolunteerEntity | null> {
@@ -145,7 +133,7 @@ export async function getVolunteerByEmail(
 // used to check if an email is in DB for google sign in
 export async function checkExistingEmail(
   volunteerEmail: string
-): Promise<VolunteerEntity | null> {
+): Promise<boolean | null> {
   if (!volunteerEmail) {
     throw new CMError(CMErrorType.BadValue, 'Email cannot be empty');
   }
@@ -162,17 +150,22 @@ export async function checkExistingEmail(
       } else {
         console.log('Unauthorized email attempt:', volunteerEmail);
       }
-      return null;
+      return false;
     }
 
-    return target;
+    return true;
   } catch (error) {
     console.error('Database error:', error);
-    return null;
+    return false;
   }
 }
 
 export async function deleteVolunteer(volunteerId: string): Promise<void> {
+  const user = await getCurrentUser();
+  if (!(user?.role == 'Admin')) {
+    throw new Error('Unauthorized User');
+  }
+
   if (!isValidObjectId(volunteerId)) {
     throw new CMError(CMErrorType.BadValue, 'Invalid VolunteerId');
   }
@@ -192,6 +185,11 @@ export async function deleteVolunteer(volunteerId: string): Promise<void> {
 }
 
 export async function getAllVolunteersNumbers(): Promise<string[]> {
+  const user = await getCurrentUser();
+  if (!(user?.role == 'Admin' || user?.role == 'Manager')) {
+    throw new Error('Unauthorized User');
+  }
+
   try {
     await dbConnect();
     const volunteersNums = await VolunteerSchema.find({})
@@ -204,6 +202,11 @@ export async function getAllVolunteersNumbers(): Promise<string[]> {
 }
 
 export async function getAllVolunteers(): Promise<VolunteerEntity[]> {
+  const user = await getCurrentUser();
+  if (!(user?.role == 'Admin')) {
+    throw new Error('Unauthorized User');
+  }
+
   try {
     await dbConnect();
     return await VolunteerSchema.find({}).lean();
@@ -215,6 +218,11 @@ export async function getAllVolunteers(): Promise<VolunteerEntity[]> {
 export async function getAllVolunteersForEvent(
   eventId: string
 ): Promise<VolunteerEntity[]> {
+  const user = await getCurrentUser();
+  if (!(user?.role == 'Admin' || user?.role == 'Manager')) {
+    throw new Error('Unauthorized User');
+  }
+
   if (!isValidObjectId(eventId)) {
     throw new CMError(CMErrorType.BadValue, 'Invalid EventId');
   }

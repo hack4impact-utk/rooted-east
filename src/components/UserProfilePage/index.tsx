@@ -72,7 +72,8 @@ export default function UserProfilePage({
   };
 
   const handleSave = async () => {
-    const updatedData = { ...formData, profileFinished: isProfileComplete() };
+    const profileStatus = isProfileComplete();
+    const updatedData = { ...formData, profileFinished: profileStatus };
     setFormData(updatedData);
     setEditable(false);
 
@@ -85,10 +86,8 @@ export default function UserProfilePage({
     });
 
     if (res.ok) {
+      sessionUpdate({ profileFinished: profileStatus });
       setSnackbarMessage('Profile saved successfully!');
-      sessionUpdate({
-        profileFinished: isProfileComplete(),
-      });
       window.location.reload();
     } else {
       setSnackbarMessage('Failed to save profile. Please try again.');
