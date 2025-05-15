@@ -19,10 +19,16 @@ import {
   EventVolunteerEntity,
   EventVolunteerResponsePopulatedEvent,
 } from '@/types/dataModel/eventVolunteer';
+import { getCurrentUser } from '@/utils/getCurrentUser';
 
 export async function createEvent(
   createEventRequest: CreateEventRequest
 ): Promise<string> {
+  const user = await getCurrentUser();
+  if (!(user?.role == 'Admin' || user?.role == 'Manager')) {
+    throw new Error('Unauthorized User');
+  }
+
   if (!createEventRequest || Object.keys(createEventRequest).length === 0) {
     throw new CMError(
       CMErrorType.BadValue,
@@ -53,6 +59,11 @@ export async function createEvent(
 }
 
 export async function deleteEvent(eventId: string): Promise<void> {
+  const user = await getCurrentUser();
+  if (!(user?.role == 'Admin' || user?.role == 'Manager')) {
+    throw new Error('Unauthorized User');
+  }
+
   if (!isValidObjectId(eventId)) {
     throw new CMError(CMErrorType.BadValue, 'EventId');
   }
@@ -93,31 +104,6 @@ export async function getEvent(eventId: string): Promise<EventEntity | null> {
   return target;
 }
 
-export async function updateEvent(
-  eventId: string,
-  updatedEvent: UpdateEventRequest
-): Promise<void> {
-  if (!isValidObjectId(eventId)) {
-    throw new CMError(CMErrorType.BadValue, 'EventId');
-  }
-
-  if (!updatedEvent || Object.keys(updatedEvent).length === 0) {
-    throw new CMError(CMErrorType.BadValue, 'UpdateEventRequest');
-  }
-
-  let res;
-  try {
-    await dbConnect();
-    res = await EventSchema.findByIdAndUpdate(eventId, updatedEvent);
-  } catch (error) {
-    throw new CMError(CMErrorType.InternalError);
-  }
-
-  if (!res) {
-    throw new CMError(CMErrorType.NoSuchKey, 'Event');
-  }
-}
-
 export async function getUpcomingEvents(): Promise<
   EventResponsePopulatedManager[] | null
 > {
@@ -146,6 +132,11 @@ export async function updateEventAction(
   eventId: string,
   eventUpdatesRequest: UpdateEventRequest
 ): Promise<void> {
+  const user = await getCurrentUser();
+  if (!(user?.role == 'Admin' || user?.role == 'Manager')) {
+    throw new Error('Unauthorized User');
+  }
+
   if (!isValidObjectId(eventId)) {
     throw new CMError(CMErrorType.BadValue, 'EventId');
   }
@@ -263,7 +254,6 @@ export async function getAllVolunteersAndEventVolunteersForEvent(
 export async function getCurrentEventsForVolunteer(
   volunteerId: string
 ): Promise<EventVolunteerResponsePopulatedEvent[]> {
-  console.log(volunteerId);
   await dbConnect();
 
   const eventVols = JSON.parse(

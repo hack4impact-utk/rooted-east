@@ -26,7 +26,6 @@ export default function NeweventView({ managers }: NeweventViewProps) {
 
     const reqBody = formData;
 
-    console.log(reqBody);
     try {
       const res = await fetch('/api/event', {
         method: 'POST',

@@ -1,5 +1,5 @@
 'use client';
-import NeweventView from '@/views/NewEventView';
+import NewEventView from '@/views/NewEventView';
 import React, { useState } from 'react';
 import { Button, Box, Dialog } from '@mui/material';
 import { useSession } from 'next-auth/react';
@@ -27,7 +27,7 @@ function AddEventButton({ managers }: AddEventButtonProps) {
       </Button>
 
       <Dialog open={open} onClose={handleClose} maxWidth="sm" fullWidth>
-        <NeweventView managers={managers} />
+        <NewEventView managers={managers} />
       </Dialog>
     </Box>
   );

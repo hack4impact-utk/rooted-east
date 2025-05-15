@@ -15,7 +15,6 @@ interface CancelSignUpButtonProps {
 export default function CancelSignUpButton(props: CancelSignUpButtonProps) {
   const [open, setOpen] = useState(false);
   const handleClickOpen = async () => {
-    console.log('test');
     try {
       const response = await fetch(
         `/api/eventVolunteer/${props.eventVolunteer._id}`,
@@ -30,7 +29,6 @@ export default function CancelSignUpButton(props: CancelSignUpButtonProps) {
       if (!response.ok) {
         throw new Error('Failed to delete EventVol. Please try again.');
       }
-      console.log(response);
     } catch (error) {
       console.log('Error during volunteer sign-up cancellation: ', error);
       console.log(error);

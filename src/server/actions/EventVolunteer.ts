@@ -11,6 +11,7 @@ import EventVolunteer from '../models/EventVolunteer';
 import { EventVolunteerResponse } from '@/types/dataModel/eventVolunteer';
 import { CreateEventVolunteerRequest } from '@/types/dataModel/eventVolunteer';
 import Event from '../models/Event';
+import { getCurrentUser } from '@/utils/getCurrentUser';
 
 export async function createEventVolunteer(
   createEventVolunteerRequest: CreateEventVolunteerRequest
@@ -23,6 +24,11 @@ export async function createEventVolunteer(
       CMErrorType.BadValue,
       'Invalid input for CreateEventVolunteerRequest'
     );
+  }
+
+  const user = await getCurrentUser();
+  if (user?._id != createEventVolunteerRequest.volunteer) {
+    throw new Error('Unauthorized User');
   }
 
   try {
@@ -55,6 +61,11 @@ export async function createEventVolunteer(
 export async function checkOutVolunteer(
   checkOutVolunteerRequest: CheckOutVolunteerRequest
 ): Promise<void> {
+  const user = await getCurrentUser();
+  if (!(user?.role == 'Admin' || user?.role == 'Manager')) {
+    throw new Error('Unauthorized User');
+  }
+
   if (!isValidObjectId(checkOutVolunteerRequest.eventVolunteerId)) {
     throw new CMError(CMErrorType.BadValue, 'Invalid EventVolunteerId');
   }
@@ -80,6 +91,11 @@ export async function checkOutVolunteer(
 export async function checkInVolunteer(
   checkInVolunteerRequest: CheckInVolunteerRequest
 ): Promise<void> {
+  const user = await getCurrentUser();
+  if (!(user?.role == 'Admin' || user?.role == 'Manager')) {
+    throw new Error('Unauthorized User');
+  }
+
   if (!isValidObjectId(checkInVolunteerRequest.eventVolunteerId)) {
     throw new CMError(CMErrorType.BadValue, 'Invalid EventVolunteerId');
   }

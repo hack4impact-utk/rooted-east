@@ -20,10 +20,6 @@ export default function LoginButton() {
           After completing your profile information, you will be able to sign up
           for events.
         </h5>
-        {/* <hr className="welcome-hr" />
-        <h5 className="welcome-h5">
-          {'Click the "Help" tab for asistance navigating the page.'}
-        </h5> */}
       </>
     );
   }
